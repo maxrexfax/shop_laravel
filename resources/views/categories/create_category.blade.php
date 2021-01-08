@@ -9,7 +9,7 @@
 
                         <div class="col-6 col-md-10 col-sm-12">
                             <div class="card-body">
-                                <form method="POST" action="{{ route('admin.categories.create') }}">
+                                <form method="POST" action="{{ route('category.create') }}">
                                     @csrf
 
                                     <div class="form-group row">

@@ -14,7 +14,7 @@
                                         <li>{{ $cat->category_name }}</li>
                                         <ul>
                                             @foreach ($cat->childrenCategories as $childCategory)
-                                                @include('admin.child_category', ['child_category' => $childCategory])
+                                                @include('categories.child_category_controll', ['child_category' => $childCategory])
                                             @endforeach
                                         </ul>
                                     @endforeach
@@ -27,8 +27,8 @@
                                 <tr>
                                     <th>{{ __('Category id') }}</th>
                                     <th>{{ __('Category name') }}</th>
-                                    <th>{{ __('Sort number') }}</th>
-                                    <th>{{ __('Parent number') }}</th>
+                                    <th>{{ __('Order') }}</th>
+                                    <th>{{ __('Parent category') }}</th>
                                     <th>{{ __('Edit') }}</th>
                                 </tr>
                                 </thead>
@@ -38,8 +38,14 @@
                                         <td>{{$category->id}}</td>
                                         <td>{{$category->category_name}}</td>
                                         <td>{{$category->sort_number}}</td>
-                                        <td>{{$category->category_id}}</td>
-                                        <td><a href="{{ route('admin.categories.edit') }}/{{$category->id}}"><i class="fas fa-pencil-alt"></i></a></td>
+                                        <td>
+                                            @foreach($categories as $cat)
+                                            @if($category->category_id===$cat->id)
+                                                {{$cat->category_name}}
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        <td><a href="{{ route('category.saveedit') }}/{{$category->id}}"><i class="fas fa-pencil-alt"></i></a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>

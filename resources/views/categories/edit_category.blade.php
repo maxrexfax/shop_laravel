@@ -10,7 +10,7 @@
                         <div class="col-6 col-md-10 col-sm-12">
                             <p class="text-center">Category editing</p>
                             <div class="card-body">
-                                <form method="POST" action="{{ route('admin.savecategory') }}">
+                                <form method="POST" action="{{ route('category.update') }}">
                                     @csrf
 
                                     <div class="form-group row">
@@ -53,7 +53,7 @@
                                         <label for="category_id" class="col-md-4 col-form-label text-md-right">{{ __('Parent category') }}</label>
                                         <div class="col-md-6">
                                             <select class="form-control" name="category_id" id="category_id">
-                                                <option value="0"
+                                                <option
                                                 @if(empty($category->category_id))
                                                     selected
                                                     @endif

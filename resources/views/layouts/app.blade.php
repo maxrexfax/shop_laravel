@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ __('messages.cool_medicines') }}</title>
+    <title>@if(!empty($alt_title)){{$alt_title}} @else{{ __('messages.cool_medicines') }}@endif</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-3.5.1.min.js') }}" defer></script>
@@ -60,8 +60,8 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownCategories">
-                                        <a class="nav-link" href="{{ route('categories') }}">{{ __('List of categories') }}</a>
-                                        <a class="nav-link" href="{{ route('admin.categories.create') }}">{{ __('Create new category') }}</a>
+                                        <a class="nav-link" href="{{ route('category.list') }}">{{ __('List of categories') }}</a>
+                                        <a class="nav-link" href="{{ route('category.saveedit') }}">{{ __('Create new category') }}</a>
                                     </div>
                                 </li>
                             @endauth

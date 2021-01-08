@@ -1,0 +1,65 @@
+.bckgnd-img {
+    background: url("/img/header_img_mini_50.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#shadow {
+    width: 110%;
+    height: 110%;
+    background-color: black;
+    z-index: 100;
+    opacity: 0.7;
+    position: absolute;
+    top:0;
+    left:0;
+    display: none;
+}
+
+#modal-with-images {
+    position: absolute;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    z-index: 101;
+    top: 50%;
+    left: 50%;
+    background: transparent;
+    padding: 2px 10px;
+    display: none;
+    transform: translate(-50%, -50%);
+}
+
+.modal-control-elements {
+
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.modal-control-elements:hover {
+    cursor: pointer;
+    color: white;
+}
+
+#close-popup-symbol:hover {
+    color: white;
+}
+
+.step-back {
+    position: absolute;
+    top: 50%;
+    left: 0;
+}
+
+.step-forward {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+}
+
+span[class^='step'], span[class*=' step']{
+    font-size: 5em;
+    z-index: 105;
+
+}

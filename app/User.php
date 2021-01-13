@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
+    const ROLE_ADMIN_NAME = 'admin';
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'login', 'first_name', 'second_name', 'last_name', 'email', 'password',
     ];
 
     /**
@@ -36,4 +37,30 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
+    }
+
+    public function getRoles()
+    {
+        if(!empty($this->roles)) {
+            return $this->roles;
+        }
+
+        return [];
+    }
+
+    public function isAdmin()
+    {
+        foreach (self::getRoles() as $role) {
+            if($role->role_name===self::ROLE_ADMIN_NAME) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

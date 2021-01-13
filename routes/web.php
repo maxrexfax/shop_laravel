@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'CategoryController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/users', 'UserController@index')->name('users');
+
+Route::get('/admin', 'AdminController@index')->name('admin');
+
+Route::get('/category/create/{id?}', 'CategoryController@create')->name('category.create');
+Route::get('/admin/category/list', 'AdminController@categoryList')->name('admin.category.list');
+Route::match(['get', 'post'],'/category/store/{id?}', 'CategoryController@store')->name('category.store');
+Route::get('/product/create/{id?}', 'ProductController@create')->name('product.create');
+Route::get('/admin/product/list', 'AdminController@productList')->name('admin.product.list');
+Route::match(['get', 'post'],'/product/store/{id?}', 'ProductController@store')->name('product.store');

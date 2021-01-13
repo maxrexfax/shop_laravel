@@ -130,3 +130,7 @@ span[class^='step'], span[class*=' step']{
 .background_as_nav{
     background-color: #f8f9fa !important;
 }
+
+.my-cursor-pointer {
+    cursor: pointer;
+}

@@ -43,4 +43,24 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Role');
     }
+
+    public function getRoles()
+    {
+        if(!empty($this->roles)) {
+            return $this->roles;
+        }
+
+        return [];
+    }
+
+    public function isAdmin()
+    {
+        foreach (self::getRoles() as $role) {
+            if($role->role_name===self::ROLE_ADMIN_NAME) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

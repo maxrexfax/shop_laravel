@@ -136,23 +136,35 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="categories" class="col-md-4 col-form-label text-md-right">{{ __('Categories') }}</label>
+                            <label for="categories" class="col-md-4 col-form-label text-md-right">{{ __('Categories of this product') }}</label>
                             <div class="col-md-6">
-                                <select class="form-control" name="categories[]" id="categories" multiple>
+                                <div id="divWithCategoriesList" class="border rounded p-2">
                                     @foreach($categories as $category)
-                                        @if(empty($product))
-                                            <option id="{{$category->id}}">{{$category->category_name}}</option>
-                                        @else
-                                    <option value="{{$category->id}}"
-                                    @foreach($product->categories as $productCategory)
-                                        @if($productCategory->id==$category->id)
-                                            selected
+                                        @if(!empty($product))
+                                            @foreach($product->categories as $productCategory)
+                                            @if($productCategory->id==$category->id)
+                                                <div id="{{$category->id}}"><i class="fa fa-minus-circle my-cursor-pointer i-deleter" title="Delete this category"></i><span> {{$category->category_name}}</span>
+                                                    <input type="hidden" name="categories[]" value="{{$category->id}}">
+                                                </div>
                                             @endif
-                                        @endforeach
-                                    >{{$category->category_name}}</option>
+                                            @endforeach
                                         @endif
                                     @endforeach
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="categories1" class="col-md-4 col-form-label text-md-right">{{ __('Categories to add') }}</label>
+                            <div class="col-md-4">
+                                <select class="form-control" id="categoriesToAdd">
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->category_name}}</option>
+                                    @endforeach
                                 </select>
+                            </div>
+                            <div class="col-md-2">
+                                <span class="btn btn-secondary float-right" id="btnAdderCategoryToList">Add this</span>
                             </div>
                         </div>
 

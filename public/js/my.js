@@ -88,6 +88,35 @@ $(document).ready(function() {
         }
     });
 
+    $(document).on('click', '#btnAdderCategoryToList', function (e) {
+        let alreadyExistCategories = $('#divWithCategoriesList').find('div');
+        console.log(alreadyExistCategories);
+        console.log($('#categoriesToAdd option:selected').val());
+        console.log($('#categoriesToAdd option:selected').text());
+        let isExist = false;
+        for(let i = 0; i < alreadyExistCategories.length; i++) {
+            if($(alreadyExistCategories[i]).attr('id')===$('#categoriesToAdd option:selected').val()) {
+                console.log('Exist');
+                isExist = true;
+            } else {
+                console.log('NOT exist');
+            }
+        }
+        if(isExist) {
+            alert('Category already chosen');
+        } else {
+            let htmlToAdd = '<div id="' + $('#categoriesToAdd option:selected').val() + '"><i class="fa fa-minus-circle my-cursor-pointer i-deleter" title="Delete this category"></i><span> ' + $('#categoriesToAdd option:selected').text() + '</span>\n' +
+                '<input type="hidden" name="categories[]" value="' + $('#categoriesToAdd option:selected').val() + '">\n' +
+                '</div>'
+            $('#divWithCategoriesList').append(htmlToAdd);
+        }
+    });
+
+    $(document).on('click', '.i-deleter', function (e){
+        $(this).parent().remove();
+        e.stopPropagation();
+    });
+
 });
 
 

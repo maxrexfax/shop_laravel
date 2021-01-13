@@ -22,8 +22,8 @@ class ProductController extends Controller
             $product = Product::find($id);
             if($product) {
                 return view('admin.partials._product_edit_create', [
-                    'NameOfForm' => 'Edit category '.$product->product_name,
-                    'alt_title' => 'Edit category '.$product->product_name,
+                    'NameOfForm' => 'Edit product '.$product->product_name,
+                    'alt_title' => 'Edit product '.$product->product_name,
                     'categories' => Category::all(),
                     'product' => $product
                 ]);

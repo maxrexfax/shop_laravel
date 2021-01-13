@@ -11,6 +11,7 @@
                             <th>User ID</th>
                             <th>Username</th>
                             <th>User roles</th>
+                            <th>Is admin</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -22,6 +23,13 @@
                         @foreach($user->roles as $role)
                             {{$role->role_name}}
                         @endforeach
+                            </td>
+                            <td>
+                                @if($user->isAdmin())
+                                    Admin
+                                @else
+                                    Not admin
+                                @endif
                             </td>
                         </tr>
                     @endforeach

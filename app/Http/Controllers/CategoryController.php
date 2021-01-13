@@ -3,38 +3,39 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        $categoriesIer = Category::whereNull('category_id')
+        $categoriesHierarchically = Category::whereNull('category_id')
             ->with('childrenCategories')
             ->get();
         $categories = Category::all()->sortBy('sort_number');
         return view('categories.index', [
-            'categoriesIer' => $categoriesIer,
+            'categoriesHierarchically' => $categoriesHierarchically,
             'categories' => $categories
         ]);
     }
 
-    public function saveEdit($id = null)
+    public function create($id = null)
     {
         if(!empty($id)) {
             $category = Category::find($id);
             if($category) {
-                return view('categories.create_edit_category', [
+                return view('admin.partials._category_edit_create', [
                     'NameOfForm' => 'Edit category '.$category->category_name,
                     'alt_title' => 'Edit category '.$category->category_name,
                     'categories' => Category::all(),
                     'category' => $category
                 ]);
             } else {
-                return redirect('category/list');
+                return redirect('admin/category/list');
             }
         } else {
-            return view('categories.create_edit_category', [
+            return view('admin.partials._category_edit_create', [
                 'NameOfForm' => 'Create new category',
                 'alt_title' => 'Create new category',
                 'categories' => Category::all()
@@ -45,46 +46,58 @@ class CategoryController extends Controller
     public function store($id = null, Request $request)
     {
         $category = Category::find($id);
-        if($category) {
+
+        if ($category) {
             $category->category_name = $request->post('category_name');
             $category->sort_number = $request->post('sort_number');
-
-            if($request->post('category_id') == 0) {
-                $category->category_id=NULL;
-            } else {
-                $category->category_id=$request->post('category_id');
+            $category->category_id = $request->post('category_id');
+            if($request->has('category_logo')) {
+                $image = $request->file('category_logo');
+                $category->category_logo = $image->getClientOriginalName();
+                $image->move(public_path('img/logo'), $image->getClientOriginalName());
             }
             $category->save();
-        } else {
-            Category::create([
-                'category_name' => $request->post('category_name'),
-                'sort_number' => $request->post('sort_number'),
-                'category_id' => $request->post('category_id') ? $request->post('category_id') : null
-            ]);
+            return redirect('admin/category/list');
         }
 
-        return redirect('category/list');
+        $category = new Category();
 
+        if($request->has('category_logo')) {
+            $image = $request->file('category_logo');
+            $category->category_logo = $image->getClientOriginalName();
+            $image->move(public_path('img/logo'), $image->getClientOriginalName());
+        }
+
+        $category->category_name = $request->post('category_name');
+        $category->sort_number = $request->post('sort_number');
+        $category->category_id = $request->post('category_id') ? $request->post('category_id') : null;
+        $category->save();
+
+        return redirect('admin/category/list');
     }
-
 
     public function list()
     {
-        $categoriesIer = Category::whereNull('category_id')
+        $categoriesHierarchically = Category::whereNull('category_id')
             ->with('childrenCategories')
             ->get();
         $categories = Category::all()->sortBy('sort_number');
         return view('categories.categories', [
             'categories' => $categories,
-            'categoriesIer' => $categoriesIer
+            'categoriesHierarchically' => $categoriesHierarchically
         ]);
     }
 
     public function show($id)
     {
+        $categoriesHierarchically = Category::whereNull('category_id')
+            ->with('childrenCategories')
+            ->get();
         $category = Category::find($id);
         if($category) {
-            return $category->category_name;
+            return view('categories.products', [
+                'categoriesHierarchically' => $categoriesHierarchically,
+            ]);
         } else {
             return redirect('category/list');
         }

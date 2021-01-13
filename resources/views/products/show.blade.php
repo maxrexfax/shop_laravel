@@ -7,7 +7,7 @@
                     <div class="col col-10 col-md-8 col-sm-12 div-img-modal-show">
                         <div class="m-2 ">
                             <div class="border text-center">
-                                    @if($product->image)
+                                    @if($product->logo_image)
                                         <img class="img-to-show-modal" height="300px" src="/img/logo/{{$product->image}}" alt="{{$product->product_name}}"/>
                                     @else
                                         <img height="200px" src="/img/empty.png" alt="tmpalt"/>

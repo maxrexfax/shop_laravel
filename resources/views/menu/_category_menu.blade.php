@@ -6,7 +6,7 @@
 
     <div class="collapse navbar-collapse" id="navbarCategoryMenu">
         <ul class="navbar-nav mr-auto">
-            @foreach($categoriesIer as $catIer)
+            @foreach($categoriesHierarchically as $catIer)
                 <li class="nav-item active">
 
                     @if(count($catIer->childrenCategories)>0)

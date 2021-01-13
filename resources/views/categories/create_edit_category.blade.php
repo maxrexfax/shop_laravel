@@ -51,21 +51,21 @@
                                         <label for="category_id" class="col-md-4 col-form-label text-md-right">{{ __('Parent category') }}</label>
                                         <div class="col-md-6">
                                             <select class="form-control" name="category_id" id="category_id">
-                                                <option value="0"
+                                                <option value=""
                                                 @if(empty($category->category_id))
                                                     selected
                                                     @endif
-                                                >Empty value</option>
-                                                @foreach($categories as $cat)
+                                                >Parent category</option>
+                                                @foreach($categories as $categoryInLoop)
                                                     @if(empty($category))
-                                                        <option value="{{$cat->id}}">{{$cat->category_name}}</option>
+                                                        <option value="{{$categoryInLoop->id}}">{{$categoryInLoop->category_name}}</option>
                                                     @else
-                                                        @if($category->id!=$cat->id)
-                                                        <option value="{{$cat->id}}"
-                                                                @if($category->category_id == $cat->id)
+                                                        @if($category->id!=$categoryInLoop->id)
+                                                        <option value="{{$categoryInLoop->id}}"
+                                                                @if($category->category_id == $categoryInLoop->id)
                                                                     selected
                                                                 @endif
-                                                        >{{$cat->category_name}}</option>
+                                                        >{{$categoryInLoop->category_name}}</option>
                                                         @endif
                                                     @endif
                                                 @endforeach

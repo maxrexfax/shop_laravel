@@ -64,4 +64,32 @@ $(document).ready(function() {
         $('#images-gallery-info').text('Image ' + (numberOfImageToShow+1) + ' from ' + arrayOfImages.length);
     }
 
+    let inputContentToAdd = "<div class=\"form-group row\">"+
+    "<label for=\"images\" class=\"col-md-4 col-form-label text-md-right\">Additional image</label>"+
+    "<div class=\"col-md-6\">" +
+    "<input type=\"file\" name=\"images[]\" title=\"Upload one or few pictures\">" +
+    "</div>" +
+    "</div>";
+
+    $(document).on('click', '#btnToAddInput', function(e) {
+        $('#divForAdditionalImageInputs').append(inputContentToAdd);
+        //$( inputContentToAdd ).insertAfter( '#divForAdditionalImageInputs' );
+        e.stopPropagation();
+    });
+
+
+    $('.accordion_content').slideUp(1);
+    //$("#accordion").accordion({collapsible : true});
+
+    $(document).on('click', '.accordion_header', function(e) {
+        $('.accordion_content').slideUp(200);
+        if(!$(this).next().is(":visible")){
+            $(this).next().slideDown(200);
+        }
+    });
+
 });
+
+
+
+

@@ -4,16 +4,17 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header text-center mb-2">{{ __('Category control') }}</div>
+                    <div class="card-header text-center">{{ __('Category control') }}</div>
                     <div class="d-flex justify-content-between flex-wrap">
-                        <div class ="container col-4">
+                        <div class ="container col-3">
                             <p><b>Current categories with relations</b></p>
+                            <p><i>Visual control of the current state</i></p>
                             <div style="overflow: auto; height: 400px;">
                                 <ul>
-                                    @foreach ($categoriesIer->sortBy('sort_number') as $cat)
-                                        <li>{{ $cat->category_name }}</li>
+                                    @foreach ($categoriesHierarchically->sortBy('sort_number') as $category)
+                                        <li>{{ $category->category_name }}</li>
                                         <ul>
-                                            @foreach ($cat->childrenCategories as $childCategory)
+                                            @foreach ($category->childrenCategories as $childCategory)
                                                 @include('categories.child_category_controll', ['child_category' => $childCategory])
                                             @endforeach
                                         </ul>
@@ -21,7 +22,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-8">
+                        <div class="col-9 p-0">
                             <table class="table table-striped">
                                 <thead class="thead-dark">
                                 <tr>
@@ -39,13 +40,9 @@
                                         <td>{{$category->category_name}}</td>
                                         <td>{{$category->sort_number}}</td>
                                         <td>
-                                            @foreach($categories as $cat)
-                                            @if($category->category_id===$cat->id)
-                                                {{$cat->category_name}}
-                                                @endif
-                                            @endforeach
+                                            {{$category->getParentCategoryName()}}
                                         </td>
-                                        <td><a href="{{ route('category.saveedit') }}/{{$category->id}}"><i class="fas fa-pencil-alt"></i></a></td>
+                                        <td><a href="{{ route('category.create') }}/{{$category->id}}"><i class="fas fa-pencil-alt"></i></a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>

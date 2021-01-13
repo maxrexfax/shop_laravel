@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('product_name', 255);
             $table->integer('rating')->nullable();
             $table->float('price');
-            $table->string('image', 255)->nullable();
+            $table->string('logo_image', 255)->nullable();
             $table->string('description', 255)->nullable();
             $table->string('title', 255)->nullable();
             $table->string('short_description', 500)->nullable();

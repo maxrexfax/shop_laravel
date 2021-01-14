@@ -26,14 +26,14 @@ Route::get('/admin', 'AdminController@index')->name('admin');
 
 Route::get('/category/create/{id?}', 'CategoryController@create')->name('category.create');
 Route::get('/admin/category/list', 'AdminController@categoryList')->name('admin.category.list');
-Route::match(['get', 'post'],'/category/store/{id?}', 'CategoryController@store')->name('category.store');
+Route::post('/category/store/{id?}', 'CategoryController@store')->name('category.store');
 Route::get('/product/create/{id?}', 'ProductController@create')->name('product.create');
 Route::get('/admin/product/list', 'AdminController@productList')->name('admin.product.list');
-Route::match(['get', 'post'],'/product/store/{id?}', 'ProductController@store')->name('product.store');
+Route::post('/product/store/{id?}', 'ProductController@store')->name('product.store');
 
-Route::match(['get', 'post'],'/image/show/{id}', 'ImageController@show')->name('image.show');
-Route::match(['get', 'post'],'/image/store', 'ImageController@store')->name('image.store');
-Route::match(['get', 'post'],'/image/delete/{id}', 'ImageController@delete')->name('image.delete');
-
+Route::post('/image/store', 'ImageController@store')->name('image.store');
+Route::get('/image/delete/{id}', 'ImageController@delete')->name('image.delete');
+Route::post('/image/order', 'ImageController@changeSortOrder')->name('image.order');
 
 Route::get('/product/images/{id}', 'ProductController@images')->name('product.images');
+Route::get('/product/category/{id}', 'CategoryController@show')->name('product.category');

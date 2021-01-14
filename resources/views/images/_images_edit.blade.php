@@ -14,13 +14,19 @@
                         <div>
                             <div class="d-flex flex-wrap justify-content-start">
                                 @if(count($images)>0)
-                                    @foreach($images as $image)
+                                    @foreach($images->sortBy('sort_number') as $image)
                                         <div id="{{$image->id}}" class="border p-2 m-2 rounded">
                                             <a href="{{route('image.delete',  ['id' => $image->id])}}"><i class="fa fa-minus-circle my-cursor-pointer" title="Delete this image"></i></a>
                                             <div style="max-width: 200px; width: 100%;">
                                                 <img width="100%" src="{{ asset('/img/images/' . $image->image_name)}}">
                                             </div>
-                                            <input type="hidden" name="images[]" value="{{$image->id}}">
+                                            <form method="POST" enctype="multipart/form-data" action="{{ route('image.order') }}">
+                                                @csrf
+                                                <input type="hidden" name="image_id" value="{{$image->id}}">
+                                                <input type="number" name="sort_number" value="{{$image->sort_number}}">
+                                                <br>
+                                                <input type="submit" value="Set sort number">
+                                            </form>
                                         </div>
                                     @endforeach
                                 @else
@@ -34,13 +40,18 @@
                             @csrf
                             <input type="hidden" name="product_id" value="{{$product->id}}">
                             <div class="ml-2">
-                                <label for="imageAdd">{{ __('Add image') }}</label>
-                                    <br>
-                                <div>
+                                <div class="m-2">
+                                    <label for="imageAdd">{{ __('Add image') }}</label>
                                     <input type="file" name="imageAdd" title="Upload new picture">
+                                </div>
+                                <div class="m-2">
+                                    <label for="sort_number">{{ __('Sort order') }}</label>
+                                    <input type="number" id="sort_number" name="sort_number" title="Sort number for this image">
                                 </div>
                             </div>
                             <div class="mb-0">
+
+
 
                             <button type="submit" class="btn btn-secondary btn-sm m-2">
                                 {{ __('Send file') }}

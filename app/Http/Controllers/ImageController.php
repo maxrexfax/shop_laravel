@@ -15,22 +15,13 @@ class ImageController extends Controller
         $this->middleware('auth');
     }
 
-    public function show($productId)
-    {
-        $images = Image::where('product_id', $productId)->get();
-        if($images) {
-            return $images;
-        }
-
-        return null;
-    }
-
     public function store(Request $request)
     {
         $savingImage = new Image();
         $image = $request->file('imageAdd');
         $savingImage->image_name = $image->getClientOriginalName();
         $savingImage->product_id = $request->post('product_id');
+        $savingImage->sort_number = $request->post('sort_number');
         $image->move(public_path('img/images'), $image->getClientOriginalName());
         $savingImage->save();
 
@@ -44,5 +35,16 @@ class ImageController extends Controller
         if($image) {
             $image->delete();
         }
+
+        return redirect()->back();
+    }
+
+    public function changeSortOrder(Request $request)
+    {
+        $image = Image::find($request->post('image_id'));
+        $image->sort_number = $request->post('sort_number');
+        $image->save();
+
+        return redirect()->back();
     }
 }

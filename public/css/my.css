@@ -5,7 +5,7 @@
     background-size: cover;
 }
 
-#shadow {
+#shadow, #shadowEdit {
     width: 110%;
     height: 110%;
     background-color: black;
@@ -133,4 +133,21 @@ span[class^='step'], span[class*=' step']{
 
 .my-cursor-pointer {
     cursor: pointer;
+}
+
+.modalWindowToManageProductImages {
+    position: absolute;
+    max-width: 900px;
+    width: 100%;
+    max-height: 90vh;
+    z-index: 101;
+    top: 50%;
+    left: 50%;
+    background: lightgray;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 2px 10px;
+    display: none;
+    transform: translate(-50%, -50%);
+
 }

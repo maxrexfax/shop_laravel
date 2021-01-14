@@ -30,3 +30,10 @@ Route::match(['get', 'post'],'/category/store/{id?}', 'CategoryController@store'
 Route::get('/product/create/{id?}', 'ProductController@create')->name('product.create');
 Route::get('/admin/product/list', 'AdminController@productList')->name('admin.product.list');
 Route::match(['get', 'post'],'/product/store/{id?}', 'ProductController@store')->name('product.store');
+
+Route::match(['get', 'post'],'/image/show/{id}', 'ImageController@show')->name('image.show');
+Route::match(['get', 'post'],'/image/store', 'ImageController@store')->name('image.store');
+Route::match(['get', 'post'],'/image/delete/{id}', 'ImageController@delete')->name('image.delete');
+
+
+Route::get('/product/images/{id}', 'ProductController@images')->name('product.images');

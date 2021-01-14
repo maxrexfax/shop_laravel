@@ -31,7 +31,7 @@
                                 @if($product->logo_image)
                                     <img height="30px" src="{{ asset('/img/logo/' . $product->logo_image) }}" alt="{{$product->product_name}}"/>
                                 @else
-                                    <img height="30px" src="/img/empty.png" alt="tmpalt"/>
+                                    <img height="30px" src="{{ asset('/img/empty.png') }}" alt="tmpalt"/>
                                 @endif
                             </td>
                             <td>{{$product->product_name}}</td>

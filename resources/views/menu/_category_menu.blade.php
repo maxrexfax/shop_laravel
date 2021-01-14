@@ -6,28 +6,26 @@
 
     <div class="collapse navbar-collapse" id="navbarCategoryMenu">
         <ul class="navbar-nav mr-auto">
-            @foreach($categoriesHierarchically as $catIer)
+            @foreach($categoriesHierarchically as $categoryH)
                 <li class="nav-item active">
 
-                    @if(count($catIer->childrenCategories)>0)
+                    @if(count($categoryH->childrenCategories)>0)
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{$catIer->category_name}}
+                            {{$categoryH->category_name}}
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="nav-link" href="{{ url('/') }}/product/category/{{$catIer->id}}">{{$catIer->category_name}}</a>
-                        @foreach ($catIer->childrenCategories as $childCategory)
+                            <a class="nav-link" href="{{ route('product.category', ['id' => $categoryH->id]) }}">{{$categoryH->category_name}}</a>
+                        @foreach ($categoryH->childrenCategories as $childCategory)
                                 @include('categories.child_category', ['child_category' => $childCategory])
                             @endforeach
                         </div>
                     </li>
                     @else
-                        <a class="nav-link" href="{{ url('/') }}/product/category/{{$catIer->id}}">{{$catIer->category_name}}</a>
+                        <a class="nav-link" href="{{ route('product.category', ['id' => $categoryH->id]) }}">{{$categoryH->category_name}}</a>
                     @endif
-
                 </li>
             @endforeach
-
         </ul>
     </div>
 </nav>

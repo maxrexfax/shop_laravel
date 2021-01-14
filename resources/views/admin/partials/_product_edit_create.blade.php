@@ -113,7 +113,7 @@
                         @if(isset($product))
                             @if($product->logo_image)
                                 <div style="max-width: 300px; width: 100%;">
-                                    <img width="100%" src="/img/logo/{{$product->logo_image}}" alt="{{$product->product_name}}" title="Current logo for {{$product->product_name}}"/>
+                                    <img width="100%" src="{{ asset('/img/logo/' . $product->logo_image) }}" alt="{{$product->product_name}}" title="Current logo for {{$product->product_name}}"/>
                                 </div>
                             @else
                                 No current logo image!
@@ -174,7 +174,7 @@
 
                             <div class="col-md-6">
                                 <div id="divWithAddtionalImages" class="border rounded p-2 d-flex flex-wrap justify-content-between w-100">
-                                    @if(count($images)>0)
+                                    @if(!empty($images))
                                         @foreach($images as $image)
                                             <div id="{{$image->id}}" class="border p-2 m-2">
                                                 <div style="max-width: 50px; width: 100%;">
@@ -187,7 +187,9 @@
                                         There are no additional images for this product!
                                     @endif
                                 </div>
-                                <a href="{{url('/')}}/product/images/{{$product->id}}" target="_blank" class="btn btn-secondary btn-sm" id="btnShowModalToEditImages">Edit additional images</a>
+                                @if(!empty($product))
+                                    <a href="{{url('/')}}/product/images/{{$product->id}}" target="_blank" class="btn btn-secondary btn-sm" id="btnShowModalToEditImages">Edit additional images</a>
+                                @endif
                             </div>
                         </div>
 

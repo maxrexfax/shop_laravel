@@ -42,13 +42,12 @@
                                         <td>
                                             {{$category->getParentCategoryName()}}
                                         </td>
-                                        <td><a href="{{ route('category.create') }}/{{$category->id}}"><i class="fas fa-pencil-alt"></i></a></td>
+                                        <td><a href="{{ route('category.create', ['id' => $category->id]) }}"><i class="fas fa-pencil-alt"></i></a></td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div>
                     <div class="h2 text-left">{{$product->product_name}} images</div>
-                    <a class="text-right mb-2" href="{{url('/')}}/product/create/{{$product->id}}">
+                    <a class="text-right mb-2" href="{{route('product.create', ['id' => $product->id])}}">
                         <span class="btn btn-secondary">Back to product {{$product->product_name}}</span>
                     </a>
                 </div>
@@ -16,8 +16,9 @@
                                 @if(count($images)>0)
                                     @foreach($images as $image)
                                         <div id="{{$image->id}}" class="border p-2 m-2 rounded">
+                                            <a href="{{route('image.delete',  ['id' => $image->id])}}"><i class="fa fa-minus-circle my-cursor-pointer" title="Delete this image"></i></a>
                                             <div style="max-width: 200px; width: 100%;">
-                                                <img width="100%" src="/img/images/{{$image->image_name}}">
+                                                <img width="100%" src="{{ asset('/img/images/' . $image->image_name)}}">
                                             </div>
                                             <input type="hidden" name="images[]" value="{{$image->id}}">
                                         </div>

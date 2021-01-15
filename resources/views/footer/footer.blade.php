@@ -7,9 +7,10 @@
 
     </div>
 </div>
-<div class="w-100 footer_div d-flex">
+<div class="footer_div text-center"></div>
+<div class="w-100 d-flex">
     <div style="width: 25%; height: 250px; border: 1px solid grey; color: #1d68a7; background-color: #1b1e21"></div>
-    <div style="width: 25%; height: 250px; border: 1px solid grey; color: #1d68a7; background-color: #1b1e21"></div>
-    <div style="width: 25%; height: 250px; border: 1px solid grey; color: #1d68a7; background-color: #1b1e21"></div>
+    <div style="width: 25%; height: 250px;  color: #1d68a7; "></div>
+    <div style="width: 25%; height: 250px;  color: #1d68a7; "></div>
     <div style="width: 25%; height: 250px; border: 1px solid grey; color: #1d68a7; background-color: #1b1e21"></div>
 </div>

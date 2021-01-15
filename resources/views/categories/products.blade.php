@@ -2,10 +2,10 @@
 @section('content')
     <div class="container p-0">
         <div class="row p-0">
-                <div class="card col-md-12 p-0">
+                <div class="card col-md-12 p-0 background_as_nav">
                     @include('menu._category_menu')
                 </div>
-            <div class="d-flex flex-wrap justify-content-between w-100">
+            <div class="d-flex flex-wrap justify-content-between">
                 @foreach($products as $product)
                     <div class="col-lg-3 col-md-3 col-sm-10 border rounded m-1 p-0 div-item-main-container" style="height: 300px; background-color: white;">
                         <div style="height: 60%;">

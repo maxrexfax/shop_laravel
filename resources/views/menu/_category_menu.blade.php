@@ -9,7 +9,7 @@
             @foreach($categoriesHierarchically as $categoryH)
                 <li class="nav-item active">
 
-                    @if(count($categoryH->childrenCategories)>0)
+                    @if($categoryH->childrenCategories->isNotEmpty())
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{$categoryH->category_name}}

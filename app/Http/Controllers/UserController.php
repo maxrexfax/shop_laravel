@@ -25,11 +25,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
-        $roles = Role::all();
         return view('users.list', [
-            'users' => $users,
-            'roles' => $roles
+            'users' => User::all(),
+            'roles' => Role::all()
         ]);
     }
 

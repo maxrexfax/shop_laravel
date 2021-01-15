@@ -94,9 +94,11 @@ class CategoryController extends Controller
             ->with('childrenCategories')
             ->get();
         $category = Category::find($id);
+
         if($category) {
             return view('categories.products', [
                 'categoriesHierarchically' => $categoriesHierarchically,
+                'products' => $category->products
             ]);
         } else {
             return redirect('category/list');

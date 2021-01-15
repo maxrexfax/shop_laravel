@@ -95,4 +95,15 @@ class ProductController extends Controller
         return redirect('admin/product/list');
     }
 
+    public function show($id)
+    {
+        $product = Product::find($id);
+        if ($product) {
+            return view('products.show', [
+                'product' => $product,
+            ]);
+        }
+        return redirect('/');
+    }
+
 }

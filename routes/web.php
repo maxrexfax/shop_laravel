@@ -37,3 +37,5 @@ Route::post('/image/order', 'ImageController@changeSortOrder')->name('image.orde
 
 Route::get('/product/images/{id}', 'ProductController@images')->name('product.images');
 Route::get('/product/category/{id}', 'CategoryController@show')->name('product.category');
+
+Route::get('/product/show/{id}', 'ProductController@show')->name('product.show');

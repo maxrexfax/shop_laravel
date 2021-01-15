@@ -98,7 +98,7 @@ class CategoryController extends Controller
         if($category) {
             return view('categories.products', [
                 'categoriesHierarchically' => $categoriesHierarchically,
-                'products' => $category->products
+                'products' => $category->getProducts()
             ]);
         } else {
             return redirect('category/list');

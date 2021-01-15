@@ -27,9 +27,10 @@ class Category extends Model
 
     public function getProducts()
     {
-        if($this->products) {
+        if(!empty($this->products)) {
             return $this->products;
         }
+
         return '';
     }
 

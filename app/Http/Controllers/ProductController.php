@@ -82,6 +82,8 @@ class ProductController extends Controller
             $image->move(public_path('img/logo'), $image->getClientOriginalName());
         }
 
+        $product->save();
+
         if ($request->post('categories')) {
             foreach ($request->post('categories') as $category) {
                 $categoryProduct = new CategoryProduct();
@@ -90,7 +92,6 @@ class ProductController extends Controller
                 $categoryProduct->save();
             }
         }
-        $product->save();
 
         return redirect('admin/product/list');
     }

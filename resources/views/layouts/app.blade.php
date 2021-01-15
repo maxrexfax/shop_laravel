@@ -26,23 +26,34 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/my.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
     <div id="app">
-        <header class="bckgnd-img">
-        <div class="d-flex p-2 align-items-center justify-content-between bd-highlight flex-wrap">
-            <img class="float-left" src="/img/header_logo.png" alt="Header logo" />
-            <div><span class="mr-2 ">&#128222; Phone +3884642484</span></div>
-            <input class="mr-2 form-control col-4" type="text" placeholder="Type to search">
-            <input class="btn btn-secondary" type="submit" value="Search">
-        </div>
+        <header class="backgound-image w-100">
+            <div class="container">
+                <div class="d-flex p-2 align-items-center justify-content-between bd-highlight flex-wrap">
+                    <img class="float-left" src="{{asset('/img/header_logo.png')}}" alt="Header logo" />
+                    <div><span class="mr-2" style="color: #ffffff; font-weight: bold;">&#128222; Phone +3884642484</span></div>
+                    <div class="d-flex mr-2 form-control col-4 p-1">
+                        <input class="w-100 border-0" type="text" placeholder="Search">
+                        <button class="btn btn-search" type="submit" title="Search">
+                            <i id="searchSignHeader" class="fa fa-search mb-2"></i>
+                        </button>
+                    </div>
+
+                    <button class="btn btn-secondary">CART</button>
+                </div>
+            </div>
         <br>
+            <div class="w-100 main-menu-div">
+
             <nav class="navbar navbar-expand-md navbar-light shadow-sm ">
-                <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ __('Main page') }}
+                <div class="container ">
+
+                    <a class="navbar-brand item-root pl-3 pr-3" href="{{ url('/') }}">
+                        <button class="navbar-toggler-icon border-0"></button>
+                        {{ __('Products') }}
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
@@ -51,20 +62,19 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
-                            @auth
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('users') }}">{{ __('Users') }}</a>
-                                </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin') }}">{{ __('Admin control') }}</a>
-                                </li>
-                            @endauth
 
                         </ul>
 
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
+
+                            @auth
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin') }}">{{ __('Admin control') }}</a>
+                                </li>
+                            @endauth
+
                             <!-- Authentication Links -->
                             @guest
                                 <li class="nav-item">
@@ -98,10 +108,16 @@
                     </div>
                 </div>
             </nav>
+
+            </div>
+
         </header>
         <main class="py-4">
             @yield('content')
         </main>
+        <footer>
+            @include('footer.footer')
+        </footer>
     </div>
 </body>
 </html>

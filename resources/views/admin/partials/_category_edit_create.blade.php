@@ -46,14 +46,14 @@
 
                             <div class="form-group row">
                                 <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Logo image') }}</label>
-                                @if(isset($product))
-                                    @if($product->logo_image)
-                                        <div style="max-width: 300px; width: 100%;">
-                                            <img width="100%" src="/img/logo/{{$category->category_logo}}" alt="{{$category->category_name}}" title="Current logo for {{$category->category_name}}"/>
-                                        </div>
+                                @if(isset($category))
+                                    <div style="max-width: 300px; width: 100%;">
+                                    @if($category->category_logo)
+                                            <img width="100%" src="{{asset('/img/logo/' . $category->category_logo)}}" alt="{{$category->category_name}}" title="Current logo for {{$category->category_name}}"/>
                                     @else
                                         No current logo image!
                                     @endif
+                            </div>
                                 @endif
                             </div>
 

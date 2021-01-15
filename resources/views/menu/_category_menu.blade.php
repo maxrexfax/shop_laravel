@@ -1,4 +1,4 @@
-<div class="container">
+<div class="">
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCategoryMenu" aria-controls="navbarCategoryMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -8,7 +8,6 @@
         <ul class="navbar-nav mr-auto">
             @foreach($categoriesHierarchically as $categoryH)
                 <li class="nav-item active">
-
                     @if($categoryH->childrenCategories->isNotEmpty())
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

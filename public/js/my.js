@@ -117,51 +117,20 @@ $(document).ready(function() {
         $('#modalWindowToManageProductImages').hide();
     });
 
-    /*$(':file').on('change', function () {
-        console.log('jQuerry change function');
-        var file = this.files[0];
-
-        if (file.size > 100240) {
-            alert('max upload size is 10k');
-        }
-
-        // Also see .name, .type
+    $(document).on('click', '.btn_add_to_cart', function(e) {
+        alert('Product ID=' + $(this).attr('id'));
     });
 
-    $(':button').on('click', function () {
-        console.log('jQuerry upload starts');
-        $.ajax({
-            // Your server script to process the upload
-            url: '/image/store/',
-            type: 'POST',
 
-            // Form data
-            data: new FormData($('form')[0]),
 
-            // Tell jQuery not to process data or worry about content-type
-            // You *must* include these options!
-            cache: false,
-            contentType: false,
-            processData: false,
+    $( '.div-item-main-container' ).mouseover(function() {
+        console.log('mouseover');
+        $(this).find('.hide').css('display', 'block');
+    });
 
-            // Custom XMLHttpRequest
-            xhr: function () {
-                var myXhr = $.ajaxSettings.xhr();
-                if (myXhr.upload) {
-                    // For handling the progress of the upload
-                    myXhr.upload.addEventListener('progress', function (e) {
-                        if (e.lengthComputable) {
-                            $('progress').attr({
-                                value: e.loaded,
-                                max: e.total,
-                            });
-                        }
-                    }, false);
-                }
-                return myXhr;
-            }
-        });
-    });*/
+    $( '.div-item-main-container' ).mouseout(function() {
+        $(this).find('.hide').css('display', 'none');
+    });
 
 });
 

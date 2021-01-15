@@ -10,17 +10,17 @@
                                 <i class="fa fa-dashboard fw ml-2"></i>
                                 <span class="ml-2 "><a class="url_in_accordion" href="{{route('admin')}}">{{ __('Dashboard') }}</a></span>
                             </div>
-<div id="accordion">
-                            <div class="accordion_header border_bottom oneHeight">
-                                <i class="fa fa-tags fw ml-2"></i>
-                                <span class="ml-2 "><b>Catalog</b></span>
-                            </div>
+                            <div id="accordion">
+                                <div class="accordion_header border_bottom oneHeight">
+                                    <i class="fa fa-tags fw ml-2"></i>
+                                    <span class="ml-2"><b>Catalog</b></span>
+                                </div>
 
-                            <div class="accordion_content p-0">
-                                <p class="p-in-accordion border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.category.list')}}">{{ __('Categories') }}</a></p>
-                                <p class="p-in-accordion border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.product.list')}}">{{ __('Products') }}</a></p>
+                                <div class="accordion_content p-0">
+                                    <p class="p-in-accordion border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.category.list')}}">{{ __('Categories') }}</a></p>
+                                    <p class="p-in-accordion border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.product.list')}}">{{ __('Products') }}</a></p>
+                                </div>
                             </div>
-</div>
                         </div>
                         <div class="col-10 p-0">
                             <main>

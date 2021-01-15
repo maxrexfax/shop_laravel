@@ -28,7 +28,7 @@
                                 @if($category->category_logo)
                                     <img height="30px" src="{{ asset('/img/logo/' . $category->category_logo) }}" alt="{{$category->category_name}}"/>
                                 @else
-                                    <img height="30px" src="/img/empty.png" alt="tmpalt"/>
+                                    <img height="30px" src="{{ asset('/img/empty.png') }}" alt="Empty logo"/>
                                 @endif
                             </td>
                             <td>{{$category->category_name}}</td>
@@ -36,7 +36,7 @@
                             <td>
                                 {{$category->getParentCategoryName()}}
                             </td>
-                            <td><a href="{{route('category.create')}}/{{$category->id}}"><i class="fas fa-pencil-alt"></i></a></td>
+                            <td><a href="{{ route('category.create', ['id' => $category->id]) }}"><i class="fas fa-pencil-alt"></i></a></td>
                         </tr>
                     @endforeach
                     </tbody>

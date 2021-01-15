@@ -54,11 +54,11 @@
                             @foreach($products as $product)
                                 <div class="p-2 border m-2">
                                     <div class="text-center">
-                                        <a href="{{ route('product.show') }}/{{$product->id}}">
+                                        <a href="{{ route('product.show', ['id' => $product->id]) }}">
                                             @if($product->image)
-                                            <img height="200px" src="img/logo/{{$product->image}}" alt="{{$product->product_name}}"/>
+                                            <img height="200px" src="{{ asset('img/logo' . $product->image) }}" alt="{{$product->product_name}}"/>
                                                 @else
-                                             <img height="200px" src="img/empty.png" alt="tmpalt"/>
+                                             <img height="200px" src="{{ asset('img/empty.png') }}" alt="No logo"/>
                                             @endif
                                         </a>
                                     </div>

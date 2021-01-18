@@ -132,6 +132,36 @@ $(document).ready(function() {
         $(this).find('.hide').css('display', 'none');
     });
 
+
+
+    $(document).on('click', '#btn-show-parent-categories', function(e) {
+        if(!$('.root-menu-container').is(":visible")) {
+            $.get( "/categories/root/list", function( data ) {
+                $.each(data, function( index, value ) {
+                    if(index < data.length/2) {
+                        $( "#divToShowRootCategories1" )
+                            .append(createDivElementForRootCatgoryLink(value['id'], value['category_name']))
+                    } else {
+                        $( "#divToShowRootCategories2" )
+                            .append(createDivElementForRootCatgoryLink(value['id'], value['category_name']))
+                    }
+                });
+            }, "json" );
+        } else {
+            $( "#divToShowRootCategories1" ).empty();
+            $( "#divToShowRootCategories2" ).empty();
+        }
+
+        $('.root-menu-container').toggle(200);
+    });
+
+    function createDivElementForRootCatgoryLink(id, name)
+    {
+        return divElementForRootCatgoryLink = '<div class="col-lg-12 popup-root-categories-item">' +
+            '<a href="/product/category/' + id + '">' + name + '</a>' +
+            '</div>';
+    }
+
 });
 
 

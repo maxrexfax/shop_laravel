@@ -105,4 +105,10 @@ class CategoryController extends Controller
         }
     }
 
+    public function categoriesRootList()
+    {
+        $rootCategories = Category::whereNull('category_id')->get();
+        return response()->json($rootCategories);
+    }
+
 }

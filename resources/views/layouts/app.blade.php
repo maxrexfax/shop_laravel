@@ -33,7 +33,9 @@
         <header class="backgound-image w-100">
             <div class="container">
                 <div class="d-flex p-2 align-items-center justify-content-between bd-highlight flex-wrap">
-                    <img class="float-left" src="{{asset('/img/header_logo.png')}}" alt="Header logo" />
+                    <a href="{{route('main.page')}}">
+                        <img class="float-left" src="{{asset('/img/header_logo.png')}}" alt="Header logo" />
+                    </a>
                     <div><span class="mr-2" style="color: #ffffff; font-weight: bold;">&#128222; Phone +3884642484</span></div>
                     <div class="d-flex mr-2 form-control col-4 p-1">
                         <input class="w-100 border-0" type="text" placeholder="Search">
@@ -47,35 +49,46 @@
             </div>
         <br>
             <div class="w-100 main-menu-div">
-
-            <nav class="navbar navbar-expand-md navbar-light shadow-sm ">
                 <div class="container ">
-
-                    <a class="navbar-brand item-root pl-3 pr-3" href="{{ url('/') }}">
-                        <button class="navbar-toggler-icon border-0"></button>
-                        {{ __('Products') }}
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <nav class="navbar navbar-expand-md navbar-light shadow-sm">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link item-root" id="btn-show-parent-categories" href="#">
+                                    {{ __('Products')}}
+                                    <span class="sr-only">(current)</span>
 
 
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link item-menu-non-root" href="#">{{ __('Bestsellers')}}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link item-menu-non-root" href="#">{{ __('Resources')}}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link item-menu-non-root" href="#">{{ __('About Us')}}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link item-menu-non-root" href="#">{{ __('Blog')}}</a>
+                            </li>
                         </ul>
-
+                        <!-- Left Side Of Navbar -->
+                        <ul class="navbar-nav mr-auto"></ul>
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
-
                             @auth
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('admin') }}">{{ __('Admin control') }}</a>
                                 </li>
                             @endauth
 
-                            <!-- Authentication Links -->
+                        <!-- Authentication Links -->
                             @guest
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -88,7 +101,7 @@
                             @else
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                       Hello {{ Auth::user()->login }}
+                                        Hello {{ Auth::user()->login }}
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -105,9 +118,11 @@
                                 </li>
                             @endguest
                         </ul>
+
                     </div>
+                </nav>
+                    @include('menu._root_categories')
                 </div>
-            </nav>
 
             </div>
 

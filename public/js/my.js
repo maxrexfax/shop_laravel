@@ -148,7 +148,7 @@ $(document).ready(function() {
             $( "#divToShowRootCategories2" ).empty();
         }
 
-        $('.root-menu-container').toggle(200);
+        $('.root-menu-container').fadeToggle( "slow", "linear" );
     });
 
     function createDivElementForRootCatgoryLink(id, name)
@@ -157,6 +157,10 @@ $(document).ready(function() {
             '<a href="/product/category/' + id + '">' + name + '</a>' +
             '</div>';
     }
+
+    $(document).on('click', '#btnButtonCardShower', function(e) {
+        alert('Cart is empty now');
+    });
 
 });
 

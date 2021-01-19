@@ -78,23 +78,25 @@
             </div>
         </div>
     </div>
-</div>
-<div class="footer-copyright">
-    <div class="container">
-        <div class="row text-light">
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                Copyright © 1994-2020 Beyond Health LLC.<br>
-                All rights reserved.
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                Privacy Policy | Customer Service
-            </div>
-            <div class="col-md-4 col-sm-4 col-xs-12">
-                Ecommerce Development<br>
-                by Absolute Web
+
+    <div class="footer-copyright pt-3 pb-3">
+        <div class="container">
+            <div class="row text-light">
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    Copyright © 1994-2020 Beyond Health LLC.<br>
+                    All rights reserved.
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 text-center">
+                    Privacy Policy | Customer Service
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12 text-right">
+                    Ecommerce Development<br>
+                    by Absolute Web
+                </div>
             </div>
         </div>
     </div>
+
 </div>
 
 

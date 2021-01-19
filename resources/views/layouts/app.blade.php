@@ -37,15 +37,22 @@
                         <img class="float-left" src="{{asset('/img/header_logo.png')}}" alt="Header logo" />
                     </a>
                     <div class="text-light font-weight-bold"><i class="fa fa-phone"></i><span class="mr-2"> Phone +3884642484</span></div>
-                    <div class="d-flex mr-2 form-control col-4 p-1 bg-dark text-white border-0">
-                        <input class="w-100 border-0  bg-dark text-white" type="text" placeholder="Search">
-                        <button class="btn btn-search" type="submit" title="Search">
-                            <i id="searchSignHeader" class="fa fa-search mb-2 text-white"></i>
+
+                    <div id="divWithInputSearchInHeader" class="d-flex mr-2 form-group col-4 p-0 text-white border-0 my-color-for-search-in-header">
+                        <input class="d-inline w-100 border-0 text-white my-class-color-transparent" type="text" placeholder="Search">
+                        <button class="d-inline btn btn-search" type="submit" title="Search">
+                            <i id="searchSignHeader" class="fa fa-search mb-2 text-white d-inline"></i>
                         </button>
                     </div>
-                    <div class="rounded bg-dark text-white p-1">
-                        <span class="">CART:</span>
-                        <span class="">0</span>
+
+                    <div class="p-0" style="border-radius: 5px 5px 5px 5px;" id="divButtonCardShower">
+                        <button class="btn btn-primary" id="btnButtonCardShower">
+                            <i class="fa fa-shopping-cart d-inline"></i>
+                            {{__('CART')}}
+                        </button>
+                        <span class="d-inline-block div-divButtonCardShower-right" style="">
+                            0
+                        </span>
                     </div>
 
                 </div>
@@ -64,8 +71,6 @@
                                 <a class="nav-link item-root" id="btn-show-parent-categories" href="#">
                                     {{ __('Products')}}
                                     <span class="sr-only">(current)</span>
-
-
                                 </a>
                             </li>
                             <li class="nav-item">

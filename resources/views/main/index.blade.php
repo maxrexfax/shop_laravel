@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
 <div class="">
-    <section>
+    <section class="my-class-color-transparent">
         <div class="text-center text-light">
-            <h1>{{__('The Highest Quality Supplements and Health-Supporting Products')}}</h1>
+            <h1 class="">{{__('The Highest Quality Supplements and Health-Supporting Products')}}</h1>
         </div>
     </section>
     @include('main.partials._slider')

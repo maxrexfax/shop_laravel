@@ -1,11 +1,18 @@
 body {
-    background: url("/img/background/background.png") no-repeat scroll;
-    background-size: 100%;
+    background: url(/img/background/background.png) 0% -5% no-repeat scroll;
+    //background-size: 100%;
 }
 
-#searchSignHeader {
+.el-with-header-background {
+    //background: url(/img/background/background.png) 0% -80% no-repeat scroll;
+
+}
+
+#divWithInputSearchInHeader {
     position: relative;
-    top:-5px;
+    top: 8px;
+    border-radius: 3px;
+    padding-left: 5px;
 }
 //MENU
 .item-menu-non-root {
@@ -13,11 +20,25 @@ body {
     font-family: roboto regular SansSerif, serif;
 }
 
+.header-grey {
+    color: gray;
+}
+
 .root-menu-container {
     display: none;
-    position: relative;
+    position: absolute;
+    top:10%;
+    left: 3%;
+    border-radius: 3px;
     z-index: 998;
     background-color: #e6e6e6;
+}
+
+#divForSliderOnMainPage {
+    max-width: 700px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .popup-root-categories-item {
@@ -28,8 +49,6 @@ body {
     color:black;
     text-decoration: none;
 }
-
-
 
 #divForSubcribingOnMainPage {
     max-width: 900px;
@@ -61,8 +80,10 @@ body {
 }
 
 .footer-copyright {
-    background-color: darkslategrey;
+    //background-color: darkslategrey;
+    background-color: rgba(10, 150, 10, 0.3);
     font-family: roboto regular SansSerif, serif;
+    font-size: 0.75em;
 }
 
 .gray-section {
@@ -76,7 +97,7 @@ body {
 
 .footer_div {
     background: url("/img/background/background.png") no-repeat scroll;
-    background-size: 100% 100%;
+    background-size: cover;
     font-family: roboto regular SansSerif, serif;
 }
 
@@ -286,4 +307,30 @@ span[class*=" step"] {
 .outer {
     margin-top: 1px;
     overflow: hidden;
+}
+
+#divButtonCardShower {
+    background-color: #126DD2;
+}
+
+#btnButtonCardShower {
+    border-radius: 5px 0 0 5px;
+}
+
+.div-divButtonCardShower-right {
+    background-color: #126DD2;
+    border-radius: 0 5px 5px 0;
+    width: 23px;
+    padding-left: 5px;
+    position: relative;
+    z-index: 100;
+}
+
+.my-color-for-search-in-header {
+    background-color: rgba(250, 252, 255, 0.3) !important;
+    //background-color: transparent;
+}
+
+.my-class-color-transparent {
+    background-color: transparent;
 }

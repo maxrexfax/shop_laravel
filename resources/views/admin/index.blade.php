@@ -40,4 +40,5 @@
             </div>
         </div>
     </div>
+    <section class="place-holder"></section>
 @endsection

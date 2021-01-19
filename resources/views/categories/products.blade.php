@@ -31,9 +31,9 @@
         <div class="row p-0">
             <div class="card col-sm-2"></div>
             <div class="col-sm-10">
-                <div class="d-flex flex-wrap justify-content-between">
+                <div class="d-flex flex-wrap justify-content-start">
                     @foreach($products as $product)
-                        <div class="col-lg-3 col-md-3 col-sm-10 border rounded m-1 p-0 div-item-main-container" style="height: 300px; background-color: white;">
+                        <div class="col-lg-3 col-md-3 col-sm-10 border rounded m-1 p-0 div-item-main-container">
                             <div style="height: 60%;">
                                 <div style="margin-right: auto; margin-left: auto; width: 50%; ">
                                     <a class="url_no_decoration" href="{{route ('product.show', ['id' => $product->id] )}}">
@@ -51,7 +51,7 @@
                             <div class="product-item-price pt-0 pr-2 pb-0 pl-2 m-0">
                                 <p>Price: <b>{{$product->price}}</b>$</p>
                             </div>
-                            <div class="hide pt-0 pr-2 pb-0 pl-2 m-0" style="height: 50%;">
+                            <div class="hide pt-0 pr-2 pb-0 pl-2 m-0 rounded-bottom" style="height: 50%;">
                                 <div style="height: 70%; overflow-y: auto;" class="product-item-description p-2">
                                     <p style="overflow: hidden;">{{$product->short_description}}</p>
                                 </div>
@@ -65,4 +65,5 @@
             </div>
         </div>
     </div>
+    <section class="place-holder"></section>
 @endsection

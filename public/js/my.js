@@ -121,8 +121,6 @@ $(document).ready(function() {
         alert('Product ID=' + $(this).attr('id'));
     });
 
-
-
     $( '.div-item-main-container' ).mouseover(function() {
         console.log('mouseover');
         $(this).find('.hide').css('display', 'block');
@@ -131,8 +129,6 @@ $(document).ready(function() {
     $( '.div-item-main-container' ).mouseout(function() {
         $(this).find('.hide').css('display', 'none');
     });
-
-
 
     $(document).on('click', '#btn-show-parent-categories', function(e) {
         if(!$('.root-menu-container').is(":visible")) {

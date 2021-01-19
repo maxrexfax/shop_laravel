@@ -7,15 +7,16 @@
     @include('main.partials._slider')
     <section>
         <div class="text-center mt-3 mb-3">
-            <h3><b>Looking for quality vitamins from a supplier you can trust?</b></h3>
-            <p>You've come to the right place!</p>
-
-            <p>Beyond Health exists to support you in achieving a level of health beyond what you may have thought possible.</p>
-            <p>These high-quality products cost more to manufacture, but they yield more biologically-active nutrients without contaminants. This makes our supplements many times more effective than comparable products, and the best supplement value you can buy.</p>
-
+            <div class="container">
+                <div class="col-sm-10">
+                    <h3><b>Looking for quality vitamins from a supplier you can trust?</b></h3>
+                    <p>You've come to the right place!</p>
+                    <p>Beyond Health exists to support you in achieving a level of health beyond what you may have thought possible.</p>
+                    <p>These high-quality products cost more to manufacture, but they yield more biologically-active nutrients without contaminants. This makes our supplements many times more effective than comparable products, and the best supplement value you can buy.</p>
+                </div>
+            </div>
         </div>
     </section>
-
     <section class="half-down">
         <div class="container text-center mt-3 mb-3">
             <div class="row">
@@ -38,16 +39,14 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 </div>
 <section class="place-holder">
-
 </section>
 <section>
-    <div class="text-center mt-3 mb-3">
-        <h2>Наши бестселлеры</h2>
+    <div class="text-center mt-3 mb-5">
+        <h2><b>Our bestsellers</b></h2>
     </div>
     @include('main.partials._bestsellers')
 </section>
@@ -68,37 +67,15 @@
 </section>
 <section>
     <div class="text-center mt-3 mb-3">
-
     </div>
     @include('main.partials._banners_in_bottom')
-    <div class="text-center mt-3 mb-3">
-
-    </div>
 </section>
 <section>
-    <div class="text-center mt-5 mb-5">
+    <div class="text-center mt-6">
         <h2><b>What Our Customers Say</b></h2>
+<a href="#"><p>Read all reviews here...</p></a>
     </div>
 </section>
 
-<section>
-    <div class="mt-5 mb-5">
-        <div id="divForSubcribingOnMainPage" style="background-color: white;">
-            <div class="row">
-                <div class="col-md-4 col-sm-4">
-                    <div class="p-3">
-                        <img width="100%" src="{{asset('/img/serviceimages/subscribe.jpeg')}}"/>
-                    </div>
-                </div>
-                <div class="col-md-8 col-sm-8 text-left">
-                    <br>
-                    <br>
-                    <h2><b>Free Health Resource</b></h2>
-                    <p>Sign up for our FREE Weekly Newsclips and reports! </p>
-                    <input type="text"><span class="btn btn-primary">SUBSCRIBE</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+
 @endsection

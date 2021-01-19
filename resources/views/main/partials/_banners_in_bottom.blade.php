@@ -1,4 +1,4 @@
-<div class="container text-center mt-3 mb-3">
+<div class="container text-center mt-5 mb-6">
     <div class="row">
         <div class="col-sm col-lg-4">
             <div class="col-sm mb-0 pb-0 border-bottom mb-2" style="height: 50px;">
@@ -28,4 +28,4 @@
     </div>
 
 </div>
-<div class="container"><hr></div>
+<div class="container mb-5 mt-5"><hr></div>

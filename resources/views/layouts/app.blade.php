@@ -36,15 +36,18 @@
                     <a href="{{route('main.page')}}">
                         <img class="float-left" src="{{asset('/img/header_logo.png')}}" alt="Header logo" />
                     </a>
-                    <div><span class="mr-2" style="color: #ffffff; font-weight: bold;">&#128222; Phone +3884642484</span></div>
-                    <div class="d-flex mr-2 form-control col-4 p-1">
-                        <input class="w-100 border-0" type="text" placeholder="Search">
+                    <div class="text-light font-weight-bold"><i class="fa fa-phone"></i><span class="mr-2"> Phone +3884642484</span></div>
+                    <div class="d-flex mr-2 form-control col-4 p-1 bg-dark text-white border-0">
+                        <input class="w-100 border-0  bg-dark text-white" type="text" placeholder="Search">
                         <button class="btn btn-search" type="submit" title="Search">
-                            <i id="searchSignHeader" class="fa fa-search mb-2"></i>
+                            <i id="searchSignHeader" class="fa fa-search mb-2 text-white"></i>
                         </button>
                     </div>
+                    <div class="rounded bg-dark text-white p-1">
+                        <span class="">CART:</span>
+                        <span class="">0</span>
+                    </div>
 
-                    <button class="btn btn-secondary">CART</button>
                 </div>
             </div>
         <br>

@@ -34,6 +34,34 @@ class Category extends Model
         return '';
     }
 
+    public function getProductsByPriceAsc()
+    {
+        if(!empty($this->products)) {
+            return $this->products->sortBy('price');
+        }
+
+        return '';
+    }
+
+
+    public function getProductsByPriceDesc()
+    {
+        if(!empty($this->products)) {
+            return $this->products->sortByDesc('price');
+        }
+
+        return '';
+    }
+
+    public function getProductsByName()
+    {
+        if(!empty($this->products)) {
+            return $this->products->sortBy('product_name');
+        }
+
+        return '';
+    }
+
     public function parentCategory()
     {
         return $this->hasOne(Category::class, 'id', 'category_id');

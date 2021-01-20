@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    const DEFAULT_PAGINATION_QUANTITY = 6;
+
     public function index()
     {
         $categoriesHierarchically = Category::whereNull('category_id')
@@ -88,17 +90,38 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show($id, Request $request)
     {
+        $tmpPaginateQuantity = self::DEFAULT_PAGINATION_QUANTITY;
+        $category = Category::find($id);
+        if($request->get('paginationQuantity')) {
+            $tmpPaginateQuantity = $request->get('paginationQuantity');
+            //$products = $category->products()->paginate($tmpPaginateQuantity);
+        } else {
+            //$products = $category->products()->paginate(self::DEFAULT_PAGINATION_QUANTITY);
+        }
+
+        $products = $category->products()->paginate($tmpPaginateQuantity);
+
+        if ($request->get('sortType')=='price') {
+            $products = $category->getProductsByPriceAsc()->forPage($request->get('page'), $tmpPaginateQuantity);
+        } else if ($request->get('sortType')=='product_name') {
+            $products = $category->getProductsByName()->forPage($request->get('page'), $tmpPaginateQuantity);
+        }
+
         $categoriesHierarchically = Category::whereNull('category_id')
             ->with('childrenCategories')
             ->get();
-        $category = Category::find($id);
 
         if($category) {
             return view('categories.products', [
                 'categoriesHierarchically' => $categoriesHierarchically,
-                'products' => $category->getProducts()
+                'products' => $products,
+                'categoriesAll' => Category::all(),
+                'currentCategoryName' => $category,
+                'tmpPaginateQuantity' => $tmpPaginateQuantity,
+                'direction' => $request->get('direction') ? $request->get('direction') : '',
+                'sortType' => $request->get('sortType') ? $request->get('sortType') : '',
             ]);
         } else {
             return redirect('category/list');

@@ -3,11 +3,6 @@ body {
     //background-size: 100%;
 }
 
-.el-with-header-background {
-    //background: url(/img/background/background.png) 0% -80% no-repeat scroll;
-
-}
-
 #divWithInputSearchInHeader {
     position: relative;
     top: 8px;
@@ -333,4 +328,43 @@ span[class*=" step"] {
 
 .my-class-color-transparent {
     background-color: transparent;
+}
+
+.border-bottom-green-2px {
+    border-bottom: 2px solid green;
+}
+
+.all-category-item a {
+    text-decoration: none;
+    color: #939598;
+    font-family: roboto regular SansSerif, serif;
+}
+
+.all-category-item a:hover {
+    color: #135bb5;
+    text-decoration: none;
+}
+
+.category-chosen a {
+    color: #135bb5;
+    font-weight: bold;
+}
+
+.my-roboto-font-family {
+    font-family: roboto regular SansSerif, serif;
+}
+
+.my-a-no-decoration a, a:hover {
+    text-decoration: none;
+    color: #939598;
+    font-family: roboto regular SansSerif, serif;
+}
+
+.my-a-no-decoration a:hover {
+    text-decoration: none;
+    color: #636b6f;
+}
+
+.gray-category-name-breadcrumb {
+    color: #939598;
 }

@@ -8,18 +8,16 @@
                         <div class="m-2 ">
                             <div class="border text-center">
                                     @if($product->logo_image)
-                                        <img class="img-to-show-modal" height="300px" src="{{ asset('/img/logo/' . $product->image)}}" alt="{{$product->product_name}}"/>
+                                        <img class="img-to-show-modal" height="300px" src="{{ asset('/img/logo/' . $product->logo_image)}}" alt="{{$product->product_name}}"/>
                                     @else
                                         <img height="200px" src="{{ asset('/img/empty.png')}}" alt="No logo"/>
                                     @endif
                             </div>
                             <div class="d-flex" style="overflow: auto; width: 100%">
-                                @foreach($images as $img)
-                                    @if($img->product_id==$product->id)
-                                        <div class="border m-2">
-                                            <img class="img-to-show-modal" height="100px" src="{{ asset('/img/images/' . $img->image_name) }}" alt="{{$img->image_name}}"/>
-                                        </div>
-                                    @endif
+                                @foreach($product->images as $img)
+                                    <div class="border m-2">
+                                        <img class="img-to-show-modal" height="100px" src="{{ asset('/img/images/' . $img->image_name) }}" alt="{{$img->image_name}}"/>
+                                    </div>
                                 @endforeach
                             </div>
                         </div>

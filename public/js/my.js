@@ -117,51 +117,50 @@ $(document).ready(function() {
         $('#modalWindowToManageProductImages').hide();
     });
 
-    /*$(':file').on('change', function () {
-        console.log('jQuerry change function');
-        var file = this.files[0];
-
-        if (file.size > 100240) {
-            alert('max upload size is 10k');
-        }
-
-        // Also see .name, .type
+    $(document).on('click', '.btn_add_to_cart', function(e) {
+        alert('Product ID=' + $(this).attr('id'));
     });
 
-    $(':button').on('click', function () {
-        console.log('jQuerry upload starts');
-        $.ajax({
-            // Your server script to process the upload
-            url: '/image/store/',
-            type: 'POST',
+    $( '.div-item-main-container' ).mouseover(function() {
+        console.log('mouseover');
+        $(this).find('.hide').css('display', 'block');
+    });
 
-            // Form data
-            data: new FormData($('form')[0]),
+    $( '.div-item-main-container' ).mouseout(function() {
+        $(this).find('.hide').css('display', 'none');
+    });
 
-            // Tell jQuery not to process data or worry about content-type
-            // You *must* include these options!
-            cache: false,
-            contentType: false,
-            processData: false,
+    $(document).on('click', '#btn-show-parent-categories', function(e) {
+        if(!$('.root-menu-container').is(":visible")) {
+            $.get( "/categories/root/list", function( data ) {
+                $.each(data, function( index, value ) {
+                    if(index < data.length/2) {
+                        $( "#divToShowRootCategories1" )
+                            .append(createDivElementForRootCatgoryLink(value['id'], value['category_name']))
+                    } else {
+                        $( "#divToShowRootCategories2" )
+                            .append(createDivElementForRootCatgoryLink(value['id'], value['category_name']))
+                    }
+                });
+            }, "json" );
+        } else {
+            $( "#divToShowRootCategories1" ).empty();
+            $( "#divToShowRootCategories2" ).empty();
+        }
 
-            // Custom XMLHttpRequest
-            xhr: function () {
-                var myXhr = $.ajaxSettings.xhr();
-                if (myXhr.upload) {
-                    // For handling the progress of the upload
-                    myXhr.upload.addEventListener('progress', function (e) {
-                        if (e.lengthComputable) {
-                            $('progress').attr({
-                                value: e.loaded,
-                                max: e.total,
-                            });
-                        }
-                    }, false);
-                }
-                return myXhr;
-            }
-        });
-    });*/
+        $('.root-menu-container').fadeToggle( "slow", "linear" );
+    });
+
+    function createDivElementForRootCatgoryLink(id, name)
+    {
+        return divElementForRootCatgoryLink = '<div class="col-lg-12 popup-root-categories-item">' +
+            '<a href="/product/category/' + id + '">' + name + '</a>' +
+            '</div>';
+    }
+
+    $(document).on('click', '#btnButtonCardShower', function(e) {
+        alert('Cart is empty now');
+    });
 
 });
 

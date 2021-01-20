@@ -26,46 +26,77 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/my.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
     <div id="app">
-        <header class="bckgnd-img">
-        <div class="d-flex p-2 align-items-center justify-content-between bd-highlight flex-wrap">
-            <img class="float-left" src="/img/header_logo.png" alt="Header logo" />
-            <div><span class="mr-2 ">&#128222; Phone +3884642484</span></div>
-            <input class="mr-2 form-control col-4" type="text" placeholder="Type to search">
-            <input class="btn btn-secondary" type="submit" value="Search">
-        </div>
-        <br>
-            <nav class="navbar navbar-expand-md navbar-light shadow-sm ">
-                <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ __('Main page') }}
+        <header class="backgound-image w-100">
+            <div class="container">
+                <div class="d-flex p-2 align-items-center justify-content-between bd-highlight flex-wrap">
+                    <a href="{{route('main.page')}}">
+                        <img class="float-left" src="{{asset('/img/header_logo.png')}}" alt="Header logo" />
                     </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <div class="text-light font-weight-bold"><i class="fa fa-phone"></i><span class="mr-2"> Phone +3884642484</span></div>
+
+                    <div id="divWithInputSearchInHeader" class="d-flex mr-2 form-group col-4 p-0 text-white border-0 my-color-for-search-in-header">
+                        <input class="d-inline w-100 border-0 text-white my-class-color-transparent" type="text" placeholder="Search">
+                        <button class="d-inline btn btn-search" type="submit" title="Search">
+                            <i id="searchSignHeader" class="fa fa-search mb-2 text-white d-inline"></i>
+                        </button>
+                    </div>
+
+                    <div class="p-0" style="border-radius: 5px 5px 5px 5px;" id="divButtonCardShower">
+                        <button class="btn btn-primary" id="btnButtonCardShower">
+                            <i class="fa fa-shopping-cart d-inline"></i>
+                            {{__('CART')}}
+                        </button>
+                        <span class="d-inline-block div-divButtonCardShower-right" style="">
+                            0
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        <br>
+            <div class="w-100 main-menu-div">
+                <div class="container ">
+                <nav class="navbar navbar-expand-md navbar-light shadow-sm">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link item-root" id="btn-show-parent-categories" href="#">
+                                    {{ __('Products')}}
+                                    <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link item-menu-non-root" href="#">{{ __('Bestsellers')}}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link item-menu-non-root" href="#">{{ __('Resources')}}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link item-menu-non-root" href="#">{{ __('About Us')}}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link item-menu-non-root" href="#">{{ __('Blog')}}</a>
+                            </li>
+                        </ul>
+                        <!-- Left Side Of Navbar -->
+                        <ul class="navbar-nav mr-auto"></ul>
+                        <!-- Right Side Of Navbar -->
+                        <ul class="navbar-nav ml-auto">
                             @auth
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('users') }}">{{ __('Users') }}</a>
-                                </li>
-
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('admin') }}">{{ __('Admin control') }}</a>
                                 </li>
                             @endauth
 
-                        </ul>
-
-                        <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto">
-                            <!-- Authentication Links -->
+                        <!-- Authentication Links -->
                             @guest
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -78,7 +109,7 @@
                             @else
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                       Hello {{ Auth::user()->login }}
+                                        Hello {{ Auth::user()->login }}
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -95,13 +126,21 @@
                                 </li>
                             @endguest
                         </ul>
+
                     </div>
+                </nav>
+                    @include('menu._root_categories')
                 </div>
-            </nav>
+
+            </div>
+
         </header>
         <main class="py-4">
             @yield('content')
         </main>
+        <footer>
+            @include('footer.footer')
+        </footer>
     </div>
 </body>
 </html>

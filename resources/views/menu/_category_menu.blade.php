@@ -8,7 +8,6 @@
         <ul class="navbar-nav mr-auto">
             @foreach($categoriesHierarchically as $categoryH)
                 <li class="nav-item active">
-
                     @if($categoryH->childrenCategories->isNotEmpty())
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -26,6 +25,24 @@
                     @endif
                 </li>
             @endforeach
+        </ul>
+        <ul class="navbar-nav ml-auto form-inline">
+            <li class="nav-item active form-group">
+                <label class="limiter-label mr-2">Show</label>
+                <select class="form-control mr-2" id="selectPaginationQuantity">
+                    <option value="5">5 per page</option>
+                    <option value="15">15 per page</option>
+                    <option value="50">50 per page</option>
+                </select>
+            </li>
+            <li class="nav-item active form-group">
+                <label class="limiter-label mr-2">Sort by</label>
+                <select class="form-control" id="selectPaginationQuantity">
+                    <option value="1">price</option>
+                    <option value="2">name</option>
+                    <option value="3">rating</option>
+                </select>
+            </li>
         </ul>
     </div>
 </nav>

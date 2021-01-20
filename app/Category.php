@@ -20,6 +20,19 @@ class Category extends Model
         return $this->hasMany(Category::class)->with('categories');
     }
 
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
+
+    public function getProducts()
+    {
+        if(!empty($this->products)) {
+            return $this->products;
+        }
+
+        return '';
+    }
 
     public function parentCategory()
     {

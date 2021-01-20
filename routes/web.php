@@ -14,19 +14,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'CategoryController@index');
+Route::get('/', 'HomeController@index')->name('main.page');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@home')->name('home');
 
 Route::get('/users', 'UserController@index')->name('users');
+
+Route::get('/categories', 'UserController@index')->name('categories');
 
 Route::get('/admin', 'AdminController@index')->name('admin');
 
 Route::get('/category/create/{id?}', 'CategoryController@create')->name('category.create');
 Route::get('/admin/category/list', 'AdminController@categoryList')->name('admin.category.list');
 Route::post('/category/store/{id?}', 'CategoryController@store')->name('category.store');
+Route::get('/categories/root/list', 'CategoryController@categoriesRootList')->name('category.rootlist');
+
+
 Route::get('/product/create/{id?}', 'ProductController@create')->name('product.create');
 Route::get('/admin/product/list', 'AdminController@productList')->name('admin.product.list');
 Route::post('/product/store/{id?}', 'ProductController@store')->name('product.store');
@@ -37,3 +42,5 @@ Route::post('/image/order', 'ImageController@changeSortOrder')->name('image.orde
 
 Route::get('/product/images/{id}', 'ProductController@images')->name('product.images');
 Route::get('/product/category/{id}', 'CategoryController@show')->name('product.category');
+
+Route::get('/product/show/{id}', 'ProductController@show')->name('product.show');

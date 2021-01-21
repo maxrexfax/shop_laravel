@@ -171,15 +171,24 @@ $(document).ready(function() {
 
 
     $( "#paginationQuantity" ).change(function() {
-        console.log('paginationQuantity');
-        console.log($(location).attr('href'));
-        $(location).attr('href',$('#paginationQuantity option:selected').val());
+        let url = getUrl();
+        url=url+'?paginationQuantity=' + $('#paginationQuantity option:selected').val();
+        $(location).attr('href', url);
     });
 
     $( "#sortBySelect" ).change(function() {
-        console.log('sortBySelect');
-        $(location).attr('href',$('#sortBySelect option:selected').val());
+        let url = getUrl();
+        url = url+'?sortType=' + $('#sortBySelect option:selected').val();
+        $(location).attr('href', url);
     });
+
+    function getUrl() {
+        let url = $(location).attr('href');
+        if(url.indexOf('?')!=-1) {
+            url = url.substring(0, url.indexOf("?"));
+        }
+        return url;
+    }
 
 });
 

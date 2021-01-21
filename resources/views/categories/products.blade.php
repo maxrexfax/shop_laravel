@@ -34,21 +34,21 @@
                         <div class="d-sm-none d-md-none d-lg-block">
                         {{__('Show by')}}
                             <select class="form-control ml-2 mr-2" id="paginationQuantity">
-                                <option value="6" @if($tmpPaginateQuantity==6) selected @else @endif>6 {{__('Per page')}}</option>
-                                <option value="12" @if($tmpPaginateQuantity==12) selected @else @endif>12 {{__('Per page')}}</option>
-                                <option value="40" @if($tmpPaginateQuantity==40) selected @else @endif>40 {{__('Per page')}}</option>
+                                <option value="6" @if($paginateQuantity==6) selected @else @endif>6 {{__('Per page')}}</option>
+                                <option value="12" @if($paginateQuantity==12) selected @else @endif>12 {{__('Per page')}}</option>
+                                <option value="40" @if($paginateQuantity==40) selected @else @endif>40 {{__('Per page')}}</option>
                             </select>
                         </div>
                         {{__('Sort by')}}
-                        <select class="form-control ml-2" id="priceTypeSort">
+                        <select class="form-control ml-2" id="sortBySelect">
                             <option value="" @if($sortType=='')selected @endif></option>
                             <option value="asc" @if($sortType=='asc')selected @else @endif>{{__('Price asc')}}</option>
-                            <option value="desc" @if($sortType=='asc')selected @else @endif>{{__('Price desc')}}</option>
+                            <option value="desc" @if($sortType=='desc')selected @else @endif>{{__('Price desc')}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="d-flex flex-wrap justify-content-start">
-                    @foreach($products->sortBy($sortType) as $product)
+                    @foreach($products as $product)
                         <div class="col-lg-4 col-md-4 col-xs-12 p-3">
                             <div class="p-0 rounded div-item-main-container">
                                 <div style="height: 180px;">
@@ -84,8 +84,8 @@
                     <hr>
                 </div>
                 <div class="col-sm-2 my-class-text-center" style="margin-left: auto; margin-right: auto;">
-                    @if($products->appends(['paginationQuantity' => $tmpPaginateQuantity]))
-                        {{$products->appends(['paginationQuantity' => $tmpPaginateQuantity])->render()}}
+                    @if(!empty($products))
+                        {{$products->links()}}
                     @endif
                 </div>
             </div>

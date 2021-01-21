@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    const DEFAULT_PAGINATION_QUANTITY = 6;
+    const DEFAULT_PAGINATION_QUANTITY = 12;
 
     public function index()
     {
@@ -92,17 +92,23 @@ class CategoryController extends Controller
 
     public function show($id, Request $request)
     {
-        $tmpPaginateQuantity = self::DEFAULT_PAGINATION_QUANTITY;
+        $paginateQuantity = self::DEFAULT_PAGINATION_QUANTITY;
         $category = Category::find($id);
         if($request->get('paginationQuantity')) {
-            $tmpPaginateQuantity = $request->get('paginationQuantity');
+            $paginateQuantity = $request->get('paginationQuantity');
         }
-
-        $products = $category->products()->paginate($tmpPaginateQuantity);
 
         $categoriesHierarchically = Category::whereNull('category_id')
             ->with('childrenCategories')
             ->get();
+
+        if ($request->get('sortType')=='asc') {
+            $products = $category->getProductsByPriceAsc();
+        } else if ($request->get('sortType')=='desc'){
+            $products = $category->getProductsByPriceDesc();
+        } else {
+            $products = $category->products()->paginate($paginateQuantity);
+        }
 
         if($category) {
             return view('categories.products', [
@@ -110,7 +116,7 @@ class CategoryController extends Controller
                 'products' => $products,
                 'categoriesAll' => Category::all(),
                 'currentCategoryName' => $category,
-                'tmpPaginateQuantity' => $tmpPaginateQuantity,
+                'paginateQuantity' => $paginateQuantity,
                 'direction' => $request->get('direction') ? $request->get('direction') : '',
                 'sortType' => $request->get('sortType') ? $request->get('sortType') : '',
             ]);

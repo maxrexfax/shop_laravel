@@ -96,18 +96,9 @@ class CategoryController extends Controller
         $category = Category::find($id);
         if($request->get('paginationQuantity')) {
             $tmpPaginateQuantity = $request->get('paginationQuantity');
-            //$products = $category->products()->paginate($tmpPaginateQuantity);
-        } else {
-            //$products = $category->products()->paginate(self::DEFAULT_PAGINATION_QUANTITY);
         }
 
         $products = $category->products()->paginate($tmpPaginateQuantity);
-
-        if ($request->get('sortType')=='price') {
-            $products = $category->getProductsByPriceAsc()->forPage($request->get('page'), $tmpPaginateQuantity);
-        } else if ($request->get('sortType')=='product_name') {
-            $products = $category->getProductsByName()->forPage($request->get('page'), $tmpPaginateQuantity);
-        }
 
         $categoriesHierarchically = Category::whereNull('category_id')
             ->with('childrenCategories')

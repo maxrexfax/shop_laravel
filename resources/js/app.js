@@ -125,10 +125,16 @@ $(document).ready(function() {
 
     $( '.div-item-main-container' ).mouseover(function() {
         $(this).find('.hide').css('display', 'block');
+        // $(this).css('box-shadow', '0px 2px 1px #888');
+        // $(this).find('.hide').css('box-shadow', '0px 2px 1px #888, -2px 0px 1px #d8d8d8, 2px 0px 1px #d8d8d8');
+
+        $(this).css('box-shadow', '0 -3px 3px rgba(0,0,0,0.5)');
+        $(this).find('.hide').css('box-shadow', '0 3px 3px rgba(0,0,0,0.5)');
     });
 
     $( '.div-item-main-container' ).mouseout(function() {
         $(this).find('.hide').css('display', 'none');
+        $(this).css('box-shadow', 'none');
     });
 
     $(document).on('click', '#btn-show-parent-categories', function(e) {
@@ -166,6 +172,7 @@ $(document).ready(function() {
 
     $( "#paginationQuantity" ).change(function() {
         console.log('paginationQuantity');
+        console.log($(location).attr('href'));
         $(location).attr('href',$('#paginationQuantity option:selected').val());
     });
 

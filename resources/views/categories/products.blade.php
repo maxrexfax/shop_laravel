@@ -7,7 +7,7 @@
             <div class="col-12 text-center"><h2>{{$currentCategoryName->category_name}}</h2></div>
             <div class="col-xs-12 col-md-3 sidebar">
                 <nav class="sidebar-menu">
-                    <div class="nav-title accordion_header bg-light border-bottom-green-2px text-dark my-roboto-font-family font-weight-bold pt-4 pl-4 pb-4">
+                    <div class="nav-title accordion_header bg-light border-bottom-green-2px text-dark my-roboto-font-family font-weight-bold p-4">
                         {{__('Categories')}}
                         <i class="d-sm-block d-md-none d-lg-none fa fa-bars pull-right float-right"></i>
                     </div>
@@ -34,42 +34,42 @@
                         <div class="d-sm-none d-md-none d-lg-block">
                         {{__('Show by')}}
                             <select class="form-control ml-2 mr-2" id="paginationQuantity">
-                                <option value="{{route('product.category', ['id' =>$currentCategoryName->id, 'paginationQuantity' => 6])}}" @if($tmpPaginateQuantity==6) selected @else @endif>6 {{__('Per page')}}</option>
-                                <option value="{{route('product.category', ['id' =>$currentCategoryName->id, 'paginationQuantity' => 12])}}" @if($tmpPaginateQuantity==12) selected @else @endif>12 {{__('Per page')}}</option>
-                                <option value="{{route('product.category', ['id' =>$currentCategoryName->id, 'paginationQuantity' => 40])}}" @if($tmpPaginateQuantity==40) selected @else @endif>40 {{__('Per page')}}</option>
+                                <option value="6" @if($tmpPaginateQuantity==6) selected @else @endif>6 {{__('Per page')}}</option>
+                                <option value="12" @if($tmpPaginateQuantity==12) selected @else @endif>12 {{__('Per page')}}</option>
+                                <option value="40" @if($tmpPaginateQuantity==40) selected @else @endif>40 {{__('Per page')}}</option>
                             </select>
                         </div>
                         {{__('Sort by')}}
-                        <select class="form-control ml-2" id="sortBySelect">
+                        <select class="form-control ml-2" id="priceTypeSort">
                             <option value="" @if($sortType=='')selected @endif></option>
-                            <option value="{{route('product.category', ['id' =>$currentCategoryName->id, 'sortType' =>'price'])}}" @if($sortType=='price')selected @else @endif>{{__('Price')}}</option>
-                            <option value="{{route('product.category', ['id' =>$currentCategoryName->id, 'sortType' =>'product_name'])}}" @if($sortType=='product_name')selected @else @endif>{{__('Name')}}</option>
+                            <option value="asc" @if($sortType=='asc')selected @else @endif>{{__('Price asc')}}</option>
+                            <option value="desc" @if($sortType=='asc')selected @else @endif>{{__('Price desc')}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="d-flex flex-wrap justify-content-start">
-                    @foreach($products as $product)
+                    @foreach($products->sortBy($sortType) as $product)
                         <div class="col-lg-4 col-md-4 col-xs-12 p-3">
-                            <div class="p-0 border rounded div-item-main-container">
-                                <div style="height: 60%;">
+                            <div class="p-0 rounded div-item-main-container">
+                                <div style="height: 180px;">
                                     <div style="margin-right: auto; margin-left: auto; width: 50%; ">
                                         <a class="url_no_decoration" href="{{route ('product.show', ['id' => $product->id] )}}">
                                             <img width="100%" src="{{asset('/img/logo/' . $product->logo_image)}}" alt="{{$product->product_name}}">
                                         </a>
                                     </div>
                                 </div>
-                                <div class="product-item-title pt-0 pr-2 pb-0 pl-2 m-0">
-                                    <h3>
+                                <div class="product-item-title text-center pt-0 pr-2 pb-0 pl-2 m-0">
+                                    <h2 class="h6 w-100 overflow-hidden">
                                         <a class="url_no_decoration" href="{{route ('product.show', ['id' => $product->id] )}}">
                                             {{$product->product_name}}
                                         </a>
-                                    </h3>
+                                    </h2>
                                 </div>
-                                <div class="product-item-price pt-0 pr-2 pb-0 pl-2 m-0">
+                                <div class="product-item-price text-center pt-0 pr-2 pb-0 pl-2 m-0">
                                     <p>Price: <b>{{$product->price}}</b>$</p>
                                 </div>
                                 <div class="hide pt-0 pr-2 pb-0 pl-2 m-0 rounded-bottom" style="height: 50%;">
-                                    <div style="height: 70%; overflow-y: auto;" class="product-item-description p-2">
+                                    <div style="height: 110px; overflow-y: auto;" class="product-item-description p-2">
                                         <p style="overflow: hidden;">{{$product->short_description}}</p>
                                     </div>
                                     <div class="product-item-button">
@@ -79,11 +79,14 @@
                             </div>
                         </div>
                     @endforeach
-                    <div class="w-100">
-                        <div class="text-center">
-                            {{$products->appends(['paginationQuantity' => $tmpPaginateQuantity])->render()}}
-                        </div>
-                    </div>
+                </div>
+                <div class="text-center">
+                    <hr>
+                </div>
+                <div class="col-sm-2 my-class-text-center" style="margin-left: auto; margin-right: auto;">
+                    @if($products->appends(['paginationQuantity' => $tmpPaginateQuantity]))
+                        {{$products->appends(['paginationQuantity' => $tmpPaginateQuantity])->render()}}
+                    @endif
                 </div>
             </div>
             <div class=""></div>

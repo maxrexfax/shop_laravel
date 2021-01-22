@@ -28,12 +28,12 @@
             <div class="col-xs-12 col-md-9">
                 <div class="w-100 border-bottom-green-2px bg-light mb-2 p-2 my-roboto-font-family d-flex flex-wrap justify-content-between align-items-center">
                     <div class="form-inline pt-2">
-                        <p class="d-sm-none d-md-none d-lg-block mt-2">{{__('Products in this category:')}} {{count($products)}}</p>
+                        <p class="d-sm-none d-md-none d-lg-block mt-2">{{__('Products:')}} {{count($products)}}</p>
                     </div>
                     <div class="form-inline p-0 m-0">
                         <div class="d-sm-none d-md-none d-lg-block">
                         {{__('Show by')}}
-                            <select class="form-control ml-2 mr-2" id="paginationQuantity">
+                            <select class="form-control ml-2 mr-2" id="paginateQuantity">
                                 <option value="6" @if($paginateQuantity==6) selected @else @endif>6 {{__('Per page')}}</option>
                                 <option value="12" @if($paginateQuantity==12) selected @else @endif>12 {{__('Per page')}}</option>
                                 <option value="40" @if($paginateQuantity==40) selected @else @endif>40 {{__('Per page')}}</option>
@@ -51,8 +51,8 @@
                     @foreach($products as $product)
                         <div class="col-lg-4 col-md-4 col-xs-12 p-3">
                             <div class="p-0 rounded div-item-main-container">
-                                <div style="height: 180px;">
-                                    <div style="margin-right: auto; margin-left: auto; width: 50%; ">
+                                <div class="div-product-logo-image-container">
+                                    <div class="div-product-logo-image-container-intro">
                                         <a class="url_no_decoration" href="{{route ('product.show', ['id' => $product->id] )}}">
                                             <img width="100%" src="{{asset('/img/logo/' . $product->logo_image)}}" alt="{{$product->product_name}}">
                                         </a>
@@ -68,12 +68,12 @@
                                 <div class="product-item-price text-center pt-0 pr-2 pb-0 pl-2 m-0">
                                     <p>Price: <b>{{$product->price}}</b>$</p>
                                 </div>
-                                <div class="hide pt-0 pr-2 pb-0 pl-2 m-0 rounded-bottom" style="height: 50%;">
-                                    <div style="height: 110px; overflow-y: auto;" class="product-item-description p-2">
-                                        <p style="overflow: hidden;">{{$product->short_description}}</p>
+                                <div class="hide pt-0 pr-2 pb-0 pl-2 m-0 rounded-bottom h-50">
+                                    <div class="product-item-description p-2">
+                                        <p class="overflow-hidden">{{$product->short_description}}</p>
                                     </div>
                                     <div class="product-item-button">
-                                        <button id="{{$product->id}}" class="btn btn-secondary w-100 m-0 btn_add_to_cart" style="position: relative; ">Add to cart</button>
+                                        <button id="{{$product->id}}" class="btn btn-secondary w-100 m-0 btn_add_to_cart">Add to cart</button>
                                     </div>
                                 </div>
                             </div>
@@ -83,9 +83,9 @@
                 <div class="text-center">
                     <hr>
                 </div>
-                <div class="col-sm-2 my-class-text-center" style="margin-left: auto; margin-right: auto;">
+                <div class="col-sm-2 my-class-text-center">
                     @if(!empty($products))
-                        {{$products->links()}}
+                        {{ $products->appends(['paginateQuantity' => $paginateQuantity, 'sortType'=> $sortType])->render()}}
                     @endif
                 </div>
             </div>

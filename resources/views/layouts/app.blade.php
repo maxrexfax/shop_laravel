@@ -45,12 +45,12 @@
                         </button>
                     </div>
 
-                    <div class="p-0" style="border-radius: 5px 5px 5px 5px;" id="divButtonCardShower">
+                    <div class="p-0" id="divButtonCardShower">
                         <button class="btn btn-primary" id="btnButtonCardShower">
                             <i class="fa fa-shopping-cart d-inline"></i>
                             {{__('CART')}}
                         </button>
-                        <span class="d-inline-block div-divButtonCardShower-right" style="">
+                        <span class="d-inline-block div-divButtonCardShower-right">
                             0
                         </span>
                     </div>
@@ -70,7 +70,6 @@
                             <li class="nav-item active">
                                 <a class="nav-link item-root" id="btn-show-parent-categories" href="#">
                                     {{ __('Products')}}
-                                    <span class="sr-only">(current)</span>
                                 </a>
                             </li>
                             <li class="nav-item">

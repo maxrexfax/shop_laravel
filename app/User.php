@@ -56,7 +56,7 @@ class User extends Authenticatable
     public function isAdmin()
     {
         foreach (self::getRoles() as $role) {
-            if($role->role_name===self::ROLE_ADMIN_NAME) {
+            if($role->role_name === self::ROLE_ADMIN_NAME) {
                 return true;
             }
         }

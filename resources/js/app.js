@@ -170,16 +170,18 @@ $(document).ready(function() {
     });
 
 
-    $( "#paginationQuantity" ).change(function() {
-        let url = getUrl();
-        url=url+'?paginationQuantity=' + $('#paginationQuantity option:selected').val();
-        $(location).attr('href', url);
+    $( "#paginateQuantity" ).change(function() {
+        createUrlToRedirect();
+        // let url = getUrl();
+        // url=url+'?paginateQuantity=' + $('#paginateQuantity option:selected').val();
+        // $(location).attr('href', url);
     });
 
     $( "#sortBySelect" ).change(function() {
-        let url = getUrl();
-        url = url+'?sortType=' + $('#sortBySelect option:selected').val();
-        $(location).attr('href', url);
+        createUrlToRedirect();
+        // let url = getUrl();
+        // url = url+'?sortType=' + $('#sortBySelect option:selected').val();
+        // $(location).attr('href', url);
     });
 
     function getUrl() {
@@ -188,6 +190,12 @@ $(document).ready(function() {
             url = url.substring(0, url.indexOf("?"));
         }
         return url;
+    }
+
+    function createUrlToRedirect() {
+        let url = getUrl();
+        url=url+'?paginateQuantity=' + $('#paginateQuantity option:selected').val() + '&sortType=' + $('#sortBySelect option:selected').val();
+        $(location).attr('href', url);
     }
 
 });

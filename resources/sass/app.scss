@@ -136,6 +136,16 @@ body {
     border: 1px solid #1d68a7;
     border-radius: 2px;
     background-color: #1872a2;
+    font-family: roboto regular SansSerif, serif;
+    font-weight: bold;
+}
+
+.item-root:hover {
+    border: 1px solid #1d68a7;
+    border-radius: 2px;
+    background-color: #1872a2;
+    font-family: roboto regular SansSerif, serif;
+    font-weight: bold;
 }
 
 #shadow,
@@ -298,7 +308,7 @@ span[class*=" step"] {
     position: relative;
     //box-shadow: 0px 2px 0px #d8d8d8, -2px 0px 0px #d8d8d8, 2px 0px 0px #d8d8d8;
     //box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), -2px 0px 4px rgba(0, 0, 0, 0.1), 2px 0px 4px rgba(0, 0, 0, 0.1);
-    
+
 }
 
 .outer {
@@ -308,6 +318,7 @@ span[class*=" step"] {
 
 #divButtonCardShower {
     background-color: #126DD2;
+    border-radius: 5px 5px 5px 5px;
 }
 
 #btnButtonCardShower {
@@ -374,4 +385,19 @@ span[class*=" step"] {
 .my-class-text-center {
     margin-left: auto;
     margin-right: auto;
+}
+
+.product-item-description {
+    height: 110px;
+    overflow-y: auto;
+}
+
+.div-product-logo-image-container {
+    height: 180px;
+}
+
+.div-product-logo-image-container-intro {
+    margin-right: auto;
+    margin-left: auto;
+    width: 50%;
 }

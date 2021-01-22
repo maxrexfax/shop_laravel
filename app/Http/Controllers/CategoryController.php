@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\GetProductsHelper;
+use App\Helpers\GetPaginationQuantityHelper;
 use App\Category;
 use App\CategoryProduct;
+use App\Http\Requests\StoreCategoryRequest;
 use App\Product;
-use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -49,7 +51,7 @@ class CategoryController extends Controller
         }
     }
 
-    public function store($id = null, Request $request)
+    public function store($id = null, StoreCategoryRequest $request)
     {
         $category = Category::find($id);
 
@@ -57,6 +59,7 @@ class CategoryController extends Controller
             $category->category_name = $request->post('category_name');
             $category->sort_number = $request->post('sort_number');
             $category->category_id = $request->post('category_id');
+            $category->category_description = $request->post('category_description');
             if($request->has('category_logo')) {
                 $image = $request->file('category_logo');
                 $category->category_logo = $image->getClientOriginalName();
@@ -97,47 +100,16 @@ class CategoryController extends Controller
     public function show($id, Request $request)
     {
         $category = Category::find($id);
-
-        if ($request->get('paginateQuantity')) {
-            $paginateQuantity = $request->get('paginateQuantity');
-        } else {
-            $paginateQuantity = self::DEFAULT_PAGINATION_QUANTITY;
-        }
-        $products = null;
-        if ($request->get('sortType') === self::ASCENDING_TYPE_OF_SORT) {
-            $sortType = 'asc';
-
-            $products = Product::whereHas('categories', function ($subQuery) use ($id) {
-                $subQuery->where('categories.id', $id);
-            })
-                ->orderByRaw('price ASC')
-                ->paginate($paginateQuantity);
-        } else if ($request->get('sortType') === self::DESCENDING_TYPE_OF_SORT){
-            $sortType = 'desc';
-
-            $products = Product::whereHas('categories', function ($subQuery) use ($id) {
-                $subQuery->where('categories.id', $id);
-            })
-                ->orderByRaw('price DESC')
-                ->paginate($paginateQuantity);
-        } else {
-            $sortType = '';
-
-            $products = Product::whereHas('categories', function ($subQuery) use ($id) {
-                $subQuery->where('categories.id', $id);
-            })
-                ->orderByRaw('product_name ASC')
-                ->paginate($paginateQuantity);
-        }
+        $paginateQuantity = (new GetPaginationQuantityHelper())->getPaginationQuantity($request);
+        $products = (new GetProductsHelper())->getUserListBySortData($id, $request->get('sortType'), $paginateQuantity);
 
         if($category) {
             return view('categories.products', [
                 'products' => $products,
                 'categoriesAll' => Category::all(),
-                'currentCategoryName' => $category,
+                'currentCategory' => $category,
                 'paginateQuantity' => $paginateQuantity,
-                'direction' => $request->get('direction') ? $request->get('direction') : '',
-                'sortType' => $sortType,
+                'sortType' => $request->get('sortType'),
             ]);
         } else {
             return redirect('category/list');

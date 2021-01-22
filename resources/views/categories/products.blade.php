@@ -3,8 +3,8 @@
 <div class="w-100 bg-white">
     <div class="container">
         <div class="row">
-            <div class="breadcrumbs-container container w-100 my-a-no-decoration"><a href="{{route('main.page')}}">{{__('Home')}}</a><span class="gray-category-name-breadcrumb"> / {{$currentCategoryName->category_name}}</span></div>
-            <div class="col-12 text-center"><h2>{{$currentCategoryName->category_name}}</h2></div>
+            <div class="breadcrumbs-container container w-100 my-a-no-decoration"><a href="{{route('main.page')}}">{{__('Home')}}</a><span class="gray-category-name-breadcrumb"> / {{$currentCategory->category_name}}</span></div>
+            <div class="col-12 text-center"><h2>{{$currentCategory->category_name}}</h2></div>
             <div class="col-xs-12 col-md-3 sidebar">
                 <nav class="sidebar-menu">
                     <div class="nav-title accordion_header bg-light border-bottom-green-2px text-dark my-roboto-font-family font-weight-bold p-4">
@@ -15,7 +15,7 @@
                         <ul class="list-unstyled">
                             @foreach($categoriesAll as $category)
                                 <li class="mb-2 all-category-item
-                                    @if($currentCategoryName->id === $category->id)
+                                    @if($currentCategory->id === $category->id)
                                     category-chosen
                                     @else
                                     @endif

@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="@if(!empty($altDescription)){{$altDescription}}@else{{ __('messages.cool_medicines') }}@endif">
     <link rel="icon" href="{{ asset('/animated_favicon.gif')}}" type="image/gif" >
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -11,7 +12,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-3.5.1.min.js') }}" defer></script>
-    <script src="{{ asset('js/my.js') }}" defer></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -45,12 +45,12 @@
                         </button>
                     </div>
 
-                    <div class="p-0" style="border-radius: 5px 5px 5px 5px;" id="divButtonCardShower">
+                    <div class="p-0" id="divButtonCardShower">
                         <button class="btn btn-primary" id="btnButtonCardShower">
                             <i class="fa fa-shopping-cart d-inline"></i>
                             {{__('CART')}}
                         </button>
-                        <span class="d-inline-block div-divButtonCardShower-right" style="">
+                        <span class="d-inline-block div-divButtonCardShower-right">
                             0
                         </span>
                     </div>
@@ -70,7 +70,6 @@
                             <li class="nav-item active">
                                 <a class="nav-link item-root" id="btn-show-parent-categories" href="#">
                                     {{ __('Products')}}
-                                    <span class="sr-only">(current)</span>
                                 </a>
                             </li>
                             <li class="nav-item">

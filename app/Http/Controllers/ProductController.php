@@ -102,6 +102,8 @@ class ProductController extends Controller
         if ($product) {
             return view('products.show', [
                 'product' => $product,
+                'alt_title' => $product->title,
+                'altDescription' => $product->description,
             ]);
         }
         return redirect('/');

@@ -16,4 +16,9 @@ class CategoryProduct extends Model
     {
         return $this->hasOne(Product::class);
     }
+
+    public function productsList()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

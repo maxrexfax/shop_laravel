@@ -1,11 +1,12 @@
 @extends('layouts.app')
 @section('content')
+<div class="bg-white w-100">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="border row">
-                    <div class="col col-10 col-md-8 col-sm-12 div-img-modal-show">
-                        <div class="m-2 ">
+                <div class="border rounded row pb-2 pt-2">
+                    <div class="col-lg-8 col-md-8 col-sm-12 div-img-modal-show">
+                        <div class="m-2">
                             <div class="border text-center">
                                     @if($product->logo_image)
                                         <img class="img-to-show-modal" height="300px" src="{{ asset('/img/logo/' . $product->logo_image)}}" alt="{{$product->product_name}}"/>
@@ -23,18 +24,27 @@
                         </div>
                     </div>
 
-                    <div class="col col-2 col-md-3 col-sm-12 mt-2">
-                        <h2>{{$product->product_name}}</h2>
-                        <p>{{__('Price:')}}{{$product->price}}</p>
-                        <br>
-                        <p>{{__('Title:')}}<i>{{$product->title}}</i></p>
-                        <p>{{__('Short description:')}}{{$product->short_description}}</p>
-                        <p>{{__('Full description:')}}{{$product->full_description}}</p>
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <div class="border rounded m-2 h-100">
+                            <h2>{{$product->product_name}}</h2>
+                            <p>{{__('Price:')}}{{$product->price}}</p>
+                            <br>
+                            <p>{{__('Title:')}}<i>{{$product->title}}</i></p>
+                            <p>{{__('Short description:')}}{{$product->short_description}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-lg-12 col-md-12 col-sm-12 border rounded">
+                        <h3>{{__('Description:')}}</h3>
+                        <p>{{$product->full_description}}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <section class="place-holder"></section>
+    <section class="place-holder"></section>
     <div id="shadow">
         <span class="modal-control-elements step-back" title="Previous">&#9664;</span>
         <span class="modal-control-elements step-forward" title="Next">&#9654;</span>
@@ -44,4 +54,5 @@
         <span class="text-center"><img src="" alt="" /></span>
         <p id="images-gallery-info" class="float-right"></p>
     </div>
+</div>
 @endsection

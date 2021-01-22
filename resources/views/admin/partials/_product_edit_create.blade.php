@@ -56,7 +56,7 @@
 
 
                         <div class="form-group row">
-                            <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
+                            <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Title (meta tag for SEO)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="@if(!empty($product)){{$product->title}}@endif" required>
@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
+                            <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description (meta tag for SEO)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="@if(!empty($product)){{$product->description}}@endif" required>
@@ -82,7 +82,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="short_description" class="col-md-4 col-form-label text-md-right">{{ __('Short description') }}</label>
+                            <label for="short_description" class="col-md-4 col-form-label text-md-right">{{ __('Short description for product card') }}</label>
 
                             <div class="col-md-6">
                                 <input id="short_description" type="text" class="form-control @error('short_description') is-invalid @enderror" name="short_description" value="@if(!empty($product)){{$product->short_description}}@endif" required>
@@ -98,11 +98,11 @@
                             <label for="full_description" class="col-md-4 col-form-label text-md-right">{{ __('Full description') }}</label>
 
                             <div class="col-md-6">
-                                <input id="full_description" type="text" class="form-control @error('full_description') is-invalid @enderror" name="full_description" value="@if(!empty($product)){{$product->full_description}}@endif" required>
+                                <textarea id="full_description" class="form-control" rows="6" cols="65" name="full_description">@if(!empty($product)){{$product->full_description}}@endif</textarea>
                                 @error('full_description')
                                 <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>

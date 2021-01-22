@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\CategoryProduct;
+use App\Product;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    const DEFAULT_PAGINATION_QUANTITY = 12;
+    const ASCENDING_TYPE_OF_SORT = 'asc';
+    const DESCENDING_TYPE_OF_SORT = 'desc';
+
     public function index()
     {
         $categoriesHierarchically = Category::whereNull('category_id')
@@ -88,17 +94,50 @@ class CategoryController extends Controller
         ]);
     }
 
-    public function show($id)
+    public function show($id, Request $request)
     {
-        $categoriesHierarchically = Category::whereNull('category_id')
-            ->with('childrenCategories')
-            ->get();
         $category = Category::find($id);
+
+        if ($request->get('paginateQuantity')) {
+            $paginateQuantity = $request->get('paginateQuantity');
+        } else {
+            $paginateQuantity = self::DEFAULT_PAGINATION_QUANTITY;
+        }
+        $products = null;
+        if ($request->get('sortType') === self::ASCENDING_TYPE_OF_SORT) {
+            $sortType = 'asc';
+
+            $products = Product::whereHas('categories', function ($subQuery) use ($id) {
+                $subQuery->where('categories.id', $id);
+            })
+                ->orderByRaw('price ASC')
+                ->paginate($paginateQuantity);
+        } else if ($request->get('sortType') === self::DESCENDING_TYPE_OF_SORT){
+            $sortType = 'desc';
+
+            $products = Product::whereHas('categories', function ($subQuery) use ($id) {
+                $subQuery->where('categories.id', $id);
+            })
+                ->orderByRaw('price DESC')
+                ->paginate($paginateQuantity);
+        } else {
+            $sortType = '';
+
+            $products = Product::whereHas('categories', function ($subQuery) use ($id) {
+                $subQuery->where('categories.id', $id);
+            })
+                ->orderByRaw('product_name ASC')
+                ->paginate($paginateQuantity);
+        }
 
         if($category) {
             return view('categories.products', [
-                'categoriesHierarchically' => $categoriesHierarchically,
-                'products' => $category->getProducts()
+                'products' => $products,
+                'categoriesAll' => Category::all(),
+                'currentCategoryName' => $category,
+                'paginateQuantity' => $paginateQuantity,
+                'direction' => $request->get('direction') ? $request->get('direction') : '',
+                'sortType' => $sortType,
             ]);
         } else {
             return redirect('category/list');

@@ -4,7 +4,7 @@
         <div class="card-header text-center">{{ __('Category control') }}</div>
             <div class="d-flex justify-content-between flex-wrap">
                 <div class="col-6 col-md-10 col-sm-12">
-                    <p class="text-center">{{$NameOfForm}}</p>
+                    <p class="text-center">{{$alt_title}}</p>
                     <div class="errors text-center bg-danger">
                         @if($errors)
                             @foreach($errors->all() as $error)

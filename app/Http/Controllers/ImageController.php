@@ -32,7 +32,7 @@ class ImageController extends Controller
     public function delete($imageId)
     {
         $image = Image::find($imageId);
-        if($image) {
+        if ($image) {
             $image->delete();
         }
 

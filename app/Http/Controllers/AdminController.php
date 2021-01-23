@@ -3,14 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\CategoryProduct;
 use App\Image;
 use App\Product;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\File\File;
 
 class AdminController extends Controller
 {
@@ -53,7 +47,6 @@ class AdminController extends Controller
             'products' => $products,
             'images' => Image::all(),
             'categoriesHierarchically' => $categoriesHierarchically,
-
         ]);
     }
 

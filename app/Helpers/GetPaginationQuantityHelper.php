@@ -12,8 +12,11 @@ class GetPaginationQuantityHelper
     {
         $paginateQuantity = CategoryController::DEFAULT_PAGINATION_QUANTITY;
         if ($request->get('paginateQuantity')) {
-            $paginateQuantity = $request->get('paginateQuantity');
+            $paginateQuantity = intval($request->get('paginateQuantity'));
         }
-        return $paginateQuantity;
+        if (is_numeric($paginateQuantity)) {
+            return $paginateQuantity;
+        }
+        return CategoryController::DEFAULT_PAGINATION_QUANTITY;
     }
 }

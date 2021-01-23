@@ -4,10 +4,10 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="border rounded row pb-2 pt-2">
-                    <div class="col-lg-8 col-md-8 col-sm-12 div-img-modal-show">
-                        <div class="m-2">
-                            <div class="border text-center">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-12 div-img-modal-show p-0">
+                        <div class="p-2">
+                            <div class="border text-center p-2">
                                     @if($product->logo_image)
                                         <img class="img-to-show-modal" height="300px" src="{{ asset('/img/logo/' . $product->logo_image)}}" alt="{{$product->product_name}}"/>
                                     @else
@@ -24,9 +24,9 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4 col-md-4 col-sm-12">
-                        <div class="border rounded m-2 h-100">
-                            <h2>{{$product->product_name}}</h2>
+                    <div class="col-lg-4 col-md-4 col-sm-12 p-2">
+                        <div class="border rounded h-100 p-2">
+                            <h2 class="text-center">{{$product->product_name}}</h2>
                             <p>{{__('Price:')}}{{$product->price}}</p>
                             <br>
                             <p>{{__('Title:')}}<i>{{$product->title}}</i></p>
@@ -34,10 +34,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mt-2">
-                    <div class="col-lg-12 col-md-12 col-sm-12 border rounded">
-                        <h3>{{__('Description:')}}</h3>
-                        <p>{{$product->full_description}}</p>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 p-2">
+                        <div class="border rounded p-2">
+                            <h3>{{__('Description:')}}</h3>
+                            <p>{{$product->full_description}}</p>
+                        </div>
                     </div>
                 </div>
             </div>

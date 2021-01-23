@@ -28,7 +28,6 @@ class StoreCategoryRequest extends FormRequest
             'category_id' => 'integer|exists:categories,id|nullable',
             'sort_number' => 'integer|nullable',
             'category_description' => 'string|max:500',
-            'category_logo' => 'string|max:255',
         ];
     }
 
@@ -44,7 +43,6 @@ class StoreCategoryRequest extends FormRequest
             'category_id.integer' => 'Only digit category id!',
             'sort_number.integer' => 'Only digit sort number!',
             'category_description.max:500' => 'Category description max 500 chars long!',
-            'category_logo.max:255' => 'Category image name max 255 chars long!',
         ];
     }
 }

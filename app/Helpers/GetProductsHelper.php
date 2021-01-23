@@ -9,25 +9,19 @@ class GetProductsHelper
 {
     public function getUserListBySortData($id, $sortType, $paginateQuantity)
     {
+        $cmd = '';
         if ($sortType === CategoryController::ASCENDING_TYPE_OF_SORT) {
-            $products = Product::whereHas('categories', function ($subQuery) use ($id) {
-                $subQuery->where('categories.id', $id);
-            })
-                ->orderByRaw('price ASC')
-                ->paginate($paginateQuantity);
+            $cmd = 'price ASC';
         } else if ($sortType === CategoryController::DESCENDING_TYPE_OF_SORT){
-            $products = Product::whereHas('categories', function ($subQuery) use ($id) {
-                $subQuery->where('categories.id', $id);
-            })
-                ->orderByRaw('price DESC')
-                ->paginate($paginateQuantity);
+            $cmd = 'price DESC';
         } else {
-            $products = Product::whereHas('categories', function ($subQuery) use ($id) {
-                $subQuery->where('categories.id', $id);
-            })
-                ->orderByRaw('product_name ASC')
-                ->paginate($paginateQuantity);
+            $cmd = 'product_name ASC';
         }
-        return $products;
+
+        return Product::whereHas('categories', function ($subQuery) use ($id) {
+            $subQuery->where('categories.id', $id);
+        })
+            ->orderByRaw($cmd)
+            ->paginate($paginateQuantity);
     }
 }

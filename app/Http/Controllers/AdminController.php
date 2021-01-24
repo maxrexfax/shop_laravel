@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Image;
 use App\Product;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -47,6 +48,13 @@ class AdminController extends Controller
             'products' => $products,
             'images' => Image::all(),
             'categoriesHierarchically' => $categoriesHierarchically,
+        ]);
+    }
+
+    public function userList()
+    {
+        return view('admin.partials._users_list', [
+            'users' => User::paginate(15),
         ]);
     }
 

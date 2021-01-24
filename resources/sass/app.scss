@@ -22,11 +22,12 @@ body {
 .root-menu-container {
     display: none;
     position: absolute;
-    top:10%;
+    top:8%;
     left: 3%;
     border-radius: 3px;
     z-index: 998;
     background-color: #e6e6e6;
+    width: 100%;
 }
 
 #divForSliderOnMainPage {
@@ -43,6 +44,16 @@ body {
 .popup-root-categories-item a {
     color:black;
     text-decoration: none;
+    font-size: 1rem;
+    font-family: roboto regular SansSerif, serif;
+}
+
+.popup-root-categories-item a:hover {
+    color:black;
+    text-decoration: none;
+    font-size: 1rem;
+    font-family: roboto regular SansSerif, serif;
+    color: #1872a2;
 }
 
 #divForSubcribingOnMainPage {

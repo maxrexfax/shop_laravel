@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Currency;
 use App\Image;
 use App\Product;
+use App\Store;
 use App\User;
 
 class AdminController extends Controller
@@ -56,6 +58,21 @@ class AdminController extends Controller
         return view('admin.partials._users_list', [
             'users' => User::paginate(15),
         ]);
+    }
+
+    public function storeList()
+    {
+        return view('admin.partials._stores_list', [
+            'stores' => Store::paginate(15),
+        ]);
+    }
+
+    public function currencyList()
+    {
+        return view('admin.partials._currency_list', [
+                'currencies' => Currency::paginate(15),
+            ]
+        );
     }
 
 }

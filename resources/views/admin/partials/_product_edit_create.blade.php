@@ -11,7 +11,8 @@
                             <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('Product ID') }}</label>
 
                             <div class="col-md-6">
-                                <input id="id" type="number" class="form-control @error('id') is-invalid @enderror" name="id" value="@if(!empty($product)){{$product->id}}@endif" readonly>
+                                <span class="form-control border-0">@if(!empty($product)){{$product->id}}@endif</span>
+                                <input id="id" type="hidden" name="id" value="@if(!empty($product)){{$product->id}}@endif">
                             </div>
                         </div>
 
@@ -45,7 +46,7 @@
                             <label for="price" class="col-md-4 col-form-label text-md-right">{{ __('Price') }}</label>
 
                             <div class="col-md-6">
-                                <input id="price" type="number" step="0.01" class="form-control @error('price') is-invalid @enderror" name="price" value="@if(!empty($product)){{$product->price}}@endif" required>
+                                <input id="price" type="number" min="0" max="999999" step="0.01" class="form-control @error('price') is-invalid @enderror" name="price" value="@if(!empty($product)){{$product->price}}@endif" required>
                                 @error('price')
                                 <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

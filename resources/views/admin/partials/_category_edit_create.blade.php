@@ -20,7 +20,8 @@
                                 <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('Category ID') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="id" type="number" class="form-control @error('name') is-invalid @enderror" name="id" value="@if(!empty($category)){{$category->id}}@endif" readonly>
+                                    <span class="form-control border-0">@if(!empty($category)){{$category->id}}@endif</span>
+                                    <input id="id" type="hidden" name="id" value="@if(!empty($category)){{$category->id}}@endif">
                                 </div>
                             </div>
 

@@ -10,10 +10,13 @@ class ProductStoreService
     public function store(StoreProductRequest $request, $product)
     {
         $logo = null;
+
         if ($product->logo_image) {
             $logo = $product->logo_image;
         }
+
         $product->fill($request->post());
+
         if ($request->has('logo_image')) {
             $image = $request->file('logo_image');
             $product->logo_image = $image->getClientOriginalName();

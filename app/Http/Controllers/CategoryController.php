@@ -51,7 +51,7 @@ class CategoryController extends Controller
     public function show($id, Request $request)
     {
         $category = Category::find($id);
-        $paginateQuantity = (new GetPaginationQuantityHelper())->getPaginationQuantity($request);
+        $paginateQuantity = (new GetPaginationQuantityHelper())->getPaginationQuantity($request->get('paginateQuantity'));
         $products = (new GetProductsService())->getUserListBySortData($id, $request->get('sortType'), $paginateQuantity);
 
         if ($category) {

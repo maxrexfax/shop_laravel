@@ -41,7 +41,7 @@ Route::post('/product/store/{id?}', 'ProductController@store')->name('product.st
 
 Route::get('/user/delete/{id}', 'UserController@destroy')->name('user.delete');
 Route::get('/user/create/{id?}', 'UserController@create')->name('user.create');
-Route::get('/user/store/{id?}', 'UserController@edit')->name('user.create');
+Route::get('/user/store/{id?}', 'UserController@edit')->name('user.store');
 
 Route::get('/image/delete/{id}', 'ImageController@delete')->name('image.delete');
 Route::post('/image/store', 'ImageController@store')->name('image.store');

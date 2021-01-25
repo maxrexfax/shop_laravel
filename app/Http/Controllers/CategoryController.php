@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\GetPaginationQuantityHelper;
+use App\Helpers\PaginationQuantityHelper;
 use App\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Services\CategoryStoreService;
@@ -51,7 +51,7 @@ class CategoryController extends Controller
     public function show($id, Request $request)
     {
         $category = Category::find($id);
-        $paginateQuantity = (new GetPaginationQuantityHelper())->getPaginationQuantity($request->get('paginateQuantity'));
+        $paginateQuantity = (new PaginationQuantityHelper())->getPaginationQuantity($request->get('paginateQuantity'));
         $products = (new GetProductsService())->getUserListBySortData($id, $request->get('sortType'), $paginateQuantity);
 
         if ($category) {

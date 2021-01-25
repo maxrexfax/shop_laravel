@@ -3,20 +3,18 @@
 namespace App\Helpers;
 
 
-use App\Http\Controllers\CategoryController;
-use Illuminate\Http\Request;
-
 class GetPaginationQuantityHelper
 {
-    public function getPaginationQuantity(Request $request)
+    const DEFAULT_PAGINATION_QUANTITY = 12;
+    public function getPaginationQuantity($paginationQuantityToCheck)
     {
-        $paginateQuantity = CategoryController::DEFAULT_PAGINATION_QUANTITY;
-        if ($request->get('paginateQuantity')) {
-            $paginateQuantity = intval($request->get('paginateQuantity'));
+        $paginateQuantity = self::DEFAULT_PAGINATION_QUANTITY;
+        if (!empty($paginationQuantityToCheck)) {
+            $paginateQuantity = intval($paginationQuantityToCheck);
         }
         if (is_numeric($paginateQuantity)) {
             return $paginateQuantity;
         }
-        return CategoryController::DEFAULT_PAGINATION_QUANTITY;
+        return self::DEFAULT_PAGINATION_QUANTITY;
     }
 }

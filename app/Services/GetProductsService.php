@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Services;
 
-use App\Http\Controllers\CategoryController;
+use App\Category;
 use App\Product;
 
-class GetProductsHelper
+class GetProductsService
 {
     public function getUserListBySortData($id, $sortType, $paginateQuantity)
     {
         $cmd = '';
-        if ($sortType === CategoryController::ASCENDING_TYPE_OF_SORT) {
+        if ($sortType === Category::ASCENDING_TYPE_OF_SORT) {
             $cmd = 'price ASC';
-        } else if ($sortType === CategoryController::DESCENDING_TYPE_OF_SORT){
+        } else if ($sortType === Category::DESCENDING_TYPE_OF_SORT){
             $cmd = 'price DESC';
         } else {
             $cmd = 'product_name ASC';

@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\CategoryStoreHelper;
-use App\Helpers\GetProductsHelper;
 use App\Helpers\GetPaginationQuantityHelper;
 use App\Category;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Services\CategoryStoreService;
+use App\Services\GetProductsService;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    const DEFAULT_PAGINATION_QUANTITY = 12;
-    const ASCENDING_TYPE_OF_SORT = 'asc';
-    const DESCENDING_TYPE_OF_SORT = 'desc';
-
     public function create($id = null)
     {
         if (!empty($id)) {
@@ -41,13 +37,13 @@ class CategoryController extends Controller
         $category = Category::find($id);
 
         if ($category) {
-            (new CategoryStoreHelper())->storeCategory($request, $category);
+            (new CategoryStoreService())->storeCategory($request, $category);
 
             return redirect('admin/category/list');
         }
 
         $category = new Category();
-        (new CategoryStoreHelper())->storeCategory($request, $category);
+        (new CategoryStoreService())->storeCategory($request, $category);
 
         return redirect('admin/category/list');
     }
@@ -56,7 +52,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $paginateQuantity = (new GetPaginationQuantityHelper())->getPaginationQuantity($request);
-        $products = (new GetProductsHelper())->getUserListBySortData($id, $request->get('sortType'), $paginateQuantity);
+        $products = (new GetProductsService())->getUserListBySortData($id, $request->get('sortType'), $paginateQuantity);
 
         if ($category) {
             return view('categories.products', [

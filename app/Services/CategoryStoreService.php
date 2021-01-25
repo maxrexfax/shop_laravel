@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Services;
 
 use App\Http\Requests\StoreCategoryRequest;
 
-class CategoryStoreHelper
+class CategoryStoreService
 {
     public function storeCategory(StoreCategoryRequest $request, $category)
     {

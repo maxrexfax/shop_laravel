@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Services;
 
 use App\CategoryProduct;
 use App\Http\Requests\StoreProductRequest;
-use App\Product;
 
-class ProductStoreHelper
+class ProductStoreService
 {
     public function store(StoreProductRequest $request, $product)
     {

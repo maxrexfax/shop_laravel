@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\Helpers\ProductStoreHelper;
 use App\Http\Requests\StoreProductRequest;
 use App\Product;
+use App\Services\ProductStoreService;
 
 class ProductController extends Controller
 {
@@ -37,13 +37,13 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         if ($product) {
-            (new ProductStoreHelper())->store($request, $product);
+            (new ProductStoreService())->store($request, $product);
 
             return redirect('admin/product/list');
         }
 
         $product = new Product($request->post());
-        (new ProductStoreHelper())->store($request, $product);
+        (new ProductStoreService())->store($request, $product);
 
         return redirect('admin/product/list');
     }

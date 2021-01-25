@@ -172,16 +172,10 @@ $(document).ready(function() {
 
     $( "#paginateQuantity" ).change(function() {
         createUrlToRedirect();
-        // let url = getUrl();
-        // url=url+'?paginateQuantity=' + $('#paginateQuantity option:selected').val();
-        // $(location).attr('href', url);
     });
 
     $( "#sortBySelect" ).change(function() {
         createUrlToRedirect();
-        // let url = getUrl();
-        // url = url+'?sortType=' + $('#sortBySelect option:selected').val();
-        // $(location).attr('href', url);
     });
 
     function getUrl() {

@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
+    const ASCENDING_TYPE_OF_SORT = 'asc';
+    const DESCENDING_TYPE_OF_SORT = 'desc';
+
     protected $fillable = [
-        'category_name', 'category_id', 'sort_number', 'description', 'category_logo'
+        'category_name', 'category_id', 'sort_number', 'category_description', 'category_logo'
     ];
 
     public function categories()

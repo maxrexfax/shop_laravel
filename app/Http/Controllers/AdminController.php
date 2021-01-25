@@ -3,14 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Category;
-use App\CategoryProduct;
 use App\Image;
 use App\Product;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\File\File;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -53,7 +48,13 @@ class AdminController extends Controller
             'products' => $products,
             'images' => Image::all(),
             'categoriesHierarchically' => $categoriesHierarchically,
+        ]);
+    }
 
+    public function userList()
+    {
+        return view('admin.partials._users_list', [
+            'users' => User::paginate(15),
         ]);
     }
 

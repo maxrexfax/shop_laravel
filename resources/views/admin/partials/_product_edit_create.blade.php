@@ -54,7 +54,6 @@
                             </div>
                         </div>
 
-
                         <div class="form-group row">
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Title (meta tag for SEO)') }}</label>
 
@@ -107,7 +106,6 @@
                             </div>
                         </div>
 
-
                         <div class="form-group row">
                             <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Logo image') }}</label>
                         @if(isset($product))
@@ -120,7 +118,6 @@
                             @endif
                         @endif
                         </div>
-
 
                         <div class="form-group row">
                             <label for="logo_image" class="col-md-4 col-form-label text-md-right">{{ __('Change logo image') }}</label>

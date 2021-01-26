@@ -15,6 +15,7 @@ $(document).ready(function() {
     $(document).on('click', '#shadow', function(e) {
         $('#shadow').hide();
         $('#modal-with-images').hide();
+        $('#modalFormAddPhone').hide();//phones editing
         $('#images-gallery-info').text('');
     });
 
@@ -191,6 +192,23 @@ $(document).ready(function() {
         url=url+'?paginateQuantity=' + $('#paginateQuantity option:selected').val() + '&sortType=' + $('#sortBySelect option:selected').val();
         $(location).attr('href', url);
     }
+
+    $(document).on('click', '#btnAddPhone', function(e) {
+        $('#shadowPhones').show();
+        $('#modalFormAddPhone').show();
+    });
+
+    $(document).on('click', '#shadowPhones', function(e) {
+        $('#shadowPhones').hide();
+        $('#modalFormAddPhone').hide();
+    });
+
+    $(document).on('click', '#closePopupSymbol', function(e) {
+        $('#shadowPhones').hide();
+        $('#modalFormAddPhone').hide();
+    });
+
+
 
 });
 

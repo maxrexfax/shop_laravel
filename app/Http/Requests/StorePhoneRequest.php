@@ -24,7 +24,7 @@ class StorePhoneRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone_number' => 'string|required|max:55',
+            'phone_number' => 'required|digits:10',
             'phone_info' => 'string|required|max:255',
         ];
     }

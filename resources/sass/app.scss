@@ -160,7 +160,8 @@ body {
 }
 
 #shadow,
-#shadowEdit {
+#shadowEdit,
+#shadowPhones {
     width: 110%;
     height: 110%;
     background-color: black;
@@ -172,7 +173,12 @@ body {
     display: none;
 }
 
-#modal-with-images {
+#shadowPhones {
+    width: 100%;
+    height: 100%
+}
+
+#modal-with-images, #modalFormAddPhone {
     position: absolute;
     max-width: 600px;
     width: 100%;
@@ -194,6 +200,18 @@ body {
 .modal-control-elements:hover {
     cursor: pointer;
     color: white;
+}
+
+.btnCloseModal {
+    font-weight: bold;
+    font-size: 2em;
+    cursor: pointer;
+    color: gray;
+}
+
+.btnCloseModal:hover {
+    cursor: pointer;
+    color: lightblue;
 }
 
 #close-popup-symbol {
@@ -429,5 +447,3 @@ span[class*=" step"] {
     font-weight: 500;
     font-family: roboto regular SansSerif, serif;
 }
-
-

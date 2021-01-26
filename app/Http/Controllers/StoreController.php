@@ -13,7 +13,7 @@ class StoreController extends Controller
         if (!empty($id)) {
             $store = Store::find($id);
             if ($store) {
-                return view ('admin.partials._store_edit_create', [
+                return view ('admin.partials.store._store_edit_create', [
                     'store' => $store,
                     'alt_title' => 'Edit store ' . $store->store_name
                 ]);
@@ -22,7 +22,7 @@ class StoreController extends Controller
             }
 
         } else {
-            return view ('admin.partials._store_edit_create', [
+            return view ('admin.partials.store._store_edit_create', [
                 'alt_title' => 'Create new store'
             ]);
         }

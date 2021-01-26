@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Currency;
-use App\Http\Requests\CurrencyStoreRequest;
+use App\Http\Requests\StoreCurrencyRequest;
 use App\Services\CurrencyStoreService;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ class CurrencyController extends Controller
             $currency = Currency::find($id);
 
             if ($currency) {
-                return view ('admin.partials._currency_edit_create', [
+                return view ('admin.partials.currency._currency_edit_create', [
                     'currency' => $currency,
                     'alt_title' => 'Edit currency ' . $currency->currency_name
                 ]);
@@ -24,13 +24,13 @@ class CurrencyController extends Controller
             }
 
         } else {
-            return view ('admin.partials._currency_edit_create', [
+            return view ('admin.partials.currency._currency_edit_create', [
                 'alt_title' => 'Create new currency'
             ]);
         }
     }
 
-    public function store($id = null, CurrencyStoreRequest $request)
+    public function store($id = null, StoreCurrencyRequest $request)
     {
         $currency = Currency::find($id);
 

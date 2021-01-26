@@ -14,7 +14,7 @@ class ProductController extends Controller
         if (!empty($id)) {
             $product = Product::find($id);
             if ($product) {
-                return view('admin.partials._product_edit_create', [
+                return view('admin.partials.product._product_edit_create', [
                     'NameOfForm' => 'Edit product '.$product->product_name,
                     'alt_title' => 'Edit product '.$product->product_name,
                     'categories' => Category::all(),
@@ -24,7 +24,7 @@ class ProductController extends Controller
                 return redirect('admin/product/list');
             }
         } else {
-            return view('admin.partials._product_edit_create', [
+            return view('admin.partials.product._product_edit_create', [
                 'NameOfForm' => 'Create new product',
                 'alt_title' => 'Create new product',
                 'categories' => Category::all()

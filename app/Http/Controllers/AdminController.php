@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Currency;
+use App\Helpers\PaginationQuantityHelper;
 use App\Image;
+use App\Locale;
 use App\Product;
 use App\Store;
 use App\User;
@@ -33,7 +35,7 @@ class AdminController extends Controller
             ->with('childrenCategories')
             ->get();
         $categories = Category::all()->sortBy('sort_number');
-        return view('admin.partials._category_list', [
+        return view('admin.partials.category._category_list', [
             'categoriesHierarchically' => $categoriesHierarchically,
             'categories' => $categories,
         ]);
@@ -44,9 +46,9 @@ class AdminController extends Controller
         $categoriesHierarchically = Category::whereNull('category_id')
             ->with('childrenCategories')
             ->get();
-        $products = Product::paginate(15);
+        $products = Product::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY);
 
-        return view('admin.partials._product_list', [
+        return view('admin.partials.product._product_list', [
             'products' => $products,
             'images' => Image::all(),
             'categoriesHierarchically' => $categoriesHierarchically,
@@ -55,24 +57,31 @@ class AdminController extends Controller
 
     public function userList()
     {
-        return view('admin.partials._users_list', [
-            'users' => User::paginate(15),
+        return view('admin.partials.user._users_list', [
+            'users' => User::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
         ]);
     }
 
     public function storeList()
     {
-        return view('admin.partials._stores_list', [
-            'stores' => Store::paginate(15),
+        return view('admin.partials.store._stores_list', [
+            'stores' => Store::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
         ]);
     }
 
     public function currencyList()
     {
-        return view('admin.partials._currency_list', [
-                'currencies' => Currency::paginate(15),
+        return view('admin.partials.currency._currency_list', [
+                'currencies' => Currency::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
             ]
         );
+    }
+
+    public function localesList()
+    {
+        return view('admin.partials.locale._locales_list', [
+            'locales' => Locale::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
+        ]);
     }
 
 }

@@ -28,6 +28,7 @@ Route::get('/admin/product/list', 'AdminController@productList')->name('admin.pr
 Route::get('/admin/users/list', 'AdminController@userList')->name('admin.users.list');
 Route::get('/admin/stores/list', 'AdminController@storeList')->name('admin.stores.list');
 Route::get('/admin/currencies/list', 'AdminController@currencyList')->name('admin.currency.list');
+Route::get('/admin/locales/list', 'AdminController@localesList')->name('admin.locales.list');
 
 
 Route::get('/category/create/{id?}', 'CategoryController@create')->name('category.create');
@@ -36,6 +37,9 @@ Route::post('/category/store/{id?}', 'CategoryController@store')->name('category
 
 Route::get('/currency/create/{id?}', 'CurrencyController@create')->name('currency.create');
 Route::post('/currency/store/{id?}', 'CurrencyController@store')->name('currency.store');
+
+Route::get('/locale/create/{id?}', 'LocaleController@create')->name('locale.create');
+Route::post('/locale/store/{id?}', 'LocaleController@store')->name('locale.store');
 
 Route::get('/product/category/{id}', 'CategoryController@show')->name('product.category');
 
@@ -49,7 +53,7 @@ Route::post('/store/store/{id?}', 'StoreController@store')->name('store.store');
 
 Route::get('/user/delete/{id}', 'UserController@destroy')->name('user.delete');
 Route::get('/user/create/{id?}', 'UserController@create')->name('user.create');
-Route::get('/user/store/{id?}', 'UserController@edit')->name('user.store');
+Route::post('/user/store/{id?}', 'UserController@store')->name('user.store');
 
 Route::get('/image/delete/{id}', 'ImageController@delete')->name('image.delete');
 Route::post('/image/store', 'ImageController@store')->name('image.store');

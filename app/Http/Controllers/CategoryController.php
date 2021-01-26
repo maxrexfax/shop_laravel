@@ -16,20 +16,21 @@ class CategoryController extends Controller
         if (!empty($id)) {
             $category = Category::find($id);
             if($category) {
-                return view('admin.partials._category_edit_create', [
+                return view('admin.partials.category._category_edit_create', [
                     'alt_title' => 'Edit category '.$category->category_name,
                     'categories' => Category::all(),
                     'category' => $category
                 ]);
-            } else {
-                return redirect('admin/category/list');
             }
-        } else {
-            return view('admin.partials._category_edit_create', [
+
+            return redirect('admin/category/list');
+        }
+
+        return view('admin.partials.category._category_edit_create', [
                 'alt_title' => 'Create new category',
                 'categories' => Category::all()
             ]);
-        }
+
     }
 
     public function store($id = null, StoreCategoryRequest $request)

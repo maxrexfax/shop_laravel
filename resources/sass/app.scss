@@ -196,6 +196,10 @@ body {
     color: white;
 }
 
+#close-popup-symbol {
+    color: lightgray;
+}
+
 #close-popup-symbol:hover {
     color: white;
 }
@@ -415,4 +419,15 @@ span[class*=" step"] {
 .url_no_decoration {
     text-decoration: none;
     cursor: pointer;
+    font-weight: 500;
+    font-family: roboto regular SansSerif, serif;
 }
+
+.url_no_decoration:hover {
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-family: roboto regular SansSerif, serif;
+}
+
+

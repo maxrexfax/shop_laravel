@@ -13,7 +13,7 @@
                             <div>
                                 <div class="accordion_header border_bottom oneHeight">
                                     <i class="fa fa-tags fw ml-2"></i>
-                                    <span class="ml-2"><b>Catalog</b></span>
+                                    <span class="ml-2"><b>{{__('Catalog')}}</b></span>
                                 </div>
 
                                 <div class="accordion_content p-0">
@@ -25,7 +25,7 @@
                             <div>
                                 <div class="accordion_header border_bottom oneHeight">
                                     <i class="fa fa-tags fw ml-2"></i>
-                                    <span class="ml-2"><b>Settings</b></span>
+                                    <span class="ml-2"><b>{{__('Settings')}}</b></span>
                                 </div>
 
                                 <div class="accordion_content p-0">
@@ -37,7 +37,7 @@
                             <div>
                                 <div class="accordion_header border_bottom oneHeight">
                                     <i class="fa fa-tags fw ml-2"></i>
-                                    <span class="ml-2"><b>Management</b></span>
+                                    <span class="ml-2"><b>{{__('Management')}}</b></span>
                                 </div>
 
                                 <div class="accordion_content p-0">

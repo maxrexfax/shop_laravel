@@ -45,4 +45,18 @@ class StoreController extends Controller
         return redirect('/admin/stores/list');
     }
 
+    public function phoneList($id = null)
+    {
+        $store = Store::find($id);
+        if ($store) {
+            return view('admin.partials.store._store_phones', [
+                'alt_title' => 'Save store phones list',
+                'store' => $store,
+                'phones' => $store->getPhones(),
+            ]);
+        }
+
+        return redirect('/admin/stores/list');
+    }
+
 }

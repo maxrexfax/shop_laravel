@@ -41,6 +41,9 @@ Route::post('/currency/store/{id?}', 'CurrencyController@store')->name('currency
 Route::get('/locale/create/{id?}', 'LocaleController@create')->name('locale.create');
 Route::post('/locale/store/{id?}', 'LocaleController@store')->name('locale.store');
 
+Route::post('/phone/store/{id?}', 'PhoneController@store')->name('phone.store');
+Route::get('/phone/delete/{id}', 'PhoneController@destroy')->name('phone.delete');
+
 Route::get('/product/category/{id}', 'CategoryController@show')->name('product.category');
 
 Route::get('/product/create/{id?}', 'ProductController@create')->name('product.create');
@@ -50,6 +53,7 @@ Route::post('/product/store/{id?}', 'ProductController@store')->name('product.st
 
 Route::get('/store/create/{id?}', 'StoreController@create')->name('store.create');
 Route::post('/store/store/{id?}', 'StoreController@store')->name('store.store');
+Route::get('/store/phonelist/{id}', 'StoreController@phoneList')->name('store.phonelist');
 
 Route::get('/user/delete/{id}', 'UserController@destroy')->name('user.delete');
 Route::get('/user/create/{id?}', 'UserController@create')->name('user.create');

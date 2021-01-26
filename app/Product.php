@@ -18,10 +18,10 @@ class Product extends Model
         return $this->hasMany('App\Image');
     }
 
-    public function getProductImage()
+    public function getProductImages()
     {
         if ($this->images) {
-            return $this->images->category_name;
+            return $this->images;
         }
 
         return '';

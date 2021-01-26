@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Role;
+use App\Services\UserStoreService;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -25,10 +28,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('users.list', [
-            'users' => User::all(),
-            'roles' => Role::all()
-        ]);
+
     }
 
     /**
@@ -38,7 +38,21 @@ class UserController extends Controller
      */
     public function create($id = null)
     {
-        return 'TODO form create update user';
+        if (!empty($id)) {
+            $user = User::find($id);
+            if ($user) {
+                return view('admin.partials.user._user_edit_create', [
+                    'alt_title' => 'Edit user ' . $user->login,
+                    'user' => $user,
+                ]);
+            } else {
+                return redirect('/admin/users/list');
+            }
+        } else {
+            return view('admin.partials.user._user_edit_create', [
+                'alt_title' => 'Create new user'
+            ]);
+        }
     }
 
     /**
@@ -47,9 +61,24 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id = null)
+    public function store($id = null, StoreUserRequest $request)
     {
-        return 'Edit user id='. $id;
+        if (Auth::user()->isAdmin() || Auth::user()->id === (int)$id) {
+
+            $user = User::find($id);
+
+            if ($user) {
+                (new UserStoreService())->storeUser($request, $user);
+
+                return redirect('admin/users/list');
+            }
+
+            $user = new User();
+
+            (new UserStoreService())->storeuser($request, $user);
+
+        }
+        return redirect('admin/users/list');
     }
 
 

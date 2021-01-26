@@ -138,7 +138,10 @@
             @yield('content')
         </main>
         <footer>
-            @include('footer.footer')
+            <section class="place-holder"></section>
+            <div class="text-center">
+                <p>Admin footer (TODO?)</p>
+            </div>
         </footer>
     </div>
 </body>

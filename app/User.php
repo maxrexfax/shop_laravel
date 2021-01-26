@@ -9,7 +9,17 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use Notifiable;
+
     const ROLE_ADMIN_NAME = 'admin';
+
+    public const VALIDATION_RULES = [
+        'login' => ['required', 'required', 'max:255'],
+        'first_name' => ['required', 'nullable', 'max:255'],
+        'second_name' => ['required', 'nullable', 'max:255'],
+        'last_name' => ['required', 'nullable', 'max:255'],
+        'email' => ['string', 'max:255', 'required'],
+    ];
+
 
     /**
      * The attributes that are mass assignable.

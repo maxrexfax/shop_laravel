@@ -7,12 +7,17 @@
                 <span class="addButton" title="Add New">+</span>
             </a>
         </div>
+        <div class="text-center">
+            @if(!empty($message))
+                <div class="bg-error">{{$message}}</div>
+            @endif
+        </div>
         <div class="col-12 p-0">
             <table class="table table-striped w-100">
                 <thead class="thead-dark">
                 <tr>
                     <th>{{ __('User id') }}</th>
-                    <th>{{ __('User image') }}</th>
+                    <th>{{ __('User login') }}</th>
                     <th>{{ __('User first name') }}</th>
                     <th>{{ __('User second name') }}</th>
                     <th>{{ __('User last name') }}</th>

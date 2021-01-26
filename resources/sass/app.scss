@@ -233,24 +233,22 @@ span[class*=" step"] {
     width: 100%;
 }
 
-.p-in-accordion {
-    width: 100%;
-}
-
-.url_in_accordion {
+.accordion_content a {
     text-decoration: none;
     color: gray;
     cursor: pointer;
     display: inline-block;
+    font-size: 1em;
+    font-family: roboto regular SansSerif, serif;
+    font-weight: bold;
 }
 
-.url_no_decoration {
+.accordion_content a:hover {
     text-decoration: none;
-    cursor: pointer;
-}
+    font-weight: bold;
+    color: #126DD2;
+    font-family: roboto regular SansSerif, serif;
 
-.url_in_accordion:hover {
-    text-decoration: none;
 }
 
 .border_bottom {
@@ -367,6 +365,7 @@ span[class*=" step"] {
 .all-category-item a:hover {
     color: #135bb5;
     text-decoration: none;
+    font-family: roboto regular SansSerif, serif;
 }
 
 .category-chosen a {
@@ -411,4 +410,9 @@ span[class*=" step"] {
     margin-right: auto;
     margin-left: auto;
     width: 50%;
+}
+
+.url_no_decoration {
+    text-decoration: none;
+    cursor: pointer;
 }

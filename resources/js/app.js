@@ -105,6 +105,25 @@ $(document).ready(function() {
         }
     });
 
+    $(document).on('click', '#btnToAddLocaleToStoreDiv' ,function (e) {
+        let divLocalesContainer = $('#divWithLocalesList').find('div');
+        let isExist = false;
+        for(let i = 0; i < divLocalesContainer.length; i++) {
+            if($(divLocalesContainer[i]).attr('id')===$('#selectToAddLocaleToStoreDiv option:selected').val()) {
+                isExist = true;
+            }
+        }
+        if(isExist) {
+            alert('Locale already chosen');
+        } else {
+            let htmlToAdd = '<div id="' + $('#selectToAddLocaleToStoreDiv option:selected').val() + '"><i class="fa fa-minus-circle my-cursor-pointer i-deleter" title="Delete this locale"></i><span> ' + $('#selectToAddLocaleToStoreDiv option:selected').text() + '</span>\n' +
+                '<input type="hidden" name="locales[]" value="' + $('#selectToAddLocaleToStoreDiv option:selected').val() + '">\n' +
+                '</div>';
+            console.log(htmlToAdd);
+            $(divLocalesContainer).append(htmlToAdd);
+        }
+    });
+
     $(document).on('click', '.i-deleter', function (e){
         $(this).parent().remove();
         e.stopPropagation();
@@ -126,8 +145,6 @@ $(document).ready(function() {
 
     $( '.div-item-main-container' ).mouseover(function() {
         $(this).find('.hide').css('display', 'block');
-        // $(this).css('box-shadow', '0px 2px 1px #888');
-        // $(this).find('.hide').css('box-shadow', '0px 2px 1px #888, -2px 0px 1px #d8d8d8, 2px 0px 1px #d8d8d8');
 
         $(this).css('box-shadow', '0 -3px 3px rgba(0,0,0,0.5)');
         $(this).find('.hide').css('box-shadow', '0 3px 3px rgba(0,0,0,0.5)');
@@ -193,9 +210,9 @@ $(document).ready(function() {
         $(location).attr('href', url);
     }
 
+    $('.accordion_content_phones').slideUp(1);
     $(document).on('click', '#btnAddPhone', function(e) {
-        $('#shadowPhones').show();
-        $('#modalFormAddPhone').show();
+        $('.accordion_content_phones').show();
     });
 
     $(document).on('click', '#shadowPhones', function(e) {
@@ -208,7 +225,9 @@ $(document).ready(function() {
         $('#modalFormAddPhone').hide();
     });
 
+    $(document).on('click', '#btnSavePhoneAsync', function(e) {
 
+    });
 
 });
 

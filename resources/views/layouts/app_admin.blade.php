@@ -143,6 +143,12 @@
                 <p>Admin footer (TODO?)</p>
             </div>
         </footer>
+        <div>
+            <div id="shadowGlobal" class="d-none"></div>
+            <div id="modalDivGlobal" class="bg-white d-none">
+                <p id="closePopupSymbol" class="float-right btnCloseModal" title="Close"><i class="fa fa-window-close" aria-hidden="true"></i></p>
+            </div>
+        </div>
     </div>
 </body>
 </html>

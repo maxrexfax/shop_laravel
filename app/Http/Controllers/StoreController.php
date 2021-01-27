@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStoreRequest;
+use App\Locale;
 use App\Services\StoreStoreService;
 use App\Store;
+use App\StoreLocale;
+use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
@@ -49,7 +52,7 @@ class StoreController extends Controller
     {
         $store = Store::find($id);
         if ($store) {
-            return view('admin.partials.store._store_phones', [
+            return view('admin.partials.phones._phones_list', [
                 'alt_title' => 'Save store phones list',
                 'store' => $store,
                 'phones' => $store->getPhones(),
@@ -57,6 +60,35 @@ class StoreController extends Controller
         }
 
         return redirect('/admin/stores/list');
+    }
+
+    public function languageList($id = null)
+    {
+        $store = Store::find($id);
+        if ($store) {
+            return view('admin.partials.locale._store_locale_list', [
+                'store' => $store,
+                'locales' => Locale::all(),
+            ]);
+        }
+    }
+
+    public function storeLocales($id, Request $request)
+    {
+        $store = Store::find($id);
+        StoreLocale::where('store_id', $store->id)->delete();
+        if ($request->post('locales')) {
+
+            StoreLocale::where('store_id', $store->id)->delete();
+
+            foreach ($request->post('locales') as $locale) {
+                $storeLocale = new StoreLocale();
+                $storeLocale->store_id = $store->id;
+                $storeLocale->locale_id = $locale;
+                $storeLocale->save();
+            }
+        }
+        return redirect()->back();
     }
 
 }

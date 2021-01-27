@@ -130,9 +130,7 @@
                 </nav>
                     @include('menu._root_categories')
                 </div>
-
             </div>
-
         </header>
         <main class="py-4">
             @yield('content')
@@ -140,6 +138,12 @@
         <footer>
             @include('footer.footer')
         </footer>
+        <div>
+            <div id="shadowGlobal" class="d-none"></div>
+            <div id="modalDivGlobal" class="bg-white d-none">
+                <p id="closePopupSymbol" class="float-right btnCloseModal" title="Close"><i class="fa fa-window-close" aria-hidden="true"></i></p>
+            </div>
+        </div>
     </div>
 </body>
 </html>

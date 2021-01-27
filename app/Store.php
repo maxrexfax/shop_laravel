@@ -24,4 +24,17 @@ class Store extends Model
         return '';
     }
 
+    public function locales()
+    {
+        return $this->belongsToMany(Locale::class, 'store_locale', 'store_id', 'locale_id');
+    }
+
+    public function getLocales()
+    {
+        if (!empty($this->locales)) {
+            return $this->locales;
+        }
+
+        return '';
+    }
 }

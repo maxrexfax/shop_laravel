@@ -16,6 +16,7 @@
                     <th>{{ __('Store name') }}</th>
                     <th>{{ __('Store description') }}</th>
                     <th>{{ __('Store keywords') }}</th>
+                    <th>{{ __('Store languages') }}</th>
                     <th>{{ __('Store phones') }}</th>
                     <th>{{ __('Edit') }}</th>
                 </tr>
@@ -34,12 +35,8 @@
                         <td>{{$store->store_name}}</td>
                         <td>{{$store->store_description}}</td>
                         <td>{{$store->store_keywords}}</td>
-                        <td>
-                            <a class="btn btn-secondary" href="{{route('store.phonelist', ['id' => $store->id])}}">Manage</a>
-                            @foreach($store->getPhones() as $phone)
-                                <p title="{{$phone->phone_info}}">{{$phone->phone_number}}</p>
-                            @endforeach
-                        </td>
+                        <td><a class="btn btn-secondary" href="{{route('store.langlist', ['id' => $store->id])}}">Languages</a></td>
+                        <td><a class="btn btn-secondary" href="{{route('store.phonelist', ['id' => $store->id])}}">Phones</a></td>
                         <td><a href="{{route('store.create')}}/{{$store->id}}"><i class="fas fa-pencil-alt"></i></a></td>
                     </tr>
                 @endforeach

@@ -37,4 +37,39 @@ class Store extends Model
 
         return '';
     }
+
+    public function currencies()
+    {
+        return $this->belongsToMany(Currency::class, 'store_currency', 'store_id', 'currency_id');
+    }
+
+    public function getCurrencies()
+    {
+        if (!empty($this->currencies)) {
+            return $this->currencies;
+        }
+
+        return '';
+    }
+
+    public function defaultLocale()
+    {
+        return $this->hasOne(StoreLocale::class)->where('store_id', $this->id)->where('default',1);
+    }
+
+    public function getDefaultLocale()
+    {
+        if (!empty($this->defaultLocale)) {
+            return $this->defaultLocale;
+        }
+
+        return '';
+    }
+
+
+
+    public function storeLocales()
+    {
+        return $this->hasMany(StoreLocale::class, 'store_id', 'id');
+    }
 }

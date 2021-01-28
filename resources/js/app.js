@@ -106,26 +106,57 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '#btnToAddLocaleToStoreDiv' ,function (e) {
-        let divLocalesContainer = $('#divWithLocalesList').find('div');
+        let tbWithLocales = $('#tbodyWithLocales').find('tr');
         let isExist = false;
-        for(let i = 0; i < divLocalesContainer.length; i++) {
-            if($(divLocalesContainer[i]).attr('id')===$('#selectToAddLocaleToStoreDiv option:selected').val()) {
+        for(let i = 0; i < tbWithLocales.length; i++) {
+            if($(tbWithLocales[i]).attr('id')===$('#selectToAddLocaleToStoreDiv option:selected').val()) {
                 isExist = true;
             }
         }
         if(isExist) {
             alert('Locale already chosen');
         } else {
-            let htmlToAdd = '<div id="' + $('#selectToAddLocaleToStoreDiv option:selected').val() + '"><i class="fa fa-minus-circle my-cursor-pointer i-deleter" title="Delete this locale"></i><span> ' + $('#selectToAddLocaleToStoreDiv option:selected').text() + '</span>\n' +
-                '<input type="hidden" name="locales[]" value="' + $('#selectToAddLocaleToStoreDiv option:selected').val() + '">\n' +
-                '</div>';
-            console.log(htmlToAdd);
-            $(divLocalesContainer).append(htmlToAdd);
+            let str = createHtmlToAdd($('#selectToAddLocaleToStoreDiv option:selected').text(), $('#selectToAddLocaleToStoreDiv option:selected').val(), 'locales');
+            $('#tbodyWithLocales').append(str);
+        }
+    });
+
+    function createHtmlToAdd(locale_name, locale_id, input_name) {
+        let htmlVal = '<tr id="' + locale_id + '">\n' +
+            '<td class="text-left pt-3"><p>' + locale_name + '</p></td>\n' +
+            '<td class="text-center">\n' +
+            '<input class="d-none" name="default" id="radio' + locale_id + '" type="radio" value="' + locale_id + '">\n' +
+            '<label class="for-locale btn" for="radio' + locale_id + '">Default</label>\n' +
+            '<input type="hidden" name="'+ input_name +'[]" value="' + locale_id + '">\n' +
+            '</td>\n' +
+            '<td class="text-right"><i class="fa fa-minus-circle my-cursor-pointer i-tr-deleter" title="{{__(\'Delete this locale\')}}"></i></td>\n' +
+            '</tr>';
+        return htmlVal;
+    }
+
+    $(document).on('click', '#btnToAddCurrencyToStoreDiv' ,function (e) {
+        let tbWithCurrency = $('#tbodyWithCurrency').find('tr');
+        let isExist = false;
+        for(let i = 0; i < tbWithCurrency.length; i++) {
+            if($(tbWithCurrency[i]).attr('id')===$('#selectToAddCurrencyToStoreDiv option:selected').val()) {
+                isExist = true;
+            }
+        }
+        if(isExist) {
+            alert('Locale already chosen');
+        } else {
+            let str = createHtmlToAdd($('#selectToAddCurrencyToStoreDiv option:selected').text(), $('#selectToAddCurrencyToStoreDiv option:selected').val(), 'currencies');
+            $('#tbodyWithCurrency').append(str);
         }
     });
 
     $(document).on('click', '.i-deleter', function (e){
         $(this).parent().remove();
+        e.stopPropagation();
+    });
+
+    $(document).on('click', '.i-tr-deleter', function (e){
+        $(this).closest('tr').remove();
         e.stopPropagation();
     });
 
@@ -228,6 +259,12 @@ $(document).ready(function() {
     $(document).on('click', '#btnSavePhoneAsync', function(e) {
 
     });
+
+    $(document).on('click', '.for-locale', function(e) {
+        $('.for-locale').removeClass('btn-success');
+        $(this).addClass('btn-success');
+    });
+
 
 });
 

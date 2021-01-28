@@ -67,7 +67,7 @@
                         <div class="form-group row">
                             <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Logo image') }}</label>
                             @if(isset($store))
-                                <div style="max-width: 300px; width: 100%;">
+                                <div style="max-width: 100px; width: 100%;">
                                     @if($store->store_logo)
                                         <img width="100%" src="{{asset('/img/logo/' . $store->store_logo)}}" alt="{{$store->store_name}}" title="Current logo for {{$store->store_name}}"/>
                                     @else
@@ -79,7 +79,7 @@
 
 
                         <div class="form-group row">
-                            <label for="store_logo" class="col-md-4 col-form-label text-md-right">{{ __('Change category logo image') }}</label>
+                            <label for="store_logo" class="col-md-4 col-form-label text-md-right">{{ __('Change store logo image') }}</label>
 
                             <div class="col-md-6">
                                 <input id="store_logo" type="file" class="form-control @error('store_logo') is-invalid @enderror" name="store_logo" title="Upload logo picture">

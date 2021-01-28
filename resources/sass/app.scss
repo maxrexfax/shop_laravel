@@ -263,6 +263,7 @@ span[class*=" step"] {
     font-size: 1em;
     font-family: roboto regular SansSerif, serif;
     font-weight: bold;
+    color: hotpink;
 }
 
 .accordion_content a:hover {
@@ -446,4 +447,16 @@ span[class*=" step"] {
     cursor: pointer;
     font-weight: 500;
     font-family: roboto regular SansSerif, serif;
+}
+
+.checkbox-budget {
+
+}
+
+.checkbox-budget:hover .for-checkbox-budget {
+    background-color: coral;
+}
+
+.for-checkbox-budget {
+    background-color: #939598;
 }

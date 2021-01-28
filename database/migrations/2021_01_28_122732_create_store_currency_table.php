@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStoreLocaleTable extends Migration
+class CreateStoreCurrencyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateStoreLocaleTable extends Migration
      */
     public function up()
     {
-        Schema::create('store_locale', function (Blueprint $table) {
+        Schema::create('store_currency', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('store_id');
-            $table->unsignedBigInteger('locale_id');
+            $table->unsignedBigInteger('currency_id');
             $table->boolean('default')->nullable();
             $table->foreign('store_id')->references('id')->on('stores');
-            $table->foreign('locale_id')->references('id')->on('locales');
+            $table->foreign('currency_id')->references('id')->on('currencies');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateStoreLocaleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('store_locale');
+        Schema::dropIfExists('store_currency');
     }
 }

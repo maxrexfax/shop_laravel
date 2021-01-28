@@ -9,7 +9,7 @@ class StoreLocale extends Model
     protected $table = 'store_locale';
 
     protected $fillable = [
-        'store_id', 'locale_id',
+        'store_id', 'locale_id', 'default'
     ];
 
     public function locales()
@@ -20,5 +20,14 @@ class StoreLocale extends Model
     public function localesList()
     {
         return $this->hasMany(Locale::class);
+    }
+
+    public function isDefault()
+    {
+        if ($this->default) {
+            return true;
+        }
+
+        return false;
     }
 }

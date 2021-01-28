@@ -14,8 +14,8 @@
                     <th>{{ __('Store id') }}</th>
                     <th>{{ __('Store logo image') }}</th>
                     <th>{{ __('Store name') }}</th>
-                    <th>{{ __('Store description') }}</th>
                     <th>{{ __('Store keywords') }}</th>
+                    <th>{{ __('Store currency') }}</th>
                     <th>{{ __('Store languages') }}</th>
                     <th>{{ __('Store phones') }}</th>
                     <th>{{ __('Edit') }}</th>
@@ -33,10 +33,10 @@
                             @endif
                         </td>
                         <td>{{$store->store_name}}</td>
-                        <td>{{$store->store_description}}</td>
                         <td>{{$store->store_keywords}}</td>
-                        <td><a class="btn btn-secondary" href="{{route('store.langlist', ['id' => $store->id])}}">Languages</a></td>
-                        <td><a class="btn btn-secondary" href="{{route('store.phonelist', ['id' => $store->id])}}">Phones</a></td>
+                        <td><a class="btn btn-secondary url_no_decoration" href="{{route('store.currencylist', ['id' => $store->id])}}">{{ __('Currency') }}</a></td>
+                        <td><a class="btn btn-secondary url_no_decoration" href="{{route('store.langlist', ['id' => $store->id])}}">{{ __('Languages') }}</a></td>
+                        <td><a class="btn btn-secondary url_no_decoration" href="{{route('store.phonelist', ['id' => $store->id])}}">{{ __('Phones') }}</a></td>
                         <td><a href="{{route('store.create')}}/{{$store->id}}"><i class="fas fa-pencil-alt"></i></a></td>
                     </tr>
                 @endforeach

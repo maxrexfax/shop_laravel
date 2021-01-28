@@ -2,7 +2,7 @@
 @section('admin.content')
     <div class="card">
         <div class="card-header text-center">{{$NameOfForm}}</div>
-        <div class="d-flex justify-content-between flex-wrap">
+        <div class="">
             <div class="col-6 col-md-10 col-sm-12">
                 <form method="POST" enctype="multipart/form-data" action="{{ route('product.store') }}@if(!empty($product))/{{$product->id}}@endif">
                         @csrf

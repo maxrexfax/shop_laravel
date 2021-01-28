@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Currency;
 use App\Http\Requests\StoreStoreRequest;
 use App\Locale;
+use App\Services\StoreCurrencyStoreService;
+use App\Services\StoreLocaleStoreService;
 use App\Services\StoreStoreService;
 use App\Store;
 use App\StoreLocale;
@@ -76,17 +79,27 @@ class StoreController extends Controller
     public function storeLocales($id, Request $request)
     {
         $store = Store::find($id);
-        StoreLocale::where('store_id', $store->id)->delete();
-        if ($request->post('locales')) {
+        if ($store) {
+            (new StoreLocaleStoreService())->store($store, $request);
+        }
 
-            StoreLocale::where('store_id', $store->id)->delete();
+        return redirect()->back();
+    }
 
-            foreach ($request->post('locales') as $locale) {
-                $storeLocale = new StoreLocale();
-                $storeLocale->store_id = $store->id;
-                $storeLocale->locale_id = $locale;
-                $storeLocale->save();
-            }
+    public function currencyList($id)
+    {
+        $store = Store::find($id);
+        return view('admin.partials.currency._store_currency_list', [
+            'store' => $store,
+            'currencies' => Currency::all()
+        ]);
+    }
+
+    public function storeCurrency($id, Request $request)
+    {
+        $store = Store::find($id);
+        if ($store) {
+            (new StoreCurrencyStoreService())->store($store, $request);
         }
         return redirect()->back();
     }

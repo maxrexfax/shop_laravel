@@ -55,8 +55,10 @@ Route::post('/product/store/{id?}', 'ProductController@store')->name('product.st
 Route::get('/store/create/{id?}', 'StoreController@create')->name('store.create');
 Route::post('/store/store/{id?}', 'StoreController@store')->name('store.store');
 Route::post('/store/locales/store/{id?}', 'StoreController@storeLocales')->name('store.locales.store');
+Route::post('/store/currency/store/{id?}', 'StoreController@storeCurrency')->name('store.currency.store');
 Route::get('/store/phonelist/{id}', 'StoreController@phoneList')->name('store.phonelist');
 Route::get('/store/langlist/{id}', 'StoreController@languageList')->name('store.langlist');
+Route::get('/store/currencylist/{id}', 'StoreController@currencyList')->name('store.currencylist');
 
 Route::get('/user/delete/{id}', 'UserController@destroy')->name('user.delete');
 Route::get('/user/create/{id?}', 'UserController@create')->name('user.create');

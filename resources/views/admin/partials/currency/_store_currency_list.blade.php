@@ -8,13 +8,14 @@
             {{__('Edit currency list for ')}}<span class="font-weight-bold">{{$store->store_name}}</span>
         </div>
             <div class="col-lg-12 col-md-12 col-sm-12 pb-2">
+                @include('admin.partials._language_currency_locale_switcher')
                         <form method="POST" id="formToAddCurrency" action="{{ route('store.currency.store', ['id' => $store->id]) }}">
                             @csrf
                             <div class="form-group row">
                                 <div class="col-md-8 offset-md-2 mt-2">
                                     <div id="divWithLocalesList" class="border rounded p-2">
                                         <p class="text-center">{{__('Current store locales:')}}</p>
-                                        <table class="table table-stripped">
+                                        <table class="table table-striped">
                                             <thead>
                                             <tr>
                                                 <th>{{__('Currency')}}</th>
@@ -49,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-8 text-center">
+                                <div class="col-md-8 offset-md-2 text-center">
                                     <p>{{ __('Currency to add') }}</p>
                                 </div>
                             </div>
@@ -64,7 +65,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-1 text-center">
+                                <div class="col-md-1 text-right">
                                     <span id="btnToAddCurrencyToStoreDiv" class="btn btn-secondary">{{__('Add')}}</span>
                                 </div>
                             </div>

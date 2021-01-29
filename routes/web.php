@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,4 +69,6 @@ Route::get('/image/delete/{id}', 'ImageController@delete')->name('image.delete')
 Route::post('/image/store', 'ImageController@store')->name('image.store');
 Route::post('/image/order', 'ImageController@changeSortOrder')->name('image.order');
 
-
+Route::get('/setLocale/{lang}', function ($lang) {
+    App::setLocale($lang);
+});

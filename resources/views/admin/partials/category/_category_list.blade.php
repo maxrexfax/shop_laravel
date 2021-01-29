@@ -17,7 +17,7 @@
                         <th>{{ __('Category name') }}</th>
                         <th>{{ __('Order') }}</th>
                         <th>{{ __('Parent category') }}</th>
-                        <th>{{ __('Edit') }}</th>
+                        <th>{{ __('actions.edit') }}</th>
                     </tr>
                     </thead>
                     <tbody>

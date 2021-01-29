@@ -129,7 +129,7 @@ $(document).ready(function() {
             '<label class="for-locale btn" for="radio' + locale_id + '">Default</label>\n' +
             '<input type="hidden" name="'+ input_name +'[]" value="' + locale_id + '">\n' +
             '</td>\n' +
-            '<td class="text-right"><i class="fa fa-minus-circle my-cursor-pointer i-tr-deleter" title="{{__(\'Delete this locale\')}}"></i></td>\n' +
+            '<td class="text-center"><i class="fa fa-minus-circle my-cursor-pointer i-tr-deleter" title="{{__(\'Delete this locale\')}}"></i></td>\n' +
             '</tr>';
         return htmlVal;
     }

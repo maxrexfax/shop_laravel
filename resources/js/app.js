@@ -265,7 +265,15 @@ $(document).ready(function() {
         $(this).addClass('btn-success');
     });
 
+    $(document).on('click', '.btnToDeletePhone', function(e) {
+        event.preventDefault();
 
+        let choice = confirm(this.getAttribute('data-confirm'));
+
+        if (choice) {
+            window.location.href = this.getAttribute('href');
+        }
+    });
 });
 
 

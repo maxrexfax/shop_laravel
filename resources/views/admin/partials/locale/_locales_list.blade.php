@@ -2,20 +2,20 @@
 @section('admin.content')
     <div class="card">
         <div class="card-header text-center">
-            {{ __('List of locales') }}
+            {{ __('text.list_of_locales') }}
             <a class="url_in_accordion ml-2 mb-0 float-right" href="{{route('locale.create')}}">
-                <span class="addButton" title="Add New">+</span>
+                <span class="addButton" title="{{ __('actions.add_new') }}">+</span>
             </a>
         </div>
         <div class="col-12 p-0">
             <table class="table table-striped w-100">
                 <thead class="thead-dark">
                 <tr>
-                    <th>{{ __('Locale id') }}</th>
-                    <th>{{ __('Locale logo image') }}</th>
-                    <th>{{ __('Locale name') }}</th>
-                    <th>{{ __('Locale code') }}</th>
-                    <th>{{ __('Edit') }}</th>
+                    <th>{{ __('actions.locale_id') }}</th>
+                    <th>{{ __('actions.locale_logo_image') }}</th>
+                    <th>{{ __('actions.locale_name') }}</th>
+                    <th>{{ __('actions.locale_code') }}</th>
+                    <th>{{ __('actions.edit') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -26,7 +26,7 @@
                             @if($locale->locale_logo)
                                 <img height="30px" src="{{ asset('/img/logo/' . $locale->locale_logo) }}" alt="{{$locale->locale_name}}"/>
                             @else
-                                <img height="30px" src="{{ asset('/img/logo/empty_logo.jpg') }}" alt="No logo"/>
+                                <img height="30px" src="{{ asset('/img/logo/empty_logo.jpg') }}" alt="{{ __('actions.no_logo') }}"/>
                             @endif
                         </td>
                         <td>{{$locale->locale_name}}</td>

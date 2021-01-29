@@ -2,10 +2,10 @@
 @section('admin.content')
     <div class="card">
         <div class="card-header text-center">
-            <a href="{{route('store.phonelist', ['id'=>$store->id])}}" title="Back to all store phones" class="btn btn-secondary float-left url_no_decoration">
-                {{__('Back to phones list')}}
+            <a href="{{route('store.phonelist', ['id'=>$store->id])}}" title="{{__('text.back to phones list')}}" class="btn btn-secondary float-left url_no_decoration">
+                {{__('text.back to phones list')}}
             </a>
-            {{ __('Phone control') }}
+            {{ __('actions.phone control') }}
         </div>
         <div class="d-flex justify-content-between flex-wrap">
             <div class="col-6 col-md-10 col-sm-12">
@@ -22,7 +22,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('Phone ID') }}</label>
+                            <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('actions.phone ID') }}</label>
 
                             <div class="col-md-6">
                                 <span class="form-control border-0">@if(!empty($phone)){{$phone->id}}@endif</span>
@@ -32,7 +32,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="phone_number" class="col-md-4 col-form-label text-md-right">{{ __('Phone number') }}</label>
+                            <label for="phone_number" class="col-md-4 col-form-label text-md-right">{{ __('actions.phone number') }}</label>
 
                             <div class="col-md-6">
                                 <input id="phone_number" type="text" class="form-control @error('phone_number') is-invalid @enderror" name="phone_number" value="@if(!empty($phone)){{$phone->phone_number}}@endif" required>
@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="phone_info" class="col-md-4 col-form-label text-md-right">{{ __('Phone info') }}</label>
+                            <label for="phone_info" class="col-md-4 col-form-label text-md-right">{{ __('actions.phone info') }}</label>
 
                             <div class="col-md-6">
                                 <input id="phone_info" type="text" class="form-control @error('phone_info') is-invalid @enderror" name="phone_info" value="@if(!empty($phone)){{$phone->phone_info}}@endif">

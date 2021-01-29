@@ -6,9 +6,8 @@
             <div class="col-6 col-md-10 col-sm-12">
                 <form method="POST" enctype="multipart/form-data" action="{{ route('product.store') }}@if(!empty($product))/{{$product->id}}@endif">
                         @csrf
-
                         <div class="form-group row">
-                            <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('Product ID') }}</label>
+                            <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('actions.product_id') }}</label>
 
                             <div class="col-md-6">
                                 <span class="form-control border-0">@if(!empty($product)){{$product->id}}@endif</span>
@@ -17,7 +16,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="product_name" class="col-md-4 col-form-label text-md-right">{{ __('Product name') }}</label>
+                            <label for="product_name" class="col-md-4 col-form-label text-md-right">{{ __('actions.product_name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="product_name" type="text" class="form-control @error('product_name') is-invalid @enderror" name="product_name" value="@if(!empty($product)){{$product->product_name}}@endif" required>
@@ -30,7 +29,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="rating" class="col-md-4 col-form-label text-md-right">{{ __('Rating') }}</label>
+                            <label for="rating" class="col-md-4 col-form-label text-md-right">{{ __('actions.rating') }}</label>
 
                             <div class="col-md-6">
                                 <input id="rating" type="number" min="0" max="5" class="form-control @error('rating') is-invalid @enderror" name="rating" value="@if(!empty($product)){{$product->rating}}@endif" required>
@@ -43,7 +42,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="price" class="col-md-4 col-form-label text-md-right">{{ __('Price') }}</label>
+                            <label for="price" class="col-md-4 col-form-label text-md-right">{{ __('actions.price') }}</label>
 
                             <div class="col-md-6">
                                 <input id="price" type="number" min="0" max="999999" step="0.01" class="form-control @error('price') is-invalid @enderror" name="price" value="@if(!empty($product)){{$product->price}}@endif" required>
@@ -56,7 +55,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Title (meta tag for SEO)') }}</label>
+                            <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('text.title_(meta_tag_for_SEO)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="@if(!empty($product)){{$product->title}}@endif" required>
@@ -69,7 +68,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description (meta tag for SEO)') }}</label>
+                            <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('text.description_(meta_tag_for_SEO)') }}</label>
 
                             <div class="col-md-6">
                                 <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="@if(!empty($product)){{$product->description}}@endif" required>
@@ -82,7 +81,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="short_description" class="col-md-4 col-form-label text-md-right">{{ __('Short description for product card') }}</label>
+                            <label for="short_description" class="col-md-4 col-form-label text-md-right">{{ __('text.short_description_for_product_card') }}</label>
 
                             <div class="col-md-6">
                                 <input id="short_description" type="text" class="form-control @error('short_description') is-invalid @enderror" name="short_description" value="@if(!empty($product)){{$product->short_description}}@endif" required>
@@ -95,7 +94,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="full_description" class="col-md-4 col-form-label text-md-right">{{ __('Full description') }}</label>
+                            <label for="full_description" class="col-md-4 col-form-label text-md-right">{{ __('text.full_description') }}</label>
 
                             <div class="col-md-6">
                                 <textarea id="full_description" class="form-control" rows="6" cols="65" name="full_description">@if(!empty($product)){{$product->full_description}}@endif</textarea>
@@ -108,7 +107,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Logo image') }}</label>
+                            <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('text.logo_image') }}</label>
                         @if(isset($product))
                             @if($product->logo_image)
                                 <div style="max-width: 300px; width: 100%;">
@@ -121,10 +120,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="logo_image" class="col-md-4 col-form-label text-md-right">{{ __('Change logo image') }}</label>
+                            <label for="logo_image" class="col-md-4 col-form-label text-md-right">{{ __('text.change_logo_image') }}</label>
 
                             <div class="col-md-6">
-                                <input id="logo_image" type="file" class="form-control @error('logo_image') is-invalid @enderror" name="logo_image" title="Upload logo picture">
+                                <input id="logo_image" type="file" class="form-control p-1 @error('logo_image') is-invalid @enderror" name="logo_image" title="{{ __('text.upload_logo_picture') }}">
                                 @error('logo_image')
                                 <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -134,14 +133,14 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="categories" class="col-md-4 col-form-label text-md-right">{{ __('Categories of this product') }}</label>
+                            <label for="categories" class="col-md-4 col-form-label text-md-right">{{ __('text.categories_of_this_product') }}</label>
                             <div class="col-md-6">
                                 <div id="divWithCategoriesList" class="border rounded p-2">
                                     @foreach($categories as $category)
                                         @if(!empty($product))
                                             @foreach($product->categories as $productCategory)
                                             @if($productCategory->id==$category->id)
-                                                <div id="{{$category->id}}"><i class="fa fa-minus-circle my-cursor-pointer i-deleter" title="Delete this category"></i><span> {{$category->category_name}}</span>
+                                                <div id="{{$category->id}}"><i class="fa fa-minus-circle my-cursor-pointer i-deleter" title="{{ __('actions.delete_this_category')}}"></i><span> {{$category->category_name}}</span>
                                                     <input type="hidden" name="categories[]" value="{{$category->id}}">
                                                 </div>
                                             @endif
@@ -153,7 +152,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="categories1" class="col-md-4 col-form-label text-md-right">{{ __('Categories to add') }}</label>
+                            <label for="categories1" class="col-md-4 col-form-label text-md-right">{{ __('text.categories_to_add') }}</label>
                             <div class="col-md-4">
                                 <select class="form-control" id="categoriesToAdd">
                                     @foreach($categories as $category)
@@ -162,13 +161,13 @@
                                 </select>
                             </div>
                             <div class="col-md-2">
-                                <span class="btn btn-secondary float-right" id="btnAdderCategoryToList">Add this</span>
+                                <span class="btn btn-secondary float-right" id="btnAdderCategoryToList">{{__('actions.add_this')}}</span>
                             </div>
                         </div>
 
 
                         <div class="form-group row">
-                            <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('Additional images list') }}</label>
+                            <label for="images" class="col-md-4 col-form-label text-md-right">{{ __('text.additional_images_list') }}</label>
 
                             <div class="col-md-6">
                                 <div id="divWithAddtionalImages" class="border rounded p-2 d-flex flex-wrap justify-content-between w-100">
@@ -182,11 +181,11 @@
                                             </div>
                                         @endforeach
                                     @else
-                                        There are no additional images for this product!
+                                        {{__('text.there_are_no_additional_images_for_this_product!')}}
                                     @endif
                                 </div>
                                 @if(!empty($product))
-                                    <a href="{{url('/')}}/product/images/{{$product->id}}" target="_blank" class="btn btn-secondary btn-sm" id="btnShowModalToEditImages">Edit additional images</a>
+                                    <a href="{{url('/')}}/product/images/{{$product->id}}" target="_blank" class="btn btn-secondary btn-sm" id="btnShowModalToEditImages">{{__('text.edit_additional_images')}}</a>
                                 @endif
                             </div>
                         </div>

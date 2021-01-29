@@ -8,40 +8,40 @@
                         <div class="col-2 text-left admin-menu p-0">
                             <div class="dashboard-menu border_bottom oneHeight">
                                 <i class="fa fa-dashboard fw ml-2"></i>
-                                <span class="ml-2 "><a class="url_in_accordion" href="{{route('admin')}}">{{ __('Dashboard') }}</a></span>
+                                <span class="ml-2 "><a class="url_in_accordion" href="{{route('admin')}}">{{ __('actions.dashboard') }}</a></span>
                             </div>
                             <div>
                                 <div class="accordion_header border_bottom oneHeight">
                                     <i class="fa fa-tags fw ml-2"></i>
-                                    <span class="ml-2"><b>{{__('Catalog')}}</b></span>
+                                    <span class="ml-2"><b>{{__('actions.catalog')}}</b></span>
                                 </div>
 
                                 <div class="accordion_content p-0">
-                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.category.list')}}">{{ __('Categories') }}</a></p>
-                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.product.list')}}">{{ __('Products') }}</a></p>
+                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.category.list')}}">{{ __('actions.categories') }}</a></p>
+                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.product.list')}}">{{ __('actions.products') }}</a></p>
 
-                                </div>
-                            </div>
-                            <div>
-                                <div class="accordion_header border_bottom oneHeight">
-                                    <i class="fa fa-tags fw ml-2"></i>
-                                    <span class="ml-2"><b>{{__('Settings')}}</b></span>
-                                </div>
-
-                                <div class="accordion_content p-0">
-                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.stores.list')}}">{{ __('Stores') }}</a></p>
-                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.currency.list')}}">{{ __('Currency') }}</a></p>
-                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.locales.list')}}">{{ __('Locales') }}</a></p>
                                 </div>
                             </div>
                             <div>
                                 <div class="accordion_header border_bottom oneHeight">
                                     <i class="fa fa-tags fw ml-2"></i>
-                                    <span class="ml-2"><b>{{__('Management')}}</b></span>
+                                    <span class="ml-2"><b>{{__('actions.settings')}}</b></span>
                                 </div>
 
                                 <div class="accordion_content p-0">
-                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.users.list')}}">{{ __('Users') }}</a></p>
+                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.stores.list')}}">{{ __('actions.stores') }}</a></p>
+                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.currency.list')}}">{{ __('actions.currency') }}</a></p>
+                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.locales.list')}}">{{ __('actions.locales') }}</a></p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="accordion_header border_bottom oneHeight">
+                                    <i class="fa fa-tags fw ml-2"></i>
+                                    <span class="ml-2"><b>{{__('actions.management')}}</b></span>
+                                </div>
+
+                                <div class="accordion_content p-0">
+                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.users.list')}}">{{ __('actions.users') }}</a></p>
                                 </div>
                             </div>
                         </div>

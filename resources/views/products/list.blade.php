@@ -4,7 +4,6 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-
 <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Categories</a>

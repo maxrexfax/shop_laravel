@@ -1,7 +1,7 @@
 @extends('admin.index')
 @section('admin.content')
     <div class="card">
-        <div class="card-header text-center">{{ __('Currency control') }}</div>
+        <div class="card-header text-center">{{ __('actions.currency_control') }}</div>
         <div class="d-flex justify-content-between flex-wrap">
             <div class="col-6 col-md-10 col-sm-12">
                 <p class="text-center">{{$alt_title}}</p>
@@ -17,7 +17,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('Currency ID') }}</label>
+                            <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('actions.currency_id') }}</label>
 
                             <div class="col-md-6">
                                 <span class="form-control border-0">@if(!empty($currency)){{$currency->id}}@endif</span>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="currency_name" class="col-md-4 col-form-label text-md-right">{{ __('Currency name') }}</label>
+                            <label for="currency_name" class="col-md-4 col-form-label text-md-right">{{ __('actions.currency_name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="currency_name" type="text" class="form-control @error('currency_name') is-invalid @enderror" name="currency_name" value="@if(!empty($currency)){{$currency->currency_name}}@endif" required>
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="currency_code" class="col-md-4 col-form-label text-md-right">{{ __('Currency code') }}</label>
+                            <label for="currency_code" class="col-md-4 col-form-label text-md-right">{{ __('actions.currency_code') }}</label>
 
                             <div class="col-md-6">
                                 <input id="currency_code" type="text" class="form-control @error('currency_code') is-invalid @enderror" name="currency_code" value="@if(!empty($currency)){{$currency->currency_code}}@endif">
@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="currency_value" class="col-md-4 col-form-label text-md-right">{{ __('Currency value') }}</label>
+                            <label for="currency_value" class="col-md-4 col-form-label text-md-right">{{ __('actions.currency_value') }}</label>
 
                             <div class="col-md-6">
                                 <input id="currency_value" type="number" min="0" max="99999" step="0.01" class="form-control @error('currency_value') is-invalid @enderror" name="currency_value" value="@if(!empty($currency)){{$currency->currency_value}}@endif">

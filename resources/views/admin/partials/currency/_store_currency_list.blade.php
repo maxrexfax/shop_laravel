@@ -2,10 +2,10 @@
 @section('admin.content')
     <div class="card">
         <div class="card-header text-center">
-            <a href="{{route('admin.stores.list', ['id'=>$store->id])}}" title="{{__('Back to all stores list')}}" class="btn btn-secondary float-left url_no_decoration">
-                {{__('Back to stores list')}}
+            <a href="{{route('admin.stores.list', ['id'=>$store->id])}}" title="{{__('text.back_to_stores_list')}}" class="btn btn-secondary float-left url_no_decoration">
+                {{__('text.back_to_stores_list')}}
             </a>
-            {{__('Edit currency list for ')}}<span class="font-weight-bold">{{$store->store_name}}</span>
+            {{__('text.edit_currency_list_for')}} <span class="font-weight-bold">{{$store->store_name}}</span>
         </div>
             <div class="col-lg-12 col-md-12 col-sm-12 pb-2">
                 @include('admin.partials._language_currency_locale_switcher')
@@ -14,13 +14,13 @@
                             <div class="form-group row">
                                 <div class="col-md-8 offset-md-2 mt-2">
                                     <div id="divWithLocalesList" class="border rounded p-2">
-                                        <p class="text-center">{{__('Current store locales:')}}</p>
+                                        <p class="text-center">{{__('text.current_store_locales:')}}</p>
                                         <table class="table table-striped">
                                             <thead>
                                             <tr>
-                                                <th>{{__('Currency')}}</th>
-                                                <th class="text-center">{{__('Default?')}}</th>
-                                                <th class="text-right">{{__('Delete')}}</th>
+                                                <th>{{__('actions.currency')}}</th>
+                                                <th class="text-center">{{__('actions.default?')}}</th>
+                                                <th class="text-right">{{__('actions.delete')}}</th>
                                             </tr>
                                             </thead>
                                             <tbody id="tbodyWithCurrency">
@@ -33,15 +33,14 @@
                                                                 checked
                                                            @endif
                                                            id="radio{{$currency->id}}" type="radio" value="{{$currency->id}}">
-
                                                     <label class="for-locale btn
                                                     @if($currency->isDefault($store->id))
                                                         btn-success
                                                     @endif
-                                                        " for="radio{{$currency->id}}">{{__('Default')}}</label>
+                                                        " for="radio{{$currency->id}}">{{__('actions.default')}}</label>
                                                     <input type="hidden" name="currencies[]" value="{{$currency->id}}">
                                                 </td>
-                                                <td class="text-right"><i class="fa fa-minus-circle my-cursor-pointer i-tr-deleter" title="{{__('Delete this currency')}}"></i></td>
+                                                <td class="text-right"><i class="fa fa-minus-circle my-cursor-pointer i-tr-deleter" title="{{__('actions.delete_this_currency')}}"></i></td>
                                             </tr>
                                         @endforeach
                                             </tbody>
@@ -51,7 +50,7 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-8 offset-md-2 text-center">
-                                    <p>{{ __('Currency to add') }}</p>
+                                    <p>{{ __('actions.currency_to_add') }}</p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -66,13 +65,13 @@
                                     </select>
                                 </div>
                                 <div class="col-md-1 text-right">
-                                    <span id="btnToAddCurrencyToStoreDiv" class="btn btn-secondary">{{__('Add')}}</span>
+                                    <span id="btnToAddCurrencyToStoreDiv" class="btn btn-secondary">{{__('actions.add')}}</span>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-md-8 offset-md-2 text-center">
-                                    <button class="btn btn-primary" type="submit">{{__('Save currency list')}}</button>
+                                    <button class="btn btn-primary" type="submit">{{__('actions.save_currency_list')}}</button>
                                 </div>
                             </div>
                         </form>

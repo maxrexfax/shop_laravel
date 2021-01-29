@@ -1,7 +1,7 @@
 @extends('admin.index')
 @section('admin.content')
     <div class="card">
-        <div class="card-header text-center">{{ __('Store control') }}</div>
+        <div class="card-header text-center">{{ __('actions.store_control') }}</div>
         <div class="d-flex justify-content-between flex-wrap">
             <div class="col-6 col-md-10 col-sm-12">
                 <p class="text-center">{{$alt_title}}</p>
@@ -17,7 +17,7 @@
                         @csrf
 
                         <div class="form-group row">
-                            <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('Store ID') }}</label>
+                            <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('actions.store_id') }}</label>
 
                             <div class="col-md-6">
                                 <span class="form-control border-0">@if(!empty($store)){{$store->id}}@endif</span>
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="store_name" class="col-md-4 col-form-label text-md-right">{{ __('Store name') }}</label>
+                            <label for="store_name" class="col-md-4 col-form-label text-md-right">{{ __('actions.store_name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="store_name" type="text" class="form-control @error('store_name') is-invalid @enderror" name="store_name" value="@if(!empty($store)){{$store->store_name}}@endif" required>
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="store_keywords" class="col-md-4 col-form-label text-md-right">{{ __('Store keywords') }}</label>
+                            <label for="store_keywords" class="col-md-4 col-form-label text-md-right">{{ __('actions.store_keywords') }}</label>
 
                             <div class="col-md-6">
                                 <input id="store_keywords" type="text" class="form-control @error('store_keywords') is-invalid @enderror" name="store_keywords" value="@if(!empty($store)){{$store->store_keywords}}@endif">
@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="store_description" class="col-md-4 col-form-label text-md-right">{{ __('Store description') }}</label>
+                            <label for="store_description" class="col-md-4 col-form-label text-md-right">{{ __('actions.store_description') }}</label>
 
                             <div class="col-md-6">
                                 <input id="store_description" type="text" class="form-control @error('store_description') is-invalid @enderror" name="store_description" value="@if(!empty($store)){{$store->store_description}}@endif">
@@ -65,7 +65,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('Logo image') }}</label>
+                            <label for="image" class="col-md-4 col-form-label text-md-right">{{ __('text.logo_image') }}</label>
                             @if(isset($store))
                                 <div style="max-width: 100px; width: 100%;">
                                     @if($store->store_logo)
@@ -79,10 +79,10 @@
 
 
                         <div class="form-group row">
-                            <label for="store_logo" class="col-md-4 col-form-label text-md-right">{{ __('Change store logo image') }}</label>
+                            <label for="store_logo" class="col-md-4 col-form-label text-md-right">{{ __('text.change_store_logo_image') }}</label>
 
                             <div class="col-md-6">
-                                <input id="store_logo" type="file" class="form-control @error('store_logo') is-invalid @enderror" name="store_logo" title="Upload logo picture">
+                                <input id="store_logo" type="file" class="form-control p-1 @error('store_logo') is-invalid @enderror" name="store_logo" title="{{__('actions.upload_logo_picture')}}">
                                 @error('store_logo')
                                 <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

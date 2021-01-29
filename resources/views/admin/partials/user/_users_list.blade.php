@@ -2,9 +2,9 @@
 @section('admin.content')
     <div class="card">
         <div class="card-header text-center">
-            {{ __('List of users') }}
+            {{ __('actions.list_of_users') }}
             <a class="url_in_accordion ml-2 mb-0 float-right" href="{{route('user.create')}}">
-                <span class="addButton" title="Add New">+</span>
+                <span class="addButton" title="{{__('actions.add_new')}}">+</span>
             </a>
         </div>
         <div class="text-center">
@@ -16,13 +16,13 @@
             <table class="table table-striped w-100">
                 <thead class="thead-dark">
                 <tr>
-                    <th>{{ __('User id') }}</th>
-                    <th>{{ __('User login') }}</th>
-                    <th>{{ __('User first name') }}</th>
-                    <th>{{ __('User second name') }}</th>
-                    <th>{{ __('User last name') }}</th>
-                    <th>{{ __('User email') }}</th>
-                    <th>{{ __('Edit') }}</th>
+                    <th>{{ __('actions.user_id') }}</th>
+                    <th>{{ __('actions.user_login') }}</th>
+                    <th>{{ __('actions.user_first_name') }}</th>
+                    <th>{{ __('actions.user_second_name') }}</th>
+                    <th>{{ __('actions.user_last_name') }}</th>
+                    <th>{{ __('actions.user_email') }}</th>
+                    <th>{{ __('actions.edit') }}</th>
                 </tr>
                 </thead>
                 <tbody>

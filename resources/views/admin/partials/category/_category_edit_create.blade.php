@@ -29,7 +29,7 @@
                                 <label for="category_name" class="col-md-4 col-form-label text-md-right">{{ __('Category name') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="category_name" type="text" class="form-control @error('catname') is-invalid @enderror" name="category_name" value="@if(!empty($category)){{$category->category_name}}@endif" required>
+                                    <input id="category_name" type="text" class="form-control @error('category_name') is-invalid @enderror" name="category_name" value="@if(!empty($category)){{$category->category_name}}@endif" required>
                                     @error('category_name')
                                     <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

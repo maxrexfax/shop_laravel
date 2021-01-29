@@ -61,4 +61,17 @@ class ProductController extends Controller
         return redirect('/');
     }
 
+    public function images($id = null)
+    {
+        $product = Product::find($id);
+        if ($product) {
+            return view('images._images_edit', [
+                'product' => $product,
+                'images' => $product->getProductImages(),
+            ]);
+        }
+
+        return redirect('admin/product/list');
+    }
+
 }

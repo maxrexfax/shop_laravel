@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\App;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,10 @@ Route::post('/currency/store/{id?}', 'CurrencyController@store')->name('currency
 Route::get('/locale/create/{id?}', 'LocaleController@create')->name('locale.create');
 Route::post('/locale/store/{id?}', 'LocaleController@store')->name('locale.store');
 
+Route::get('/phone/create/{store_id?}/{phone_id?}', 'PhoneController@create')->name('phone.create');
+Route::post('/phone/store/{id?}', 'PhoneController@store')->name('phone.store');
+Route::get('/phone/delete/{id}', 'PhoneController@destroy')->name('phone.delete');
+
 Route::get('/product/category/{id}', 'CategoryController@show')->name('product.category');
 
 Route::get('/product/create/{id?}', 'ProductController@create')->name('product.create');
@@ -50,6 +55,11 @@ Route::post('/product/store/{id?}', 'ProductController@store')->name('product.st
 
 Route::get('/store/create/{id?}', 'StoreController@create')->name('store.create');
 Route::post('/store/store/{id?}', 'StoreController@store')->name('store.store');
+Route::post('/store/locales/store/{id?}', 'StoreController@storeLocales')->name('store.locales.store');
+Route::post('/store/currency/store/{id?}', 'StoreController@storeCurrency')->name('store.currency.store');
+Route::get('/store/phonelist/{id}', 'StoreController@phoneList')->name('store.phonelist');
+Route::get('/store/langlist/{id}', 'StoreController@languageList')->name('store.langlist');
+Route::get('/store/currencylist/{id}', 'StoreController@currencyList')->name('store.currencylist');
 
 Route::get('/user/delete/{id}', 'UserController@destroy')->name('user.delete');
 Route::get('/user/create/{id?}', 'UserController@create')->name('user.create');
@@ -59,4 +69,6 @@ Route::get('/image/delete/{id}', 'ImageController@delete')->name('image.delete')
 Route::post('/image/store', 'ImageController@store')->name('image.store');
 Route::post('/image/order', 'ImageController@changeSortOrder')->name('image.order');
 
-
+Route::get('/setLocale/{lang}', function ($lang) {
+    App::setLocale($lang);
+});

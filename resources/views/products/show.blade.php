@@ -52,7 +52,7 @@
         <span class="modal-control-elements step-forward" title="Next">&#9654;</span>
     </div>
     <div id="modal-with-images">
-        <p id="close-popup-symbol" class="float-right modal-control-elements" title="Close">&nbsp;X&nbsp;</p><br>
+        <p id="close-popup-symbol" class="float-right modal-control-elements" title="Close"><i class="fa fa-window-close" aria-hidden="true"></i></p><br>
         <span class="text-center"><img src="" alt="" /></span>
         <p id="images-gallery-info" class="float-right"></p>
     </div>

@@ -17,14 +17,14 @@ class LocaleController extends Controller
                     'alt_title' => 'Edit locale ' . $locale->login,
                     'locale' => $locale,
                 ]);
-            } else {
-                return redirect('/admin/locales/list');
             }
-        } else {
-            return view('admin.partials.locale._locale_edit_create', [
-                'alt_title' => 'Create new locale'
-            ]);
+
+            return redirect('/admin/locales/list');
         }
+
+        return view('admin.partials.locale._locale_edit_create', [
+            'alt_title' => 'Create new locale'
+        ]);
     }
 
     public function store($id = null, StoreLocaleRequest $request)

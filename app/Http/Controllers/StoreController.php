@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Currency;
 use App\Http\Requests\StoreStoreRequest;
+use App\Locale;
+use App\Services\StoreCurrencyStoreService;
+use App\Services\StoreLocaleStoreService;
 use App\Services\StoreStoreService;
 use App\Store;
+use App\StoreLocale;
+use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
@@ -43,6 +49,59 @@ class StoreController extends Controller
         (new StoreStoreService())->store($store ,$request);
 
         return redirect('/admin/stores/list');
+    }
+
+    public function phoneList($id = null)
+    {
+        $store = Store::find($id);
+        if ($store) {
+            return view('admin.partials.phones._phones_list', [
+                'alt_title' => 'Save store phones list',
+                'store' => $store,
+                'phones' => $store->getPhones(),
+            ]);
+        }
+
+        return redirect('/admin/stores/list');
+    }
+
+    public function languageList($id = null)
+    {
+        $store = Store::find($id);
+        if ($store) {
+            return view('admin.partials.locale._store_locale_list', [
+                'store' => $store,
+                'locales' => Locale::all(),
+            ]);
+        }
+    }
+
+    public function storeLocales($id, Request $request)
+    {
+        $store = Store::find($id);
+        if ($store) {
+            (new StoreLocaleStoreService())->store($store, $request);
+        }
+
+        return redirect()->back();
+    }
+
+    public function currencyList($id)
+    {
+        $store = Store::find($id);
+        return view('admin.partials.currency._store_currency_list', [
+            'store' => $store,
+            'currencies' => Currency::all()
+        ]);
+    }
+
+    public function storeCurrency($id, Request $request)
+    {
+        $store = Store::find($id);
+        if ($store) {
+            (new StoreCurrencyStoreService())->store($store, $request);
+        }
+        return redirect()->back();
     }
 
 }

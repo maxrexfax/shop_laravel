@@ -1,7 +1,15 @@
 @extends('admin.index')
 @section('admin.content')
     <div class="card">
-        <div class="card-header text-center">{{$NameOfForm}}</div>
+        <div class="card-header text-center">
+            <p class="text-center">
+                @if(isset($product))
+                    {{__('text.edit_product')}} {{$product->product_name}}
+                @else
+                    {{__('text.create_product')}}
+                @endif
+            </p>
+        </div>
         <div class="">
             <div class="col-6 col-md-10 col-sm-12">
                 <form method="POST" enctype="multipart/form-data" action="{{ route('product.store') }}@if(!empty($product))/{{$product->id}}@endif">
@@ -114,7 +122,7 @@
                                     <img width="100%" src="{{ asset('/img/logo/' . $product->logo_image) }}" alt="{{$product->product_name}}" title="Current logo for {{$product->product_name}}"/>
                                 </div>
                             @else
-                                No current logo image!
+                                    {{__('text.no_current_logo_image!')}}
                             @endif
                         @endif
                         </div>
@@ -161,7 +169,7 @@
                                 </select>
                             </div>
                             <div class="col-md-2">
-                                <span class="btn btn-secondary float-right" id="btnAdderCategoryToList">{{__('actions.add_this')}}</span>
+                                <span class="btn btn-secondary float-right" data-confirm="{{__('text.already_in_use')}}" id="btnAdderCategoryToList">{{__('actions.add_this')}}</span>
                             </div>
                         </div>
 
@@ -194,7 +202,7 @@
 
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ $alt_title }}
+                                    {{ __('actions.save') }}
                                 </button>
                             </div>
                         </div>

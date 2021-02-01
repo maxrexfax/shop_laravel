@@ -4,7 +4,13 @@
         <div class="card-header text-center">{{ __('actions.currency_control') }}</div>
         <div class="d-flex justify-content-between flex-wrap">
             <div class="col-6 col-md-10 col-sm-12">
-                <p class="text-center">{{$alt_title}}</p>
+                <p class="text-center">
+                    @if(isset($currency))
+                    {{__('text.edit_currency')}} {{$currency->currency_name}}
+                    @else
+                        {{__('text.create_currency')}}
+                    @endif
+                </p>
                 <div class="errors text-center bg-danger">
                     @if($errors)
                         @foreach($errors->all() as $error)
@@ -67,7 +73,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ $alt_title }}
+                                    {{ __('actions.save') }}
                                 </button>
                             </div>
                         </div>

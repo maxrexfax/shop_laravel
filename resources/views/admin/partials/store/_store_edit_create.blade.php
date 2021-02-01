@@ -4,7 +4,13 @@
         <div class="card-header text-center">{{ __('actions.store_control') }}</div>
         <div class="d-flex justify-content-between flex-wrap">
             <div class="col-6 col-md-10 col-sm-12">
-                <p class="text-center">{{$alt_title}}</p>
+                <p class="text-center">
+                    @if(isset($store))
+                        {{__('text.edit_store')}} {{$store->store_name}}
+                    @else
+                        {{__('text.create_store')}}
+                    @endif
+                </p>
                 <div class="errors text-center bg-danger">
                     @if($errors)
                         @foreach($errors->all() as $error)
@@ -69,9 +75,9 @@
                             @if(isset($store))
                                 <div style="max-width: 100px; width: 100%;">
                                     @if($store->store_logo)
-                                        <img width="100%" src="{{asset('/img/logo/' . $store->store_logo)}}" alt="{{$store->store_name}}" title="Current logo for {{$store->store_name}}"/>
+                                        <img width="100%" src="{{asset('/img/logo/' . $store->store_logo)}}" alt="{{$store->store_name}}" title="{{__('current_logo_for')}} {{$store->store_name}}"/>
                                     @else
-                                        No current logo image!
+                                        {{__('text.no_current_logo_image!')}}
                                     @endif
                                 </div>
                             @endif
@@ -94,7 +100,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ $alt_title }}
+                                    {{ __('actions.save') }}
                                 </button>
                             </div>
                         </div>

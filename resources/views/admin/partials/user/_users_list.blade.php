@@ -40,7 +40,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="text-center">
+        <div class="col-sm-2 my-class-text-center">
             @if(!empty($users))
                 {{ $users->links() }}
             @endif

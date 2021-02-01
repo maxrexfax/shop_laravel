@@ -85,7 +85,7 @@
                                 <a class="nav-link item-menu-non-root" href="#">{{ __('actions.resources')}}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link item-menu-non-root" href="#">{{ __('actions.about_us')}}</a>
+                                <a class="nav-link item-menu-non-root" href="#">{{ __('text.about_us')}}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link item-menu-non-root" href="#">{{ __('actions.blog')}}</a>
@@ -114,7 +114,7 @@
                             @else
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle item-menu-non-root" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        Hello {{ Auth::user()->login }}
+                                        {{__('text.hello')}} {{ Auth::user()->login }}
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

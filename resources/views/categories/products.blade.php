@@ -32,11 +32,11 @@
                     </div>
                     <div class="form-inline p-0 m-0">
                         <div class="d-sm-none d-md-none d-lg-block">
-                        {{__('Show by')}}
+                        {{__('actions.show_by')}}
                             <select class="form-control ml-2 mr-2" id="paginateQuantity" data-paginateQuantity="{{$paginateQuantity}}">
-                                <option value="6" @if($paginateQuantity==6) selected @else @endif>6 {{__('Per page')}}</option>
-                                <option value="12" @if($paginateQuantity==12) selected @else @endif>12 {{__('Per page')}}</option>
-                                <option value="40" @if($paginateQuantity==40) selected @else @endif>40 {{__('Per page')}}</option>
+                                <option value="6" @if($paginateQuantity==6) selected @else @endif>6 {{__('actions.per_page')}}</option>
+                                <option value="12" @if($paginateQuantity==12) selected @else @endif>12 {{__('actions.per_page')}}</option>
+                                <option value="40" @if($paginateQuantity==40) selected @else @endif>40 {{__('actions.per_page')}}</option>
                             </select>
                         </div>
                         {{__('actions.sort_by')}}

@@ -104,4 +104,21 @@ class StoreController extends Controller
         return redirect()->back();
     }
 
+    public function changeActive($id)
+    {
+
+        $store = Store::find($id);
+
+        if ($store) {
+            if($store->active == null) {
+                $store->active = 1;
+            } else {
+                $store->active = null;
+            }
+            $store->save();
+        }
+
+        return redirect()->back();
+    }
+
 }

@@ -2,6 +2,7 @@
 
 return [
     'about_us' => 'About Us',
+    'active' => 'Active',
     'add' => 'Add',
     'add_new' => 'Add New',
     'add_this' => 'Add this',
@@ -105,6 +106,7 @@ return [
     'store_control' => 'Store control',
     'store_currency' => 'Store currency',
     'store_description' => 'Store description',
+    'store_is_active' => 'Is active?',
     'store_keywords' => 'Store keywords',
     'store_languages' => 'Store languages',
     'store_logo_image' => 'Store logo image',
@@ -113,6 +115,9 @@ return [
     'stores' => 'Stores',
     'subscribe' => 'SUBSCRIBE',
     'title' => 'Title',
+    'turn_on' => 'Turn ON',
+    'turn_off' => 'Turn OFF',
+    'turned_off' => 'Turned off',
     'upload_logo_picture' => 'Upload logo picture',
     'users' => 'Users',
     'user_id' => 'User ID',

@@ -30,12 +30,7 @@
 </head>
 <body>
     <div id="app">
-        <div class="" id="lang">
-            <div id="lang_menu" class="d-inline-block">
-                <span class="language{{ App::isLocale('ru') ? ' active' : '' }}"><a href="/locale/ru">rus</a></span>
-                <span class="language{{ App::isLocale('en') ? ' active' : '' }}"><a href="/locale/en">eng</a></span>
-            </div>
-        </div>
+        <x-dropdown></x-dropdown>
         <header class="backgound-image w-100">
             <div class="container">
                 <div class="d-flex p-2 align-items-center justify-content-between bd-highlight flex-wrap">

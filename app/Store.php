@@ -54,7 +54,15 @@ class Store extends Model
 
     public function defaultLocale()
     {
-        return $this->hasOne(StoreLocale::class)->where('store_id', $this->id)->where('default',1);
+        $storeLocale = StoreLocale::where('store_id', $this->id)->where('default', '=', 1)->get();
+       return Locale::find($storeLocale[0]->locale_id);
+
+    }
+
+    public function defaultCurrency()
+    {
+        $storeCurrency = StoreCurrency::where('store_id', $this->id)->where('default', '=', 1)->get();
+        return Currency::find($storeCurrency[0]->currency_id);
     }
 
     public function getDefaultLocale()
@@ -65,8 +73,6 @@ class Store extends Model
 
         return '';
     }
-
-
 
     public function storeLocales()
     {

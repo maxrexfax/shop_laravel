@@ -1,7 +1,8 @@
 <?php
 
 return [
-    'about_us' => 'About Us',
+    'about_us' => 'О нас',
+    'active' => 'Включен',
     'add' => 'Добавить',
     'add_new' => 'Добавить новый',
     'add_this' => 'Добавить этот',
@@ -105,6 +106,7 @@ return [
     'store_control' => 'Управление магазином',
     'store_currency' => 'Валюта магазина',
     'store_description' => 'Описание магазина',
+    'store_is_active' => 'Включен?',
     'store_keywords' => 'Ключевые фразы магазина',
     'store_languages' => 'Языки магазина',
     'store_logo_image' => 'Логотип магазина',
@@ -113,6 +115,9 @@ return [
     'stores' => 'Магазины',
     'subscribe' => 'ПОДПИСАТЬСЯ',
     'title' => 'Заголовок',
+    'turn_on' => 'Включить',
+    'turn_off' => 'Отключить',
+    'turned_off' => 'Отключен',
     'upload_logo_picture' => 'Выгрузить изображение для логотипа',
     'users' => 'Пользователи',
     'user_id' => 'ID пользователя',

@@ -61,6 +61,7 @@ Route::group(['middleware'=>'language'],function ()
     Route::get('/store/phonelist/{id}', 'StoreController@phoneList')->name('store.phonelist');
     Route::get('/store/langlist/{id}', 'StoreController@languageList')->name('store.langlist');
     Route::get('/store/currencylist/{id}', 'StoreController@currencyList')->name('store.currencylist');
+    Route::get('/store/changeactive/{id}', 'StoreController@changeActive')->name('store.changeactive');
 
     Route::get('/user/delete/{id}', 'UserController@destroy')->name('user.delete');
     Route::get('/user/create/{id?}', 'UserController@create')->name('user.create');

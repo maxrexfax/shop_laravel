@@ -11,7 +11,7 @@
                                     @if($product->logo_image)
                                         <img class="img-to-show-modal" height="300px" src="{{ asset('/img/logo/' . $product->logo_image)}}" alt="{{$product->product_name}}"/>
                                     @else
-                                        <img height="200px" src="{{ asset('/img/empty.png')}}" alt="No logo"/>
+                                        <img height="200px" src="{{ asset('/img/empty.png')}}" alt="{{__('text.no_current_logo_image!')}}"/>
                                     @endif
                             </div>
                             <div class="d-flex" style="overflow: auto; width: 100%">
@@ -27,17 +27,17 @@
                     <div class="col-lg-4 col-md-4 col-sm-12 p-2">
                         <div class="border rounded h-100 p-2">
                             <h2 class="text-center">{{$product->product_name}}</h2>
-                            <p>{{__('Price:')}}{{$product->price}}</p>
+                            <p>{{__('actions.price:')}}{{$product->price}}</p>
                             <br>
-                            <p>{{__('Title:')}}<i>{{$product->title}}</i></p>
-                            <p>{{__('Short description:')}}{{$product->short_description}}</p>
+                            <p>{{__('actions.title:')}}<i>{{$product->title}}</i></p>
+                            <p>{{__('actions.short_description')}}{{$product->short_description}}</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 p-2">
                         <div class="border rounded p-2">
-                            <h3>{{__('Description:')}}</h3>
+                            <h3>{{__('text.description:')}}</h3>
                             <p>{{$product->full_description}}</p>
                         </div>
                     </div>
@@ -48,8 +48,8 @@
     <section class="place-holder"></section>
     <section class="place-holder"></section>
     <div id="shadow">
-        <span class="modal-control-elements step-back" title="Previous">&#9664;</span>
-        <span class="modal-control-elements step-forward" title="Next">&#9654;</span>
+        <span class="modal-control-elements step-back" title="{{__('text.previous')}}">&#9664;</span>
+        <span class="modal-control-elements step-forward" title="{{__('text.next')}}">&#9654;</span>
     </div>
     <div id="modal-with-images">
         <p id="close-popup-symbol" class="float-right modal-control-elements" title="Close"><i class="fa fa-window-close" aria-hidden="true"></i></p><br>

@@ -96,7 +96,7 @@ $(document).ready(function() {
             }
         }
         if(isExist) {
-            alert('Category already chosen');
+            alert(this.getAttribute('data-confirm'));
         } else {
             let htmlToAdd = '<div id="' + $('#categoriesToAdd option:selected').val() + '"><i class="fa fa-minus-circle my-cursor-pointer i-deleter" title="Delete this category"></i><span> ' + $('#categoriesToAdd option:selected').text() + '</span>\n' +
                 '<input type="hidden" name="categories[]" value="' + $('#categoriesToAdd option:selected').val() + '">\n' +
@@ -114,7 +114,7 @@ $(document).ready(function() {
             }
         }
         if(isExist) {
-            alert('Locale already chosen');
+            alert(this.getAttribute('data-confirm'));
         } else {
             let str = createHtmlToAdd($('#selectToAddLocaleToStoreDiv option:selected').text(), $('#selectToAddLocaleToStoreDiv option:selected').val(), 'locales');
             $('#tbodyWithLocales').append(str);
@@ -143,7 +143,7 @@ $(document).ready(function() {
             }
         }
         if(isExist) {
-            alert('Locale already chosen');
+            alert(this.getAttribute('data-confirm'));
         } else {
             let str = createHtmlToAdd($('#selectToAddCurrencyToStoreDiv option:selected').text(), $('#selectToAddCurrencyToStoreDiv option:selected').val(), 'currencies');
             $('#tbodyWithCurrency').append(str);
@@ -265,7 +265,15 @@ $(document).ready(function() {
         $(this).addClass('btn-success');
     });
 
+    $(document).on('click', '.btnToDeletePhone', function(e) {
+        event.preventDefault();
 
+        let choice = confirm(this.getAttribute('data-confirm'));
+
+        if (choice) {
+            window.location.href = this.getAttribute('href');
+        }
+    });
 });
 
 

@@ -2,20 +2,20 @@
 @section('admin.content')
     <div class="card">
         <div class="card-header text-center">
-            {{ __('List of currency') }}
+            {{ __('text.list_of_currency') }}
             <a class="url_in_accordion ml-2 mb-0 float-right" href="{{route('currency.create')}}">
-                <span class="addButton" title="Add New">+</span>
+                <span class="addButton" title="{{ __('text.add_new') }}">+</span>
             </a>
         </div>
         <div class="col-12 p-0">
             <table class="table table-striped w-100">
                 <thead class="thead-dark">
                 <tr>
-                    <th>{{ __('Currency id') }}</th>
-                    <th>{{ __('Currency name') }}</th>
-                    <th>{{ __('Currency code') }}</th>
-                    <th>{{ __('Currency value') }}</th>
-                    <th>{{ __('Edit') }}</th>
+                    <th>{{ __('actions.currency_id') }}</th>
+                    <th>{{ __('actions.currency_name') }}</th>
+                    <th>{{ __('actions.currency_code') }}</th>
+                    <th>{{ __('actions.currency_value') }}</th>
+                    <th>{{ __('actions.edit') }}</th>
                 </tr>
                 </thead>
                 <tbody>

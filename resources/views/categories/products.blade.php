@@ -3,12 +3,12 @@
 <div class="w-100 bg-white">
     <div class="container">
         <div class="row">
-            <div class="breadcrumbs-container container w-100 my-a-no-decoration"><a href="{{route('main.page')}}">{{__('Home')}}</a><span class="gray-category-name-breadcrumb"> / {{$currentCategory->category_name}}</span></div>
+            <div class="breadcrumbs-container container w-100 my-a-no-decoration"><a href="{{route('main.page')}}">{{__('actions.home')}}</a><span class="gray-category-name-breadcrumb"> / {{$currentCategory->category_name}}</span></div>
             <div class="col-12 text-center"><h2>{{$currentCategory->category_name}}</h2></div>
             <div class="col-xs-12 col-md-3 sidebar">
                 <nav class="sidebar-menu">
                     <div class="nav-title accordion_header bg-light border-bottom-green-2px text-dark my-roboto-font-family font-weight-bold p-4">
-                        {{__('Categories')}}
+                        {{__('actions.categories')}}
                         <i class="d-sm-block d-md-none d-lg-none fa fa-bars pull-right float-right"></i>
                     </div>
                     <div class="accordion_content_categories pl-4">
@@ -28,22 +28,22 @@
             <div class="col-xs-12 col-md-9">
                 <div class="w-100 border-bottom-green-2px bg-light mb-2 p-2 my-roboto-font-family d-flex flex-wrap justify-content-between align-items-center">
                     <div class="form-inline pt-2">
-                        <p class="d-sm-none d-md-none d-lg-block mt-2">{{__('Products:')}} {{count($products)}}</p>
+                        <p class="d-sm-none d-md-none d-lg-block mt-2">{{__('actions.products')}}: {{count($products)}}</p>
                     </div>
                     <div class="form-inline p-0 m-0">
                         <div class="d-sm-none d-md-none d-lg-block">
-                        {{__('Show by')}}
-                            <select class="form-control ml-2 mr-2" id="paginateQuantity">
-                                <option value="6" @if($paginateQuantity==6) selected @else @endif>6 {{__('Per page')}}</option>
-                                <option value="12" @if($paginateQuantity==12) selected @else @endif>12 {{__('Per page')}}</option>
-                                <option value="40" @if($paginateQuantity==40) selected @else @endif>40 {{__('Per page')}}</option>
+                        {{__('actions.show_by')}}
+                            <select class="form-control ml-2 mr-2" id="paginateQuantity" data-paginateQuantity="{{$paginateQuantity}}">
+                                <option value="6" @if($paginateQuantity==6) selected @else @endif>6 {{__('actions.per_page')}}</option>
+                                <option value="12" @if($paginateQuantity==12) selected @else @endif>12 {{__('actions.per_page')}}</option>
+                                <option value="40" @if($paginateQuantity==40) selected @else @endif>40 {{__('actions.per_page')}}</option>
                             </select>
                         </div>
-                        {{__('Sort by')}}
+                        {{__('actions.sort_by')}}
                         <select class="form-control ml-2" id="sortBySelect">
                             <option value="" @if($sortType=='')selected @endif></option>
-                            <option value="asc" @if($sortType=='asc')selected @else @endif>{{__('Price asc')}}</option>
-                            <option value="desc" @if($sortType=='desc')selected @else @endif>{{__('Price desc')}}</option>
+                            <option value="asc" @if($sortType=='asc')selected @else @endif>{{__('actions.price_asc')}}</option>
+                            <option value="desc" @if($sortType=='desc')selected @else @endif>{{__('actions.price_desc')}}</option>
                         </select>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                                         <p class="overflow-hidden">{{$product->short_description}}</p>
                                     </div>
                                     <div class="product-item-button">
-                                        <button id="{{$product->id}}" class="btn btn-secondary w-100 m-0 btn_add_to_cart">Add to cart</button>
+                                        <button id="{{$product->id}}" class="btn btn-secondary w-100 m-0 btn_add_to_cart">{{__('actions.add_to_cart')}}</button>
                                     </div>
                                 </div>
                             </div>

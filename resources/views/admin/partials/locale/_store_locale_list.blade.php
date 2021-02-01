@@ -2,10 +2,10 @@
 @section('admin.content')
     <div class="card">
         <div class="card-header text-center">
-            <a href="{{route('admin.stores.list', ['id'=>$store->id])}}" title="{{__('Back to all stores list')}}" class="btn btn-secondary float-left url_no_decoration">
-                {{__('Back to stores list')}}
+            <a href="{{route('admin.stores.list', ['id'=>$store->id])}}" title="{{__('text.back_to_stores_list')}}" class="btn btn-secondary float-left url_no_decoration">
+                {{__('actions.back_to_stores_list')}}
             </a>
-            {{__('Edit languages list for ')}}<span class="font-weight-bold">{{$store->store_name}}</span>
+            {{__('text.edit_languages_list_for')}} <span class="font-weight-bold">{{$store->store_name}}</span>
         </div>
             <div class="col-lg-12 col-md-12 col-sm-12 pb-2">
                 @include('admin.partials._language_currency_locale_switcher')
@@ -15,13 +15,13 @@
                                 <label for="" class="col-md-2 col-form-label text-md-right"> </label>
                                 <div class="col-md-8 mt-2">
                                     <div id="divWithLocalesList" class="border rounded p-2">
-                                        <p class="text-center">{{__('Current store locales:')}}</p>
+                                        <p class="text-center">{{__('text.current_store_locales:')}}</p>
                                         <table class="table table-striped">
                                             <thead>
                                             <tr>
-                                                <th>{{__('Locale')}}</th>
-                                                <th class="text-center">{{__('Default?')}}</th>
-                                                <th class="text-center">{{__('Delete')}}</th>
+                                                <th>{{__('actions.locale')}}</th>
+                                                <th class="text-center">{{__('actions.default?')}}</th>
+                                                <th class="text-center">{{__('actions.delete')}}</th>
                                             </tr>
                                             </thead>
                                             <tbody id="tbodyWithLocales">
@@ -33,7 +33,7 @@
                                                            @if($locale->isDefault($store->id))
                                                            checked
                                                            @endif
-                                                           name="default" id="radio{{$locale->id}}" type="radio" title="{{__('Set as default language for this store')}}" value="{{$locale->id}}">
+                                                           name="default" id="radio{{$locale->id}}" type="radio" title="{{__('text.set_as_default_language_for_this_store')}}" value="{{$locale->id}}">
                                                     <label class="for-locale btn
                                                     @if($locale->isDefault($store->id))
                                                         btn-success
@@ -41,7 +41,7 @@
                                                     " for="radio{{$locale->id}}">{{__('Default')}}</label>
                                                     <input type="hidden" name="locales[]" value="{{$locale->id}}">
                                                 </td>
-                                                <td class="text-center"><i class="fa fa-minus-circle my-cursor-pointer i-tr-deleter" title="{{__('Delete this locale')}}"></i></td>
+                                                <td class="text-center"><i class="fa fa-minus-circle my-cursor-pointer i-tr-deleter" title="{{__('actions.delete_this_locale')}}"></i></td>
                                             </tr>
                                         @endforeach
                                             </tbody>
@@ -52,7 +52,7 @@
                             <div class="form-group row">
                                 <label for="selectToAddLocaleToStoreDiv" class="col-md-2 col-form-label text-md-right"> </label>
                                 <div class="col-md-8 text-center">
-                                    <p>{{ __('Locales to add') }}</p>
+                                    <p>{{ __('actions.locales_to_add') }}</p>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -63,26 +63,18 @@
                                             <option value="{{$locale->id}}">{{$locale->locale_name}}</option>
                                         @endforeach
                                     </select>
-
                                 </div>
                                 <div class="col-md-1 text-right">
-                                    <span id="btnToAddLocaleToStoreDiv" class="btn btn-secondary">{{__('Add')}}</span>
+                                    <span id="btnToAddLocaleToStoreDiv" data-confirm="{{__('text.already_in_use')}}" class="btn btn-secondary">{{__('actions.add')}}</span>
                                 </div>
-
                             </div>
-
                             <div class="form-group row mb-0">
 
                                 <div class="col-md-8 offset-md-4">
-                                    <button class="btn btn-primary" type="submit" form="formToAddLocales">{{__('Save locales list')}}</button>
+                                    <button class="btn btn-primary" type="submit" form="formToAddLocales">{{__('actions.save_locales_list')}}</button>
                                 </div>
                             </div>
                         </form>
-
-
-
-
-
             </div>
     </div>
     <section class="place-holder"></section>

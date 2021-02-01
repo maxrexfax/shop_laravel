@@ -5,7 +5,7 @@ namespace App\Helpers;
 
 class PaginationQuantityHelper
 {
-    const DEFAULT_PAGINATION_QUANTITY = 15;
+    const DEFAULT_PAGINATION_QUANTITY = 12;
 
     public function getPaginationQuantity($paginationQuantityToCheck)
     {

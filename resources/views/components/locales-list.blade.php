@@ -1,11 +1,11 @@
 <div>
     <div class="dropdown-el" title="{{__('actions.locale')}}">
-            <span class="dropdown-header btn btn-success btn-sm">
-               {{__('actions.locale')}}: {{ app()->getLocale()}}
+            <span class="dropdown-header btn btn-success btn-sm" style="opacity: 0.6;">
+               <i class="fas fa-globe"></i> {{__('actions.locale')}}: {{ app()->getLocale()}}
             </span>
         <div class="dropdown-content">
             @foreach($locales as $locale)
-                <a class="dropdown-item" href="{{ url('/locale', ['locale' => $locale->locale_code]) }}">{{$locale->locale_code}}</a>
+                <a class="dropdown-item" title="{{$locale->locale_name}}" href="{{ url('/locale', ['locale' => $locale->locale_code]) }}">{{$locale->locale_code}}</a>
                 @endforeach
         </div>
     </div>

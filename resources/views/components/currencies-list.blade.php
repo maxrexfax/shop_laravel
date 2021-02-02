@@ -1,11 +1,11 @@
 <div>
     <div class="dropdown-el" title="{{__('actions.currency')}}">
-            <span class="dropdown-header btn btn-success btn-sm">
-                {{__('actions.currency')}}: {{ $defaultCurrency->currency_code}}
+            <span class="dropdown-header btn btn-success btn-sm" style="opacity: 0.6;">
+                <i class="fas fa-wallet"></i> {{__('actions.currency')}}: {{ $defaultCurrency->currency_code}}
             </span>
         <div class="dropdown-content">
             @foreach($currencies as $currency)
-                <a class="dropdown-item" href="{{ url('/set-currency', ['currency' => $currency->id]) }}">{{$currency->currency_code}}</a>
+                <a class="dropdown-item elFromListOfCurrencies" title="{{$currency->currency_name}}" href="{{ url('/set-currency', ['currency' => $currency->id]) }}">{{$currency->currency_code}}</a>
             @endforeach
         </div>
     </div>

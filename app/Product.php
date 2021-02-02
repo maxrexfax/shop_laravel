@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Helpers\CurrentCurrencyHelper;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -39,6 +40,12 @@ class Product extends Model
         }
 
         return [];
+    }
+
+    public function currentPrice()
+    {
+        $currentCurrency = (new CurrentCurrencyHelper())->getCurrentCurrency();
+        return $this->price * $currentCurrency->currency_value . $currentCurrency->currency_symbol;
     }
 
 }

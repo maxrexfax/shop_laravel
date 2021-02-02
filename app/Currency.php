@@ -8,7 +8,7 @@ class Currency extends Model
 {
     const IS_DEFAULT_CURRENCY = 1;
     protected $fillable = [
-        'currency_name', 'currency_code', 'currency_value'
+        'currency_name', 'currency_code', 'currency_value', 'currency_symbol'
     ];
 
     public function isDefault($store_id)

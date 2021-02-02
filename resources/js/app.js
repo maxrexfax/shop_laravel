@@ -274,6 +274,8 @@ $(document).ready(function() {
             window.location.href = this.getAttribute('href');
         }
     });
+
+
 });
 
 

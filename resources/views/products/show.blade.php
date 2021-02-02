@@ -27,9 +27,9 @@
                     <div class="col-lg-4 col-md-4 col-sm-12 p-2">
                         <div class="border rounded h-100 p-2">
                             <h2 class="text-center">{{$product->product_name}}</h2>
-                            <p>{{__('actions.price:')}}{{$product->price}}</p>
+                            <p>{{__('actions.price')}}{{$product->price}}</p>
                             <br>
-                            <p>{{__('actions.title:')}}<i>{{$product->title}}</i></p>
+                            <p>{{__('actions.title')}}<i>{{$product->title}}</i></p>
                             <p>{{__('actions.short_description')}}{{$product->short_description}}</p>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 p-2">
                         <div class="border rounded p-2">
-                            <h3>{{__('text.description:')}}</h3>
+                            <h3>{{__('text.description')}}</h3>
                             <p>{{$product->full_description}}</p>
                         </div>
                     </div>

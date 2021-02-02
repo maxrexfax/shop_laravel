@@ -8,7 +8,7 @@ use Illuminate\View\Component;
 class StorePhone extends Component
 {
     public $activeStore;
-    public $phone;
+    public $phones;
 
     /**
      * Create a new component instance.
@@ -18,7 +18,12 @@ class StorePhone extends Component
     public function __construct()
     {
         $this->activeStore = Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE);
-        $this->phone = $this->activeStore->getPhones()->first();
+        if ($this->activeStore) {
+            $this->phones = $this->activeStore->getPhones();
+        } else {
+            $this->phones = null;
+        }
+
     }
 
     /**

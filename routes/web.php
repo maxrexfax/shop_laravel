@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use App\Locale;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,7 +76,7 @@ Route::group(['middleware'=>'language'],function ()
 });
 
 Route::get('/locale/{locale}', function ($locale) {
-    $validLocale = in_array($locale, ['ru', 'en']);
+    $validLocale = in_array($locale, Locale::all()->pluck('locale_code')->all());
     if ($validLocale) {
         App::setLocale($locale);
         Session::put('locale', $locale);

@@ -7,6 +7,7 @@ use App\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Services\CategoryStoreService;
 use App\Services\GetProductsService;
+use App\Store;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -53,8 +54,9 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $paginateQuantity = (new PaginationQuantityHelper())->getPaginationQuantity($request->get('paginateQuantity'));
-        $products = (new GetProductsService())->getUserListBySortData($id, $request->get('sortType'), $paginateQuantity);
-
+        $products = (new GetProductsService())
+                ->getUserListBySortData($id, $request
+                ->get('sortType'), $paginateQuantity);
         if ($category) {
             return view('categories.products', [
                 'products' => $products,
@@ -62,6 +64,7 @@ class CategoryController extends Controller
                 'currentCategory' => $category,
                 'paginateQuantity' => $paginateQuantity,
                 'sortType' => $request->get('sortType'),
+                'activeCurrency' => session('defaultCurrency'),
             ]);
         } else {
             return redirect('category/list');

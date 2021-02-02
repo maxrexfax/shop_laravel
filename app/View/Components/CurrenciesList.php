@@ -4,13 +4,12 @@ namespace App\View\Components;
 
 use App\Currency;
 use App\Store;
-use App\StoreCurrency;
 use Illuminate\View\Component;
+use Illuminate\Support\Facades\Session;
 
 class CurrenciesList extends Component
 {
     public $currencies;
-    //public $activeStore;
     public $defaultCurrency;
     /**
      * Create a new component instance.
@@ -19,11 +18,19 @@ class CurrenciesList extends Component
      */
     public function __construct()
     {
-        $activeStore = Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE);
-        $this->currencies = $activeStore->currencies;
-        $storeCurrencyDefault = StoreCurrency::where('store_id', '=', $activeStore->id)->where('default', '=', Currency::IS_DEFAULT_CURRENCY)->first();
-        $this->defaultCurrency = Currency::find($storeCurrencyDefault->currency_id);
+        $this->currencies = Currency::where('currency_code', 'usd')->get();
+        $this->defaultCurrency = Currency::find(1);
+        Session::put('defaultCurrency', $this->defaultCurrency);
 
+        $activeStore = Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE);
+        if ($activeStore) {
+            $tmpStoreCurrency = $activeStore->getDefaultCurrency()->first();
+            if ($tmpStoreCurrency) {
+                $this->defaultCurrency = Currency::where('id', '=', $tmpStoreCurrency->currency_id)->first();
+                $this->currencies = $activeStore->currencies;
+                Session::put('defaultCurrency', $this->defaultCurrency);
+            }
+        }
     }
 
     /**

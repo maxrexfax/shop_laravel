@@ -19,6 +19,11 @@ body {
     color: gray;
 }
 
+.logo-container-in-header {
+    max-width: 100px;
+    width: 100%;
+}
+
 .root-menu-container {
     display: none;
     position: absolute;
@@ -253,6 +258,10 @@ span[class*=" step"] {
     color: #1d68a7;
     cursor: pointer;
     width: 100%;
+}
+
+.accordion_header:hover {
+    color: #939598;
 }
 
 .accordion_content a {

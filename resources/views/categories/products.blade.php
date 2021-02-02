@@ -66,7 +66,7 @@
                                     </h2>
                                 </div>
                                 <div class="product-item-price text-center pt-0 pr-2 pb-0 pl-2 m-0">
-                                    <p>Price: <b>{{$product->price}}</b>$</p>
+                                    <p id="productPrice">{{__('text.price')}}: <b>{{$product->currentPrice()}}</b></p>
                                 </div>
                                 <div class="hide pt-0 pr-2 pb-0 pl-2 m-0 rounded-bottom h-50">
                                     <div class="product-item-description p-2">

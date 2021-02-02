@@ -19,11 +19,7 @@ class Store extends Model
 
     public function getPhones()
     {
-        if(!empty($this->phones)) {
-            return $this->phones;
-        }
-
-        return '';
+        return $this->phones ? : '';
     }
 
     public function locales()
@@ -33,11 +29,17 @@ class Store extends Model
 
     public function getLocales()
     {
-        if (!empty($this->locales)) {
-            return $this->locales;
-        }
+        return $this->locales ? : '';
+    }
 
-        return '';
+    public function storeCurrencies()
+    {
+        return $this->hasMany(StoreCurrency::class, 'store_id', 'id');
+    }
+
+    public function getDefaultCurrency()
+    {
+        return $this->storeCurrencies->where('default', '=', Store::STORE_IS_ACTIVE);
     }
 
     public function currencies()
@@ -47,26 +49,13 @@ class Store extends Model
 
     public function getCurrencies()
     {
-        if (!empty($this->currencies)) {
-            return $this->currencies;
-        }
-
-        return '';
+        return $this->currencies ? $this->currencies : '';
     }
 
-    public function defaultCurrency()
-    {
-        $storeCurrency = StoreCurrency::where('store_id', $this->id)->where('default', '=', 1)->get();
-        return Currency::find($storeCurrency[0]->currency_id);
-    }
 
     public function getDefaultLocale()
     {
-        if (!empty($this->defaultLocale)) {
-            return $this->defaultLocale;
-        }
-
-        return '';
+        return $this->defaultLocale ? : '';
     }
 
     public function storeLocales()

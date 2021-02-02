@@ -8,7 +8,7 @@
                         <div class="col-2 text-left admin-menu p-0">
                             <div class="dashboard-menu border_bottom oneHeight">
                                 <i class="fa fa-dashboard fw ml-2"></i>
-                                <span class="ml-2 "><a class="url_in_accordion" href="{{route('admin')}}">{{ __('actions.dashboard') }}</a></span>
+                                <span class="ml-2 "><a class="url_no_decoration my-roboto-font-family font-weight-bold" href="{{route('admin')}}">{{ __('actions.dashboard') }}</a></span>
                             </div>
                             <div>
                                 <div class="accordion_header border_bottom oneHeight">

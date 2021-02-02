@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Currency extends Model
 {
+    const IS_DEFAULT_CURRENCY = 1;
     protected $fillable = [
         'currency_name', 'currency_code', 'currency_value'
     ];
-
 
     public function isDefault($store_id)
     {
@@ -17,4 +17,5 @@ class Currency extends Model
 
         return $storeCurrency->isDefault();
     }
+
 }

@@ -14,7 +14,7 @@ class AddActiveToStoresTable extends Migration
     public function up()
     {
         Schema::table('stores', function (Blueprint $table) {
-            $table->boolean('active')->nullable();
+            $table->boolean('active')->default(0);
         });
     }
 

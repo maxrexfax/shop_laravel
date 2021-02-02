@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,11 +74,13 @@ Route::group(['middleware'=>'language'],function ()
 
 });
 
-Route::get('locale/{locale}', function ($locale) {
+Route::get('/locale/{locale}', function ($locale) {
     $validLocale = in_array($locale, ['ru', 'en']);
     if ($validLocale) {
         App::setLocale($locale);
-        \Session::put('locale',$locale);
+        Session::put('locale', $locale);
     }
     return back();
 });
+
+Route::get('/set-currency/{currency}', 'StoreController@setDefaultCurrency')->name('set.current.currency');

@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Store extends Model
 {
+    const STORE_IS_ACTIVE = 1;
+
     protected $fillable = [
         'store_name', 'store_description', 'store_logo', 'store_keywords'
     ];
@@ -50,13 +52,6 @@ class Store extends Model
         }
 
         return '';
-    }
-
-    public function defaultLocale()
-    {
-        $storeLocale = StoreLocale::where('store_id', $this->id)->where('default', '=', 1)->get();
-       return Locale::find($storeLocale[0]->locale_id);
-
     }
 
     public function defaultCurrency()

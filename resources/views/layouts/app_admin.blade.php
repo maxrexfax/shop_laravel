@@ -30,21 +30,13 @@
 </head>
 <body>
     <div id="app">
-        <x-dropdown></x-dropdown>
         <header class="backgound-image w-100">
             <div class="container">
                 <div class="d-flex p-2 align-items-center justify-content-between bd-highlight flex-wrap">
-                    <a href="{{route('main.page')}}">
-                        <img class="float-left" src="{{asset('/img/header_logo.png')}}" alt="{{ __('messages.cool_medicines') }}" />
-                    </a>
-                    <div class="text-light font-weight-bold"><i class="fa fa-phone"></i><span class="mr-2"> {{__('text.phone')}} +3884642484</span></div>
-
-                    <div id="divWithInputSearchInHeader" class="d-flex mr-2 form-group col-4 p-0 text-white border-0 my-color-for-search-in-header">
-                        <input class="d-inline w-100 border-0 text-white my-class-color-transparent" type="text" placeholder="{{__('text.search')}}">
-                        <button class="d-inline btn btn-search" type="submit" title="{{__('text.search')}}">
-                            <i id="searchSignHeader" class="fa fa-search mb-2 text-white d-inline"></i>
-                        </button>
-                    </div>
+                    <x-logo-image></x-logo-image>
+                    <x-store-phone></x-store-phone>
+                    <x-locales-list></x-locales-list>
+                    <x-currencies-list></x-currencies-list>
 
                     <div class="p-0" id="divButtonCardShower">
                         <button class="btn btn-primary" id="btnButtonCardShower">
@@ -55,7 +47,6 @@
                             0
                         </span>
                     </div>
-
                 </div>
             </div>
         <br>

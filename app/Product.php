@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Helpers\CurrentCurrencyHelper;
+use App\Services\ProductPriceGetterService;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -44,8 +44,7 @@ class Product extends Model
 
     public function currentPrice()
     {
-        $currentCurrency = (new CurrentCurrencyHelper())->getCurrentCurrency();
-        return $this->price * $currentCurrency->currency_value . $currentCurrency->currency_symbol;
+        return (new ProductPriceGetterService())->getPriceWithSymbol($this->price);
     }
 
 }

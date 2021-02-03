@@ -93,7 +93,7 @@ return [
     'sale_disclaimers' => 'Sale Disclaimers',
     'set_as_default_language_for_this_store' => 'Установить как язык по умолчанию для магазина',
     'short_description_for_product_card' => 'Короткое описание для карточки товара',
-    'sign_up_for_our_free_weekly_newsclips_and_reports!' => 'Подпишитесь на нашу еженедельную рассылку новостей!',
+    'sign_up_for_our_free_weekly_newsclips_and_reports' => 'Подпишитесь на нашу еженедельную рассылку новостей!',
     'sort_number_for_this_image' => 'Номер сортировки данного изображения',
     'title_(meta_tag_for_SEO)' => 'Тайтл (мета тэг для СЕО)',
     'the_Highest_Quality_Supplements_and_Health_Supporting_products' => 'The Highest Quality Supplements and Health-Supporting Products',

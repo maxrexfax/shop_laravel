@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-10 p-0">
+                        <div class="col-10 p-0 bg-secondary">
                             <main>
                                 <div class="">
                                     <div class="row justify-content-center">
@@ -56,7 +56,6 @@
                                 </div>
                             </main>
                         </div>
-
                     </div>
                 </div>
             </div>

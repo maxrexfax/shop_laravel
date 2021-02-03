@@ -92,7 +92,7 @@ return [
     'sale_disclaimers' => 'Sale Disclaimers',
     'set_as_default_language_for_this_store' => 'Set as default language for this store',
     'short_description_for_product_card' => 'Short description for product card',
-    'sign_up_for_our_free_weekly_newsclips_and_reports!' => 'Sign up for our FREE Weekly Newsclips and reports!',
+    'sign_up_for_our_free_weekly_newsclips_and_reports' => 'Sign up for our FREE Weekly Newsclips and reports!',
     'sort_number_for_this_image' => 'Sort number for this image',
     'title_(meta_tag_for_SEO)' => 'Title (meta tag for SEO)',
     'the_Highest_Quality_Supplements_and_Health_Supporting_products' => 'The Highest Quality Supplements and Health-Supporting Products',

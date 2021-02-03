@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Helpers;
+namespace App\Services;
 
 use App\Currency;
 use App\Store;
 
-class CurrentCurrencyHelper
+class ProductPriceGetterService
 {
     public function getCurrentCurrency()
     {
@@ -20,5 +20,12 @@ class CurrentCurrencyHelper
         }
 
         return $defaultCurrency;
+    }
+
+    public function getPriceWithSymbol($price)
+    {
+        $defaultCurrency = self::getCurrentCurrency();
+        return $price * $defaultCurrency->currency_value . $defaultCurrency->currency_symbol;
+
     }
 }

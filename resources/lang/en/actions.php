@@ -92,6 +92,8 @@ return [
     'really_delete?' => 'Really delete?',
     'register' => 'Register',
     'resources' => 'Resources',
+    're_new_currency_values' => 'Reload currencies values',
+    're_new_values' => 'Reload values',
     'send_file' => 'Send file',
     'settings' => 'Settings',
     'set_sort_number' => 'Set sort number',

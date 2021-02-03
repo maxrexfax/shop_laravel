@@ -10,7 +10,7 @@
                 @endif
             </p>
         </div>
-        <div class="">
+        <div id="divInFormToAddProduct" class="">
             <div class="col-6 col-md-10 col-sm-12">
                 <form method="POST" enctype="multipart/form-data" action="{{ route('product.store') }}@if(!empty($product))/{{$product->id}}@endif">
                         @csrf
@@ -105,7 +105,7 @@
                             <label for="full_description" class="col-md-4 col-form-label text-md-right">{{ __('text.full_description') }}</label>
 
                             <div class="col-md-6">
-                                <textarea id="full_description" class="form-control" rows="6" cols="65" name="full_description">@if(!empty($product)){{$product->full_description}}@endif</textarea>
+                                <textarea  id="summernote" class="form-control" rows="6" cols="65" name="full_description">@if(!empty($product)){{$product->full_description}}@endif</textarea>
                                 @error('full_description')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

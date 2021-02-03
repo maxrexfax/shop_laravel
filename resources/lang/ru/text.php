@@ -2,6 +2,7 @@
 
 return [
     'add_new' => 'Добавить новый',
+    'add_to_wishlist' => 'Добавить в "понравилось"',
     'additional_images_list' => 'Список дополнительных изображений',
     'about_us' => 'О нас',
     'already_in_use' => 'Уже используется!',
@@ -92,6 +93,7 @@ return [
     'search' => 'Поиск',
     'sale_disclaimers' => 'Sale Disclaimers',
     'set_as_default_language_for_this_store' => 'Установить как язык по умолчанию для магазина',
+    'share' => 'Поделиться',
     'short_description_for_product_card' => 'Короткое описание для карточки товара',
     'sign_up_for_our_free_weekly_newsclips_and_reports' => 'Подпишитесь на нашу еженедельную рассылку новостей!',
     'sort_number_for_this_image' => 'Номер сортировки данного изображения',

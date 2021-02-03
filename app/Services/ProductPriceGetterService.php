@@ -25,7 +25,8 @@ class ProductPriceGetterService
     public function getPriceWithSymbol($price)
     {
         $defaultCurrency = self::getCurrentCurrency();
-        return $price * $defaultCurrency->currency_value . $defaultCurrency->currency_symbol;
-
+        $mainCurrency = Currency::where('currency_code', '=', Currency::CURRENCY_MAIN)->first();
+        $res = number_format((float)($price * $mainCurrency->currency_value / $defaultCurrency->currency_value), 2, '.', '');
+        return $res . $defaultCurrency->currency_symbol;
     }
 }

@@ -3,7 +3,7 @@
 <div class="w-100 bg-white">
     <div class="container">
         <div class="row">
-            <div class="breadcrumbs-container container w-100 my-a-no-decoration"><a href="{{route('main.page')}}">{{__('actions.home')}}</a><span class="gray-category-name-breadcrumb"> / {{$currentCategory->category_name}}</span></div>
+            <div class="breadcrumbs-container container w-100 my-breadcrumb-decoration"><a href="{{route('main.page')}}">{{__('actions.home')}}</a><span class="gray-category-name-breadcrumb"> / {{$currentCategory->category_name}}</span></div>
             <div class="col-12 text-center"><h2>{{$currentCategory->category_name}}</h2></div>
             <div class="col-xs-12 col-md-3 sidebar">
                 <nav class="sidebar-menu">

@@ -92,6 +92,8 @@ return [
     'really_delete?' => 'Действительно удалить?',
     'register' => 'Регистрация',
     'resources' => 'Ресурсы',
+    're_new_currency_values' => 'Обновить значения стоимости валют',
+    're_new_values' => 'Обновить курсы валют',
     'send_file' => 'Отправить файл',
     'settings' => 'Настройки',
     'set_sort_number' => 'Установить номер сортировки',

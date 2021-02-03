@@ -70,13 +70,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link item-menu-non-root" href="#">{{ __('actions.bestsellers')}}</a>
+                                <a class="nav-link item-menu-non-root" href="#bestsellers">{{ __('actions.bestsellers')}}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link item-menu-non-root" href="#">{{ __('actions.resources')}}</a>
+                                <a class="nav-link item-menu-non-root" href="#resources">{{ __('actions.resources')}}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link item-menu-non-root" href="#">{{ __('text.about_us')}}</a>
+                                <a class="nav-link item-menu-non-root" href="#about_us">{{ __('text.about_us')}}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link item-menu-non-root" href="#">{{ __('actions.blog')}}</a>

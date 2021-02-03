@@ -5,13 +5,13 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="d-flex justify-content-between flex-wrap">
-                        <div class="col-2 text-left admin-menu p-0">
-                            <div class="dashboard-menu border_bottom oneHeight">
+                        <div class="col-3 text-left admin-menu p-0">
+                            <div class="dashboard-menu border_bottom oneHeight pl-2">
                                 <i class="fa fa-dashboard fw ml-2"></i>
-                                <span class="ml-2 "><a class="url_no_decoration my-roboto-font-family font-weight-bold" href="{{route('admin')}}">{{ __('actions.dashboard') }}</a></span>
+                                <span class=""><a class="url_no_decoration my-roboto-font-family font-weight-bold" href="{{route('admin')}}">{{ __('actions.dashboard') }}</a></span>
                             </div>
                             <div>
-                                <div class="accordion_header border_bottom oneHeight">
+                                <div class="accordion_header border_bottom oneHeight pl-2">
                                     <i class="fa fa-tags fw ml-2"></i>
                                     <span class="ml-2"><b>{{__('actions.catalog')}}</b></span>
                                 </div>
@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                             <div>
-                                <div class="accordion_header border_bottom oneHeight">
+                                <div class="accordion_header border_bottom oneHeight pl-2">
                                     <i class="fa fa-tags fw ml-2"></i>
                                     <span class="ml-2"><b>{{__('actions.settings')}}</b></span>
                                 </div>
@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                             <div>
-                                <div class="accordion_header border_bottom oneHeight">
+                                <div class="accordion_header border_bottom oneHeight pl-2">
                                     <i class="fa fa-tags fw ml-2"></i>
                                     <span class="ml-2"><b>{{__('actions.management')}}</b></span>
                                 </div>
@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-10 p-0 bg-secondary">
+                        <div class="col-9 p-0 bg-secondary">
                             <main>
                                 <div class="">
                                     <div class="row justify-content-center">

@@ -2,6 +2,9 @@
 @section('admin.content')
     <div class="card">
         <div class="card-header text-center">
+            <a class="url_in_accordion ml-2 mb-0 float-left" href="{{route('currency.reload')}}">
+                <span class="btn btn-secondary" title="{{ __('actions.re_new_currency_values') }}">{{ __('actions.re_new_values') }}</span>
+            </a>
             {{ __('text.list_of_currency') }}
             <a class="url_in_accordion ml-2 mb-0 float-right" href="{{route('currency.create')}}">
                 <span class="addButton" title="{{ __('text.add_new') }}">+</span>

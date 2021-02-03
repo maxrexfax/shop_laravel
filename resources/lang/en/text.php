@@ -2,6 +2,7 @@
 
 return [
     'add_new' => 'Add New',
+    'add_to_wishlist' => 'Add to wishlist',
     'additional_images_list' => 'Additional images list',
     'about_us' => 'About Us',
     'already_in_use' => 'Already in use!',
@@ -67,6 +68,8 @@ return [
     'general' => 'General',
     'health_roadmap' => 'Health Roadmap',
     'hello' => 'Hello',
+    'in_stock' => 'In stock',
+    'item' => 'Item',
     'list_of_currency' => 'List of currency',
     'list_of_locales' => 'List of locales',
     'list_of_stores' => 'List of stores',
@@ -91,6 +94,7 @@ return [
     'search' => 'Search',
     'sale_disclaimers' => 'Sale Disclaimers',
     'set_as_default_language_for_this_store' => 'Set as default language for this store',
+    'share' => 'Share',
     'short_description_for_product_card' => 'Short description for product card',
     'sign_up_for_our_free_weekly_newsclips_and_reports' => 'Sign up for our FREE Weekly Newsclips and reports!',
     'sort_number_for_this_image' => 'Sort number for this image',

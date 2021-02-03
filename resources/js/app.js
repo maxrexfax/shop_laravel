@@ -1,6 +1,8 @@
 require('./bootstrap');
 $(document).ready(function() {
 
+    //$('#summernote').summernote();
+
     var numberOfImageToShow = 0;
     var arrayOfImages = [];
     $(document).on('click', '.img-to-show-modal', function(e) {
@@ -209,9 +211,9 @@ $(document).ready(function() {
 
     function createDivElementForRootCatgoryLink(id, name)
     {
-        return divElementForRootCatgoryLink = '<div class="col-lg-12 popup-root-categories-item">' +
-            '<a href="/product/category/' + id + '">' + name + '</a>' +
-            '</div>';
+        return divElementForRootCatgoryLink = '<a class="url_no_decoration" href="/product/category/' + id + '"><div class="col-lg-12 popup-root-categories-item">' +
+            '' + name + '' +
+            '</div></a>';
     }
 
     $(document).on('click', '#btnButtonCardShower', function(e) {
@@ -281,3 +283,6 @@ $(document).ready(function() {
 
 
 
+$(document).ready(function() {
+    $('#summernote').summernote();
+});

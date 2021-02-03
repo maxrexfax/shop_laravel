@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-lg-8 col-md-8 col-sm-12 div-img-modal-show p-0">
                         <div class="p-2">
-                            <div class="border text-center p-2">
+                            <div class="text-center p-2">
                                     @if($product->logo_image)
                                         <img class="img-to-show-modal" height="300px" src="{{ asset('/img/logo/' . $product->logo_image)}}" alt="{{$product->product_name}}"/>
                                     @else
@@ -25,20 +25,56 @@
                     </div>
 
                     <div class="col-lg-4 col-md-4 col-sm-12 p-2">
-                        <div class="border rounded h-100 p-2">
-                            <h2 class="text-center">{{$product->product_name}}</h2>
-                            <p>{{__('actions.price')}}{{$product->price}}</p>
+                        <div class="my-product-right-banner rounded h-100 p-2">
+                            <div class="w-100 overflow-hidden" style="height: 10%">
+                                <h2 class="">{{$product->product_name}}</h2>
+                            </div>
+                            <div class="clearfix">
+                                <span class="float-left">{{__('text.item')}}:</span><span class="float-right text-dark font-weight-bold">{{__('text.in_stock')}}</span>
+                            </div>
+                            <hr>
+                            <div class="">
+                                <span class="text-dark font-weight-bold h3">{{$product->currentPrice()}}</span>
+                            </div>
                             <br>
-                            <p>{{__('actions.title')}}<i>{{$product->title}}</i></p>
-                            <p>{{__('actions.short_description')}}{{$product->short_description}}</p>
+                            <div class="v-100 mb-2 text-muted" style="max-height: 30%; overflow-y: auto;">
+                                <p>{{$product->short_description}}</p>
+                            </div>
+                            <div class="mt-2">
+                                <div class="form-row">
+                                    <div class="col-md-3 mb-3">
+                                        <input class="form-control text-center" type="text" value="1" min="1" max="999">
+                                    </div>
+                                    <div class="col-md-9 mb-3">
+                                        <span class="btn btn-primary w-100">{{__('actions.add_to_cart')}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-muted font-italic"><i class="fa fa-heart-o" aria-hidden="true"></i> {{__('text.add_to_wishlist')}}</span>
+                            </div>
+                            <hr>
+                            <div class="pl-2">
+                                <span>{{__('text.share')}}:</span>
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 p-2">
-                        <div class="border rounded p-2">
-                            <h3>{{__('text.description')}}</h3>
-                            <p>{{$product->full_description}}</p>
+                        <div class="my-product-main-description rounded p-0">
+                            <div class="p-2">
+                                <h3>{{__('text.description')}}</h3>
+                            </div>
+                            <div class="bg-light w-100 p-5 rounded-bottom">
+                                <h3>Description as text</h3>
+                                <p>{{$product->full_description}}</p>
+                                <hr>
+                                <h3>Formatted description</h3>
+                                <div>{!!$product->full_description!!}</div>
+                            </div>
                         </div>
                     </div>
                 </div>

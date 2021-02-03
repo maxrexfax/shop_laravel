@@ -6,9 +6,11 @@
             </span>
             <div class="dropdown-content">
                 @if($phones)
-                    @foreach($phones as $phone)
+                    @forelse($phones as $phone)
                         <a class="dropdown-item" title="{{$phone->phone_info}}" href="tel:{{$phone->phone_number}}">{{$phone->phone_number}}</a><br>
-                    @endforeach
+                    @empty
+                        <span class="dropdown-item">{{__('text.no_phone_number')}}</span>
+                    @endforelse
                 @else
                     <span>{{__('text.no_phone_number')}}</span>
                 @endif

@@ -4,7 +4,6 @@ namespace App\View\Components;
 
 use App\Locale;
 use App\Store;
-use App\StoreLocale;
 use Illuminate\View\Component;
 
 class LocalesList extends Component
@@ -21,7 +20,9 @@ class LocalesList extends Component
 
         $activeStore = Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE);
         if ($activeStore) {
-            $this->locales = $activeStore->locales;
+            if (($activeStore->locales)->isNotEmpty()) {
+                $this->locales = $activeStore->locales;
+            }
         }
 
     }

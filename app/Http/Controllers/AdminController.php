@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Currency;
+use App\Delivery;
 use App\Helpers\PaginationQuantityHelper;
 use App\Image;
 use App\Locale;
@@ -88,6 +89,14 @@ class AdminController extends Controller
         return view('admin.partials.locale._locales_list', [
             'locales' => Locale::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
             'alternativeTitle' => Lang::get('messages.locales_list'),
+        ]);
+    }
+
+    public function deliveriesList()
+    {
+        return view('admin.partials.delivery._deliveries_list', [
+            'deliveries' => Delivery::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
+            'alternativeTitle' => Lang::get('messages.deliveries_list'),
         ]);
     }
 

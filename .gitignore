@@ -1,8 +1,11 @@
+.idea/
 /.idea/
 /node_modules
 /public/hot
 /public/css
+public/css
 /public/js
+public/js
 /public/storage
 /storage/
 /vendor

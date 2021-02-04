@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Currency;
+use App\Delivery;
 use App\Http\Requests\StoreStoreRequest;
 use App\Locale;
 use App\Services\StoreCurrencyStoreService;
+use App\Services\StoreDeliveryStoreService;
 use App\Services\StoreLocaleStoreService;
 use App\Services\StoreStoreService;
 use App\Store;
@@ -22,7 +24,6 @@ class StoreController extends Controller
             if ($store) {
                 return view ('admin.partials.store._store_edit_create', [
                     'store' => $store,
-                    'alt_title' => 'Edit store ' . $store->store_name
                 ]);
             }
 
@@ -85,11 +86,29 @@ class StoreController extends Controller
         return redirect()->back();
     }
 
+    public function storeDelivery($id, Request $request)
+    {
+        $store = Store::find($id);
+        if ($store) {
+            (new StoreDeliveryStoreService())->store($store, $request);
+        }
+
+        return redirect()->back();
+    }
+
     public function currencyList($id)
     {
         return view('admin.partials.currency._store_currency_list', [
             'store' => Store::find($id),
             'currencies' => Currency::all()
+        ]);
+    }
+
+    public function deliveryList($id)
+    {
+        return view('admin.partials.delivery._store_delivery_list', [
+            'store' => Store::find($id),
+            'deliveries' => Delivery::all()
         ]);
     }
 

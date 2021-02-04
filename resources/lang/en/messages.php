@@ -7,6 +7,7 @@ return [
     'cool_medicines' => 'Cool medicines',
     'categories_list' => 'Categories List',
     'currency_list' => 'Currency List',
+    'deliveries_list' => 'Deliveries List',
     'locales_list' => 'Locales List',
     'product_list' => 'Product List',
     'stores_list' => 'Stores List',

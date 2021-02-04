@@ -12,7 +12,7 @@
                         <form method="POST" id="formToAddCurrency" action="{{ route('store.currency.store', ['id' => $store->id]) }}">
                             @csrf
                             <div class="form-group row">
-                                <div class="col-md-8 offset-md-2 mt-2">
+                                <div class="col-md-10 offset-md-1 mt-2">
                                     <div id="divWithLocalesList" class="border rounded p-2">
                                         <p class="text-center">{{__('text.current_store_locales:')}}</p>
                                         <table class="table table-striped">
@@ -54,7 +54,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <div class="col-md-7 offset-md-2">
+                                <div class="col-md-8 offset-md-1">
                                     <select class="form-control" id="selectToAddCurrencyToStoreDiv">
                                         @foreach($currencies as $currency)
                                             <option value="{{$currency->id}}">
@@ -64,8 +64,8 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-1 text-right">
-                                    <span id="btnToAddCurrencyToStoreDiv" data-confirm="{{__('text.already_in_use')}}" class="btn btn-secondary">{{__('actions.add')}}</span>
+                                <div class="col-md-2 text-right">
+                                    <span id="btnToAddCurrencyToStoreDiv" data-confirm="{{__('text.already_in_use')}}" class="btn btn-secondary w-100">{{__('actions.add')}}</span>
                                 </div>
                             </div>
 

@@ -16,6 +16,7 @@
                     <th>{{ __('actions.store_name') }}</th>
                     <th>{{ __('actions.store_keywords') }}</th>
                     <th>{{ __('actions.store_is_active') }}</th>
+                    <th>{{ __('actions.store_delivery') }}</th>
                     <th>{{ __('actions.store_currency') }}</th>
                     <th>{{ __('actions.store_languages') }}</th>
                     <th>{{ __('actions.store_phones') }}</th>
@@ -42,6 +43,7 @@
                                 <a href="{{route('store.changeactive', ['id' => $store->id])}}" class="btn btn-secondary url_no_decoration" title="{{__('actions.turn_on')}}">{{__('actions.turned_off')}}</a>
                             @endif
                         </td>
+                        <td><a class="btn btn-secondary url_no_decoration" href="{{route('store.deliverylist', ['id' => $store->id])}}">{{ __('actions.deliveries') }}</a></td>
                         <td><a class="btn btn-secondary url_no_decoration" href="{{route('store.currencylist', ['id' => $store->id])}}">{{ __('actions.currency') }}</a></td>
                         <td><a class="btn btn-secondary url_no_decoration" href="{{route('store.langlist', ['id' => $store->id])}}">{{ __('actions.languages') }}</a></td>
                         <td><a class="btn btn-secondary url_no_decoration" href="{{route('store.phonelist', ['id' => $store->id])}}">{{ __('actions.phones') }}</a></td>

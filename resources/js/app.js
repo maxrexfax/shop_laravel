@@ -123,6 +123,31 @@ $(document).ready(function() {
         }
     });
 
+    $(document).on('click', '#btnToAddDeliveryToStoreDiv', function (e){
+        let tbWithDeliveries = $('#tbodyWithDeliveries').find('tr');
+        let isExist = false;
+        for(let i = 0; i < tbWithDeliveries.length; i++) {
+            if($(tbWithDeliveries[i]).attr('id')===$('#selectToAddDeliveryToStoreDiv option:selected').val()) {
+                isExist = true;
+            }
+        }
+        if(isExist) {
+            alert(this.getAttribute('data-confirm'));
+        } else {
+            let str = createHtmlToAddDelivery($('#selectToAddDeliveryToStoreDiv option:selected').text(), $('#selectToAddDeliveryToStoreDiv option:selected').val(), 'deliveries');
+            $('#tbodyWithDeliveries').append(str);
+        }
+    });
+
+    function createHtmlToAddDelivery(delivery_name, delivery_id, input_name) {
+    let htmlValue = '<tr id="' + delivery_id + '">\n' +
+        '<td class="text-left pt-3"><p>' + delivery_name + '</p></td>\n' +
+        '<td class="text-center"><i class="fa fa-minus-circle my-cursor-pointer i-tr-deleter" title="Delete this delivery" aria-hidden="true"></i>' +
+        '<input type="hidden" name="'+ input_name +'[]" value="' + delivery_id + '"></td>\n' +
+        '</tr>';
+    return htmlValue;
+    }
+
     function createHtmlToAdd(locale_name, locale_id, input_name) {
         let htmlVal = '<tr id="' + locale_id + '">\n' +
             '<td class="text-left pt-3"><p>' + locale_name + '</p></td>\n' +
@@ -280,10 +305,3 @@ $(document).ready(function() {
     CKEDITOR.replace( 'summary-ckeditor' );
 
 });
-// $('#divInFormToAddProduct').ready(function() {
-//     console.log('divInFormToAddProduct summernote');
-//     $('#summernote').summernote();
-// });
-// $(document).ready(function() {
-//     $('#summernote').summernote();
-// });

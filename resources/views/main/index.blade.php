@@ -52,7 +52,7 @@
 </section>
 <section>
     <div class="text-center mt-3 mb-5">
-        <h2 class="font-weight-bold">{{__('Our bestsellers')}}</h2>
+        <h2 id="bestsellers" class="font-weight-bold">{{__('Our bestsellers')}}</h2>
     </div>
     @include('main.partials._bestsellers')
 </section>
@@ -61,7 +61,7 @@
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-3">
-                <h2 class="font-weight-bold">{{__('Why Choose Us')}}</h2>
+                <h2 id="resources" class="font-weight-bold">{{__('Why Choose Us')}}</h2>
             </div>
             <div class="col-sm-7">
                 <p class="">{{__('Most vitamin products are made from synthetic chemicals that the body doesn\'t recognize and is unable to process, and from minerals in forms that the body can\'t use.')}}</p>
@@ -78,7 +78,7 @@
 </section>
 <section>
     <div class="text-center mt-6">
-        <h2 class="font-weight-bold">{{__('What Our Customers Say')}}</h2>
+        <h2 id="about_us" class="font-weight-bold">{{__('What Our Customers Say')}}</h2>
         <a href="#"><p>{{__('Read all reviews here...')}}</p></a>
     </div>
 </section>

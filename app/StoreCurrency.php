@@ -20,4 +20,14 @@ class StoreCurrency extends Model
 
         return false;
     }
+
+    public function getDefaultCurrency($store_id)
+    {
+        return $this->hasOne(Currency::class)->where('store_id');
+    }
+
+    public function getCurrency()
+    {
+        return $this->hasOne(Currency::class);
+    }
 }

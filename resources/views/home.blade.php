@@ -20,5 +20,6 @@
         </div>
     </div>
 </div>
-    <section class="place-holder"></section>
+<section class="place-holder"></section>
+<section class="place-holder"></section>
 @endsection

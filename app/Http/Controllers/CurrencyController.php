@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Currency;
 use App\Http\Requests\StoreCurrencyRequest;
 use App\Services\CurrencyStoreService;
+use App\Services\CurrencyValueReloadService;
 use Illuminate\Http\Request;
 
 class CurrencyController extends Controller
@@ -45,5 +46,11 @@ class CurrencyController extends Controller
         (new CurrencyStoreService())->store($currency ,$request);
 
         return redirect('/admin/currencies/list');
+    }
+
+    public function reloadCurrencyValue()
+    {
+        (new CurrencyValueReloadService())->reloadCurrenciesValues();
+        return redirect()->back();
     }
 }

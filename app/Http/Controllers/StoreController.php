@@ -9,6 +9,7 @@ use App\Services\StoreCurrencyStoreService;
 use App\Services\StoreLocaleStoreService;
 use App\Services\StoreStoreService;
 use App\Store;
+use App\StoreCurrency;
 use App\StoreLocale;
 use Illuminate\Http\Request;
 
@@ -23,15 +24,14 @@ class StoreController extends Controller
                     'store' => $store,
                     'alt_title' => 'Edit store ' . $store->store_name
                 ]);
-            } else {
-                return redirect('/admin/stores/list');
             }
 
-        } else {
-            return view ('admin.partials.store._store_edit_create', [
-                'alt_title' => 'Create new store'
-            ]);
+            return redirect('/admin/stores/list');
         }
+
+        return view ('admin.partials.store._store_edit_create', [
+
+        ]);
     }
 
     public function store($id = null, StoreStoreRequest $request)
@@ -56,7 +56,6 @@ class StoreController extends Controller
         $store = Store::find($id);
         if ($store) {
             return view('admin.partials.phones._phones_list', [
-                'alt_title' => 'Save store phones list',
                 'store' => $store,
                 'phones' => $store->getPhones(),
             ]);
@@ -88,9 +87,8 @@ class StoreController extends Controller
 
     public function currencyList($id)
     {
-        $store = Store::find($id);
         return view('admin.partials.currency._store_currency_list', [
-            'store' => $store,
+            'store' => Store::find($id),
             'currencies' => Currency::all()
         ]);
     }
@@ -101,6 +99,36 @@ class StoreController extends Controller
         if ($store) {
             (new StoreCurrencyStoreService())->store($store, $request);
         }
+        return redirect()->back();
+    }
+
+    public function changeActive($id)
+    {
+
+        $store = Store::find($id);
+
+        if ($store) {
+            $store->active = !$store->active;
+            $store->save();
+        }
+
+        return redirect()->back();
+    }
+
+    public function setDefaultCurrency($id)
+    {
+        $store = Store::where('active', '=', Store::STORE_IS_ACTIVE)->first();
+        $storeCurrencies = StoreCurrency::where('store_id', '=', $store->id)->get();
+
+        foreach ($storeCurrencies as $storeCurrency) {
+
+            $storeCurrency->default = 0;
+            if ($storeCurrency->currency_id == $id) {
+                $storeCurrency->default = 1;
+            }
+            $storeCurrency->save();
+        }
+
         return redirect()->back();
     }
 

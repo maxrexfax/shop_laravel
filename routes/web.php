@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
+use App\Locale;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +63,7 @@ Route::group(['middleware'=>'language'],function ()
     Route::get('/store/phonelist/{id}', 'StoreController@phoneList')->name('store.phonelist');
     Route::get('/store/langlist/{id}', 'StoreController@languageList')->name('store.langlist');
     Route::get('/store/currencylist/{id}', 'StoreController@currencyList')->name('store.currencylist');
+    Route::get('/store/changeactive/{id}', 'StoreController@changeActive')->name('store.changeactive');
 
     Route::get('/user/delete/{id}', 'UserController@destroy')->name('user.delete');
     Route::get('/user/create/{id?}', 'UserController@create')->name('user.create');
@@ -72,11 +75,15 @@ Route::group(['middleware'=>'language'],function ()
 
 });
 
-Route::get('locale/{locale}', function ($locale) {
-    $validLocale = in_array($locale, ['ru', 'en']);
+Route::get('/locale/{locale}', function ($locale) {
+    $validLocale = in_array($locale, Locale::all()->pluck('locale_code')->all());
     if ($validLocale) {
         App::setLocale($locale);
-        \Session::put('locale',$locale);
+        Session::put('locale', $locale);
     }
     return back();
 });
+
+Route::get('/set-currency/{currency}', 'StoreController@setDefaultCurrency')->name('set.current.currency');
+
+Route::get('/currency/reload', 'CurrencyController@reloadCurrencyValue')->name('currency.reload');

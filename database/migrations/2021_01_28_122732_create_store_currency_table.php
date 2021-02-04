@@ -17,7 +17,7 @@ class CreateStoreCurrencyTable extends Migration
             $table->id();
             $table->unsignedBigInteger('store_id');
             $table->unsignedBigInteger('currency_id');
-            $table->boolean('default')->nullable();
+            $table->boolean('default')->default(0);
             $table->foreign('store_id')->references('id')->on('stores');
             $table->foreign('currency_id')->references('id')->on('currencies');
             $table->timestamps();

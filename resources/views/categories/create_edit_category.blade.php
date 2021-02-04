@@ -17,7 +17,7 @@
                                         <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('actions.category_id') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="id" type="number" class="form-control @error('name') is-invalid @enderror" name="id" value="@if(!empty($category)){{$category->id}}@endif" readonly>
+                                            <input type="number" class="form-control @error('name') is-invalid @enderror" name="id" value="@if(!empty($category)){{$category->id}}@endif" readonly>
                                         </div>
                                     </div>
 
@@ -25,7 +25,7 @@
                                         <label for="category_name" class="col-md-4 col-form-label text-md-right">{{ __('actions.category_name') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="category_name" type="text" class="form-control @error('catname') is-invalid @enderror" name="category_name" value="@if(!empty($category)){{$category->category_name}}@endif" required>
+                                            <input type="text" class="form-control @error('catname') is-invalid @enderror" name="category_name" value="@if(!empty($category)){{$category->category_name}}@endif" required>
                                             @error('category_name')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -38,7 +38,7 @@
                                         <label for="sort_number" class="col-md-4 col-form-label text-md-right">{{ __('actions.category_sort_number') }}</label>
 
                                         <div class="col-md-6">
-                                            <input id="sort_number" type="number" class="form-control @error('password') is-invalid @enderror" name="sort_number" value="@if(!empty($category)){{$category->sort_number}}@endif" required>
+                                            <input type="number" class="form-control @error('password') is-invalid @enderror" name="sort_number" value="@if(!empty($category)){{$category->sort_number}}@endif" required>
                                             @error('sort_number')
                                             <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -50,7 +50,7 @@
                                     <div class="form-group row">
                                         <label for="category_id" class="col-md-4 col-form-label text-md-right">{{ __('actions.category_id') }}</label>
                                         <div class="col-md-6">
-                                            <select class="form-control" name="category_id" id="category_id">
+                                            <select class="form-control" name="category_id">
                                                 <option value=""
                                                 @if(empty($category->category_id))
                                                     selected

@@ -30,7 +30,7 @@ class StoreProductRequest extends FormRequest
             'title' => 'string|required|max:255',
             'description' => 'string|required|max:255',
             'short_description' => 'string|max:500|nullable',
-            'full_description' => 'string|max:1500|nullable',
+            'full_description' => 'string|nullable',
         ];
     }
 
@@ -50,7 +50,6 @@ class StoreProductRequest extends FormRequest
             'description.required' =>'Description is required!',
             'description.max:255' =>'Description maximum 255 chars!',
             'short_description.max:500' =>'Short description maximum 500 chars!',
-            'full_description.max:1500' =>'Full description maximum 1500 chars!',
         ];
     }
 }

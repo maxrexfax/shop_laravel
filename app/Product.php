@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\ProductPriceGetterService;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -39,6 +40,11 @@ class Product extends Model
         }
 
         return [];
+    }
+
+    public function currentPrice()
+    {
+        return (new ProductPriceGetterService())->getPriceWithSymbol($this->price);
     }
 
 }

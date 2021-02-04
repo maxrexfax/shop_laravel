@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Store extends Model
 {
+    const STORE_IS_ACTIVE = 1;
+
     protected $fillable = [
         'store_name', 'store_description', 'store_logo', 'store_keywords'
     ];
@@ -17,11 +19,7 @@ class Store extends Model
 
     public function getPhones()
     {
-        if(!empty($this->phones)) {
-            return $this->phones;
-        }
-
-        return '';
+        return $this->phones ? : '';
     }
 
     public function locales()
@@ -31,11 +29,17 @@ class Store extends Model
 
     public function getLocales()
     {
-        if (!empty($this->locales)) {
-            return $this->locales;
-        }
+        return $this->locales ? : '';
+    }
 
-        return '';
+    public function storeCurrencies()
+    {
+        return $this->hasMany(StoreCurrency::class, 'store_id', 'id');
+    }
+
+    public function getDefaultCurrency()
+    {
+        return $this->storeCurrencies->where('default', '=', Store::STORE_IS_ACTIVE);
     }
 
     public function currencies()
@@ -45,28 +49,14 @@ class Store extends Model
 
     public function getCurrencies()
     {
-        if (!empty($this->currencies)) {
-            return $this->currencies;
-        }
-
-        return '';
+        return $this->currencies ? $this->currencies : '';
     }
 
-    public function defaultLocale()
-    {
-        return $this->hasOne(StoreLocale::class)->where('store_id', $this->id)->where('default',1);
-    }
 
     public function getDefaultLocale()
     {
-        if (!empty($this->defaultLocale)) {
-            return $this->defaultLocale;
-        }
-
-        return '';
+        return $this->defaultLocale ? : '';
     }
-
-
 
     public function storeLocales()
     {

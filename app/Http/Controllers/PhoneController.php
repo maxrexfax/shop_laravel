@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePhoneRequest;
 use App\Phone;
 use App\Services\PhoneStoreService;
+use App\Store;
 
 class PhoneController extends Controller
 {
     public function create($store_id = null, $phone_id = null)
     {
+        $store = Store::find($store_id);
         $phone = Phone::find($phone_id);
-        $store = Phone::find($store_id);
         if ($phone) {
             return view('admin.partials.phones._phone_edit_create', [
                 'alt_title' => 'Edit phone',
@@ -20,7 +21,6 @@ class PhoneController extends Controller
             ]);
         }
         return view('admin.partials.phones._phone_edit_create', [
-            'alt_title' => 'Create phone',
             'store' => $store
         ]);
     }
@@ -42,6 +42,6 @@ class PhoneController extends Controller
         }
         (new PhoneStoreService())->storePhone($request, $phone);
 
-        return redirect()->back();
+        return redirect('/store/phonelist/' . $request->post('store_id'));
     }
 }

@@ -1,6 +1,5 @@
 body {
     background: url(/img/background/background.png) 0% -5% no-repeat scroll;
-    //background-size: 100%;
 }
 
 #divWithInputSearchInHeader {
@@ -17,6 +16,11 @@ body {
 
 .header-grey {
     color: gray;
+}
+
+.logo-container-in-header {
+    max-width: 100px;
+    width: 100%;
 }
 
 .root-menu-container {
@@ -40,20 +44,17 @@ body {
 .popup-root-categories-item {
     padding: 5px;
     margin: 5px;
-}
-.popup-root-categories-item a {
+    width: 100%;
     color:black;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
     font-family: roboto regular SansSerif, serif;
 }
 
-.popup-root-categories-item a:hover {
-    color:black;
+.popup-root-categories-item:hover {
     text-decoration: none;
-    font-size: 1rem;
-    font-family: roboto regular SansSerif, serif;
-    color: #1872a2;
+    background-color: #939598;
 }
 
 #divForSubcribingOnMainPage {
@@ -202,16 +203,11 @@ body {
     color: white;
 }
 
-.btnCloseModal {
+.btn-close-modal {
     font-weight: bold;
     font-size: 2em;
     cursor: pointer;
     color: gray;
-}
-
-.btnCloseModal:hover {
-    cursor: pointer;
-    color: lightblue;
 }
 
 #close-popup-symbol {
@@ -255,6 +251,10 @@ span[class*=" step"] {
     width: 100%;
 }
 
+.accordion_header:hover {
+    color: #939598;
+}
+
 .accordion_content a {
     text-decoration: none;
     color: gray;
@@ -270,7 +270,6 @@ span[class*=" step"] {
     font-weight: bold;
     color: #126DD2;
     font-family: roboto regular SansSerif, serif;
-
 }
 
 .border_bottom {
@@ -329,7 +328,6 @@ span[class*=" step"] {
 .div-item-main-container {
     height: 300px;
     background-color: white;
-    //box-shadow: 0px -2px 1px #888, -2px 0px 1px #d8d8d8, 2px 0px 1px #d8d8d8;
 }
 
 .hide{
@@ -337,9 +335,6 @@ span[class*=" step"] {
     z-index: 100;
     background-color: white;
     position: relative;
-    //box-shadow: 0px 2px 0px #d8d8d8, -2px 0px 0px #d8d8d8, 2px 0px 0px #d8d8d8;
-    //box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), -2px 0px 4px rgba(0, 0, 0, 0.1), 2px 0px 4px rgba(0, 0, 0, 0.1);
-
 }
 
 .outer {
@@ -356,7 +351,7 @@ span[class*=" step"] {
     border-radius: 5px 0 0 5px;
 }
 
-.div-divButtonCardShower-right {
+.div-button-card-shower-right {
     background-color: #126DD2;
     border-radius: 0 5px 5px 0;
     width: 23px;
@@ -399,13 +394,13 @@ span[class*=" step"] {
     font-family: roboto regular SansSerif, serif;
 }
 
-.my-a-no-decoration a, a:hover {
+.my-breadcrumb-decoration a {
     text-decoration: none;
     color: #939598;
     font-family: roboto regular SansSerif, serif;
 }
 
-.my-a-no-decoration a:hover {
+.my-breadcrumb-decoration a:hover {
     text-decoration: none;
     color: #636b6f;
 }
@@ -458,4 +453,66 @@ span[class*=" step"] {
 
 .for-checkbox-budget {
     background-color: #939598;
+}
+
+.dropdown-el {
+    position: relative;
+    display: inline-block;
+
+    &:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #04530A;
+        box-shadow: 0px 8px 16px 3px rgba(0,0,0,0.2);
+        padding: 3px 6px;
+        z-index: 1;
+        border-radius: 5px;
+    }
+
+    .my-dropdown-item {
+        display: block;
+        border-radius: 5px;
+
+    }
+
+    .my-dropdown-item:hover {
+        background-color: darkslategray;
+        border-radius: 5px;
+        font-weight: bold !important;
+    }
+
+    .dropdown-header {
+        font-weight: bold !important;
+        margin: 0;
+        padding: 3px;
+        color: #1b1e21;
+    }
+}
+
+#divWithInputSearchInHeader {
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: white;
+        opacity: 1; /* Firefox */
+    }
+
+    ::-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: white;
+    }
+
+    ::-ms-input-placeholder { /* Microsoft Edge */
+        color: white;
+    }
+}
+
+.my-product-right-banner, .my-product-main-description {
+    box-shadow: 0px 5px 16px 3px rgba(0,0,0,0.2), 0px -5px 16px 3px rgba(0,0,0,0.2);
+}
+
+
+.clearfix:after {
+    clear: both;
 }

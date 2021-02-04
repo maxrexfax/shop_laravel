@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="@if(!empty($altDescription)){{$altDescription}}@else{{ __('messages.cool_medicines') }}@endif">
+    <meta name="description" content="@if(!empty($alternativeDescription)){{$alternativeDescription}}@else{{ __('messages.cool_medicines') }}@endif">
     <link rel="icon" href="{{ asset('/animated_favicon.gif')}}" type="image/gif" >
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@if(!empty($alt_title)){{$alt_title}} @else{{ __('messages.cool_medicines') }}@endif</title>
+    <title>@if(!empty($alternativeTitle)){{$alternativeTitle}} @else{{ __('messages.cool_medicines') }}@endif</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-3.5.1.min.js') }}" defer></script>
@@ -30,37 +30,28 @@
 </head>
 <body>
     <div id="app">
-        <div class="" id="lang">
-            <div id="lang_menu" class="d-inline-block">
-                <span class="language{{ App::isLocale('ru') ? ' active' : '' }}"><a href="/locale/ru">rus</a></span>
-                <span class="language{{ App::isLocale('en') ? ' active' : '' }}"><a href="/locale/en">eng</a></span>
-            </div>
-        </div>
         <header class="backgound-image w-100">
             <div class="container">
                 <div class="d-flex p-2 align-items-center justify-content-between bd-highlight flex-wrap">
-                    <a href="{{route('main.page')}}">
-                        <img class="float-left" src="{{asset('/img/header_logo.png')}}" alt="{{ __('messages.cool_medicines') }}" />
-                    </a>
-                    <div class="text-light font-weight-bold"><i class="fa fa-phone"></i><span class="mr-2"> {{__('text.phone')}} +3884642484</span></div>
-
+                    <x-logo-image></x-logo-image>
+                    <x-store-phone></x-store-phone>
+                    <x-locales-list></x-locales-list>
+                    <x-currencies-list></x-currencies-list>
                     <div id="divWithInputSearchInHeader" class="d-flex mr-2 form-group col-4 p-0 text-white border-0 my-color-for-search-in-header">
-                        <input class="d-inline w-100 border-0 text-white my-class-color-transparent" type="text" placeholder="{{__('text.search')}}">
-                        <button class="d-inline btn btn-search" type="submit" title="{{__('text.search')}}">
+                        <input class="d-inline w-100 border-0 text-white my-class-color-transparent" type="text" placeholder="Search">
+                        <button class="d-inline btn btn-search" type="submit" title="Search">
                             <i id="searchSignHeader" class="fa fa-search mb-2 text-white d-inline"></i>
                         </button>
                     </div>
-
                     <div class="p-0" id="divButtonCardShower">
                         <button class="btn btn-primary" id="btnButtonCardShower">
                             <i class="fa fa-shopping-cart d-inline"></i>
                             {{__('actions.cart')}}
                         </button>
-                        <span class="d-inline-block div-divButtonCardShower-right">
+                        <span class="d-inline-block div-button-card-shower-right">
                             0
                         </span>
                     </div>
-
                 </div>
             </div>
         <br>
@@ -74,18 +65,18 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                                <a class="nav-link item-root" id="btn-show-parent-categories" href="#">
+                                <a class="nav-link item-root" id="btnShowParentCategories" href="#">
                                     {{__('actions.products')}}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link item-menu-non-root" href="#">{{ __('actions.bestsellers')}}</a>
+                                <a class="nav-link item-menu-non-root" href="{{route('main.page') . '#bestsellers'}}">{{ __('actions.bestsellers')}}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link item-menu-non-root" href="#">{{ __('actions.resources')}}</a>
+                                <a class="nav-link item-menu-non-root" href="{{route('main.page') . '#resources'}}">{{ __('actions.resources')}}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link item-menu-non-root" href="#">{{ __('text.about_us')}}</a>
+                                <a class="nav-link item-menu-non-root" href="{{route('main.page') . '#about_us'}}">{{ __('text.about_us')}}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link item-menu-non-root" href="#">{{ __('actions.blog')}}</a>
@@ -147,7 +138,7 @@
         <div>
             <div id="shadowGlobal" class="d-none"></div>
             <div id="modalDivGlobal" class="bg-white d-none">
-                <p id="closePopupSymbol" class="float-right btnCloseModal" title="{{__('actions.close')}}"><i class="fa fa-window-close" aria-hidden="true"></i></p>
+                <p id="closePopupSymbol" class="float-right btn-close-modal" title="{{__('actions.close')}}"><i class="fa fa-window-close" aria-hidden="true"></i></p>
             </div>
         </div>
     </div>

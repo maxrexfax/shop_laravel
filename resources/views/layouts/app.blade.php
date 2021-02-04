@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="@if(!empty($altDescription)){{$altDescription}}@else{{ __('messages.cool_medicines') }}@endif">
+    <meta name="description" content="@if(!empty($alternativeDescription)){{$alternativeDescription}}@else{{ __('messages.cool_medicines') }}@endif">
     <link rel="icon" href="{{ asset('/animated_favicon.gif')}}" type="image/gif" >
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@if(!empty($alt_title)){{$alt_title}} @else{{ __('messages.cool_medicines') }}@endif</title>
+    <title>@if(!empty($alternativeTitle)){{$alternativeTitle}} @else{{ __('messages.cool_medicines') }}@endif</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/jquery-3.5.1.min.js') }}" defer></script>
@@ -48,7 +48,7 @@
                             <i class="fa fa-shopping-cart d-inline"></i>
                             {{__('actions.cart')}}
                         </button>
-                        <span class="d-inline-block div-divButtonCardShower-right">
+                        <span class="d-inline-block div-button-card-shower-right">
                             0
                         </span>
                     </div>
@@ -65,7 +65,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                                <a class="nav-link item-root" id="btn-show-parent-categories" href="#">
+                                <a class="nav-link item-root" id="btnShowParentCategories" href="#">
                                     {{__('actions.products')}}
                                 </a>
                             </li>
@@ -138,7 +138,7 @@
         <div>
             <div id="shadowGlobal" class="d-none"></div>
             <div id="modalDivGlobal" class="bg-white d-none">
-                <p id="closePopupSymbol" class="float-right btnCloseModal" title="{{__('actions.close')}}"><i class="fa fa-window-close" aria-hidden="true"></i></p>
+                <p id="closePopupSymbol" class="float-right btn-close-modal" title="{{__('actions.close')}}"><i class="fa fa-window-close" aria-hidden="true"></i></p>
             </div>
         </div>
     </div>

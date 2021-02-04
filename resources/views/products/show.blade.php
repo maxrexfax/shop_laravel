@@ -69,10 +69,6 @@
                                 <h3>{{__('text.description')}}</h3>
                             </div>
                             <div class="bg-light w-100 p-5 rounded-bottom">
-                                <h3>Description as text</h3>
-                                <p>{{$product->full_description}}</p>
-                                <hr>
-                                <h3>Formatted description</h3>
                                 <div>{!!$product->full_description!!}</div>
                             </div>
                         </div>
@@ -87,10 +83,10 @@
         <span class="modal-control-elements step-back" title="{{__('text.previous')}}">&#9664;</span>
         <span class="modal-control-elements step-forward" title="{{__('text.next')}}">&#9654;</span>
     </div>
-    <div id="modal-with-images">
-        <p id="close-popup-symbol" class="float-right modal-control-elements" title="Close"><i class="fa fa-window-close" aria-hidden="true"></i></p><br>
+    <div id="modalWithImages">
+        <p id="closePopupSymbol" class="float-right modal-control-elements" title="Close"><i class="fa fa-window-close" aria-hidden="true"></i></p><br>
         <span class="text-center"><img src="" alt="" /></span>
-        <p id="images-gallery-info" class="float-right"></p>
+        <p id="imagesGalleryInfo" class="float-right"></p>
     </div>
 </div>
 @endsection

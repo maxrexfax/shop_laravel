@@ -203,16 +203,11 @@ body {
     color: white;
 }
 
-.btnCloseModal {
+.btn-close-modal {
     font-weight: bold;
     font-size: 2em;
     cursor: pointer;
     color: gray;
-}
-
-.btnCloseModal:hover {
-    cursor: pointer;
-    color: lightblue;
 }
 
 #close-popup-symbol {
@@ -356,7 +351,7 @@ span[class*=" step"] {
     border-radius: 5px 0 0 5px;
 }
 
-.div-divButtonCardShower-right {
+.div-button-card-shower-right {
     background-color: #126DD2;
     border-radius: 0 5px 5px 0;
     width: 23px;

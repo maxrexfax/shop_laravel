@@ -15,8 +15,6 @@ class ProductController extends Controller
             $product = Product::find($id);
             if ($product) {
                 return view('admin.partials.product._product_edit_create', [
-                    'NameOfForm' => 'Edit product '.$product->product_name,
-                    'alt_title' => 'Edit product '.$product->product_name,
                     'categories' => Category::all(),
                     'product' => $product
                 ]);
@@ -25,8 +23,6 @@ class ProductController extends Controller
             }
         } else {
             return view('admin.partials.product._product_edit_create', [
-                'NameOfForm' => 'Create new product',
-                'alt_title' => 'Create new product',
                 'categories' => Category::all()
             ]);
         }
@@ -54,8 +50,8 @@ class ProductController extends Controller
         if ($product) {
             return view('products.show', [
                 'product' => $product,
-                'alt_title' => $product->title,
-                'altDescription' => $product->description,
+                'alternativeTitle' => $product->title,
+                'alternativeDescription' => $product->description,
             ]);
         }
         return redirect('/');

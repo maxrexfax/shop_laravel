@@ -26,7 +26,7 @@ class ProductPriceGetterService
     {
         $defaultCurrency = self::getCurrentCurrency();
         $mainCurrency = Currency::where('currency_code', '=', Currency::CURRENCY_MAIN)->first();
-        $res = number_format((float)($price * $mainCurrency->currency_value / $defaultCurrency->currency_value), 2, '.', '');
-        return $res . $defaultCurrency->currency_symbol;
+        $price = number_format(($price * $mainCurrency->currency_value / $defaultCurrency->currency_value), 2, '.', '');
+        return $price . $defaultCurrency->currency_symbol;
     }
 }

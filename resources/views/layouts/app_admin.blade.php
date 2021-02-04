@@ -3,22 +3,26 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="@if(!empty($altDescription)){{$altDescription}}@else{{ __('messages.cool_medicines') }}@endif">
+    <meta name="description" content="{{ __('messages.cool_medicines') }}">
     <link rel="icon" href="{{ asset('/animated_favicon.gif')}}" type="image/gif" >
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@if(!empty($alt_title)){{$alt_title}} @else{{ __('messages.cool_medicines') }}@endif</title>
+    <title>@if(!empty($alternativeTitle)){{$alternativeTitle}} @else{{ __('messages.cool_medicines') }}@endif</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/jquery-3.5.1.min.js') }}" defer></script>
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <script src="https://kit.fontawesome.com/53707af6ce.js" crossorigin="anonymous"></script>
+
+    <script src="{{ asset('js/jquery-3.5.1.min.js') }}" defer></script>
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -27,7 +31,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
 
 </head>
 <body>
@@ -50,7 +53,7 @@
                             <i class="fa fa-shopping-cart d-inline"></i>
                             {{__('actions.cart')}}
                         </button>
-                        <span class="d-inline-block div-divButtonCardShower-right">
+                        <span class="d-inline-block div-button-card-shower-right">
                             0
                         </span>
                     </div>
@@ -67,7 +70,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                                <a class="nav-link item-root" id="btn-show-parent-categories" href="#">
+                                <a class="nav-link item-root" id="btnShowParentCategories" href="#">
                                     {{ __('actions.products')}}
                                 </a>
                             </li>
@@ -145,7 +148,7 @@
         <div>
             <div id="shadowGlobal" class="d-none"></div>
             <div id="modalDivGlobal" class="bg-white d-none">
-                <p id="closePopupSymbol" class="float-right btnCloseModal" title="Close"><i class="fa fa-window-close" aria-hidden="true"></i></p>
+                <p id="closePopupSymbol" class="float-right btn-close-modal" title="Close"><i class="fa fa-window-close" aria-hidden="true"></i></p>
             </div>
         </div>
     </div>

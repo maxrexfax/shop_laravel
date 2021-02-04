@@ -17,7 +17,6 @@
                         <th>{{ __('actions.product_price') }}</th>
                         <th>{{ __('actions.product_title') }}</th>
                         <th>{{ __('actions.product_short_description') }}</th>
-                        <th>{{ __('actions.product_full_description') }}</th>
                         <th>{{ __('actions.product_rating') }}</th>
                         <th>{{ __('actions.edit') }}</th>
                     </tr>
@@ -36,10 +35,9 @@
                             <td>{{$product->product_name}}</td>
                             <td>{{$product->price}}</td>
                             <td>{{$product->title}}</td>
-                            <td>{{$product->short_description}}</td>
-                            <td>{{$product->full_description}}</td>
+                            <td><span>{{$product->short_description}}</span></td>
                             <td>{{$product->rating}}</td>
-                            <td><a href="{{route('product.create')}}/{{$product->id}}"><i class="fas fa-pencil-alt"></i></a></td>
+                            <td><a href="{{route('product.create', ['id' => $product->id])}}"><i class="fas fa-pencil-alt"></i></a></td>
                         </tr>
                     @endforeach
                     </tbody>

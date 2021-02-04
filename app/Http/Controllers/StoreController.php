@@ -30,7 +30,7 @@ class StoreController extends Controller
         }
 
         return view ('admin.partials.store._store_edit_create', [
-            'alt_title' => 'Create new store'
+
         ]);
     }
 
@@ -56,7 +56,6 @@ class StoreController extends Controller
         $store = Store::find($id);
         if ($store) {
             return view('admin.partials.phones._phones_list', [
-                'alt_title' => 'Save store phones list',
                 'store' => $store,
                 'phones' => $store->getPhones(),
             ]);

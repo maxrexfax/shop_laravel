@@ -32,13 +32,10 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-        if ($product) {
-            (new ProductStoreService())->store($request, $product);
-
-            return redirect('admin/product/list');
+        if (!$product) {
+            $product = new Product();
         }
 
-        $product = new Product($request->post());
         (new ProductStoreService())->store($request, $product);
 
         return redirect('admin/product/list');

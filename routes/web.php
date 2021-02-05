@@ -95,3 +95,7 @@ Route::get('/locale/{locale}', function ($locale) {
 Route::get('/set-currency/{currency}', 'StoreController@setDefaultCurrency')->name('set.current.currency');
 
 Route::get('/currency/reload', 'CurrencyController@reloadCurrencyValue')->name('currency.reload');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

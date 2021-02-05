@@ -19,7 +19,7 @@
                         @endif
                     </div>
                     <div class="card-body">
-                        <form method="POST" enctype="multipart/form-data" action="{{ route('category.store') }}@if(!empty($category))/{{$category->id}}@endif">
+                        <form method="POST" enctype="multipart/form-data" action="{{ route('category.store', ['id' => isset($category) ? $category->id : '']) }}">
                             @csrf
 
                             <div class="form-group row">

@@ -31,7 +31,7 @@ class StoreController extends Controller
         }
 
         return view ('admin.partials.store._store_edit_create', [
-
+            //'store' => Store::find($id) ? Store::find($id) : ''
         ]);
     }
 
@@ -39,13 +39,9 @@ class StoreController extends Controller
     {
         $store = Store::find($id);
 
-        if ($store) {
-            (new StoreStoreService())->store($store ,$request);
-
-            return redirect('/admin/stores/list');
+        if (!$store) {
+            $store = new Store();
         }
-
-        $store = new Store();
 
         (new StoreStoreService())->store($store ,$request);
 

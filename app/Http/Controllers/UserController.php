@@ -67,13 +67,9 @@ class UserController extends Controller
 
             $user = User::find($id);
 
-            if ($user) {
-                (new UserStoreService())->storeUser($request, $user);
-
-                return redirect('admin/users/list');
+            if (!$user) {
+                $user = new User();
             }
-
-            $user = new User();
 
             (new UserStoreService())->storeuser($request, $user);
 

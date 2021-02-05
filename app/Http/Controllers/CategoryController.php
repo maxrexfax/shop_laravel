@@ -39,13 +39,10 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
 
-        if ($category) {
-            (new CategoryStoreService())->storeCategory($request, $category);
-
-            return redirect('admin/category/list');
+        if (!$category) {
+            $category = new Category();
         }
 
-        $category = new Category();
         (new CategoryStoreService())->storeCategory($request, $category);
 
         return redirect('admin/category/list');

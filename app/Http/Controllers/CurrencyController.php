@@ -35,13 +35,9 @@ class CurrencyController extends Controller
     {
         $currency = Currency::find($id);
 
-        if ($currency) {
-            (new CurrencyStoreService())->store($currency ,$request);
-
-            return redirect('/admin/currencies/list');
+        if (!$currency) {
+            $currency = new Currency();
         }
-
-        $currency = new Currency();
 
         (new CurrencyStoreService())->store($currency ,$request);
 

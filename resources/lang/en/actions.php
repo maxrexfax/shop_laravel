@@ -33,6 +33,7 @@ return [
     'currency_control' => 'Currency control',
     'currency_name' => 'Currency name',
     'currency_id' => 'Currency ID',
+    'currency_symbol' => 'Currency symbol',
     'currency_to_add' => 'Currency to add',
     'currency_value' => 'Currency value',
     'dashboard' => 'Dashboard',

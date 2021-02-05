@@ -33,6 +33,7 @@ return [
     'currency_control' => 'Управление валютами',
     'currency_name' => 'Название валюты',
     'currency_id' => 'ID валюты',
+    'currency_symbol' => 'Символ валюты',
     'currency_to_add' => 'Валюта для добавления',
     'currency_value' => 'Стоимость валюты',
     'dashboard' => 'Меню администратора',

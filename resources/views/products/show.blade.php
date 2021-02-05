@@ -26,8 +26,8 @@
 
                     <div class="col-lg-4 col-md-4 col-sm-12 p-2">
                         <div class="my-product-right-banner rounded h-100 p-2">
-                            <div class="w-100 overflow-hidden" style="height: 10%">
-                                <h2 class="">{{$product->product_name}}</h2>
+                            <div class="w-100 overflow-hidden" style="max-height: 9%">
+                                <h2 class="h-3">{{$product->product_name}}</h2>
                             </div>
                             <div class="clearfix">
                                 <span class="float-left">{{__('text.item')}}:</span><span class="float-right text-dark font-weight-bold">{{__('text.in_stock')}}</span>

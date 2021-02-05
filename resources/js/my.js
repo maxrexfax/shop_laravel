@@ -313,6 +313,10 @@ $(document).ready(function() {
         $('html, body').animate({ scrollTop: '0px' }, 'slow');
     });
 
+    $(document).on('click', '#btnTogglerMenu', function(e) {
+        $('.navbar-collapse').toggle(300);
+    });
+
 
     CKEDITOR.replace( 'summary-ckeditor' );
 

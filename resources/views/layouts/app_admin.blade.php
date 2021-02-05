@@ -23,7 +23,6 @@
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/my.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -63,18 +62,14 @@
             </div>
         <br>
             <div class="w-100 main-menu-div">
-                <div class="container ">
                 <nav class="navbar navbar-expand-md navbar-light shadow-sm">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button id="btnTogglerMenu" class="navbar-toggler mb-1">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="collapse navbar-collapse">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                                <a class="nav-link item-root" id="btnShowParentCategories" href="#">
-                                    {{ __('actions.products')}}
-                                </a>
+                                <a class="navbar-brand item-root pl-2 pr-2" id="btnShowParentCategories" href="#">{{ __('actions.products')}}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link item-menu-non-root" href="{{route('main.page') . '#bestsellers'}}">{{ __('actions.bestsellers')}}</a>
@@ -89,9 +84,7 @@
                                 <a class="nav-link item-menu-non-root" href="#">{{ __('actions.blog')}}</a>
                             </li>
                         </ul>
-                        <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mr-auto"></ul>
-                        <!-- Right Side Of Navbar -->
+
                         <ul class="navbar-nav ml-auto">
                             @auth
                                 <li class="nav-item">
@@ -129,14 +122,10 @@
                                 </li>
                             @endguest
                         </ul>
-
                     </div>
                 </nav>
                     @include('menu._root_categories')
-                </div>
-
             </div>
-
         </header>
         <main class="py-4">
             @yield('content')

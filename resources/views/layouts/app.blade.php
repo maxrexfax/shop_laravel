@@ -143,6 +143,9 @@
                 <p id="closePopupSymbol" class="float-right btn-close-modal" title="{{__('actions.close')}}"><i class="fa fa-window-close" aria-hidden="true"></i></p>
             </div>
         </div>
+        <div class="div-with-to-top-button" title="{{__('actions.scroll_to_top')}}">
+            &#708;
+        </div>
     </div>
 </body>
 </html>

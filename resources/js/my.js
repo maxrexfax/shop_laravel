@@ -302,6 +302,18 @@ $(document).ready(function() {
         }
     });
 
+    $( window ).scroll(function() {
+        $( '.div-with-to-top-button' ).css( "display", "block" );
+        if ($('html, body').scrollTop()==0) {
+            $('.div-with-to-top-button' ).css( 'display', 'none' );
+        }
+    });
+
+    $(document).on('click', '.div-with-to-top-button', function(e) {
+        $('html, body').animate({ scrollTop: '0px' }, 'slow');
+    });
+
+
     CKEDITOR.replace( 'summary-ckeditor' );
 
 });

@@ -22,9 +22,7 @@ class DeliveryController extends Controller
             return redirect('/admin/deliveries/list');
         }
 
-        return view ('admin.partials.delivery._delivery_edit_create', [
-
-        ]);
+        return view ('admin.partials.delivery._delivery_edit_create');
     }
 
     public function store($id = null, StoreDeliveryRequest $request)

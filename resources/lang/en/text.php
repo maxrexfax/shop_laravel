@@ -43,6 +43,7 @@ return [
     'delivery_price' => 'Delivery price',
     'delivery_to_add' => 'Delivery to add to store',
     'delete_this_delivery' => 'Delete this delivery',
+    'delete_this_image' => 'Delete this image',
     'description' => 'Description',
     'description_(meta_tag_for_SEO)' => 'Description (meta tag for SEO)',
     'disabled' => 'Disabled',

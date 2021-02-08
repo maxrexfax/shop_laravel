@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreLocaleRequest extends FormRequest
+class StoreDeliveryStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,16 @@ class StoreLocaleRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            'locale_name' => 'string|required|max:255',
-            'locale_code' => 'string|required|max:10',
+            'deliveries' => 'exists:deliveries,id',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'deliveries.exists' =>'Delivery id wrong!',
         ];
     }
 

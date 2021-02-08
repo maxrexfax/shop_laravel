@@ -8,6 +8,13 @@
             {{__('text.edit_delivery_list_for')}} <span class="font-weight-bold">{{$store->store_name}}</span>
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12 pb-2">
+            <div class="errors text-center bg-danger">
+                @if($errors)
+                    @foreach($errors->all() as $error)
+                        {{$error}}
+                    @endforeach
+                @endif
+            </div>
             @include('admin.partials._language_currency_locale_switcher')
             <form method="POST" id="formToAddLocales" action="{{ route('store.delivery.store', ['id' => $store->id]) }}">
                 @csrf

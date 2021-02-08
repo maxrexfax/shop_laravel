@@ -16,7 +16,7 @@
                                 @if(count($images)>0)
                                     @foreach($images->sortBy('sort_number') as $image)
                                         <div id="{{$image->id}}" class="border p-2 m-2 rounded">
-                                            <a href="{{route('image.delete',  ['id' => $image->id])}}"><i class="fa fa-minus-circle my-cursor-pointer" title="Delete this image"></i></a>
+                                            <a href="{{route('image.delete',  ['id' => $image->id])}}"><i class="fa fa-minus-circle my-cursor-pointer" title="{{__('text.delete_this_image')}}"></i></a>
                                             <div style="max-width: 200px; width: 100%;">
                                                 <img width="100%" src="{{ asset('/img/images/' . $image->image_name)}}">
                                             </div>

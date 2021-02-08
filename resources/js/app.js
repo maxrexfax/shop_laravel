@@ -1,12 +1,11 @@
 require('./bootstrap');
 $(document).ready(function() {
 
-    //$('#summernote').summernote();
-
     var numberOfImageToShow = 0;
     var arrayOfImages = [];
     $(document).on('click', '.img-to-show-modal', function(e) {
-        $('#shadow').show();
+        $('#shadow').removeClass('d-none');
+        $('#shadow').addClass('d-block');
         $('#modalWithImages').show();
         $('#modalWithImages').find('img').attr('src', e.target.src);
         $('#modalWithImages').find('img').attr('title', $('h2').text());
@@ -15,14 +14,16 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '#shadow', function(e) {
-        $('#shadow').hide();
+        $('#shadow').removeClass('d-block');
+        $('#shadow').addClass('d-none');
         $('#modalWithImages').hide();
         $('#modalFormAddPhone').hide();//phones editing
         $('#imagesGalleryInfo').text('');
     });
 
     $(document).on('click', '#closePopupSymbol', function(e) {
-        $('#shadow').hide();
+        $('#shadow').removeClass('d-block');
+        $('#shadow').addClass('d-none');
         $('#modalWithImages').hide();
         $('#imagesGalleryInfo').text('');
     });
@@ -54,30 +55,16 @@ $(document).ready(function() {
         return nameOfCurrentImage;
     }
 
-
     function showSlide() {
-        if(numberOfImageToShow==arrayOfImages.length){
+        if(numberOfImageToShow == arrayOfImages.length){
             numberOfImageToShow=0;
-        } else if(numberOfImageToShow==-1) {
-            numberOfImageToShow=arrayOfImages.length-1;
+        } else if(numberOfImageToShow == -1) {
+            numberOfImageToShow = arrayOfImages.length-1;
         }
 
         $('#modalWithImages').find('img').attr('src', $(arrayOfImages[numberOfImageToShow]).attr('src'));
         $('#imagesGalleryInfo').text('Image ' + (numberOfImageToShow+1) + ' from ' + arrayOfImages.length);
     }
-
-    let inputContentToAdd = "<div class=\"form-group row\">"+
-        "<label for=\"images\" class=\"col-md-4 col-form-label text-md-right\">Additional image</label>"+
-        "<div class=\"col-md-6\">" +
-        "<input type=\"file\" name=\"images[]\" title=\"Upload one or few pictures\">" +
-        "</div>" +
-        "</div>";
-
-    $(document).on('click', '#btnToAddInput', function(e) {
-        $('#divForAdditionalImageInputs').append(inputContentToAdd);
-        e.stopPropagation();
-    });
-
 
     $('.accordion_content').slideUp(1);
 
@@ -92,11 +79,13 @@ $(document).ready(function() {
     $(document).on('click', '#btnAdderCategoryToList', function (e) {
         let alreadyExistCategories = $('#divWithCategoriesList').find('div');
         let isExist = false;
-        for(let i = 0; i < alreadyExistCategories.length; i++) {
-            if($(alreadyExistCategories[i]).attr('id')===$('#categoriesToAdd option:selected').val()) {
+
+        $( alreadyExistCategories ).each(function( ) {
+            if ($(this).attr('id') === $('#categoriesToAdd option:selected').val()) {
                 isExist = true;
             }
-        }
+        });
+
         if(isExist) {
             alert(this.getAttribute('data-confirm'));
         } else {
@@ -110,11 +99,13 @@ $(document).ready(function() {
     $(document).on('click', '#btnToAddLocaleToStoreDiv' ,function (e) {
         let tbWithLocales = $('#tbodyWithLocales').find('tr');
         let isExist = false;
-        for(let i = 0; i < tbWithLocales.length; i++) {
-            if($(tbWithLocales[i]).attr('id')===$('#selectToAddLocaleToStoreDiv option:selected').val()) {
+
+        $( tbWithLocales ).each(function( ) {
+            if ($(this).attr('id') === $('#selectToAddLocaleToStoreDiv option:selected').val()) {
                 isExist = true;
             }
-        }
+        });
+
         if(isExist) {
             alert(this.getAttribute('data-confirm'));
         } else {
@@ -126,11 +117,13 @@ $(document).ready(function() {
     $(document).on('click', '#btnToAddDeliveryToStoreDiv', function (e){
         let tbWithDeliveries = $('#tbodyWithDeliveries').find('tr');
         let isExist = false;
-        for(let i = 0; i < tbWithDeliveries.length; i++) {
-            if($(tbWithDeliveries[i]).attr('id')===$('#selectToAddDeliveryToStoreDiv option:selected').val()) {
+
+        $( tbWithDeliveries ).each(function( ) {
+            if ($(this).attr('id') === $('#selectToAddDeliveryToStoreDiv option:selected').val()) {
                 isExist = true;
             }
-        }
+        });
+
         if(isExist) {
             alert(this.getAttribute('data-confirm'));
         } else {
@@ -164,11 +157,13 @@ $(document).ready(function() {
     $(document).on('click', '#btnToAddCurrencyToStoreDiv' ,function (e) {
         let tbWithCurrency = $('#tbodyWithCurrency').find('tr');
         let isExist = false;
-        for(let i = 0; i < tbWithCurrency.length; i++) {
-            if($(tbWithCurrency[i]).attr('id')===$('#selectToAddCurrencyToStoreDiv option:selected').val()) {
+
+        $( tbWithCurrency ).each(function( ) {
+            if ($(this).attr('id') === $('#selectToAddCurrencyToStoreDiv option:selected').val()) {
                 isExist = true;
             }
-        }
+        });
+
         if(isExist) {
             alert(this.getAttribute('data-confirm'));
         } else {
@@ -202,15 +197,16 @@ $(document).ready(function() {
     });
 
     $( '.div-item-main-container' ).mouseover(function() {
-        $(this).find('.hide').css('display', 'block');
+        $(this).find('.hide').removeClass(' d-none');
+        $(this).find('.hide').addClass(' d-block');
+        $(this).addClass(' class-top-shadow');
 
-        $(this).css('box-shadow', '0 -3px 3px rgba(0,0,0,0.5)');
-        $(this).find('.hide').css('box-shadow', '0 3px 3px rgba(0,0,0,0.5)');
     });
 
     $( '.div-item-main-container' ).mouseout(function() {
-        $(this).find('.hide').css('display', 'none');
-        $(this).css('box-shadow', 'none');
+        $(this).removeClass(' class-top-shadow');
+        $(this).find('.hide').removeClass(' d-block');
+        $(this).find('.hide').addClass(' d-none');
     });
 
     $(document).on('click', '#btnShowParentCategories', function(e) {
@@ -245,7 +241,6 @@ $(document).ready(function() {
         alert('Cart is empty now');
     });
 
-
     $( "#paginateQuantity" ).change(function() {
         createUrlToRedirect();
     });
@@ -269,6 +264,7 @@ $(document).ready(function() {
     }
 
     $('.accordion_content_phones').slideUp(1);
+
     $(document).on('click', '#btnAddPhone', function(e) {
         $('.accordion_content_phones').show();
     });
@@ -281,10 +277,6 @@ $(document).ready(function() {
     $(document).on('click', '#closePopupSymbol', function(e) {
         $('#shadowPhones').hide();
         $('#modalFormAddPhone').hide();
-    });
-
-    $(document).on('click', '#btnSavePhoneAsync', function(e) {
-
     });
 
     $(document).on('click', '.for-locale', function(e) {
@@ -303,20 +295,13 @@ $(document).ready(function() {
     });
 
     $( window ).scroll(function() {
-        $( '.div-with-to-top-button' ).css( "display", "block" );
-        if ($('html, body').scrollTop()==0) {
-            $('.div-with-to-top-button' ).css( 'display', 'none' );
+        $( '.to-top-button' ).removeClass('d-none');
+        $( '.to-top-button' ).addClass('d-block');//?? - $( '.to-top-button' ).show();
+        if ($('html, body').scrollTop() == 0) {
+            $( '.to-top-button' ).removeClass('d-block');//?? - $( '.to-top-button' ).hide();
+            $( '.to-top-button' ).addClass('d-none');
         }
     });
-
-    $(document).on('click', '.div-with-to-top-button', function(e) {
-        $('html, body').animate({ scrollTop: '0px' }, 'slow');
-    });
-
-    $(document).on('click', '#btnTogglerMenu', function(e) {
-        $('.navbar-collapse').toggle(300);
-    });
-
 
     CKEDITOR.replace( 'summary-ckeditor' );
 

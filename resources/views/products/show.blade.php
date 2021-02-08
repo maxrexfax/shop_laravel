@@ -79,14 +79,14 @@
     </div>
     <section class="place-holder"></section>
     <section class="place-holder"></section>
-    <div id="shadow">
+    <div id="shadow" class="d-none">
         <span class="modal-control-elements step-back" title="{{__('text.previous')}}">&#9664;</span>
         <span class="modal-control-elements step-forward" title="{{__('text.next')}}">&#9654;</span>
     </div>
     <div id="modalWithImages">
         <p id="closePopupSymbol" class="float-right modal-control-elements" title="Close"><i class="fa fa-window-close" aria-hidden="true"></i></p><br>
         <span class="text-center"><img src="" alt="" /></span>
-        <p id="imagesGalleryInfo" class="float-right"></p>
+        <p id="imagesGalleryInfo" class="float-right text-white"></p>
     </div>
 </div>
 @endsection

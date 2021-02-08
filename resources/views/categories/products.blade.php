@@ -68,7 +68,7 @@
                                 <div class="product-item-price text-center pt-0 pr-2 pb-0 pl-2 m-0">
                                     <p id="productPrice">{{__('text.price')}}: <b>{{$product->currentPrice()}}</b></p>
                                 </div>
-                                <div class="hide pt-0 pr-2 pb-0 pl-2 m-0 rounded-bottom h-50">
+                                <div class="hide d-none">
                                     <div class="product-item-description p-2">
                                         <p class="overflow-hidden">{{$product->short_description}}</p>
                                     </div>

@@ -43,6 +43,7 @@ return [
     'delivery_price' => 'Цена доставки',
     'delivery_to_add' => 'Варианты доставки для добавления в магазин',
     'delete_this_delivery' => 'Удалить эту службу доставки',
+    'delete_this_image' => 'Удалить это изображение',
     'description' => 'Описание',
     'description_(meta_tag_for_SEO)' => 'Дескрипшн (мета тэг для СЕО)',
     'disabled' => 'Отключено',

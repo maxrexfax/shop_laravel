@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Currency;
 use App\Delivery;
+use App\Http\Requests\StoreDeliveryStoreRequest;
 use App\Http\Requests\StoreStoreRequest;
 use App\Locale;
 use App\Services\StoreCurrencyStoreService;
@@ -30,9 +31,7 @@ class StoreController extends Controller
             return redirect('/admin/stores/list');
         }
 
-        return view ('admin.partials.store._store_edit_create', [
-            //'store' => Store::find($id) ? Store::find($id) : ''
-        ]);
+        return view ('admin.partials.store._store_edit_create');
     }
 
     public function store($id = null, StoreStoreRequest $request)
@@ -82,7 +81,7 @@ class StoreController extends Controller
         return redirect()->back();
     }
 
-    public function storeDelivery($id, Request $request)
+    public function storeDelivery($id, StoreDeliveryStoreRequest $request)
     {
         $store = Store::find($id);
         if ($store) {

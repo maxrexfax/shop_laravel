@@ -24,6 +24,7 @@ class StoreProductRequest extends FormRequest
     public function rules()
     {
         return [
+            'logo_image' => 'image',
             'product_name' => 'string|required|max:255',
             'rating' => 'integer|digits_between:0,5|nullable',
             'price' => 'required|numeric|between:0,99999.99',
@@ -40,6 +41,7 @@ class StoreProductRequest extends FormRequest
     public function messages()
     {
         return [
+            'logo_image.image' =>'Product logo only image!',
             'product_name.required' =>'Product name required!',
             'product_name.max:255' =>'Product name 255 symbols max!',
             'rating.integer' =>'Rating value only digit!',

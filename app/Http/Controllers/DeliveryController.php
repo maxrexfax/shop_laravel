@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Delivery;
 use App\Http\Requests\StoreDeliveryRequest;
 use App\Services\DeliveryStoreService;
-use Illuminate\Http\Request;
 
 class DeliveryController extends Controller
 {

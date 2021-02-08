@@ -76,7 +76,7 @@
                                 <label for="category_logo" class="col-md-4 col-form-label text-md-right">{{ __('text.change_category_logo_image') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="category_logo" type="file" class="form-control @error('category_logo') is-invalid @enderror" name="category_logo" title="{{__('actions.upload_logo_picture')}}">
+                                    <input id="category_logo" type="file" class="form-control p-1 @error('category_logo') is-invalid @enderror" name="category_logo" title="{{__('actions.upload_logo_picture')}}">
                                     @error('category_logo')
                                     <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

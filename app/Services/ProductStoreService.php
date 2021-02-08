@@ -18,6 +18,10 @@ class ProductStoreService
         $product->fill($request->post());
 
         if ($request->has('logo_image')) {
+            if ($logo) {
+                $image_path = public_path() . '/img/logo/' . $logo;
+                unlink($image_path);
+            }
             $image = $request->file('logo_image');
             $product->logo_image = $image->getClientOriginalName();
             $image->move(public_path('img/logo'), $image->getClientOriginalName());

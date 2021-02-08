@@ -18,16 +18,13 @@ class CurrencyController extends Controller
             if ($currency) {
                 return view ('admin.partials.currency._currency_edit_create', [
                     'currency' => $currency,
-                    'alt_title' => 'Edit currency ' . $currency->currency_name
                 ]);
             } else {
                 return redirect('/admin/currencies/list');
             }
 
         } else {
-            return view ('admin.partials.currency._currency_edit_create', [
-                'alt_title' => 'Create new currency'
-            ]);
+            return view ('admin.partials.currency._currency_edit_create');
         }
     }
 

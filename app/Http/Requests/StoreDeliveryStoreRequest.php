@@ -32,7 +32,7 @@ class StoreDeliveryStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'deliveries.exists' =>'Delivery id wrong!',
+            'deliveries.exists' => trans('messages.deliveries_id_is_wrong'),
         ];
     }
 

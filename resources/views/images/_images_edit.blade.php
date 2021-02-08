@@ -6,7 +6,7 @@
                 <div>
                     <div class="h2 text-left">{{$product->product_name}} images</div>
                     <a class="text-right mb-2" href="{{route('product.create', ['id' => $product->id])}}">
-                        <span class="btn btn-secondary">{{__('actions.back_to_product')}} {{$product->product_name}}</span>
+                        <span class="btn btn-primary">{{__('actions.back_to_product')}} {{$product->product_name}}</span>
                     </a>
                 </div>
                 <div class="border row mt-2 rounded">
@@ -16,7 +16,7 @@
                                 @if(count($images)>0)
                                     @foreach($images->sortBy('sort_number') as $image)
                                         <div id="{{$image->id}}" class="border p-2 m-2 rounded">
-                                            <a href="{{route('image.delete',  ['id' => $image->id])}}"><i class="fa fa-minus-circle my-cursor-pointer" title="{{__('text.delete_this_image')}}"></i></a>
+                                            <a href="{{route('image.delete',  ['id' => $image->id, 'subPath' => 'images'])}}"><i class="fa fa-minus-circle my-cursor-pointer" title="{{__('text.delete_this_image')}}"></i></a>
                                             <div style="max-width: 200px; width: 100%;">
                                                 <img width="100%" src="{{ asset('/img/images/' . $image->image_name)}}">
                                             </div>
@@ -36,6 +36,13 @@
                         </div>
                     </div>
                     <div class="border rounded m-3 p-2">
+                        <div class="errors text-center bg-danger">
+                            @if($errors)
+                                @foreach($errors->all() as $error)
+                                    {{$error}}
+                                @endforeach
+                            @endif
+                        </div>
                         <form method="POST" enctype="multipart/form-data" action="{{ route('image.store') }}">
                             @csrf
                             <input type="hidden" name="product_id" value="{{$product->id}}">

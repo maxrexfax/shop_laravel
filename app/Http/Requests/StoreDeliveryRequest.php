@@ -34,14 +34,14 @@ class StoreDeliveryRequest extends FormRequest
     public function messages()
     {
         return [
-            'delivery_name.required' =>'Delivery name required!',
-            'delivery_name.max:255' =>'Delivery name 255 symbols max!',
-            'delivery_description.required' =>'Delivery description required!',
-            'delivery_description.max:500' =>'Delivery description 500 symbols max!',
-            'delivery_price.required' =>'Delivery price value required!',
-            'delivery_price.numeric' =>'Delivery price value numeric!',
-            'delivery_price.between:0,9999.99' =>'From 0 to 9999.99!',
-            'active.between:0,1' =>'Incorrect data from select!',
+            'delivery_name.required' => trans('messages.deliveries_name_required'),
+            'delivery_name.max:255' => trans('messages.deliveries_name_max_255'),
+            'delivery_description.required' => trans('messages.deliveries_description_required'),
+            'delivery_description.max:500' => trans('messages.deliveries_description_max_500'),
+            'delivery_price.required' => trans('messages.deliveries_price_required'),
+            'delivery_price.numeric' => trans('messages.deliveries_price_numeric'),
+            'delivery_price.between:0,9999.99' => trans('messages.deliveries_price_from_0_to_9999'),
+            'active.between:0,1' => trans('messages.deliveries_incorrect_select'),
         ];
     }
 }

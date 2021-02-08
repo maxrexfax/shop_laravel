@@ -19,7 +19,6 @@ class CategoryController extends Controller
             $category = Category::find($id);
             if($category) {
                 return view('admin.partials.category._category_edit_create', [
-                    'alt_title' => 'Edit category '.$category->category_name,
                     'categories' => Category::all(),
                     'category' => $category
                 ]);
@@ -29,7 +28,6 @@ class CategoryController extends Controller
         }
 
         return view('admin.partials.category._category_edit_create', [
-                'alt_title' => 'Create new category',
                 'categories' => Category::all()
             ]);
 

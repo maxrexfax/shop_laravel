@@ -59,11 +59,10 @@
             <div class="w-100 main-menu-div">
                 <div class="container ">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                        <button id="btnTogglerMenu" class="navbar-toggler mb-1">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-
-                        <div class="collapse navbar-collapse">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="nav navbar-nav mr-auto">
                                 <li class="nav-item active">
                                     <a class="navbar-brand item-root pl-2 pr-2" id="btnShowParentCategories" href="#">{{__('actions.products')}}</a>

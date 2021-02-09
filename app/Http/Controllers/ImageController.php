@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Helpers\ImageHelper;
 use App\Http\Requests\StoreImageRequest;
 use App\Image;
 use App\Product;
@@ -31,8 +32,7 @@ class ImageController extends Controller
         $image = Image::find($imageId);
         if ($image) {
             $image->delete();
-            $image_path = public_path() . '/img/' . $request->get('subPath') . '/' . $image->image_name;
-            unlink($image_path);
+            (new ImageHelper())->deleteImage($image->image_name, '/img/' . $request->get('subPath') . '/');
         }
 
         return redirect()->back();

@@ -47,33 +47,21 @@
                         </select>
                     </div>
                 </div>
-                <div class="d-flex flex-wrap justify-content-start">
+                <div class="products">
                     @foreach($products as $product)
                         <div class="col-lg-4 col-md-4 col-xs-12 p-3">
-                            <div class="p-0 rounded div-item-main-container">
-                                <div class="div-product-logo-image-container">
-                                    <div class="div-product-logo-image-container-intro">
-                                        <a class="url_no_decoration" href="{{route ('product.show', ['id' => $product->id] )}}">
-                                            <img width="100%" src="{{asset('/img/logo/' . $product->logo_image)}}" alt="{{$product->product_name}}">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="product-item-title text-center pt-0 pr-2 pb-0 pl-2 m-0">
-                                    <h2 class="h6 w-100 overflow-hidden">
-                                        <a class="url_no_decoration" href="{{route ('product.show', ['id' => $product->id] )}}">
-                                            {{$product->product_name}}
-                                        </a>
-                                    </h2>
-                                </div>
-                                <div class="product-item-price text-center pt-0 pr-2 pb-0 pl-2 m-0">
-                                    <p id="productPrice">{{__('text.price')}}: <b>{{$product->currentPrice()}}</b></p>
-                                </div>
-                                <div class="hide d-none">
-                                    <div class="product-item-description p-2">
-                                        <p class="overflow-hidden">{{$product->short_description}}</p>
-                                    </div>
-                                    <div class="product-item-button">
-                                        <button id="{{$product->id}}" class="btn btn-secondary w-100 m-0 btn_add_to_cart">{{__('actions.add_to_cart')}}</button>
+                            <div class="item">
+                                <div class="sub-container">
+                                    <a class="url_no_decoration" href="{{route('product.show',  ['id' => $product->id])}}"><div class="image" style="background-image:url({{asset('/img/logo/' . $product->logo_image)}}); background-color: transparent;"></div></a>
+                                    <a class="url_no_decoration" href="{{route('product.show',  ['id' => $product->id])}}"><h1 class="text-center">{{$product->product_name}}</h1></a>
+                                    <h2 class="text-dark text-center">{{__('text.price')}}: <b>{{$product->currentPrice()}}</b></h2>
+                                    <div class="informations">
+                                        <div class="product-item-description p-2">
+                                            <p class="overflow-hidden">{{$product->short_description}}</p>
+                                        </div>
+                                        <div class="product-item-button">
+                                            <button id="{{$product->id}}" class="btn btn-secondary w-100 m-0 btn_add_to_cart">{{__('actions.add_to_cart')}}</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -92,8 +80,8 @@
             <div class=""></div>
         </div>
     </div>
-
-
 </div>
+    <section class="place-holder"></section>
+    <section class="place-holder"></section>
     <section class="place-holder"></section>
 @endsection

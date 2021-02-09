@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\CategoryProduct;
+use App\Helpers\ImageHelper;
 use App\Http\Requests\StoreProductRequest;
 
 class ProductStoreService
@@ -19,12 +20,13 @@ class ProductStoreService
 
         if ($request->has('logo_image')) {
             if ($logo) {
-                $image_path = public_path() . '/img/logo/' . $logo;
-                unlink($image_path);
+                (new ImageHelper())->deleteImage($logo, '/img/logo/');
             }
+
             $image = $request->file('logo_image');
             $product->logo_image = $image->getClientOriginalName();
-            $image->move(public_path('img/logo'), $image->getClientOriginalName());
+
+            (new ImageHelper())->storeImageFile($image, '/img/logo/');
         } else {
             $product->logo_image = $logo;
         }

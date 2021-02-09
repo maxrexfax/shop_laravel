@@ -196,19 +196,6 @@ $(document).ready(function() {
         alert('Product ID=' + $(this).attr('id'));
     });
 
-    $( '.div-item-main-container' ).mouseover(function() {
-        $(this).find('.hide').removeClass(' d-none');
-        $(this).find('.hide').addClass(' d-block');
-        $(this).addClass(' class-top-shadow');
-
-    });
-
-    $( '.div-item-main-container' ).mouseout(function() {
-        $(this).removeClass(' class-top-shadow');
-        $(this).find('.hide').removeClass(' d-block');
-        $(this).find('.hide').addClass(' d-none');
-    });
-
     $(document).on('click', '#btnShowParentCategories', function(e) {
         if(!$('.root-menu-container').is(":visible")) {
             $.get( "/categories/root/list", function( data ) {

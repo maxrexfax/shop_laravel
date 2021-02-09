@@ -351,10 +351,26 @@ span[class*=" step"] {
 .div-item-main-container {
     height: 300px;
     background-color: white;
+    position:relative;
+    z-index: 1;
+
+    a {
+        display:block;
+        position:absolute;
+    }
+}
+
+.div-item-main-container:hover {
+    z-index: 2;
+}
+
+.div-item-main-container:hover a {
+    z-index: 2;
+    box-shadow: 0px 5px 16px 3px rgba(0,0,0,0.2), 0px -5px 16px 3px rgba(0,0,0,0.2);
 }
 
 .class-top-shadow {
-    box-shadow: 0 -3px 3px rgba(0,0,0,0.5);
+    //box-shadow: 0 -3px 3px rgba(0,0,0,0.5);
 }
 
 
@@ -452,6 +468,10 @@ span[class*=" step"] {
     overflow-y: auto;
 }
 
+.product-container {
+    position: relative;
+}
+
 .div-product-logo-image-container {
     height: 180px;
 }
@@ -474,10 +494,6 @@ span[class*=" step"] {
     cursor: pointer;
     font-weight: 500;
     font-family: roboto regular SansSerif, serif;
-}
-
-.checkbox-budget {
-
 }
 
 .checkbox-budget:hover .for-checkbox-budget {
@@ -621,19 +637,111 @@ span[class*=" step"] {
 
 .to-top-button {
     position: fixed;
-    bottom: 5%;
+    bottom: 10%;
     right: 5%;
-    font-size: 3em;
+    font-size: 5em;
     opacity: 0.5;
+    /*
     background-color: rgba(20, 20, 20, 0.2);
-    border-radius: 10px;
+    border-radius: 10px;*/
     cursor: pointer;
-    padding-left: 10px;
-    padding-right: 10px;
-    line-height: 1em;
+    width: 50px;
+    height: 50px;
+    padding: 1px;
     display: none;
+    color:gray;
 }
 
 .to-top-button:hover {
-    color: white;
+    color: darkcyan;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width:100%;
+    height:100%;
+    position:relative;
+    margin:0px;
+    padding:0px;
+
+    .item {
+        display:inline-block;
+        width:100%;
+        height:250px;
+        position:relative;
+        margin:0px;
+        padding:0px;
+        z-index:1;
+
+        .sub-container {
+            display:block;
+            width:100%;
+            height:auto;
+            padding:10px;
+            position:absolute;
+            background-color:white;
+        }
+
+    }
+
+}
+
+.products .item:hover {
+    z-index:2;
+}
+
+.products .item:hover .sub-container {
+    box-shadow:0px 0px 5px rgba(0,0,0,0.5);
+    -moz-box-shadow:0px 0px 5px rgba(0,0,0,0.5);
+    -webkit-box-shadow:0px 0px 5px rgba(0,0,0,0.5);
+    -o-box-shadow:0px 0px 5px rgba(0,0,0,0.5);
+    -ms-box-shadow:0px 0px 5px rgba(0,0,0,0.5);
+}
+
+.products .item .sub-container .image {
+    display:block;
+    height:150px;
+    position:relative;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-size:contain;
+    background-color:black;
+}
+
+.products .item .sub-container h1 {
+    display:block;
+    height:auto;
+    margin:10px 0px;
+    font-family:arial;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.products .item .sub-container h2 {
+    display:block;
+    height:auto;
+    margin:10px 0px;
+    font-size: 1em;
+    font-family:arial;
+    font-weight:normal;
+}
+
+.products .item .sub-container .informations {
+    display:none;
+}
+
+.products .item .sub-container .informations p {
+    display:block;
+    height:auto;
+    margin:5px 0px;
+    font-family:arial;
+    font-size: 0.8em;
+    color:grey;
+    font-weight:normal;
+}
+
+.products .item:hover .sub-container .informations {
+    display:block;
 }

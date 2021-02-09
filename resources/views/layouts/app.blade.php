@@ -129,10 +129,11 @@
         <footer>
             @include('footer.footer')
         </footer>
-
-        <div class="to-top-button d-none" title="{{__('actions.scroll_to_top')}}">
-            <a href="#app" class="url_no_decoration"> &#708;</a>
-        </div>
+        <a href="#app" class="url_no_decoration">
+            <div class="to-top-button d-none" title="{{__('actions.scroll_to_top')}}">
+                <i class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+            </div>
+        </a>
     </div>
 </body>
 </html>

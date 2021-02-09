@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Http\Requests\StoreImageRequest;
 use App\Image;
 use App\Product;
+use App\Services\ImageStoreService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 
 class ImageController extends Controller
@@ -15,25 +18,21 @@ class ImageController extends Controller
         $this->middleware('auth');
     }
 
-    public function store(Request $request)
+    public function store(StoreImageRequest $request)
     {
-        $savingImage = new Image();
-        $image = $request->file('imageAdd');
-        $savingImage->image_name = $image->getClientOriginalName();
-        $savingImage->product_id = $request->post('product_id');
-        $savingImage->sort_number = $request->post('sort_number');
-        $image->move(public_path('img/images'), $image->getClientOriginalName());
-        $savingImage->save();
+        (new ImageStoreService())->store($request);
 
         return redirect('product/images/' . $request->post('product_id'));
 
     }
 
-    public function delete($imageId)
+    public function delete($imageId, Request $request)
     {
         $image = Image::find($imageId);
         if ($image) {
             $image->delete();
+            $image_path = public_path() . '/img/' . $request->get('subPath') . '/' . $image->image_name;
+            unlink($image_path);
         }
 
         return redirect()->back();

@@ -28,4 +28,17 @@ class StorePhoneRequest extends FormRequest
             'phone_info' => 'string|required|max:255',
         ];
     }
+
+    /**
+     * @return string[]
+     */
+    public function messages()
+    {
+        return [
+            'phone_number.required' => trans('messages.phone_number_required'),
+            'phone_number.digits:10' => trans('messages.phone_number_digits10'),
+            'phone_info.required' => trans('messages.phone_info_required'),
+            'phone_info.max:255' => trans('messages.phone_info_max255'),
+        ];
+    }
 }

@@ -17,8 +17,8 @@
                                 </div>
 
                                 <div class="accordion_content p-0">
-                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.category.list')}}">{{ __('actions.categories') }}</a></p>
-                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.product.list')}}">{{ __('actions.products') }}</a></p>
+                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-4 mb-0" href="{{route('admin.category.list')}}">{{ __('actions.categories') }}</a></p>
+                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-4 mb-0" href="{{route('admin.product.list')}}">{{ __('actions.products') }}</a></p>
 
                                 </div>
                             </div>
@@ -29,9 +29,10 @@
                                 </div>
 
                                 <div class="accordion_content p-0">
-                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.stores.list')}}">{{ __('actions.stores') }}</a></p>
-                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.currency.list')}}">{{ __('actions.currency') }}</a></p>
-                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.locales.list')}}">{{ __('actions.locales') }}</a></p>
+                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-4 mb-0" href="{{route('admin.stores.list')}}">{{ __('actions.stores') }}</a></p>
+                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-4 mb-0" href="{{route('admin.currency.list')}}">{{ __('actions.currency') }}</a></p>
+                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-4 mb-0" href="{{route('admin.locales.list')}}">{{ __('actions.locales') }}</a></p>
+                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-4 mb-0" href="{{route('admin.deliveries.list')}}">{{ __('actions.deliveries') }}</a></p>
                                 </div>
                             </div>
                             <div>
@@ -41,7 +42,7 @@
                                 </div>
 
                                 <div class="accordion_content p-0">
-                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-2 mb-0" href="{{route('admin.users.list')}}">{{ __('actions.users') }}</a></p>
+                                    <p class="w-100 border_bottom oneHeight"><a class="url_in_accordion ml-4 mb-0" href="{{route('admin.users.list')}}">{{ __('actions.users') }}</a></p>
                                 </div>
                             </div>
                         </div>

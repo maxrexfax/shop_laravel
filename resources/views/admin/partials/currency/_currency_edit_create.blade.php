@@ -19,7 +19,7 @@
                     @endif
                 </div>
                 <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data" action="{{ route('currency.store') }}@if(!empty($currency))/{{$currency->id}}@endif">
+                    <form method="POST" enctype="multipart/form-data" action="{{ route('currency.store', ['id' => isset($currency) ? $currency->id : '']) }}">
                         @csrf
 
                         <div class="form-group row">
@@ -62,7 +62,20 @@
 
                             <div class="col-md-6">
                                 <input id="currency_value" type="number" min="0" max="99999" step="0.01" class="form-control @error('currency_value') is-invalid @enderror" name="currency_value" value="@if(!empty($currency)){{$currency->currency_value}}@endif">
-                                @error('store_description')
+                                @error('currency_value')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="currency_symbol" class="col-md-4 col-form-label text-md-right">{{ __('actions.currency_symbol') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="currency_symbol" type="text" class="form-control @error('currency_symbol') is-invalid @enderror" name="currency_symbol" value="@if(!empty($currency)){{$currency->currency_symbol}}@endif" required>
+                                @error('currency_symbol')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

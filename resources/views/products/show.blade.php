@@ -26,8 +26,8 @@
 
                     <div class="col-lg-4 col-md-4 col-sm-12 p-2">
                         <div class="my-product-right-banner rounded h-100 p-2">
-                            <div class="w-100 overflow-hidden" style="height: 10%">
-                                <h2 class="">{{$product->product_name}}</h2>
+                            <div class="w-100 overflow-hidden" style="max-height: 9%">
+                                <h2 class="h-3">{{$product->product_name}}</h2>
                             </div>
                             <div class="clearfix">
                                 <span class="float-left">{{__('text.item')}}:</span><span class="float-right text-dark font-weight-bold">{{__('text.in_stock')}}</span>
@@ -79,14 +79,14 @@
     </div>
     <section class="place-holder"></section>
     <section class="place-holder"></section>
-    <div id="shadow">
+    <div id="shadow" class="d-none">
         <span class="modal-control-elements step-back" title="{{__('text.previous')}}">&#9664;</span>
         <span class="modal-control-elements step-forward" title="{{__('text.next')}}">&#9654;</span>
     </div>
     <div id="modalWithImages">
         <p id="closePopupSymbol" class="float-right modal-control-elements" title="Close"><i class="fa fa-window-close" aria-hidden="true"></i></p><br>
         <span class="text-center"><img src="" alt="" /></span>
-        <p id="imagesGalleryInfo" class="float-right"></p>
+        <p id="imagesGalleryInfo" class="float-right text-white"></p>
     </div>
 </div>
 @endsection

@@ -33,8 +33,10 @@ class StoreStoreRequest extends FormRequest
     public function messages()
     {
         return [
-            'store_name.required' =>'Store name required!',
-            'store_name.max:255' =>'Store name 255 symbols max!',
+            'store_name.required' => trans('messages.ssr_store_name_required'),
+            'store_name.max:255' => trans('messages.ssr_store_name_255_symbols_max'),
+            'store_description.max:500' => trans('messages.ssr_store_description_500_symbols_max'),
+            'store_keywords.max:500' => trans('messages.ssr_store_keywords_500_symbols_max!'),
         ];
     }
 }

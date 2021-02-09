@@ -43,8 +43,14 @@ class StoreUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'store_name.required' =>'Store name required!',
-            'store_name.max:255' =>'Store name 255 symbols max!',
+            'login.required' => trans('messages.sur_user_login_required'),
+            'login.max:255' => trans('messages.sur_user_login_255_symbols_max'),
+            'first_name.max:255' => trans('messages.sur_user_first_name_255_symbols_max'),
+            'second_name.max:255' => trans('messages.sur_user_second_name_255_symbols_max'),
+            'last_name.max:255' => trans('messages.sur_user_last_name_255_symbols_max'),
+            'email.required' => trans('messages.sur_email_required'),
+            'email.max:255' => trans('messages.sur_email_255_symbols_max'),
+            'password.required' => trans('messages.Password required!'),
         ];
     }
 }

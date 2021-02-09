@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class CurrencyValueReloadService
 {
+    const PRIVAT_BANK_CURRENCY_API_URL = 'https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11';
     public function reloadCurrenciesValues()
     {
         $collectionOfValues = self::getDataFromPbApi();
@@ -18,12 +19,11 @@ class CurrencyValueReloadService
             $currency->currency_value = $dataForCurrentCurrency['sale'];
             $currency->save();
         }
-
     }
 
     public function getDataFromPbApi()
     {
-        $response = Http::get('https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11');
+        $response = Http::get(self::PRIVAT_BANK_CURRENCY_API_URL);
         return collect(json_decode($response->body(), true));
 
     }

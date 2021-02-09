@@ -31,6 +31,11 @@ class CreateStoreLocaleTable extends Migration
      */
     public function down()
     {
+        Schema::table('store_locale', function(Blueprint $table)
+        {
+            $table->dropForeign('store_id'); //
+            $table->dropForeign('locale_id'); //
+        });
         Schema::dropIfExists('store_locale');
     }
 }

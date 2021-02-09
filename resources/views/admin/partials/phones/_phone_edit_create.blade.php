@@ -24,7 +24,7 @@
                     @endif
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('phone.store') }}@if(!empty($phone))/{{$phone->id}}@endif">
+                    <form method="POST" action="{{ route('phone.store', ['id' => isset($phone) ? $phone->id : '']) }}">
                         @csrf
 
                         <div class="form-group row">

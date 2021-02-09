@@ -24,6 +24,7 @@ class StoreCategoryRequest extends FormRequest
     public function rules()
     {
         return [
+            'category_logo' => 'image',
             'category_name' => 'string|required|max:255',
             'category_id' => 'integer|exists:categories,id|nullable',
             'sort_number' => 'integer|nullable',
@@ -37,12 +38,13 @@ class StoreCategoryRequest extends FormRequest
     public function messages()
     {
         return [
-            'category_name.required' =>'Category name required!',
-            'category_name.max:255' =>'Category name max 255 chars long!',
-            'category_id.exists:categories,id' => 'Choose existing category!',
-            'category_id.integer' => 'Only digit category id!',
-            'sort_number.integer' => 'Only digit sort number!',
-            'category_description.max:500' => 'Category description max 500 chars long!',
+            'category_logo.image' => trans('messages.only_image'),
+            'category_name.required' => trans('messages.category_name_required'),
+            'category_name.max:255' =>trans('messages.category_name_max_255'),
+            'category_id.exists:categories,id' => trans('messages.category_existing_chose'),
+            'category_id.integer' => trans('messages.category_id_only_digits'),
+            'sort_number.integer' => trans('messages.category_sort_only_digits'),
+            'category_description.max:500' => trans('messages.category_description_500_long!'),
         ];
     }
 }

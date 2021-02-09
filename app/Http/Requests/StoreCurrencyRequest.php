@@ -34,13 +34,13 @@ class StoreCurrencyRequest extends FormRequest
     public function messages()
     {
         return [
-            'currency_name.required' =>'Currency name required!',
-            'currency_name.max:255' =>'Currency name 255 symbols max!',
-            'currency_code.required' =>'Currency code required!',
-            'currency_code.max:10' =>'Currency code 10 symbols max!',
-            'currency_value.required' =>'Currency value required!',
-            'currency_value.numeric' =>'Currency value numeric!',
-            'currency_value.between:0,9999.99' =>'From 0 to 9999.99!',
+            'currency_name.required' => trans('messages.currency_name_required'),
+            'currency_name.max:255' => trans('messages.currency_name_max_255'),
+            'currency_code.required' => trans('messages.currency_code_required'),
+            'currency_code.max:10' => trans('messages.currency_code_max_10'),
+            'currency_value.required' => trans('messages.currency_value_required'),
+            'currency_value.numeric' => trans('messages.currency_value_numeric'),
+            'currency_value.between:0,9999.99' => trans('messages.currency_from_0_to_9999'),
         ];
     }
 }

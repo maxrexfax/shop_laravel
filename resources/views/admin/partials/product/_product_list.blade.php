@@ -8,7 +8,7 @@
             </a>
         </div>
             <div class="col-12 p-0">
-                <table class="table table-striped w-100">
+                <table class="table table-striped w-100 table-for-users-list">
                     <thead class="thead-dark">
                     <tr>
                         <th>{{ __('actions.product_id') }}</th>
@@ -35,7 +35,7 @@
                             <td>{{$product->product_name}}</td>
                             <td>{{$product->price}}</td>
                             <td>{{$product->title}}</td>
-                            <td><span>{{$product->short_description}}</span></td>
+                            <td><div class="td-short-description">{{$product->short_description}}</div></td>
                             <td>{{$product->rating}}</td>
                             <td><a href="{{route('product.create', ['id' => $product->id])}}"><i class="fas fa-pencil-alt"></i></a></td>
                         </tr>

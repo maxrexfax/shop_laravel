@@ -18,27 +18,26 @@ class ProductController extends Controller
                     'categories' => Category::all(),
                     'product' => $product
                 ]);
-            } else {
-                return redirect('admin/product/list');
             }
-        } else {
-            return view('admin.partials.product._product_edit_create', [
-                'categories' => Category::all()
-            ]);
+
+            return redirect('admin/product/list');
+
         }
+
+        return view('admin.partials.product._product_edit_create', [
+            'categories' => Category::all()
+        ]);
+
     }
 
     public function store($id = null, StoreProductRequest $request)
     {
         $product = Product::find($id);
 
-        if ($product) {
-            (new ProductStoreService())->store($request, $product);
-
-            return redirect('admin/product/list');
+        if (!$product) {
+            $product = new Product();
         }
 
-        $product = new Product($request->post());
         (new ProductStoreService())->store($request, $product);
 
         return redirect('admin/product/list');
@@ -47,6 +46,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
+
         if ($product) {
             return view('products.show', [
                 'product' => $product,
@@ -54,6 +54,7 @@ class ProductController extends Controller
                 'alternativeDescription' => $product->description,
             ]);
         }
+
         return redirect('/');
     }
 

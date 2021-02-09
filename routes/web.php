@@ -33,6 +33,7 @@ Route::group(['middleware'=>'language'],function ()
     Route::get('/admin/stores/list', 'AdminController@storeList')->name('admin.stores.list');
     Route::get('/admin/currencies/list', 'AdminController@currencyList')->name('admin.currency.list');
     Route::get('/admin/locales/list', 'AdminController@localesList')->name('admin.locales.list');
+    Route::get('/admin/deliveries/list', 'AdminController@deliveriesList')->name('admin.deliveries.list');
 
 
     Route::get('/category/create/{id?}', 'CategoryController@create')->name('category.create');
@@ -41,6 +42,11 @@ Route::group(['middleware'=>'language'],function ()
 
     Route::get('/currency/create/{id?}', 'CurrencyController@create')->name('currency.create');
     Route::post('/currency/store/{id?}', 'CurrencyController@store')->name('currency.store');
+
+    Route::get('/delivery/create/{id?}', 'DeliveryController@create')->name('delivery.create');
+    Route::post('/delivery/store/{id?}', 'DeliveryController@store')->name('delivery.store');
+    Route::get('/delivery/destroy/{id?}', 'DeliveryController@destroy')->name('delivery.destroy');
+
 
     Route::get('/locale/create/{id?}', 'LocaleController@create')->name('locale.create');
     Route::post('/locale/store/{id?}', 'LocaleController@store')->name('locale.store');
@@ -60,10 +66,12 @@ Route::group(['middleware'=>'language'],function ()
     Route::post('/store/store/{id?}', 'StoreController@store')->name('store.store');
     Route::post('/store/locales/store/{id?}', 'StoreController@storeLocales')->name('store.locales.store');
     Route::post('/store/currency/store/{id?}', 'StoreController@storeCurrency')->name('store.currency.store');
+    Route::post('/store/delivery/store/{id?}', 'StoreController@storeDelivery')->name('store.delivery.store');
     Route::get('/store/phonelist/{id}', 'StoreController@phoneList')->name('store.phonelist');
     Route::get('/store/langlist/{id}', 'StoreController@languageList')->name('store.langlist');
     Route::get('/store/currencylist/{id}', 'StoreController@currencyList')->name('store.currencylist');
     Route::get('/store/changeactive/{id}', 'StoreController@changeActive')->name('store.changeactive');
+    Route::get('/store/deliverylist/{id}', 'StoreController@deliveryList')->name('store.deliverylist');
 
     Route::get('/user/delete/{id}', 'UserController@destroy')->name('user.delete');
     Route::get('/user/create/{id?}', 'UserController@create')->name('user.create');
@@ -87,3 +95,7 @@ Route::get('/locale/{locale}', function ($locale) {
 Route::get('/set-currency/{currency}', 'StoreController@setDefaultCurrency')->name('set.current.currency');
 
 Route::get('/currency/reload', 'CurrencyController@reloadCurrencyValue')->name('currency.reload');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

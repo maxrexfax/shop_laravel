@@ -28,4 +28,17 @@ class StoreLocaleRequest extends FormRequest
             'locale_code' => 'string|required|max:10',
         ];
     }
+
+    /**
+     * @return string[]
+     */
+    public function messages()
+    {
+        return [
+            'locale_name.required' => trans('messages.locale_name_required'),
+            'locale_name.max:255' => trans('messages.locale_name_max_255'),
+            'locale_code.required' => trans('messages.locale_code_required'),
+            'locale_code.max:10' => trans('messages.locale_code_max_10'),
+        ];
+    }
 }

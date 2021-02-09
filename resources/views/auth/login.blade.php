@@ -67,8 +67,8 @@
                     </form>
                 </div>
             </div>
-            <section class="place-holder"></section>
         </div>
     </div>
 </div>
+<section class="place-holder"></section>
 @endsection

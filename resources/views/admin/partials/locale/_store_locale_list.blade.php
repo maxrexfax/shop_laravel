@@ -13,7 +13,7 @@
                             @csrf
                             <div class="form-group row">
                                 <label for="" class="col-md-2 col-form-label text-md-right"> </label>
-                                <div class="col-md-8 mt-2">
+                                <div class="col-md-10 offset-md-1 mt-2">
                                     <div id="divWithLocalesList" class="border rounded p-2">
                                         <p class="text-center">{{__('text.current_store_locales:')}}</p>
                                         <table class="table table-striped">
@@ -50,22 +50,20 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="selectToAddLocaleToStoreDiv" class="col-md-2 col-form-label text-md-right"> </label>
-                                <div class="col-md-8 text-center">
+                                <div class="col-md-10 offset-md-1 text-center">
                                     <p>{{ __('actions.locales_to_add') }}</p>
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="selectToAddLocaleToStoreDiv" class="col-md-2 col-form-label text-md-right"> </label>
-                                <div class="col-md-7">
+                                <div class="col-md-7 offset-md-1">
                                     <select class="form-control" id="selectToAddLocaleToStoreDiv">
                                         @foreach($locales as $locale)
                                             <option value="{{$locale->id}}">{{$locale->locale_name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="col-md-1 text-right">
-                                    <span id="btnToAddLocaleToStoreDiv" data-confirm="{{__('text.already_in_use')}}" class="btn btn-secondary">{{__('actions.add')}}</span>
+                                <div class="col-md-2 text-right">
+                                    <span id="btnToAddLocaleToStoreDiv" data-confirm="{{__('text.already_in_use')}}" class="btn btn-secondary w-100">{{__('actions.add')}}</span>
                                 </div>
                             </div>
                             <div class="form-group row mb-0">

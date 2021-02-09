@@ -19,7 +19,7 @@
                     @endif
                 </div>
                 <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data" action="{{ route('locale.store') }}@if(!empty($locale))/{{$locale->id}}@endif">
+                    <form method="POST" enctype="multipart/form-data" action="{{ route('locale.store', ['id' => isset($locale) ? $locale->id : '']) }}">
                         @csrf
 
                         <div class="form-group row">

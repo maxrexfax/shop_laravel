@@ -62,4 +62,9 @@ class Store extends Model
     {
         return $this->hasMany(StoreLocale::class, 'store_id', 'id');
     }
+
+    public function deliveries()
+    {
+        return $this->belongsToMany(Delivery::class, 'store_delivery');
+    }
 }

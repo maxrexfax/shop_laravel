@@ -18,16 +18,13 @@ class CurrencyController extends Controller
             if ($currency) {
                 return view ('admin.partials.currency._currency_edit_create', [
                     'currency' => $currency,
-                    'alt_title' => 'Edit currency ' . $currency->currency_name
                 ]);
             } else {
                 return redirect('/admin/currencies/list');
             }
 
         } else {
-            return view ('admin.partials.currency._currency_edit_create', [
-                'alt_title' => 'Create new currency'
-            ]);
+            return view ('admin.partials.currency._currency_edit_create');
         }
     }
 
@@ -35,13 +32,9 @@ class CurrencyController extends Controller
     {
         $currency = Currency::find($id);
 
-        if ($currency) {
-            (new CurrencyStoreService())->store($currency ,$request);
-
-            return redirect('/admin/currencies/list');
+        if (!$currency) {
+            $currency = new Currency();
         }
-
-        $currency = new Currency();
 
         (new CurrencyStoreService())->store($currency ,$request);
 

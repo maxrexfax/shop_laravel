@@ -15,6 +15,5 @@ class UserStoreService
         $user->last_name = $request->post('last_name');
         $user->email = $request->post('email');
         $user->save();
-
     }
 }

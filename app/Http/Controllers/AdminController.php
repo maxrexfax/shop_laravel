@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Currency;
+use App\Delivery;
 use App\Helpers\PaginationQuantityHelper;
 use App\Image;
 use App\Locale;
@@ -35,10 +36,10 @@ class AdminController extends Controller
         $categoriesHierarchically = Category::whereNull('category_id')
             ->with('childrenCategories')
             ->get();
-        $categories = Category::all()->sortBy('sort_number');
+
         return view('admin.partials.category._category_list', [
             'categoriesHierarchically' => $categoriesHierarchically,
-            'categories' => $categories,
+            'categories' => Category::all()->sortBy('sort_number'),
             'alternativeTitle' => Lang::get('messages.categories_list'),
         ]);
     }
@@ -48,10 +49,9 @@ class AdminController extends Controller
         $categoriesHierarchically = Category::whereNull('category_id')
             ->with('childrenCategories')
             ->get();
-        $products = Product::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY);
 
         return view('admin.partials.product._product_list', [
-            'products' => $products,
+            'products' => Product::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
             'images' => Image::all(),
             'categoriesHierarchically' => $categoriesHierarchically,
             'alternativeTitle' => Lang::get('messages.product_list'),
@@ -88,6 +88,14 @@ class AdminController extends Controller
         return view('admin.partials.locale._locales_list', [
             'locales' => Locale::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
             'alternativeTitle' => Lang::get('messages.locales_list'),
+        ]);
+    }
+
+    public function deliveriesList()
+    {
+        return view('admin.partials.delivery._deliveries_list', [
+            'deliveries' => Delivery::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
+            'alternativeTitle' => Lang::get('messages.deliveries_list'),
         ]);
     }
 

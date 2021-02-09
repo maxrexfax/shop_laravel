@@ -41,17 +41,20 @@ class StoreProductRequest extends FormRequest
     public function messages()
     {
         return [
-            'logo_image.image' =>'Product logo only image!',
-            'product_name.required' =>'Product name required!',
-            'product_name.max:255' =>'Product name 255 symbols max!',
-            'rating.integer' =>'Rating value only digit!',
-            'rating.digits_between:0,5' =>'Rating value from 0 to 5!',
-            'price.required' =>'Price is required!',
-            'price.numeric' =>'Price must be numeric!',
-            'price.between:0,99999.99' =>'Price from 0 to 99999.99!',
-            'description.required' =>'Description is required!',
-            'description.max:255' =>'Description maximum 255 chars!',
-            'short_description.max:500' =>'Short description maximum 500 chars!',
+            'logo_image.image' => trans('messages.spr_product_logo_only_image'),
+            'product_name.required' => trans('messages.spr_product_name_required'),
+            'product_name.max:255' => trans('messages.spr_product_name_255_symbols_max'),
+            'rating.integer' => trans('messages.spr_rating_value_only_digit'),
+            'rating.digits_between:0,5' => trans('messages.spr_rating_value_from_0_to_5'),
+            'price.required' => trans('messages.spr_price_is_required'),
+            'price.numeric' => trans('messages.spr_price_must_be_numeric'),
+            'price.between:0,99999.99' => trans('messages.spr_price_from_0_to_99999'),
+            'title.required' => trans('messages.spr_title_is_required'),
+            'title.max:255' => trans('messages.spr_title_maximum_255_chars'),
+            'description.required' => trans('messages.spr_description_is_required'),
+            'description.max:255' => trans('messages.spr_description_maximum_255_chars'),
+            'short_description.required' => trans('messages.spr_short_description_is_required'),
+            'short_description.max:500' => trans('messages.spr_short_description_maximum_500_chars'),
         ];
     }
 }

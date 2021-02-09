@@ -13,10 +13,10 @@ class User extends Authenticatable
     const ROLE_ADMIN_NAME = 'admin';
 
     public const VALIDATION_RULES = [
-        'login' => ['required', 'required', 'max:255'],
-        'first_name' => ['required', 'nullable', 'max:255'],
-        'second_name' => ['required', 'nullable', 'max:255'],
-        'last_name' => ['required', 'nullable', 'max:255'],
+        'login' => ['required', 'max:255'],
+        'first_name' => ['nullable', 'max:255'],
+        'second_name' => ['nullable', 'max:255'],
+        'last_name' => ['nullable', 'max:255'],
         'email' => ['string', 'max:255', 'required'],
     ];
 

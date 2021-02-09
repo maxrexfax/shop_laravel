@@ -32,9 +32,8 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param null $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
     public function create($id = null)
     {
@@ -42,24 +41,21 @@ class UserController extends Controller
             $user = User::find($id);
             if ($user) {
                 return view('admin.partials.user._user_edit_create', [
-                    'alt_title' => 'Edit user ' . $user->login,
                     'user' => $user,
                 ]);
-            } else {
-                return redirect('/admin/users/list');
             }
-        } else {
-            return view('admin.partials.user._user_edit_create', [
-                'alt_title' => 'Create new user'
-            ]);
+
+            return redirect('/admin/users/list');
+
         }
+
+        return view('admin.partials.user._user_edit_create');
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param null $id
+     * @param StoreUserRequest $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store($id = null, StoreUserRequest $request)
     {
@@ -72,17 +68,14 @@ class UserController extends Controller
             }
 
             (new UserStoreService())->storeuser($request, $user);
-
         }
         return redirect('admin/users/list');
     }
 
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return string
      */
     public function destroy($id)
     {

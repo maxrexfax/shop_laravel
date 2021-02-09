@@ -50,6 +50,7 @@ class StoreController extends Controller
     public function phoneList($id = null)
     {
         $store = Store::find($id);
+
         if ($store) {
             return view('admin.partials.phones._phones_list', [
                 'store' => $store,
@@ -63,6 +64,7 @@ class StoreController extends Controller
     public function languageList($id = null)
     {
         $store = Store::find($id);
+
         if ($store) {
             return view('admin.partials.locale._store_locale_list', [
                 'store' => $store,
@@ -74,6 +76,7 @@ class StoreController extends Controller
     public function storeLocales($id, Request $request)
     {
         $store = Store::find($id);
+
         if ($store) {
             (new StoreLocaleStoreService())->store($store, $request);
         }
@@ -84,6 +87,7 @@ class StoreController extends Controller
     public function storeDelivery($id, StoreDeliveryStoreRequest $request)
     {
         $store = Store::find($id);
+
         if ($store) {
             (new StoreDeliveryStoreService())->store($store, $request);
         }
@@ -110,15 +114,16 @@ class StoreController extends Controller
     public function storeCurrency($id, Request $request)
     {
         $store = Store::find($id);
+
         if ($store) {
             (new StoreCurrencyStoreService())->store($store, $request);
         }
+
         return redirect()->back();
     }
 
     public function changeActive($id)
     {
-
         $store = Store::find($id);
 
         if ($store) {

@@ -14,5 +14,4 @@ class PhoneStoreService
         $phone->store_id = $request->post('store_id');
         $phone->save();
     }
-
 }

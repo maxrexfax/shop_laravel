@@ -44,8 +44,8 @@ $(document).ready(function() {
 
     function getNameOfCurrentImage() {
         let currentImg = $('#modalWithImages').find('img');
-        let src = $(currentImg).attr('src'); // "static/images/banner/blue.jpg"
-        let tempArray = src.split('/');      // ["static","images","banner","blue.jpg"]
+        let src = $(currentImg).attr('src');
+        let tempArray = src.split('/');
         let nameOfCurrentImage = tempArray[tempArray.length-1];
         return nameOfCurrentImage;
     }
@@ -261,9 +261,9 @@ $(document).ready(function() {
     });
 
     $( window ).scroll(function() {
-        $( '.to-top-button' ).removeClass('d-none').addClass('d-block');//?? - $( '.to-top-button' ).show();
+        $( '.to-top-button' ).show();
         if ($('html, body').scrollTop() == 0) {
-            $( '.to-top-button' ).removeClass('d-block').addClass('d-none');//?? - $( '.to-top-button' ).hide();
+            $( '.to-top-button' ).hide();
         }
     });
 

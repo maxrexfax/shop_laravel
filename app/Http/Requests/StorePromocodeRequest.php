@@ -27,7 +27,7 @@ class StorePromocodeRequest extends FormRequest
             'promocode_name' => [
                 'required',
                 'max:30',
-                'regex:^[A-Z0-9]$^',
+                'regex:/^[A-Z0-9]+$/',
             ],
             'promocode_value' => ['required', 'between:0,99.99'],
         ];

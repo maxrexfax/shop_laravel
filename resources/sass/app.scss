@@ -102,7 +102,7 @@ body {
     top:80px
 }
 
-.footer_div {
+.footer-div {
     background: url("/img/background/background.png") no-repeat scroll;
     background-size: cover;
     font-family: roboto regular SansSerif, serif;
@@ -268,17 +268,17 @@ span[class*=" step"] {
     width: 100%;
 }
 
-.accordion_header {
+.accordion-header {
     color: #1d68a7;
     cursor: pointer;
     width: 100%;
 }
 
-.accordion_header:hover {
+.accordion-header:hover {
     color: #939598;
 }
 
-.accordion_content a {
+.accordion-content a {
     text-decoration: none;
     color: gray;
     cursor: pointer;
@@ -288,14 +288,14 @@ span[class*=" step"] {
     font-weight: bold;
 }
 
-.accordion_content a:hover {
+.accordion-content a:hover {
     text-decoration: none;
     font-weight: bold;
     color: #126DD2;
     font-family: roboto regular SansSerif, serif;
 }
 
-.border_bottom {
+.border-bottom {
     border-bottom: 1px solid gray;
 }
 
@@ -324,28 +324,12 @@ span[class*=" step"] {
     margin-bottom: 0 !important;
 }
 
-.background_as_nav {
+.background-as-nav {
     background-color: #f8f9fa !important;
 }
 
 .my-cursor-pointer {
     cursor: pointer;
-}
-
-.modalWindowToManageProductImages {
-    position: absolute;
-    max-width: 900px;
-    width: 100%;
-    max-height: 90vh;
-    z-index: 101;
-    top: 50%;
-    left: 50%;
-    background: lightgray;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 2px 10px;
-    display: none;
-    transform: translate(-50%, -50%);
 }
 
 .div-item-main-container {
@@ -482,14 +466,14 @@ span[class*=" step"] {
     width: 50%;
 }
 
-.url_no_decoration {
+.url-no-decoration {
     text-decoration: none;
     cursor: pointer;
     font-weight: 500;
     font-family: roboto regular SansSerif, serif;
 }
 
-.url_no_decoration:hover {
+.url-no-decoration:hover {
     text-decoration: none;
     cursor: pointer;
     font-weight: 500;
@@ -641,9 +625,6 @@ span[class*=" step"] {
     right: 5%;
     font-size: 5em;
     opacity: 0.5;
-    /*
-    background-color: rgba(20, 20, 20, 0.2);
-    border-radius: 10px;*/
     cursor: pointer;
     width: 50px;
     height: 50px;
@@ -682,66 +663,63 @@ span[class*=" step"] {
             padding:10px;
             position:absolute;
             background-color:white;
+
+            .image {
+                display:block;
+                height:150px;
+                position:relative;
+                background-position:center center;
+                background-repeat:no-repeat;
+                background-size:contain;
+                background-color:black;
+            }
+
+            h1 {
+                display:block;
+                height:auto;
+                margin:10px 0px;
+                font-family:arial;
+                font-size:20px;
+                font-weight:bold;
+            }
+
+            h2 {
+                display:block;
+                height:auto;
+                margin:10px 0px;
+                font-size: 1em;
+                font-family:arial;
+                font-weight:normal;
+            }
+
+            .informations {
+                display:none;
+
+                p {
+                    display:block;
+                    height:auto;
+                    margin:5px 0px;
+                    font-family:arial;
+                    font-size: 0.8em;
+                    color:grey;
+                    font-weight:normal;
+                }
+            }
         }
-
     }
+    .item:hover {
+        z-index:2;
 
-}
+        .sub-container {
+            box-shadow:0px 0px 5px rgba(0,0,0,0.5);
+            -moz-box-shadow:0px 0px 5px rgba(0,0,0,0.5);
+            -webkit-box-shadow:0px 0px 5px rgba(0,0,0,0.5);
+            -o-box-shadow:0px 0px 5px rgba(0,0,0,0.5);
+            -ms-box-shadow:0px 0px 5px rgba(0,0,0,0.5);
 
-.products .item:hover {
-    z-index:2;
-}
-
-.products .item:hover .sub-container {
-    box-shadow:0px 0px 5px rgba(0,0,0,0.5);
-    -moz-box-shadow:0px 0px 5px rgba(0,0,0,0.5);
-    -webkit-box-shadow:0px 0px 5px rgba(0,0,0,0.5);
-    -o-box-shadow:0px 0px 5px rgba(0,0,0,0.5);
-    -ms-box-shadow:0px 0px 5px rgba(0,0,0,0.5);
-}
-
-.products .item .sub-container .image {
-    display:block;
-    height:150px;
-    position:relative;
-    background-position:center center;
-    background-repeat:no-repeat;
-    background-size:contain;
-    background-color:black;
-}
-
-.products .item .sub-container h1 {
-    display:block;
-    height:auto;
-    margin:10px 0px;
-    font-family:arial;
-    font-size:20px;
-    font-weight:bold;
-}
-
-.products .item .sub-container h2 {
-    display:block;
-    height:auto;
-    margin:10px 0px;
-    font-size: 1em;
-    font-family:arial;
-    font-weight:normal;
-}
-
-.products .item .sub-container .informations {
-    display:none;
-}
-
-.products .item .sub-container .informations p {
-    display:block;
-    height:auto;
-    margin:5px 0px;
-    font-family:arial;
-    font-size: 0.8em;
-    color:grey;
-    font-weight:normal;
-}
-
-.products .item:hover .sub-container .informations {
-    display:block;
+            .informations {
+                display:block;
+            }
+        }
+    }
 }

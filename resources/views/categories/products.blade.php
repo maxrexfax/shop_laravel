@@ -52,8 +52,8 @@
                         <div class="col-lg-4 col-md-4 col-xs-12 p-3">
                             <div class="item">
                                 <div class="sub-container">
-                                    <a class="url_no_decoration" href="{{route('product.show',  ['id' => $product->id])}}"><div class="image" style="background-image:url({{asset('/img/logo/' . $product->logo_image)}}); background-color: transparent;"></div></a>
-                                    <a class="url_no_decoration" href="{{route('product.show',  ['id' => $product->id])}}"><h1 class="text-center">{{$product->product_name}}</h1></a>
+                                    <a class="url-no-decoration" href="{{route('product.show',  ['id' => $product->id])}}"><div class="image" style="background-image:url({{asset('/img/logo/' . $product->logo_image)}}); background-color: transparent;"></div></a>
+                                    <a class="url-no-decoration" href="{{route('product.show',  ['id' => $product->id])}}"><h1 class="text-center">{{$product->product_name}}</h1></a>
                                     <h2 class="text-dark text-center">{{__('text.price')}}: <b>{{$product->currentPrice()}}</b></h2>
                                     <div class="informations">
                                         <div class="product-item-description p-2">

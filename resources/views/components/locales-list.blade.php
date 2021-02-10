@@ -5,7 +5,7 @@
             </span>
         <div class="dropdown-content">
             @foreach($locales as $locale)
-                <a class="my-dropdown-item url_no_decoration text-white p-1" title="{{$locale->locale_name}}" href="{{ url('/locale', ['locale' => $locale->locale_code]) }}">{{$locale->locale_code}}</a>
+                <a class="my-dropdown-item url-no-decoration text-white p-1" title="{{$locale->locale_name}}" href="{{ url('/locale', ['locale' => $locale->locale_code]) }}">{{$locale->locale_code}}</a>
                 @endforeach
         </div>
     </div>

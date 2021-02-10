@@ -1,5 +1,5 @@
 
-<div class="footer_div d-none d-sm-block">
+<div class="footer-div d-none d-sm-block">
     <section>
         <div id="divForSubcribingOnMainPage" class="bg-white p-3">
             <div class="row pl-2 h-100">

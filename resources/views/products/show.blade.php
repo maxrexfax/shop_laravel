@@ -85,7 +85,7 @@
     </div>
     <div id="modalWithImages">
         <p id="closePopupSymbol" class="float-right modal-control-elements" title="Close"><i class="fa fa-window-close" aria-hidden="true"></i></p><br>
-        <span class="text-center"><img src="" alt="" /></span>
+        <div style="max-width: 60%;" class="text-center"><img class="w-100" src="" alt="" /></div>
         <p id="imagesGalleryInfo" class="float-right text-white"></p>
     </div>
 </div>

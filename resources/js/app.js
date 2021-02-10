@@ -182,16 +182,6 @@ $(document).ready(function() {
         e.stopPropagation();
     });
 
-    $(document).on('click', '#btnShowModalToEditImages', function(e) {
-        $('#shadowEdit').show();
-        $('#modalWindowToManageProductImages').show();
-    });
-
-    $(document).on('click', '#shadowEdit', function(e) {
-        $('#shadowEdit').hide();
-        $('#modalWindowToManageProductImages').hide();
-    });
-
     $(document).on('click', '.btn_add_to_cart', function(e) {
         alert('Product ID=' + $(this).attr('id'));
     });
@@ -219,7 +209,7 @@ $(document).ready(function() {
 
     function createDivElementForRootCatgoryLink(id, name)
     {
-        return divElementForRootCatgoryLink = '<a class="url_no_decoration" href="/product/category/' + id + '"><div class="col-lg-12 popup-root-categories-item">' +
+        return divElementForRootCatgoryLink = '<a class="url-no-decoration" href="/product/category/' + id + '"><div class="col-lg-12 popup-root-categories-item">' +
             '' + name + '' +
             '</div></a>';
     }

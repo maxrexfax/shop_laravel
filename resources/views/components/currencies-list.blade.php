@@ -9,7 +9,7 @@
         <div class="dropdown-content">
             @if($currencies)
                 @foreach($currencies as $currency)
-                    <a class="my-dropdown-item url_no_decoration text-white p-1" title="{{$currency->currency_name}}" href="{{ url('/set-currency', ['currency' => $currency->id]) }}">{{$currency->currency_code}}</a>
+                    <a class="my-dropdown-item url-no-decoration text-white p-1" title="{{$currency->currency_name}}" href="{{ url('/set-currency', ['currency' => $currency->id]) }}">{{$currency->currency_code}}</a>
                 @endforeach
             @endif
         </div>

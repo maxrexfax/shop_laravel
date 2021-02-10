@@ -2,7 +2,7 @@
 @section('admin.content')
     <div class="card">
         <div class="card-header text-center">
-            <a href="{{route('store.phonelist', ['id'=>$store->id])}}" title="{{__('text.back_to_phones_list')}}" class="btn btn-secondary float-left url_no_decoration">
+            <a href="{{route('store.phonelist', ['id'=>$store->id])}}" title="{{__('text.back_to_phones_list')}}" class="btn btn-secondary float-left url-no-decoration">
                 {{__('text.back_to_phones_list')}}
             </a>
             {{ __('actions.phone_control') }}

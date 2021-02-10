@@ -40,6 +40,7 @@ class StorePromocodeRequest extends FormRequest
             'promocode_name.max:30' => trans('messages.spr_promocode_name_30_symbols_max'),
             'promocode_value.required' => trans('messages.spr_promocode_value_required'),
             'promocode_value.between:0,99.99' => trans('messages.spr_promocode_value_wrong'),
+            'regex' => trans('messages.uppercase_and_digits_only'),
         ];
     }
 }

@@ -66,6 +66,7 @@ return [
     'sur_email_required' => 'Email required!',
     'sur_email_255_symbols_max' => 'Email 255 symbols max!',
     'sur_password_required' => 'Password required!',
+    'uppercase_and_digits_only' => 'UPPERCASE and digits only for promocode name!',
     'users_list' => 'Users List',
     'wrong_product_id' => 'Wrong product ID!',
 ];

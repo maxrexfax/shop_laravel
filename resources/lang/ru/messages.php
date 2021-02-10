@@ -66,6 +66,7 @@ return [
     'sur_email_required' => 'Требуется email!',
     'sur_email_255_symbols_max' => 'Email не более 255 символов!',
     'sur_password_required' => 'Паспорт требуется!',
+    'uppercase_and_digits_only' => 'ТОЛЬКО ЗАГЛАВНЫЕ и цифры в названии промокода!',
     'users_list' => 'Список пользователей',
     'wrong_product_id' => 'Неверный ID продукта!',
 ];

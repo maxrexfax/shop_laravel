@@ -40,7 +40,7 @@
                                                         " for="radio{{$currency->id}}">{{__('actions.default')}}</label>
                                                     <input type="hidden" name="currencies[]" value="{{$currency->id}}">
                                                 </td>
-                                                <td class="text-right"><i class="fa fa-minus-circle my-cursor-pointer i-tr-deleter" title="{{__('actions.delete_this_currency')}}"></i></td>
+                                                <td class="text-right"><i class="fa fa-minus-circle class-cursor-pointer i-tr-deleter" title="{{__('actions.delete_this_currency')}}"></i></td>
                                             </tr>
                                         @endforeach
                                             </tbody>

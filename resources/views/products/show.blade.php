@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="col-lg-4 col-md-4 col-sm-12 p-2">
-                        <div class="my-product-right-banner rounded h-100 p-2">
+                        <div class="product-right-banner rounded h-100 p-2">
                             <div class="w-100 overflow-hidden" style="max-height: 9%">
                                 <h2 class="h-3">{{$product->product_name}}</h2>
                             </div>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 p-2">
-                        <div class="my-product-main-description rounded p-0">
+                        <div class="product-main-description rounded p-0">
                             <div class="p-2">
                                 <h3>{{__('text.description')}}</h3>
                             </div>

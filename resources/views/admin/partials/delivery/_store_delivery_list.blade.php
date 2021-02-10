@@ -38,7 +38,7 @@
                                             @if(!$delivery->active)
                                                 <span class="font-italic">{{__('text.disabled')}}</span>
                                                 @endif
-                                            <i class="fa fa-minus-circle my-cursor-pointer i-tr-deleter" title="{{__('text.delete_this_delivery')}}"></i>
+                                            <i class="fa fa-minus-circle class-cursor-pointer i-tr-deleter" title="{{__('text.delete_this_delivery')}}"></i>
                                             <input type="hidden" name="deliveries[]" value="{{$delivery->id}}">
                                         </td>
                                     </tr>

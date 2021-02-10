@@ -43,7 +43,7 @@
                     </tbody>
                 </table>
             </div>
-        <div class="col-sm-2 my-class-text-center">
+        <div class="col-sm-2 class-text-center">
             @if(!empty($products))
                 {{ $products->links() }}
             @endif

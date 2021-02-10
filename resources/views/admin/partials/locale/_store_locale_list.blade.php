@@ -41,7 +41,7 @@
                                                     " for="radio{{$locale->id}}">{{__('Default')}}</label>
                                                     <input type="hidden" name="locales[]" value="{{$locale->id}}">
                                                 </td>
-                                                <td class="text-center"><i class="fa fa-minus-circle my-cursor-pointer i-tr-deleter" title="{{__('actions.delete_this_locale')}}"></i></td>
+                                                <td class="text-center"><i class="fa fa-minus-circle class-cursor-pointer i-tr-deleter" title="{{__('actions.delete_this_locale')}}"></i></td>
                                             </tr>
                                         @endforeach
                                             </tbody>

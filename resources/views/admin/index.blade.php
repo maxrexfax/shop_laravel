@@ -8,7 +8,7 @@
                         <div class="col-3 text-left admin-menu p-0">
                             <div class="dashboard-menu border-bottom oneHeight pl-2">
                                 <i class="fa fa-dashboard fw ml-2"></i>
-                                <span class=""><a class="url-no-decoration my-roboto-font-family font-weight-bold" href="{{route('admin')}}">{{ __('actions.dashboard') }}</a></span>
+                                <span class=""><a class="url-no-decoration roboto-font-family font-weight-bold" href="{{route('admin')}}">{{ __('actions.dashboard') }}</a></span>
                             </div>
                             <div>
                                 <div class="accordion-header border-bottom oneHeight pl-2">
@@ -17,8 +17,8 @@
                                 </div>
 
                                 <div class="accordion-content p-0">
-                                    <p class="w-100 border-bottom oneHeight"><a class="url_in_accordion ml-4 mb-0" href="{{route('admin.category.list')}}">{{ __('actions.categories') }}</a></p>
-                                    <p class="w-100 border-bottom oneHeight"><a class="url_in_accordion ml-4 mb-0" href="{{route('admin.product.list')}}">{{ __('actions.products') }}</a></p>
+                                    <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.category.list')}}">{{ __('actions.categories') }}</a></p>
+                                    <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.product.list')}}">{{ __('actions.products') }}</a></p>
 
                                 </div>
                             </div>
@@ -29,10 +29,10 @@
                                 </div>
 
                                 <div class="accordion-content p-0">
-                                    <p class="w-100 border-bottom oneHeight"><a class="url_in_accordion ml-4 mb-0" href="{{route('admin.stores.list')}}">{{ __('actions.stores') }}</a></p>
-                                    <p class="w-100 border-bottom oneHeight"><a class="url_in_accordion ml-4 mb-0" href="{{route('admin.currency.list')}}">{{ __('actions.currency') }}</a></p>
-                                    <p class="w-100 border-bottom oneHeight"><a class="url_in_accordion ml-4 mb-0" href="{{route('admin.locales.list')}}">{{ __('actions.locales') }}</a></p>
-                                    <p class="w-100 border-bottom oneHeight"><a class="url_in_accordion ml-4 mb-0" href="{{route('admin.deliveries.list')}}">{{ __('actions.deliveries') }}</a></p>
+                                    <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.stores.list')}}">{{ __('actions.stores') }}</a></p>
+                                    <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.currency.list')}}">{{ __('actions.currency') }}</a></p>
+                                    <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.locales.list')}}">{{ __('actions.locales') }}</a></p>
+                                    <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.deliveries.list')}}">{{ __('actions.deliveries') }}</a></p>
                                 </div>
                             </div>
                             <div>
@@ -42,7 +42,7 @@
                                 </div>
 
                                 <div class="accordion-content p-0">
-                                    <p class="w-100 border-bottom oneHeight"><a class="url_in_accordion ml-4 mb-0" href="{{route('admin.users.list')}}">{{ __('actions.users') }}</a></p>
+                                    <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.users.list')}}">{{ __('actions.users') }}</a></p>
                                 </div>
                             </div>
                         </div>

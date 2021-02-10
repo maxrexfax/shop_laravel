@@ -146,7 +146,7 @@
                                         @if(!empty($product))
                                             @foreach($product->categories as $productCategory)
                                             @if($productCategory->id==$category->id)
-                                                <div id="{{$category->id}}"><i class="fa fa-minus-circle my-cursor-pointer i-deleter" title="{{ __('actions.delete_this_category')}}"></i><span> {{$category->category_name}}</span>
+                                                <div id="{{$category->id}}"><i class="fa fa-minus-circle class-cursor-pointer i-deleter" title="{{ __('actions.delete_this_category')}}"></i><span> {{$category->category_name}}</span>
                                                     <input type="hidden" name="categories[]" value="{{$category->id}}">
                                                 </div>
                                             @endif

@@ -66,11 +66,11 @@ $(document).ready(function() {
         $('#imagesGalleryInfo').text('Image ' + (numberOfImageToShow+1) + ' from ' + arrayOfImages.length);
     }
 
-    $('.accordion_content').slideUp(1);
+    $('.accordion-content').slideUp(1);
 
-    $(document).on('click', '.accordion_header', function(e) {
-        $('.accordion_content').slideUp(200);
-        $('.accordion_content_categories').slideUp(200);
+    $(document).on('click', '.accordion-header', function(e) {
+        $('.accordion-content').slideUp(200);
+        $('.accordion-content-categories').slideUp(200);
         if(!$(this).next().is(":visible")){
             $(this).next().slideDown(200);
         }
@@ -89,7 +89,7 @@ $(document).ready(function() {
         if(isExist) {
             alert(this.getAttribute('data-confirm'));
         } else {
-            let htmlToAdd = '<div id="' + $('#categoriesToAdd option:selected').val() + '"><i class="fa fa-minus-circle my-cursor-pointer i-deleter" title="Delete this category"></i><span> ' + $('#categoriesToAdd option:selected').text() + '</span>\n' +
+            let htmlToAdd = '<div id="' + $('#categoriesToAdd option:selected').val() + '"><i class="fa fa-minus-circle class-cursor-pointer i-deleter" title="Delete this category"></i><span> ' + $('#categoriesToAdd option:selected').text() + '</span>\n' +
                 '<input type="hidden" name="categories[]" value="' + $('#categoriesToAdd option:selected').val() + '">\n' +
                 '</div>'
             $('#divWithCategoriesList').append(htmlToAdd);
@@ -135,7 +135,7 @@ $(document).ready(function() {
     function createHtmlToAddDelivery(delivery_name, delivery_id, input_name) {
         let htmlValue = '<tr id="' + delivery_id + '">\n' +
             '<td class="text-left pt-3"><p>' + delivery_name + '</p></td>\n' +
-            '<td class="text-center"><i class="fa fa-minus-circle my-cursor-pointer i-tr-deleter" title="Delete this delivery" aria-hidden="true"></i>' +
+            '<td class="text-center"><i class="fa fa-minus-circle class-cursor-pointer i-tr-deleter" title="Delete this delivery" aria-hidden="true"></i>' +
             '<input type="hidden" name="'+ input_name +'[]" value="' + delivery_id + '"></td>\n' +
             '</tr>';
         return htmlValue;
@@ -149,7 +149,7 @@ $(document).ready(function() {
             '<label class="for-locale btn" for="radio' + locale_id + '">Default</label>\n' +
             '<input type="hidden" name="'+ input_name +'[]" value="' + locale_id + '">\n' +
             '</td>\n' +
-            '<td class="text-center"><i class="fa fa-minus-circle my-cursor-pointer i-tr-deleter" title="{{__(\'Delete this locale\')}}"></i></td>\n' +
+            '<td class="text-center"><i class="fa fa-minus-circle class-cursor-pointer i-tr-deleter" title="{{__(\'Delete this locale\')}}"></i></td>\n' +
             '</tr>';
         return htmlVal;
     }
@@ -182,7 +182,7 @@ $(document).ready(function() {
         e.stopPropagation();
     });
 
-    $(document).on('click', '.btn_add_to_cart', function(e) {
+    $(document).on('click', '.btn-add-to-cart', function(e) {
         alert('Product ID=' + $(this).attr('id'));
     });
 
@@ -239,12 +239,6 @@ $(document).ready(function() {
         url=url+'?paginateQuantity=' + $('#paginateQuantity option:selected').val() + '&sortType=' + $('#sortBySelect option:selected').val();
         $(location).attr('href', url);
     }
-
-    $('.accordion_content_phones').slideUp(1);
-
-    $(document).on('click', '#btnAddPhone', function(e) {
-        $('.accordion_content_phones').show();
-    });
 
     $(document).on('click', '#shadowPhones', function(e) {
         $('#shadowPhones').hide();

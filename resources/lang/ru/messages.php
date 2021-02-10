@@ -34,6 +34,7 @@ return [
     'locale_name_max_255' => 'Название языка максимум 255 символов',
     'locale_code_required' => 'Требуется код языка',
     'locale_code_max_10' => 'Длина кода не более 10 символов',
+    'only_uppercase' => 'Только ЗАГЛАВНЫЕ буквы',
     'phone_number_required' => 'Номер телефона обязателен',
     'phone_number_digits10' => 'Номер телефона максимум 10 цифр',
     'phone_info_required' => 'Описание телефона требуется',

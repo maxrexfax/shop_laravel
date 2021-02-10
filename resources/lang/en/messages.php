@@ -34,6 +34,7 @@ return [
     'locale_name_max_255' => 'Locale name max 255 symbols',
     'locale_code_required' => 'Locale code required',
     'locale_code_max_10' => 'Locale code max 10 symbols',
+    'only_uppercase' => 'Symbols must be UPPERCASE',
     'phone_number_required' => 'Phone number required',
     'phone_number_digits10' => 'Phone number max 10 digits',
     'phone_info_required' => 'Phone info required',

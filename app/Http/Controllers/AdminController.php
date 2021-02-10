@@ -9,6 +9,7 @@ use App\Helpers\PaginationQuantityHelper;
 use App\Image;
 use App\Locale;
 use App\Product;
+use App\Promocode;
 use App\Store;
 use App\User;
 use Illuminate\Support\Facades\Lang;
@@ -96,6 +97,13 @@ class AdminController extends Controller
         return view('admin.partials.delivery._deliveries_list', [
             'deliveries' => Delivery::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
             'alternativeTitle' => Lang::get('messages.deliveries_list'),
+        ]);
+    }
+
+    public function promocodesList()
+    {
+        return view('admin.partials.promocode._promocodes_list', [
+            'promocodes' => Promocode::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
         ]);
     }
 

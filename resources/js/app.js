@@ -250,7 +250,7 @@ $(document).ready(function() {
         $(this).addClass('btn-success');
     });
 
-    $(document).on('click', '.btnToDeletePhone', function(e) {
+    $(document).on('click', '.btnToDeletePhone, .btn-delete-promocode', function(e) {
         event.preventDefault();
 
         let choice = confirm(this.getAttribute('data-confirm'));

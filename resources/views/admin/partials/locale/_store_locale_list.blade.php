@@ -2,7 +2,7 @@
 @section('admin.content')
     <div class="card">
         <div class="card-header text-center">
-            <a href="{{route('admin.stores.list', ['id'=>$store->id])}}" title="{{__('text.back_to_stores_list')}}" class="btn btn-secondary float-left url_no_decoration">
+            <a href="{{route('admin.stores.list', ['id'=>$store->id])}}" title="{{__('text.back_to_stores_list')}}" class="btn btn-secondary float-left url-no-decoration">
                 {{__('actions.back_to_stores_list')}}
             </a>
             {{__('text.edit_languages_list_for')}} <span class="font-weight-bold">{{$store->store_name}}</span>
@@ -41,7 +41,7 @@
                                                     " for="radio{{$locale->id}}">{{__('Default')}}</label>
                                                     <input type="hidden" name="locales[]" value="{{$locale->id}}">
                                                 </td>
-                                                <td class="text-center"><i class="fa fa-minus-circle my-cursor-pointer i-tr-deleter" title="{{__('actions.delete_this_locale')}}"></i></td>
+                                                <td class="text-center"><i class="fa fa-minus-circle class-cursor-pointer i-tr-deleter" title="{{__('actions.delete_this_locale')}}"></i></td>
                                             </tr>
                                         @endforeach
                                             </tbody>

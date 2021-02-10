@@ -2,7 +2,7 @@
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card background_as_nav">
+            <div class="card background-as-nav">
                 @include('menu._category_menu')
             </div>
             <div class="card">

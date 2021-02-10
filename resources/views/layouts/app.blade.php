@@ -37,8 +37,8 @@
                     <x-store-phone></x-store-phone>
                     <x-locales-list></x-locales-list>
                     <x-currencies-list></x-currencies-list>
-                    <div id="divWithInputSearchInHeader" class="d-flex mr-2 form-group col-4 p-0 text-white border-0 my-color-for-search-in-header">
-                        <input class="d-inline w-100 border-0 text-white my-class-color-transparent" type="text" placeholder="Search">
+                    <div id="divWithInputSearchInHeader" class="d-flex mr-2 form-group col-4 p-0 text-white border-0 color-for-search-in-header">
+                        <input class="d-inline w-100 border-0 text-white class-color-transparent" type="text" placeholder="Search">
                         <button class="d-inline btn btn-search" type="submit" title="Search">
                             <i id="searchSignHeader" class="fa fa-search mb-2 text-white d-inline"></i>
                         </button>
@@ -129,10 +129,11 @@
         <footer>
             @include('footer.footer')
         </footer>
-
-        <div class="to-top-button d-none" title="{{__('actions.scroll_to_top')}}">
-            <a href="#app" class="url_no_decoration"> &#708;</a>
-        </div>
+        <a href="#app" class="url-no-decoration">
+            <div class="to-top-button d-none" title="{{__('actions.scroll_to_top')}}">
+                <i class="fa fa-chevron-circle-up" aria-hidden="true"></i>
+            </div>
+        </a>
     </div>
 </body>
 </html>

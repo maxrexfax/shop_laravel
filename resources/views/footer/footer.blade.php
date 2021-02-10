@@ -1,5 +1,5 @@
 
-<div class="footer_div d-none d-sm-block">
+<div class="footer-div d-none d-sm-block">
     <section>
         <div id="divForSubcribingOnMainPage" class="bg-white p-3">
             <div class="row pl-2 h-100">
@@ -10,7 +10,7 @@
                 <div class="col-md-8 col-sm-7 text-left p-2">
                     <div class="row h-100">
                         <div class="col-sm-12 my-auto">
-                            <div class="my-vertical-align-middle">
+                            <div class="vertical-align-middle">
                                 <h2 class="font-weight-bold">{{__('text.free_health_resource')}}</h2>
                                 <p>{{__('text.sign_up_for_our_free_weekly_newsclips_and_reports')}}</p>
                                 <input class="m-1" type="text"><button class="btn btn-primary m-1">{{__('actions.subscribe')}}</button>

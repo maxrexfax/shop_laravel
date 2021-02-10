@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="">
-    <section class="my-class-color-transparent">
+    <section class="class-color-transparent">
         <div class="text-center text-light">
             <h1 class="">{{__('The Highest Quality Supplements and Health-Supporting Products')}}</h1>
         </div>

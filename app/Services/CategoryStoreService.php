@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Helpers\ImageHelper;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Image;
 
 class CategoryStoreService
 {
@@ -14,13 +16,12 @@ class CategoryStoreService
         $category->category_description = $request->post('category_description');
         if ($request->has('category_logo')) {
             if ($category->category_logo) {
-                $image_path = public_path() . '/img/logo/' . $category->category_logo;
-                unlink($image_path);
+                (new ImageHelper())->deleteImage($category->category_logo, Image::PATH_TO_SAVE_LOGOS);
             }
 
             $image = $request->file('category_logo');
             $category->category_logo = $image->getClientOriginalName();
-            $image->move(public_path('img/logo'), $image->getClientOriginalName());
+            (new ImageHelper())->storeImageFile($image, '/img/logo/');
         }
         $category->save();
     }

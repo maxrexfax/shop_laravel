@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Helpers\ImageHelper;
 use App\Http\Requests\StoreImageRequest;
 use App\Image;
 use App\Product;
-use App\Services\ImageStoreService;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
@@ -20,7 +21,7 @@ class ImageController extends Controller
 
     public function store(StoreImageRequest $request)
     {
-        (new ImageStoreService())->store($request);
+        (new ImageService())->store($request);
 
         return redirect('product/images/' . $request->post('product_id'));
 
@@ -31,8 +32,7 @@ class ImageController extends Controller
         $image = Image::find($imageId);
         if ($image) {
             $image->delete();
-            $image_path = public_path() . '/img/' . $request->get('subPath') . '/' . $image->image_name;
-            unlink($image_path);
+            (new ImageHelper())->deleteImage($image->image_name, '/img/' . $request->get('subPath') . '/');
         }
 
         return redirect()->back();

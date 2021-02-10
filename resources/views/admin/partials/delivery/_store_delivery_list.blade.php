@@ -2,7 +2,7 @@
 @section('admin.content')
     <div class="card">
         <div class="card-header text-center">
-            <a href="{{route('admin.stores.list', ['id'=>$store->id])}}" title="{{__('text.back_to_stores_list')}}" class="btn btn-secondary float-left url_no_decoration">
+            <a href="{{route('admin.stores.list', ['id'=>$store->id])}}" title="{{__('text.back_to_stores_list')}}" class="btn btn-secondary float-left url-no-decoration">
                 {{__('actions.back_to_stores_list')}}
             </a>
             {{__('text.edit_delivery_list_for')}} <span class="font-weight-bold">{{$store->store_name}}</span>
@@ -38,7 +38,7 @@
                                             @if(!$delivery->active)
                                                 <span class="font-italic">{{__('text.disabled')}}</span>
                                                 @endif
-                                            <i class="fa fa-minus-circle my-cursor-pointer i-tr-deleter" title="{{__('text.delete_this_delivery')}}"></i>
+                                            <i class="fa fa-minus-circle class-cursor-pointer i-tr-deleter" title="{{__('text.delete_this_delivery')}}"></i>
                                             <input type="hidden" name="deliveries[]" value="{{$delivery->id}}">
                                         </td>
                                     </tr>

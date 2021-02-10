@@ -4,8 +4,7 @@ $(document).ready(function() {
     var numberOfImageToShow = 0;
     var arrayOfImages = [];
     $(document).on('click', '.img-to-show-modal', function(e) {
-        $('#shadow').removeClass('d-none');
-        $('#shadow').addClass('d-block');
+        $('#shadow').removeClass('d-none').addClass('d-block');
         $('#modalWithImages').show();
         $('#modalWithImages').find('img').attr('src', e.target.src);
         $('#modalWithImages').find('img').attr('title', $('h2').text());
@@ -14,16 +13,13 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '#shadow', function(e) {
-        $('#shadow').removeClass('d-block');
-        $('#shadow').addClass('d-none');
+        $('#shadow').removeClass('d-block').addClass('d-none');
         $('#modalWithImages').hide();
-        $('#modalFormAddPhone').hide();//phones editing
         $('#imagesGalleryInfo').text('');
     });
 
     $(document).on('click', '#closePopupSymbol', function(e) {
-        $('#shadow').removeClass('d-block');
-        $('#shadow').addClass('d-none');
+        $('#shadow').removeClass('d-block').addClass('d-none');
         $('#modalWithImages').hide();
         $('#imagesGalleryInfo').text('');
     });
@@ -39,7 +35,6 @@ $(document).ready(function() {
     });
 
     function getNumberOfChosenImage(arrayOfImages) {
-        let currentImage = $('#modalWithImages').find('img').attr('src');
         for(let i = 0; i < arrayOfImages.length; i++) {
             if ($(arrayOfImages[i]).attr('src').indexOf(getNameOfCurrentImage()) >= 0) {
                 return i;
@@ -49,9 +44,9 @@ $(document).ready(function() {
 
     function getNameOfCurrentImage() {
         let currentImg = $('#modalWithImages').find('img');
-        let src = $(currentImg).attr('src'); // "static/images/banner/blue.jpg"
-        let tarr = src.split('/');      // ["static","images","banner","blue.jpg"]
-        let nameOfCurrentImage = tarr[tarr.length-1];
+        let src = $(currentImg).attr('src');
+        let tempArray = src.split('/');
+        let nameOfCurrentImage = tempArray[tempArray.length-1];
         return nameOfCurrentImage;
     }
 
@@ -266,11 +261,9 @@ $(document).ready(function() {
     });
 
     $( window ).scroll(function() {
-        $( '.to-top-button' ).removeClass('d-none');
-        $( '.to-top-button' ).addClass('d-block');//?? - $( '.to-top-button' ).show();
+        $( '.to-top-button' ).show();
         if ($('html, body').scrollTop() == 0) {
-            $( '.to-top-button' ).removeClass('d-block');//?? - $( '.to-top-button' ).hide();
-            $( '.to-top-button' ).addClass('d-none');
+            $( '.to-top-button' ).hide();
         }
     });
 

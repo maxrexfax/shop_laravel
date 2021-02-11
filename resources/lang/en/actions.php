@@ -104,6 +104,7 @@ return [
     're_new_currency_values' => 'Reload currencies values',
     're_new_values' => 'Reload values',
     'send_file' => 'Send file',
+    'sales' => 'Sales',
     'settings' => 'Settings',
     'set_sort_number' => 'Set sort number',
     'save' => 'Save',

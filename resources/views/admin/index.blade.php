@@ -25,6 +25,16 @@
                             <div>
                                 <div class="accordion-header border-bottom oneHeight pl-2">
                                     <i class="fa fa-tags fw ml-2"></i>
+                                    <span class="ml-2"><b>{{__('actions.sales')}}</b></span>
+                                </div>
+
+                                <div class="accordion-content p-0">
+                                    <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.promocodes.list')}}">{{ __('actions.promocodes') }}</a></p>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="accordion-header border-bottom oneHeight pl-2">
+                                    <i class="fa fa-tags fw ml-2"></i>
                                     <span class="ml-2"><b>{{__('actions.settings')}}</b></span>
                                 </div>
 
@@ -33,7 +43,6 @@
                                     <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.currency.list')}}">{{ __('actions.currency') }}</a></p>
                                     <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.locales.list')}}">{{ __('actions.locales') }}</a></p>
                                     <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.deliveries.list')}}">{{ __('actions.deliveries') }}</a></p>
-                                    <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.promocodes.list')}}">{{ __('actions.promocodes') }}</a></p>
                                 </div>
                             </div>
                             <div>

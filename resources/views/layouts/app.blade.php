@@ -44,10 +44,10 @@
                         </button>
                     </div>
                     <div class="p-0" id="divButtonCardShower">
-                        <button class="btn btn-primary" id="btnButtonCardShower">
+                        <a href="{{route('cart')}}" class="btn btn-primary" id="btnButtonCardShower">
                             <i class="fa fa-shopping-cart d-inline"></i>
                             {{__('actions.cart')}}
-                        </button>
+                        </a>
                         <span class="d-inline-block div-button-card-shower-right">
                             0
                         </span>

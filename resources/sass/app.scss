@@ -660,3 +660,18 @@ body {
     }
 }
 
+.shopping-cart-main {
+    .show-input-btn {
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .product-description {
+        max-height: 200px;
+        overflow: hidden;
+    }
+
+    .promocode-usage {
+        display: none;
+    }
+}

@@ -177,10 +177,6 @@ $(document).ready(function() {
         e.stopPropagation();
     });
 
-    $(document).on('click', '.btn-add-to-cart', function(e) {
-        alert('Product ID=' + $(this).attr('id'));
-    });
-
     $(document).on('click', '#btnShowParentCategories', function(e) {
         if(!$('.root-menu-container').is(":visible")) {
             $.get( "/categories/root/list", function( data ) {
@@ -208,10 +204,6 @@ $(document).ready(function() {
             '' + name + '' +
             '</div></a>';
     }
-
-    $(document).on('click', '#btnButtonCardShower', function(e) {
-        alert('Cart is empty now');
-    });
 
     $( "#paginateQuantity" ).change(function() {
         createUrlToRedirect();
@@ -248,6 +240,10 @@ $(document).ready(function() {
     $(document).on('click', '.for-locale', function(e) {
         $('.for-locale').removeClass('btn-success');
         $(this).addClass('btn-success');
+    });
+
+    $(document).on('click', '#btnToAddPromoCode', function(e) {
+        $('.promocode-usage').toggle();
     });
 
     $(document).on('click', '.btnToDeletePhone, .btn-delete-promocode', function(e) {

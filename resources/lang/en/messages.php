@@ -19,6 +19,7 @@ return [
     'currency_value_required' => 'Currency value required!',
     'currency_value_numeric' => 'Currency value numeric!',
     'currency_from_0_to_9999' => 'Currency From 0 to 9999.99!',
+    'delete' => 'Delete',
     'deliveries_id_is_wrong' => 'Delivery id wrong!',
     'deliveries_name_required' => 'Delivery name required!',
     'deliveries_name_max_255' => 'Delivery name 255 symbols max!',

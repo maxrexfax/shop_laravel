@@ -19,6 +19,7 @@ return [
     'currency_value_required' => 'Стоимость валюты требуется!',
     'currency_value_numeric' => 'Значение только числа!',
     'currency_from_0_to_9999' => 'Значение от 0 до 9999.99!',
+    'delete' => 'Удалить',
     'deliveries_id_is_wrong' => 'ID доставки неверный',
     'deliveries_name_required' => 'Название доставки требуется!',
     'deliveries_name_max_255' => 'Длина названия 255 симв. максимум!',

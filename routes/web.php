@@ -37,9 +37,12 @@ Route::group(['middleware'=>'language'],function ()
     Route::get('/admin/promocodes/list', 'AdminController@promocodesList')->name('admin.promocodes.list');
 
     Route::get('/cart', 'CartController@cart')->name('cart');
+    Route::get('/cartjs', 'CartController@cartjs')->name('cartjs');
     Route::get('/cart/add/{id?}', 'CartController@addProductToCart')->name('cart.add');
     Route::get('/cart/delete/{id?}', 'CartController@deleteProductFromCart')->name('cart.delete');
     Route::match(['get', 'post'],'/cart/calculate', 'CartController@calculate')->name('cart.calculate');
+    Route::match(['get', 'post'],'/cart/edit', 'CartController@editOneRow')->name('cart.edit');
+    Route::match(['get', 'post'],'/cart/changedelivery', 'CartController@changeDelivery')->name('cart.changedelivery');
 
     Route::get('/category/create/{id?}', 'CategoryController@create')->name('category.create');
     Route::get('/categories/root/list', 'CategoryController@categoriesRootList')->name('category.rootlist');

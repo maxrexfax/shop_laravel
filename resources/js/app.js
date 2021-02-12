@@ -213,6 +213,30 @@ $(document).ready(function() {
         createUrlToRedirect();
     });
 
+    $( ".input-product-quantity-cart" ).change(function() {
+        //console.log($(this).val());
+        let inputChanged = $(this);
+        let product_id = $(this).attr('id');
+        $.post( "/cart/edit", { "_token": $('meta[name="csrf-token"]').attr('content'), product_id: product_id, quantity: $(this).val() })
+            .done(function( data ) {
+                console.log(data['new_row_price']);
+                let tdWithPrice = $(inputChanged).closest('tr').find('.row-price-holder');
+                console.log(tdWithPrice);
+                $(tdWithPrice).html(data['new_row_price']);
+                $('#spanWithTotalProductsPrice').html(data['totalProducts']);
+                $('#spanWithTotalPrice').html(data['totalAmount']);
+            });
+    });
+
+    $( "#selectTypeOfDeliveryInCart" ).change(function() {
+        console.log($('#selectTypeOfDeliveryInCart option:selected').val());
+        $.post( "/cart/changedelivery", { "_token": $('meta[name="csrf-token"]').attr('content'), delivery_id: $('#selectTypeOfDeliveryInCart option:selected').val() })
+            .done(function( data ) {
+                console.log(data['totalAmount']);
+                $('#spanWithTotalPrice').html(data['totalAmount']);
+            });
+    });
+
     function getUrl() {
         let url = $(location).attr('href');
         if(url.indexOf('?')!=-1) {

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Helpers\PriceHelper;
 use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
@@ -20,4 +21,13 @@ class Cart extends Model
         parent::__construct($attributes);
     }
 
+    public function calculatePrice($priceIn)
+    {
+        return (new PriceHelper())->calculate($priceIn);
+    }
+
+    public function getCurrencySymbol()
+    {
+        return (new PriceHelper())->getCurrentCurrencySymbol();
+    }
 }

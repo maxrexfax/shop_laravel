@@ -1,0 +1,100 @@
+<?php
+
+namespace App\Services;
+
+use App\Delivery;
+use App\Product;
+use App\Promocode;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
+class CartService
+{
+
+    public function addToCart($id)
+    {
+        $product = Product::find($id);
+        $sessionCart = Session::get('cart');
+        $isNotInCart = true;
+
+        foreach ($sessionCart->product_rows as $row) {
+            if ($row['product_id'] == $id) {
+                $isNotInCart = false;
+            }
+        }
+
+        if ($isNotInCart) {
+            array_push($sessionCart->product_rows, [
+                'product_id' => $product->id,
+                'product_name' => $product->product_name,
+                'product_logo' => $product->logo_image,
+                'product_quantity' => 1,
+                'product_price' => $product->price,
+                'product_row_price' => $product->price
+            ]);
+        }
+
+        Session::put('cart', $sessionCart);
+    }
+
+    public function deleteFromCart($id)
+    {
+        $sessionCart = Session::get('cart');
+        $indexToDelete = 0;
+
+        for ($i = 0; $i < count($sessionCart->product_rows); $i++ ) {
+            if ($sessionCart->product_rows[$i]['product_id'] == $id) {
+                $indexToDelete = $i;
+            }
+        }
+        unset($sessionCart->product_rows[$indexToDelete]);
+
+        $sessionCart->product_rows = array_slice($sessionCart->product_rows, 0);
+        Session::put('cart', $sessionCart);
+    }
+
+    public function calculate($request)
+    {
+        $totalProductsPrice = 0;
+        $totalAmount = 0;
+        $delivery_obj = Delivery::find($request->post('delivery_id'));
+        $delivery = 0;
+        if ($delivery_obj) {
+            $delivery = $delivery_obj->delivery_price;
+        }
+        $sessionCart = Session::get('cart');
+
+        if (Session::has('logined_user_id')) {
+            $sessionCart->user_id = Session::get('logined_user_id');
+        }
+
+        if($request->post('promocode')) {
+            $promocode = Promocode::where('promocode_name', $request->post('promocode'))->first();
+            if ($promocode) {
+                $sessionCart->promocode_id = $promocode->id;
+                $sessionCart->promocode_value = $promocode->promocode_value;
+            }
+        }
+
+        $listOfQuantities = $request->post('quantity');
+
+        if ($request->post('product_ids')) {
+            for ($i = 0; $i < count($request->post('product_ids')); $i++) {
+                $sessionCart->product_rows[$i]['product_quantity'] = $listOfQuantities[$i];
+                $sessionCart->product_rows[$i]['product_row_price'] = $listOfQuantities[$i] * $sessionCart->product_rows[$i]['product_price'];
+                $totalProductsPrice += $sessionCart->product_rows[$i]['product_row_price'];
+            }
+
+            $promocodeDiscountSum = ($sessionCart->promocode_value * $totalProductsPrice)/100;
+            $totalProductsPrice = $totalProductsPrice - $promocodeDiscountSum;
+        }
+
+
+        $totalAmount = $totalProductsPrice + $delivery;
+        $sessionCart->delivery_id = $request->post('delivery_id');
+        $sessionCart->totalProducts = $totalProductsPrice;
+        $sessionCart->totalAmount = $totalAmount;
+
+        Session::put('cart', $sessionCart);
+    }
+}

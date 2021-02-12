@@ -40,7 +40,6 @@ Route::group(['middleware'=>'language'],function ()
     Route::get('/cart/add/{id?}', 'CartController@addProductToCart')->name('cart.add');
     Route::get('/cart/delete/{id?}', 'CartController@deleteProductFromCart')->name('cart.delete');
     Route::match(['get', 'post'],'/cart/calculate', 'CartController@calculate')->name('cart.calculate');
-    Route::get('/cart/reset', 'CartController@reset')->name('cart.reset');
 
     Route::get('/category/create/{id?}', 'CategoryController@create')->name('category.create');
     Route::get('/categories/root/list', 'CategoryController@categoriesRootList')->name('category.rootlist');

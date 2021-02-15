@@ -312,6 +312,8 @@ $(document).ready(function() {
         }
     });
 
-    CKEDITOR.replace( 'summary-ckeditor' );
-
+    let ckeditor = document.getElementById('summary-ckeditor');
+    if(ckeditor) {
+        CKEDITOR.replace( 'summary-ckeditor' );
+    }
 });

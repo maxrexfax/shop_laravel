@@ -26,7 +26,9 @@
                             <tr>
                                 <td>
                                     <div class="image-in-cart">
-                                        <img class="w-100" src="{{asset('/img/logo/' . $product['product_logo'])}}">
+                                        <a href="{{route('product.show', ['id' => $product['product_id']])}}" target="_blank">
+                                            <img class="w-100" src="{{asset('/img/logo/' . $product['product_logo'])}}">
+                                        </a>
                                     </div>
                                 </td>
                                 <td>

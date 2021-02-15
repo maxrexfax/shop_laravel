@@ -641,6 +641,14 @@ body {
                     font-weight:normal;
                 }
             }
+
+            .message-added-popup {
+                color: red !important;
+                font-weight: bold !important;
+                border-radius: 5px;
+                border: 2px solid #ffed4a;
+                background-color: #ffed4a;
+            }
         }
     }
     .item:hover {

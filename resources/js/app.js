@@ -289,9 +289,12 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.btn-adder-to-cart', function(e) {
+        let buttonClicked = this;
+        let message = this.getAttribute('data-message');
         $.get( "/cart/add/" + this.getAttribute('data-id'))
             .done(function( data ) {
-            });
+                $('<div class="message-added-popup">' +  message + '</div>').insertBefore(buttonClicked).delay(2000).fadeOut();
+        });
     });
 
     $(document).on('click', '#btnCheckout', function(e) {

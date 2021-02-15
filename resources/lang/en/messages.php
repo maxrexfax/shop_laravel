@@ -2,6 +2,7 @@
 
 return [
     'activated_discount' => 'Activated discount',
+    'added_to_cart' => 'Added to cart!',
     'cool_medicines' => 'Cool medicines',
     'categories_list' => 'Categories List',
     'category_existing_chose' => 'Choose existing category!',

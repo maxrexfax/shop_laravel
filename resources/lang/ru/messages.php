@@ -2,6 +2,7 @@
 
 return [
     'activated_discount' => 'Использована скидка',
+    'added_to_cart' => 'Добавлен в корзину!',
     'cool_medicines' => 'Отличные препараты',
     'categories_list' => 'Список категорий',
     'category_existing_chose' => 'Выберите существующую категорию!',

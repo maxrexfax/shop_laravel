@@ -46,14 +46,13 @@ $(document).ready(function() {
         let currentImg = $('#modalWithImages').find('img');
         let src = $(currentImg).attr('src');
         let tempArray = src.split('/');
-        let nameOfCurrentImage = tempArray[tempArray.length-1];
-        return nameOfCurrentImage;
+        return tempArray[tempArray.length-1];
     }
 
     function showSlide() {
-        if(numberOfImageToShow == arrayOfImages.length){
+        if(numberOfImageToShow === arrayOfImages.length){
             numberOfImageToShow=0;
-        } else if(numberOfImageToShow == -1) {
+        } else if(numberOfImageToShow === -1) {
             numberOfImageToShow = arrayOfImages.length-1;
         }
 
@@ -307,7 +306,7 @@ $(document).ready(function() {
 
     $( window ).scroll(function() {
         $( '.to-top-button' ).show();
-        if ($('html, body').scrollTop() == 0) {
+        if ($('html, body').scrollTop() === 0) {
             $( '.to-top-button' ).hide();
         }
     });

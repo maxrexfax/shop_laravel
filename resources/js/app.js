@@ -214,26 +214,21 @@ $(document).ready(function() {
     });
 
     $( ".input-product-quantity-cart" ).change(function() {
-        //console.log($(this).val());
         let inputChanged = $(this);
         let product_id = $(this).attr('id');
         $.post( "/cart/edit", { "_token": $('meta[name="csrf-token"]').attr('content'), product_id: product_id, quantity: $(this).val() })
             .done(function( data ) {
-                console.log(data['new_row_price']);
                 let tdWithPrice = $(inputChanged).closest('tr').find('.row-price-holder');
-                console.log(tdWithPrice);
-                $(tdWithPrice).html(data['new_row_price']);
-                $('#spanWithTotalProductsPrice').html(data['totalProducts']);
-                $('#spanWithTotalPrice').html(data['totalAmount']);
+                $(tdWithPrice).html(data['new_row_price'] + data['currency_symbol']);
+                $('#spanWithTotalProductsPrice').html(data['totalProducts'] + data['currency_symbol']);
+                $('#spanWithTotalPrice').html(data['totalAmount'] + data['currency_symbol']);
             });
     });
 
     $( "#selectTypeOfDeliveryInCart" ).change(function() {
-        console.log($('#selectTypeOfDeliveryInCart option:selected').val());
         $.post( "/cart/changedelivery", { "_token": $('meta[name="csrf-token"]').attr('content'), delivery_id: $('#selectTypeOfDeliveryInCart option:selected').val() })
             .done(function( data ) {
-                console.log(data['totalAmount']);
-                $('#spanWithTotalPrice').html(data['totalAmount']);
+                $('#spanWithTotalPrice').html(data['totalAmount'] + data['currency_symbol']);
             });
     });
 
@@ -278,6 +273,33 @@ $(document).ready(function() {
         if (choice) {
             window.location.href = this.getAttribute('href');
         }
+    });
+
+    $(document).on('click', '.delete-from-cart', function(e) {
+        event.preventDefault();
+
+        let choice = confirm(this.getAttribute('data-confirm'));
+
+        if (choice) {
+            $.get( "/cart/delete/" + this.getAttribute('data-id'))
+                .done(function( data ) {
+                    window.location.href = '/cart/calculate';
+            });
+        }
+    });
+
+    $(document).on('click', '.btn-adder-to-cart', function(e) {
+        $.get( "/cart/add/" + this.getAttribute('data-id'))
+            .done(function( data ) {
+            });
+    });
+
+    $(document).on('click', '#btnCheckout', function(e) {
+        let btnText = this.getAttribute('data-info');
+        $.get( "/cart/data")
+            .done(function( data ) {
+                alert(btnText + ': ' + data['totalAmount'] + data['currency_symbol']);
+            });
     });
 
     $( window ).scroll(function() {

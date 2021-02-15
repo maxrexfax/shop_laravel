@@ -27,15 +27,8 @@ class CartController extends Controller
 
     public function cart()
     {
+        CartService::recalculateCart();
         return view('cart.cart', [
-            'activeStore' => Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE),
-            'cart' => Session::get('cart')
-        ]);
-    }
-
-    public function cartjs()
-    {
-        return view('cart.cartjs', [
             'activeStore' => Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE),
             'cart' => Session::get('cart')
         ]);
@@ -51,8 +44,6 @@ class CartController extends Controller
     public function deleteProductFromCart($id)
     {
         (new CartService())->deleteFromCart($id);
-
-        return redirect()->back();
     }
 
     public function editOneRow(Request $request)
@@ -60,11 +51,12 @@ class CartController extends Controller
         $new_row_price = (new CartService())->editOneRow($request->post('product_id'), $request->post('quantity'));
 
         $cart = Session::get('cart');
-        //dd($cart);
+
         return response()->json([
             'new_row_price' => (new Cart())->calculatePrice($new_row_price),
             'totalProducts' => (new Cart())->calculatePrice($cart->totalProducts),
-            'totalAmount' => (new Cart())->calculatePrice($cart->totalAmount)
+            'totalAmount' => (new Cart())->calculatePrice($cart->totalAmount),
+            'currency_symbol' => (new Cart())->getCurrencySymbol()
         ]);
     }
 
@@ -80,7 +72,18 @@ class CartController extends Controller
         (new CartService())->changeDelivery($request->post('delivery_id'));
         $cart = Session::get('cart');
         return response()->json([
-            'totalAmount' => (new Cart())->calculatePrice($cart->totalAmount)
+            'totalAmount' => (new Cart())->calculatePrice($cart->totalAmount),
+            'currency_symbol' => (new Cart())->getCurrencySymbol()
+        ]);
+    }
+
+    public function data()
+    {
+        $cart = Session::get('cart');
+        return response()->json([
+            'totalProducts' => (new Cart())->calculatePrice($cart->totalProducts),
+            'totalAmount' => (new Cart())->calculatePrice($cart->totalAmount),
+            'currency_symbol' => (new Cart())->getCurrencySymbol()
         ]);
     }
 

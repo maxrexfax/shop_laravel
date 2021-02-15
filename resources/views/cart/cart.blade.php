@@ -38,16 +38,19 @@
                                     <input type="hidden" value="{{$product['product_id']}}" name="product_ids[]">
                                     <input type="hidden" value="{{$product['product_price']}}" name="product_prices[]">
                                     <input type="number" min="0" max="999" id="{{$product['product_id']}}" name="quantity[]" class="text-center pl-3 input-product-quantity-cart form-control" value="{{$product['product_quantity']}}">
-                                    <span class="font-italic"><a href="{{route('cart.delete', ['id' => $product['product_id']])}}" title="{{__('messages.remove_this_item_from_cart')}}">{{__('messages.remove')}}</a></span>
                                 </td>
                                 <td>
                                    {{$cart->calculatePrice($product['product_price'])}}{{$cart->getCurrencySymbol()}}
                                 </td>
-                                <td>
+                                <td class="row-price-holder">
                                     {{$cart->calculatePrice($product['product_row_price'])}}{{$cart->getCurrencySymbol()}}
                                 </td>
                                 <td>
-                                    <span class="font-italic"><a href="{{route('cart.delete', ['id' => $product['product_id']])}}" title="{{__('messages.remove_this_item_from_cart')}}"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a></span>
+                                    <span class="font-italic">
+                                        <a data-id="{{$product['product_id']}}" data-confirm="{{__('actions.really_delete?')}}" class="delete-from-cart" href="{{route('cart.delete', ['id' => $product['product_id']])}}" title="{{__('messages.remove_this_item_from_cart')}}">
+                                            <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                                        </a>
+                                    </span>
                                 </td>
                             </tr>
                         @endforeach
@@ -60,7 +63,7 @@
                         <p class="font-weight-bold">{{__('messages.order_summary')}}</p>
                         <hr>
                         <div class="font-weight-bold w-100">{{__('messages.items')}}:
-                            <span class="float-right">
+                            <span class="float-right" id="spanWithTotalProductsPrice">
                                 @if(isset($cart->totalProducts))
                                     {{$cart->calculatePrice($cart->totalProducts)}}{{$cart->getCurrencySymbol()}}
                                 @endif
@@ -82,14 +85,14 @@
                         <br>
                         <hr>
                         <br>
-                        <div class="font-weight-bold w-100">{{__('messages.total_cost')}} <span class="float-right">
+                        <div class="font-weight-bold w-100">{{__('messages.total_cost')}} <span class="float-right" id="spanWithTotalPrice">
                                 @if(isset($cart->totalAmount))
                                     {{$cart->calculatePrice($cart->totalAmount)}}{{$cart->getCurrencySymbol()}}
                                 @endif
                             </span></div>
                         <div class="clearfix"></div>
                         <br>
-                        <button type="submit" class="btn btn-dark btn-block">{{__('messages.checkout')}}</button>
+                        <span id="btnCheckout" data-info="{{__('messages.total_cost')}}" class="btn btn-dark btn-block">{{__('messages.checkout')}}</span>
                         <br>
                         <p>
                             @if($cart->promocode_id)
@@ -108,6 +111,7 @@
             </form>
         </div>
     </div>
+    {{var_dump($cart)}}
 <section class="place-holder"></section>
 <section class="place-holder"></section>
 <section class="place-holder"></section>

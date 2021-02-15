@@ -113,7 +113,7 @@ class CartService
         return $new_row_price;
     }
 
-    private static function recalculateCart()
+    public static function recalculateCart()
     {
         $sessionCart = Session::get('cart');
         $totalProductsPrice = 0;

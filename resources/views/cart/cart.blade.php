@@ -111,7 +111,6 @@
             </form>
         </div>
     </div>
-    {{var_dump($cart)}}
 <section class="place-holder"></section>
 <section class="place-holder"></section>
 <section class="place-holder"></section>

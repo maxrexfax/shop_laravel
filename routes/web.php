@@ -42,6 +42,7 @@ Route::group(['middleware'=>'language'],function ()
     Route::match(['get', 'post'],'/cart/calculate', 'CartController@calculate')->name('cart.calculate');
     Route::match(['get', 'post'],'/cart/edit', 'CartController@editOneRow')->name('cart.edit');
     Route::match(['get', 'post'],'/cart/changedelivery', 'CartController@changeDelivery')->name('cart.changedelivery');
+    Route::post('/cart/addpromo', 'CartController@addpromo')->name('cart.addpromo');
     Route::get('/cart/data', 'CartController@data')->name('cart.data');
 
     Route::get('/category/create/{id?}', 'CategoryController@create')->name('category.create');
@@ -54,7 +55,6 @@ Route::group(['middleware'=>'language'],function ()
     Route::get('/delivery/create/{id?}', 'DeliveryController@create')->name('delivery.create');
     Route::post('/delivery/store/{id?}', 'DeliveryController@store')->name('delivery.store');
     Route::get('/delivery/destroy/{id?}', 'DeliveryController@destroy')->name('delivery.destroy');
-
 
     Route::get('/locale/create/{id?}', 'LocaleController@create')->name('locale.create');
     Route::post('/locale/store/{id?}', 'LocaleController@store')->name('locale.store');
@@ -69,7 +69,6 @@ Route::group(['middleware'=>'language'],function ()
     Route::get('/product/images/{id}', 'ProductController@images')->name('product.images');
     Route::get('/product/show/{id}', 'ProductController@show')->name('product.show');
     Route::post('/product/store/{id?}', 'ProductController@store')->name('product.store');
-
 
     Route::get('/promocode/create/{id?}', 'PromocodeController@create')->name('promocode.create');
     Route::post('/promocode/store/{id?}', 'PromocodeController@store')->name('promocode.store');

@@ -106,6 +106,7 @@
                         <div class="clearfix"></div>
                         <div class="text-center promocode-usage">
                             <input type="text" id="promoCodeInput" class="form-control" name="promocode">
+                            <span id="btnUsePromocode" class="btn btn-secondary">Use</span>
                         </div>
                     </div>
                 </div>

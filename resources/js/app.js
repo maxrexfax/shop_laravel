@@ -304,6 +304,14 @@ $(document).ready(function() {
             });
     });
 
+    $(document).on('click', '#btnUsePromocode', function(e) {
+        console.log($('#promoCodeInput').val())
+        $.post( "/cart/addpromo", { "_token": $('meta[name="csrf-token"]').attr('content'), promo_text: $('#promoCodeInput').val() })
+            .done(function( data ) {
+
+            });
+    });
+
     $( window ).scroll(function() {
         $( '.to-top-button' ).show();
         if ($('html, body').scrollTop() === 0) {

@@ -147,4 +147,15 @@ class CartService
         }
         return $delivery;
     }
+
+    public function setPromo($promo_text)
+    {
+        $sessionCart = Session::get('cart');
+        $promocode = Promocode::where('promocode_name', $promo_text)->first();
+        if ($promocode) {
+            $sessionCart->promocode_id = $promocode->id;
+            $sessionCart->promocode_value = $promocode->promocode_value;
+        }
+        self::recalculateCart();
+    }
 }

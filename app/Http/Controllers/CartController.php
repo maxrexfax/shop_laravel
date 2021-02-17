@@ -77,6 +77,11 @@ class CartController extends Controller
         ]);
     }
 
+    public function addpromo(Request $request)
+    {
+        (new CartService())->setPromo($request->post('promo_text'));
+    }
+
     public function data()
     {
         $cart = Session::get('cart');

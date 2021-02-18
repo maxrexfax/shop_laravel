@@ -12,7 +12,7 @@
                 <div class="bg-error">{{$message}}</div>
             @endif
         </div>
-        <div class="col-12 p-0">
+        <div class="col-12 p-0 overflow-auto">
             <table class="table table-striped w-100">
                 <thead class="thead-dark">
                 <tr>

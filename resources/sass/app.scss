@@ -670,6 +670,13 @@ body {
 }
 
 .shopping-cart-main {
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 10px;
+    padding-left: 10px;
+    max-width: 1200px;
+    width: 100%;
+
     .show-input-btn {
         font-weight: bold;
         cursor: pointer;

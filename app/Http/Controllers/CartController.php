@@ -92,4 +92,13 @@ class CartController extends Controller
         ]);
     }
 
+    public function cartProductQuantity()
+    {
+        $cart = Session::get('cart');
+        if (count($cart->product_rows)>0) {
+            return count($cart->product_rows);
+        }
+        return 0;
+    }
+
 }

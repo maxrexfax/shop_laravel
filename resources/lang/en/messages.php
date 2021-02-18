@@ -38,6 +38,7 @@ return [
     'locale_code_required' => 'Locale code required',
     'locale_code_max_10' => 'Locale code max 10 symbols',
     'no_delivery' => 'No delivery',
+    'now_products_in_cart' => 'Now products in cart',
     'only_image' => 'Only image!',
     'only_uppercase' => 'Symbols must be UPPERCASE',
     'order_summary' => 'Order summary',

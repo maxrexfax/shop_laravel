@@ -48,7 +48,7 @@
                             <i class="fa fa-shopping-cart d-inline"></i>
                             {{__('actions.cart')}}
                         </a>
-                        <span class="d-inline-block div-button-card-shower-right">
+                        <span class="d-inline-block div-button-card-shower-right text-white" title="{{__('messages.now_products_in_cart')}}">
                             0
                         </span>
                     </div>

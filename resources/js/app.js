@@ -1,4 +1,5 @@
 require('./bootstrap');
+
 $(document).ready(function() {
 
     var numberOfImageToShow = 0;
@@ -308,7 +309,6 @@ $(document).ready(function() {
         console.log($('#promoCodeInput').val())
         $.post( "/cart/addpromo", { "_token": $('meta[name="csrf-token"]').attr('content'), promo_text: $('#promoCodeInput').val() })
             .done(function( data ) {
-
             });
     });
 
@@ -318,6 +318,20 @@ $(document).ready(function() {
             $( '.to-top-button' ).hide();
         }
     });
+
+    setInterval(function(){ checkProductsInCart(); }, 3000);
+
+    function checkProductsInCart() {
+        $.get( "/cart/productquantity")
+            .done(function( data ) {
+                setCartDigit(data);
+            });
+    }
+
+    function setCartDigit(number) {
+        $('.div-button-card-shower-right').html(number);
+    }
+    checkProductsInCart();
 
     let ckeditor = document.getElementById('summary-ckeditor');
     if(ckeditor) {

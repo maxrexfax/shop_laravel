@@ -44,6 +44,7 @@ Route::group(['middleware'=>'language'],function ()
     Route::match(['get', 'post'],'/cart/changedelivery', 'CartController@changeDelivery')->name('cart.changedelivery');
     Route::post('/cart/addpromo', 'CartController@addpromo')->name('cart.addpromo');
     Route::get('/cart/data', 'CartController@data')->name('cart.data');
+    Route::get('/cart/productquantity', 'CartController@cartProductQuantity')->name('cart.productquantity');
 
     Route::get('/category/create/{id?}', 'CategoryController@create')->name('category.create');
     Route::get('/categories/root/list', 'CategoryController@categoriesRootList')->name('category.rootlist');

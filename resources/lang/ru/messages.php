@@ -38,6 +38,7 @@ return [
     'locale_code_required' => 'Требуется код языка',
     'locale_code_max_10' => 'Длина кода не более 10 символов',
     'no_delivery' => 'Без доставки',
+    'now_products_in_cart' => 'Сейчас продуктов в корзине',
     'only_image' => 'Только файлы изображений!',
     'only_uppercase' => 'Только ЗАГЛАВНЫЕ буквы',
     'order_summary' => 'Суммарно по заказу',

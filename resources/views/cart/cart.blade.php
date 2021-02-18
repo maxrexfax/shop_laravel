@@ -7,7 +7,7 @@
             <div class="row">
                     @csrf
                 <div class="offset-md-1 col-md-7 col-sm-12">
-                    <h2 class="h4">{{__('messages.shopping_cart')}}</h2>
+                    <div class="text-center"><h2 class="h4">{{__('messages.shopping_cart')}}</h2></div>
                     <div class="d-none d-md-block overflow-auto">
                         <table class="table">
                             <thead>
@@ -46,7 +46,7 @@
                                     <td class="row-price-holder">
                                         {{$cart->calculatePrice($product['product_row_price'])}}{{$cart->getCurrencySymbol()}}
                                     </td>
-                                    <td>
+                                    <td class="text-center">
                                         <span class="font-italic">
                                             <a data-id="{{$product['product_id']}}" data-confirm="{{__('actions.really_delete?')}}" class="delete-from-cart" href="{{route('cart.delete', ['id' => $product['product_id']])}}" title="{{__('messages.remove_this_item_from_cart')}}">
                                                 <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
@@ -63,8 +63,17 @@
                         @if(isset($cart->product_rows))
                             @foreach($cart->product_rows as $product)
                                 <div class="tr">
-                                    <div>
-                                        <h3>{{$product['product_name']}}</h3>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h3>{{$product['product_name']}}</h3>
+                                        </div>
+                                        <div>
+                                        <span>
+                                            <a data-id="{{$product['product_id']}}" data-confirm="{{__('actions.really_delete?')}}" class="delete-from-cart" href="{{route('cart.delete', ['id' => $product['product_id']])}}" title="{{__('messages.remove_this_item_from_cart')}}">
+                                                <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                                            </a>
+                                        </span>
+                                        </div>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-inline">{{__('messages.price')}}: </div>
@@ -78,19 +87,12 @@
                                             <input type="number" min="0" max="999" id="{{$product['product_id']}}" name="quantity[]" class="text-center input-product-quantity-cart form-control" value="{{$product['product_quantity']}}">
                                         </div>
                                     </div>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="d-inline">{{__('messages.total')}}: </div>
-                                        <div class="row-price-holder d-inline">
-                                            {{$cart->calculatePrice($product['product_row_price'])}}{{$cart->getCurrencySymbol()}}
+                                    <div class="text-right">
+                                        <div class="row-price-holder">
+                                            {{__('messages.total_one_product')}}: {{$cart->calculatePrice($product['product_row_price'])}}{{$cart->getCurrencySymbol()}}
                                         </div>
                                     </div>
-                                    <div class="text-center">
-                                        <span>
-                                            <a data-id="{{$product['product_id']}}" data-confirm="{{__('actions.really_delete?')}}" class="delete-from-cart" href="{{route('cart.delete', ['id' => $product['product_id']])}}" title="{{__('messages.remove_this_item_from_cart')}}">
-                                                <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
-                                            </a>
-                                        </span>
-                                    </div>
+
                                 </div>
                                 <hr>
                             @endforeach

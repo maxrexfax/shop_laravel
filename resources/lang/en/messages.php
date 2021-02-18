@@ -83,6 +83,7 @@ return [
     'sur_password_required' => 'Password required!',
     'total' => 'Total',
     'total_cost' => 'TOTAL COST',
+    'total_one_product' => 'Total one product',
     'uppercase_and_digits_only' => 'UPPERCASE and digits only for promocode name!',
     'users_list' => 'Users List',
     'wrong_product_id' => 'Wrong product ID!',

@@ -83,6 +83,7 @@ return [
     'sur_password_required' => 'Паспорт требуется!',
     'total' => 'Всего',
     'total_cost' => 'ОБЩАЯ СТОИМОСТЬ',
+    'total_one_product' => 'Всего один товар',
     'uppercase_and_digits_only' => 'ТОЛЬКО ЗАГЛАВНЫЕ и цифры в названии промокода!',
     'users_list' => 'Список пользователей',
     'wrong_product_id' => 'Неверный ID продукта!',

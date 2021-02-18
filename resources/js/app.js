@@ -230,7 +230,7 @@ $(document).ready(function() {
         let product_id = $(this).attr('id');
         $.post( "/cart/edit", { "_token": $('meta[name="csrf-token"]').attr('content'), product_id: product_id, quantity: $(this).val() })
             .done(function( data ) {
-                let tdWithPrice = $(inputChanged).closest('tr').find('.row-price-holder');
+                let tdWithPrice = $(inputChanged).closest('.tr').find('.row-price-holder');
                 $(tdWithPrice).html(data['new_row_price'] + data['currency_symbol']);
                 $('#spanWithTotalProductsPrice').html(data['totalProducts'] + data['currency_symbol']);
                 $('#spanWithTotalPrice').html(data['totalAmount'] + data['currency_symbol']);

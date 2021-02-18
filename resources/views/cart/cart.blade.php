@@ -22,7 +22,7 @@
                             <tbody>
                             @if(isset($cart->product_rows))
                             @foreach($cart->product_rows as $product)
-                                <tr>
+                                <tr class="tr">
                                     <td>
                                         <div class="image-in-cart">
                                             <a href="{{route('product.show', ['id' => $product['product_id']])}}" target="_blank">
@@ -62,7 +62,7 @@
                     <div class="d-md-none d-lg-none">
                         @if(isset($cart->product_rows))
                             @foreach($cart->product_rows as $product)
-                                <div>
+                                <div class="tr">
                                     <div>
                                         <h3>{{$product['product_name']}}</h3>
                                     </div>

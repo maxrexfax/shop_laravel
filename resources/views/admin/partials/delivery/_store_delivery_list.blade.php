@@ -65,7 +65,7 @@
                         </select>
                     </div>
                     <div class="col-md-2 text-right">
-                        <span id="btnToAddDeliveryToStoreDiv" data-confirm="{{__('text.already_in_use')}}" class="btn btn-secondary w-100">{{__('actions.add')}}</span>
+                        <span id="btnToAddDeliveryToStoreDiv" data-confirm="{{__('text.already_in_use')}}" data-title="{{__('text.delete_this_delivery')}}" class="btn btn-secondary w-100">{{__('actions.add')}}</span>
                     </div>
                 </div>
                 <div class="form-group row mb-0">

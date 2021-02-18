@@ -167,7 +167,7 @@
                                 </select>
                             </div>
                             <div class="col-md-2">
-                                <span class="btn btn-secondary float-right" data-confirm="{{__('text.already_in_use')}}" id="btnAdderCategoryToList">{{__('actions.add_this')}}</span>
+                                <span class="btn btn-secondary float-right" data-confirm="{{__('text.already_in_use')}}" data-title="{{__('actions.delete_this_category')}}" id="btnAdderCategoryToList">{{__('actions.add_this')}}</span>
                             </div>
                         </div>
 

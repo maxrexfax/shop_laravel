@@ -38,7 +38,7 @@
                                                     @if($locale->isDefault($store->id))
                                                         btn-success
                                                     @endif
-                                                    " for="radio{{$locale->id}}">{{__('Default')}}</label>
+                                                    " for="radio{{$locale->id}}">{{__('actions.default')}}</label>
                                                     <input type="hidden" name="locales[]" value="{{$locale->id}}">
                                                 </td>
                                                 <td class="text-center"><i class="fa fa-minus-circle class-cursor-pointer i-tr-deleter" title="{{__('actions.delete_this_locale')}}"></i></td>
@@ -63,7 +63,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <span id="btnToAddLocaleToStoreDiv" data-confirm="{{__('text.already_in_use')}}" class="btn btn-secondary w-100">{{__('actions.add')}}</span>
+                                    <span id="btnToAddLocaleToStoreDiv" data-confirm="{{__('text.already_in_use')}}" data-default="{{__('actions.default')}}" data-title="{{__('actions.delete_this_locale')}}" class="btn btn-secondary w-100">{{__('actions.add')}}</span>
                                 </div>
                             </div>
                             <div class="form-group row mb-0">

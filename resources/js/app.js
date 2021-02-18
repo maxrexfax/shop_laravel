@@ -1,5 +1,9 @@
 require('./bootstrap');
 
+const TIME_TO_RECHECK_CART = 3000;
+const TIME_TO_SHOW_MESSAGE = 2000;
+const TIME_TO_SLIDE_UP = 200;
+
 $(document).ready(function() {
 
     var numberOfImageToShow = 0;
@@ -64,10 +68,10 @@ $(document).ready(function() {
     $('.accordion-content').slideUp(1);
 
     $(document).on('click', '.accordion-header', function(e) {
-        $('.accordion-content').slideUp(200);
-        $('.accordion-content-categories').slideUp(200);
+        $('.accordion-content').slideUp(TIME_TO_SLIDE_UP);
+        $('.accordion-content-categories').slideUp(TIME_TO_SLIDE_UP);
         if(!$(this).next().is(":visible")){
-            $(this).next().slideDown(200);
+            $(this).next().slideDown(TIME_TO_SLIDE_UP);
         }
     });
 
@@ -84,7 +88,7 @@ $(document).ready(function() {
         if(isExist) {
             alert(this.getAttribute('data-confirm'));
         } else {
-            let htmlToAdd = '<div id="' + $('#categoriesToAdd option:selected').val() + '"><i class="fa fa-minus-circle class-cursor-pointer i-deleter" title="Delete this category"></i><span> ' + $('#categoriesToAdd option:selected').text() + '</span>\n' +
+            let htmlToAdd = '<div id="' + $('#categoriesToAdd option:selected').val() + '"><i class="fa fa-minus-circle class-cursor-pointer i-deleter" title="' + this.getAttribute('data-title') + '"></i><span> ' + $('#categoriesToAdd option:selected').text() + '</span>\n' +
                 '<input type="hidden" name="categories[]" value="' + $('#categoriesToAdd option:selected').val() + '">\n' +
                 '</div>'
             $('#divWithCategoriesList').append(htmlToAdd);
@@ -104,7 +108,11 @@ $(document).ready(function() {
         if(isExist) {
             alert(this.getAttribute('data-confirm'));
         } else {
-            let str = createHtmlToAdd($('#selectToAddLocaleToStoreDiv option:selected').text(), $('#selectToAddLocaleToStoreDiv option:selected').val(), 'locales');
+            let str = createHtmlToAdd($('#selectToAddLocaleToStoreDiv option:selected').text(),
+                $('#selectToAddLocaleToStoreDiv option:selected').val(),
+                'locales',
+                this.getAttribute('data-title'),
+                this.getAttribute('data-default'));
             $('#tbodyWithLocales').append(str);
         }
     });
@@ -122,29 +130,29 @@ $(document).ready(function() {
         if(isExist) {
             alert(this.getAttribute('data-confirm'));
         } else {
-            let str = createHtmlToAddDelivery($('#selectToAddDeliveryToStoreDiv option:selected').text(), $('#selectToAddDeliveryToStoreDiv option:selected').val(), 'deliveries');
+            let str = createHtmlToAddDelivery($('#selectToAddDeliveryToStoreDiv option:selected').text(), $('#selectToAddDeliveryToStoreDiv option:selected').val(), 'deliveries', this.getAttribute('data-title'));
             $('#tbodyWithDeliveries').append(str);
         }
     });
 
-    function createHtmlToAddDelivery(delivery_name, delivery_id, input_name) {
+    function createHtmlToAddDelivery(delivery_name, delivery_id, input_name, title) {
         let htmlValue = '<tr id="' + delivery_id + '">\n' +
             '<td class="text-left pt-3"><p>' + delivery_name + '</p></td>\n' +
-            '<td class="text-center"><i class="fa fa-minus-circle class-cursor-pointer i-tr-deleter" title="Delete this delivery" aria-hidden="true"></i>' +
+            '<td class="text-center"><i class="fa fa-minus-circle class-cursor-pointer i-tr-deleter" title="' +title + '" aria-hidden="true"></i>' +
             '<input type="hidden" name="'+ input_name +'[]" value="' + delivery_id + '"></td>\n' +
             '</tr>';
         return htmlValue;
     }
 
-    function createHtmlToAdd(locale_name, locale_id, input_name) {
+    function createHtmlToAdd(locale_name, locale_id, input_name, title, text) {
         let htmlVal = '<tr id="' + locale_id + '">\n' +
             '<td class="text-left pt-3"><p>' + locale_name + '</p></td>\n' +
             '<td class="text-center">\n' +
             '<input class="d-none" name="default" id="radio' + locale_id + '" type="radio" value="' + locale_id + '">\n' +
-            '<label class="for-locale btn" for="radio' + locale_id + '">Default</label>\n' +
+            '<label class="for-locale btn" for="radio' + locale_id + '">' + text + '</label>\n' +
             '<input type="hidden" name="'+ input_name +'[]" value="' + locale_id + '">\n' +
             '</td>\n' +
-            '<td class="text-center"><i class="fa fa-minus-circle class-cursor-pointer i-tr-deleter" title="{{__(\'Delete this locale\')}}"></i></td>\n' +
+            '<td class="text-center"><i class="fa fa-minus-circle class-cursor-pointer i-tr-deleter" title="' + title + '"></i></td>\n' +
             '</tr>';
         return htmlVal;
     }
@@ -162,7 +170,11 @@ $(document).ready(function() {
         if(isExist) {
             alert(this.getAttribute('data-confirm'));
         } else {
-            let str = createHtmlToAdd($('#selectToAddCurrencyToStoreDiv option:selected').text(), $('#selectToAddCurrencyToStoreDiv option:selected').val(), 'currencies');
+            let str = createHtmlToAdd($('#selectToAddCurrencyToStoreDiv option:selected').text(),
+                $('#selectToAddCurrencyToStoreDiv option:selected').val(),
+                'currencies',
+                this.getAttribute('data-title'),
+                this.getAttribute('data-default'));
             $('#tbodyWithCurrency').append(str);
         }
     });
@@ -293,7 +305,7 @@ $(document).ready(function() {
         let message = this.getAttribute('data-message');
         $.get( "/cart/add/" + this.getAttribute('data-id'))
             .done(function( data ) {
-                $('<div class="message-added-popup">' +  message + '</div>').insertBefore(buttonClicked).delay(2000).fadeOut();
+                $('<div class="message-added-popup">' +  message + '</div>').insertBefore(buttonClicked).delay(TIME_TO_SHOW_MESSAGE).fadeOut();
         });
     });
 
@@ -319,7 +331,7 @@ $(document).ready(function() {
         }
     });
 
-    setInterval(function(){ checkProductsInCart(); }, 3000);
+    setInterval(function(){ checkProductsInCart(); }, TIME_TO_RECHECK_CART);
 
     function checkProductsInCart() {
         $.get( "/cart/productquantity")

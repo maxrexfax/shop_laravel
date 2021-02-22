@@ -65,20 +65,20 @@ class CartService
 
     public function calculate($request)
     {
-        $totalProductsPrice = 0;
-        $totalAmount = 0;
         $sessionCart = Session::get('cart');
-
-        if (Session::has('logined_user_id')) {
-            $sessionCart->user_id = Session::get('logined_user_id');
-        }
-
         if($request->post('promocode')) {
             $promocode = Promocode::where('promocode_name', $request->post('promocode'))->first();
             if ($promocode) {
                 $sessionCart->promocode_id = $promocode->id;
                 $sessionCart->promocode_value = $promocode->promocode_value;
             }
+        }
+
+        $totalProductsPrice = 0;
+        $totalAmount = 0;
+
+        if (Session::has('logined_user_id')) {
+            $sessionCart->user_id = Session::get('logined_user_id');
         }
 
         $listOfQuantities = $request->post('quantity');

@@ -3,11 +3,14 @@
     <div class="w-100 bg-white p-0">
         <section class="place-holder"></section>
         <div class="shopping-cart-main">
-            <form method="POST" action="{{ route('cart.calculate') }}">
+
             <div class="row">
                     @csrf
                 <div class="offset-md-1 col-md-7 col-sm-12">
-                    <div class="text-center"><h2 class="h4">{{__('messages.shopping_cart')}}</h2></div>
+                    <div class="text-center">
+                        <h2 class="h4">{{__('messages.shopping_cart')}}</h2>
+                    </div>
+                    <form method="POST" action="{{ route('cart.calculate') }}">
                     <div class="d-none d-md-block overflow-auto">
                         <table class="table">
                             <thead>
@@ -85,6 +88,7 @@
                                             <input type="hidden" value="{{$product['product_id']}}" name="product_ids[]">
                                             <input type="hidden" value="{{$product['product_price']}}" name="product_prices[]">
                                             <input type="number" min="0" max="999" id="{{$product['product_id']}}" name="quantity[]" class="text-center input-product-quantity-cart form-control" value="{{$product['product_quantity']}}">
+                                            <input type="number" min="0" max="999" id="{{$product['product_id']}}" name="quantity{{$product['product_id']}}" class="text-center input-product-quantity-cart form-control" value="{{$product['product_quantity']}}">
                                         </div>
                                     </div>
                                     <div class="text-right">
@@ -98,6 +102,7 @@
                             @endforeach
                         @endif
                     </div>
+                    </form>
                 </div>
                 <div class="col-md-4 col-sm-12 pt-3">
                     <div class="bg-light p-2">
@@ -145,16 +150,19 @@
                         <br>
                         <p>{{__('messages.promotional_code')}} <span class="float-right show-input-btn" id="btnToAddPromoCode">+</span></p>
                         <div class="clearfix"></div>
+                        <form method="POST" action="{{ route('cart.calculate') }}">
+                                @csrf
                         <div class="text-center promocode-usage">
-                            <div class="w-75">
-                                <input type="text" id="promoCodeInput" class="form-control" name="promocode">
-                            </div>
-                            <span id="btnUsePromocode" class="btn btn-secondary d-inline">Use</span>
+
+                            <input type="text" id="promoCodeInput" class="form-control w-75 float-left" name="promocode">
+
+                            <button type="submit" value="promoadd" id="btnUsePromocode" class="btn btn-secondary w-25 float-right">Use</button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            </form>
+
         </div>
     </div>
 <section class="place-holder"></section>

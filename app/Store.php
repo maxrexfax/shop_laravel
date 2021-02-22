@@ -37,9 +37,14 @@ class Store extends Model
         return $this->hasMany(StoreCurrency::class, 'store_id', 'id');
     }
 
+    public function getActiveStoreCurrency()
+    {
+        return $this->storeCurrencies->where('default', '=', Store::STORE_IS_ACTIVE)->first();
+    }
+
     public function getDefaultCurrency()
     {
-        return $this->storeCurrencies->where('default', '=', Store::STORE_IS_ACTIVE);
+        return Currency::find($this->getActiveStoreCurrency()->currency_id);
     }
 
     public function currencies()

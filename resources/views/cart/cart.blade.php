@@ -136,16 +136,20 @@
                         <span id="btnCheckout" data-info="{{__('messages.total_cost')}}" class="btn btn-dark btn-block">{{__('messages.checkout')}}</span>
                         <br>
                         <p>
-                            @if($cart->promocode_id)
-                                {{__('messages.activated_discount')}}:{{$cart->promocode_value}}%
+
+                                {{__('messages.activated_discount')}}:
+                            @if($cart->promocode_value)
+                                {{$cart->promocode_value}}%
                             @endif
                         </p>
                         <br>
                         <p>{{__('messages.promotional_code')}} <span class="float-right show-input-btn" id="btnToAddPromoCode">+</span></p>
                         <div class="clearfix"></div>
                         <div class="text-center promocode-usage">
-                            <input type="text" id="promoCodeInput" class="form-control" name="promocode">
-                            <span id="btnUsePromocode" class="btn btn-secondary">Use</span>
+                            <div class="w-75">
+                                <input type="text" id="promoCodeInput" class="form-control" name="promocode">
+                            </div>
+                            <span id="btnUsePromocode" class="btn btn-secondary d-inline">Use</span>
                         </div>
                     </div>
                 </div>

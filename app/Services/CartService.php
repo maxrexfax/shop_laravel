@@ -116,11 +116,11 @@ class CartService
         }
         Session::put('cart', $sessionCart);
 
-        self::recalculateCart();
+        $this->recalculateCart();
         return $new_row_price;
     }
 
-    public static function recalculateCart()
+    public function recalculateCart()
     {
         $sessionCart = Session::get('cart');
         $totalProductsPrice = 0;
@@ -145,7 +145,7 @@ class CartService
         $sessionCart = Session::get('cart');
         $sessionCart->delivery_id = $delivery_id;
         Session::put('cart', $sessionCart);
-        self::recalculateCart();
+        $this->recalculateCart();
         return true;
     }
 
@@ -167,6 +167,6 @@ class CartService
             $sessionCart->promocode_id = $promocode->id;
             $sessionCart->promocode_value = $promocode->promocode_value;
         }
-        self::recalculateCart();
+        $this->recalculateCart();
     }
 }

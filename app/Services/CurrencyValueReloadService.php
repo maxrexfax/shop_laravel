@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Http;
 class CurrencyValueReloadService
 {
     const PRIVAT_BANK_CURRENCY_API_URL = 'https://api.privatbank.ua/p24api/pubinfo?exchange&json&coursid=11';
+
+    public function __construct(){}
+
     public function reloadCurrenciesValues()
     {
         $collectionOfValues = self::getDataFromPbApi();

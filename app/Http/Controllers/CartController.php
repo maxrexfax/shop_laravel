@@ -28,7 +28,7 @@ class CartController extends Controller
 
     public function cart()
     {
-        CartService::recalculateCart();
+        $this->cartService->recalculateCart();
         return view('cart.cart', [
             'activeStore' => Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE),
             'cart' => Session::get('cart')

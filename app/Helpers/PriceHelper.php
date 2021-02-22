@@ -11,12 +11,10 @@ class PriceHelper
 
     public function getCurrentCurrency()
     {
-        $defaultCurrency = Currency::find(1);
+        $defaultCurrency = Currency::firstWhere('currency_code', Currency::CURRENCY_MAIN);
 
-        $activeStore = Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE);
-        if ($activeStore) {
-            $currentStoreCurrency = $activeStore->getDefaultCurrency();
-            if ($currentStoreCurrency) {
+        if ($activeStore = Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE)) {
+            if ($currentStoreCurrency = $activeStore->getDefaultCurrency()) {
                 $defaultCurrency = $currentStoreCurrency;
             }
         }

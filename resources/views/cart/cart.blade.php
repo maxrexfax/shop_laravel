@@ -88,7 +88,6 @@
                                             <input type="hidden" value="{{$product['product_id']}}" name="product_ids[]">
                                             <input type="hidden" value="{{$product['product_price']}}" name="product_prices[]">
                                             <input type="number" min="0" max="999" id="{{$product['product_id']}}" name="quantity[]" class="text-center input-product-quantity-cart form-control" value="{{$product['product_quantity']}}">
-                                            <input type="number" min="0" max="999" id="{{$product['product_id']}}" name="quantity{{$product['product_id']}}" class="text-center input-product-quantity-cart form-control" value="{{$product['product_quantity']}}">
                                         </div>
                                     </div>
                                     <div class="text-right">

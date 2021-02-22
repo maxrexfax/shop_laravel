@@ -7,6 +7,8 @@ use App\Store;
 
 class PriceHelper
 {
+    public function __construct() {}
+
     public function getCurrentCurrency()
     {
         $defaultCurrency = Currency::find(1);
@@ -24,15 +26,14 @@ class PriceHelper
 
     public function calculate($base_price)
     {
-        $defaultCurrency = self::getCurrentCurrency();
+        $defaultCurrency = $this->getCurrentCurrency();
         $mainCurrency = Currency::where('currency_code', '=', Currency::CURRENCY_MAIN)->first();
         return number_format(($base_price * $mainCurrency->currency_value / $defaultCurrency->currency_value), 2, '.', '');
-
     }
 
     public function getCurrentCurrencySymbol()
     {
-        $defaultCurrency = self::getCurrentCurrency();
+        $defaultCurrency = $this->getCurrentCurrency();
         return $defaultCurrency->currency_symbol;
     }
 }

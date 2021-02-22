@@ -12,16 +12,23 @@ use Illuminate\Support\Facades\Session;
 class CartService
 {
 
+    public function __construct(){}
+
     public function addToCart($id)
     {
         $product = Product::find($id);
         $sessionCart = Session::get('cart');
         $isNotInCart = true;
-
-        foreach ($sessionCart->product_rows as $row) {
-            if ($row['product_id'] == $id) {
-                $isNotInCart = false;
+        if (!empty($sessionCart->product_rows)) {
+            foreach ($sessionCart->product_rows as $row) {
+                if ($row['product_id'] == $id) {
+                    $isNotInCart = false;
+                }
             }
+        }
+
+        if ($sessionCart->product_rows === null) {
+            $sessionCart->product_rows = [];
         }
 
         if ($isNotInCart) {
@@ -118,9 +125,13 @@ class CartService
         $sessionCart = Session::get('cart');
         $totalProductsPrice = 0;
         $promocodeDiscountSum = 0;
-        for ($i = 0; $i < count($sessionCart->product_rows); $i++) {
-            $totalProductsPrice += $sessionCart->product_rows[$i]['product_row_price'];
+
+        if (!empty($sessionCart->product_rows)) {
+            for ($i = 0; $i < count($sessionCart->product_rows); $i++) {
+                $totalProductsPrice += $sessionCart->product_rows[$i]['product_row_price'];
+            }
         }
+
         if (!empty($sessionCart->promocode_value)) {
             $promocodeDiscountSum = ($sessionCart->promocode_value * $totalProductsPrice)/100;
         }

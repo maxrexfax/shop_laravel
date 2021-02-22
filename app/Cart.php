@@ -5,7 +5,7 @@ namespace App;
 use App\Helpers\PriceHelper;
 use Illuminate\Database\Eloquent\Model;
 
-class Cart extends Model
+class Cart
 {
     public $user_id;
     public $product_rows;
@@ -14,20 +14,20 @@ class Cart extends Model
     public $promocode_value;
     public $totalProducts;
     public $totalAmount;
+    public $priceHelper;
 
-    public function __construct(array $attributes = [])
+    public function __construct()
     {
-        $this->product_rows = [];
-        parent::__construct($attributes);
+        $this->priceHelper = new PriceHelper();
     }
 
     public function calculatePrice($priceIn)
     {
-        return (new PriceHelper())->calculate($priceIn);
+        return $this->priceHelper->calculate($priceIn);
     }
 
     public function getCurrencySymbol()
     {
-        return (new PriceHelper())->getCurrentCurrencySymbol();
+        return $this->priceHelper->getCurrentCurrencySymbol();
     }
 }

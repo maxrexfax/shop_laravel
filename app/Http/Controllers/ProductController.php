@@ -21,7 +21,6 @@ class ProductController extends Controller
             }
 
             return redirect('admin/product/list');
-
         }
 
         return view('admin.partials.product._product_edit_create', [

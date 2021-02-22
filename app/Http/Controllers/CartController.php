@@ -15,14 +15,15 @@ use Illuminate\Support\Facades\Session;
 class CartController extends Controller
 {
     public $cart;
+    public $cartService;
 
     public function __construct()
     {
         if (!session()->has('cart')) {
-            $this->cart = new Cart();
+            Session::put('cart', new Cart());
         }
-
-        Session::put('cart', $this->cart);
+        $this->cart = new Cart();
+        $this->cartService = new CartService();
     }
 
     public function cart()
@@ -36,68 +37,71 @@ class CartController extends Controller
 
     public function addProductToCart($id)
     {
-        (new CartService())->addToCart($id);
+        $this->cartService->addToCart($id);
 
         return redirect()->back();
     }
 
     public function deleteProductFromCart($id)
     {
-        (new CartService())->deleteFromCart($id);
+        $this->cartService->deleteFromCart($id);
     }
 
     public function editOneRow(Request $request)
     {
-        $new_row_price = (new CartService())->editOneRow($request->post('product_id'), $request->post('quantity'));
+        $new_row_price = $this->cartService->editOneRow($request->post('product_id'), $request->post('quantity'));
 
         $cart = Session::get('cart');
 
         return response()->json([
-            'new_row_price' => (new Cart())->calculatePrice($new_row_price),
-            'totalProducts' => (new Cart())->calculatePrice($cart->totalProducts),
-            'totalAmount' => (new Cart())->calculatePrice($cart->totalAmount),
-            'currency_symbol' => (new Cart())->getCurrencySymbol()
+            'new_row_price' => $this->cart->calculatePrice($new_row_price),
+            'totalProducts' => $this->cart->calculatePrice($cart->totalProducts),
+            'totalAmount' => $this->cart->calculatePrice($cart->totalAmount),
+            'currency_symbol' => $this->cart->getCurrencySymbol()
         ]);
     }
 
     public function calculate(Request $request)
     {
-        (new CartService())->calculate($request);
+        $this->cartService->calculate($request);
 
         return redirect('/cart');
     }
 
     public function changeDelivery(Request $request)
     {
-        (new CartService())->changeDelivery($request->post('delivery_id'));
+        $this->cartService->changeDelivery($request->post('delivery_id'));
         $cart = Session::get('cart');
         return response()->json([
-            'totalAmount' => (new Cart())->calculatePrice($cart->totalAmount),
-            'currency_symbol' => (new Cart())->getCurrencySymbol()
+            'totalAmount' => $this->cart->calculatePrice($cart->totalAmount),
+            'currency_symbol' => $this->cart->getCurrencySymbol()
         ]);
     }
 
     public function addpromo(Request $request)
     {
-        (new CartService())->setPromo($request->post('promo_text'));
+        $this->cartService->setPromo($request->post('promo_text'));
     }
 
     public function data()
     {
         $cart = Session::get('cart');
         return response()->json([
-            'totalProducts' => (new Cart())->calculatePrice($cart->totalProducts),
-            'totalAmount' => (new Cart())->calculatePrice($cart->totalAmount),
-            'currency_symbol' => (new Cart())->getCurrencySymbol()
+            'totalProducts' => $this->cart->calculatePrice($cart->totalProducts),
+            'totalAmount' => $this->cart->calculatePrice($cart->totalAmount),
+            'currency_symbol' => $this->cart->getCurrencySymbol()
         ]);
     }
 
     public function cartProductQuantity()
     {
         $cart = Session::get('cart');
-        if (count($cart->product_rows)>0) {
-            return count($cart->product_rows);
+        if (!empty($cart->product_rows)) {
+            if (count($cart->product_rows)>0) {
+                return count($cart->product_rows);
+            }
         }
+
         return 0;
     }
 

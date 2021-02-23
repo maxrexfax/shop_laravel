@@ -210,6 +210,16 @@ $(document).ready(function() {
         $('.root-menu-container').fadeToggle( "slow", "linear" );
     });
 
+    $(document).on('click', '.py-4', function (e) {
+        hideCategoriesMenu();
+    });
+
+    function hideCategoriesMenu() {
+        $( "#divToShowRootCategories1" ).empty();
+        $( "#divToShowRootCategories2" ).empty();
+        $('.root-menu-container').hide();
+    }
+
     function createDivElementForRootCatgoryLink(id, name)
     {
         return divElementForRootCatgoryLink = '<a class="url-no-decoration" href="/product/category/' + id + '"><div class="col-lg-12 popup-root-categories-item">' +

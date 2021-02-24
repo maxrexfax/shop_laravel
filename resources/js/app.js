@@ -235,7 +235,7 @@ $(document).ready(function() {
         createUrlToRedirect();
     });
 
-    $( ".input-product-quantity-cart" ).change(function() {
+    /*$( ".input-product-quantity-cart" ).change(function() {
         let inputChanged = $(this);
         let product_id = $(this).attr('id');
         $.post( "/cart/edit", { "_token": $('meta[name="csrf-token"]').attr('content'), product_id: product_id, quantity: $(this).val() })
@@ -245,7 +245,7 @@ $(document).ready(function() {
                 $('#spanWithTotalProductsPrice').html(data['totalProducts'] + data['currency_symbol']);
                 $('#spanWithTotalPrice').html(data['totalAmount'] + data['currency_symbol']);
             });
-    });
+    });*/
 
     $( "#selectTypeOfDeliveryInCart" ).change(function() {
         $.post( "/cart/changedelivery", { "_token": $('meta[name="csrf-token"]').attr('content'), delivery_id: $('#selectTypeOfDeliveryInCart option:selected').val() })
@@ -319,11 +319,43 @@ $(document).ready(function() {
         });
     });
 
+    $(document).on('click', '.minus-product', function (e) {
+        let parentId = $(this).closest('.tr').attr('id');
+        let idDigit = parentId.substring(3);
+        let currentQuantity = $('.input'+idDigit).val();
+        console.log('currentQuantity=' + currentQuantity);
+        currentQuantity--;
+        if (currentQuantity === 0) {
+            currentQuantity = 1;
+        }
+        $('.input'+idDigit).val(currentQuantity);
+        recalculateCart(idDigit, currentQuantity)
+    });
+
+    $(document).on('click', '.plus-product', function (e) {
+        let parentId = $(this).closest('.tr').attr('id');
+        let idDigit = parentId.substring(3);
+        let currentQuantity = $('.input'+idDigit).val();
+        console.log('currentQuantity=' + currentQuantity);
+        $('.input'+idDigit).val(++currentQuantity);
+        recalculateCart(idDigit, currentQuantity)
+    });
+
+    function recalculateCart(productId, productQuantity) {
+        $.post( "/cart/edit", { "_token": $('meta[name="csrf-token"]').attr('content'), productId: productId, productQuantity: productQuantity })
+            .done(function( data ) {
+                let rowPriceHolder = $('.row-price-' + productId);
+                $(rowPriceHolder).html(data['newRowPrice'] + data['currencySymbol']);
+                $('#spanWithTotalProductsPrice').html(data['totalProducts'] + data['currencySymbol']);
+                $('#spanWithTotalPrice').html(data['totalAmount'] + data['currencySymbol']);
+            });
+    }
+
     $(document).on('click', '#btnCheckout', function(e) {
         let btnText = this.getAttribute('data-info');
         $.get( "/cart/data")
             .done(function( data ) {
-                alert(btnText + ': ' + data['totalAmount'] + data['currency_symbol']);
+                alert(btnText + ': ' + data['totalAmount'] + data['currencySymbol']);
             });
     });
 
@@ -332,6 +364,23 @@ $(document).ready(function() {
         $.post( "/cart/addpromo", { "_token": $('meta[name="csrf-token"]').attr('content'), promo_text: $('#promoCodeInput').val() })
             .done(function( data ) {
             });
+    });
+
+    let divWithImages = $('.div-icons-container');
+    if (divWithImages.offsetWidth < divWithImages.scrollWidth) {
+        console.log('overflow');
+    } else {
+        console.log('no overflow');
+    }
+
+    $(document).on('click', '#leftScroll', function (e) {
+        let currentPosition = $('.div-icons-container').scrollLeft();
+        $('.div-icons-container').animate( { scrollLeft: '-=120' }, 1000);
+    });
+
+    $(document).on('click', '#rightScroll', function (e) {
+        let currentPosition = $('.div-icons-container').scrollLeft();
+        $('.div-icons-container').animate( { scrollLeft: '+=120' }, 1000);
     });
 
     $( window ).scroll(function() {
@@ -359,4 +408,6 @@ $(document).ready(function() {
     if(ckeditor) {
         CKEDITOR.replace( 'summary-ckeditor' );
     }
+
+
 });

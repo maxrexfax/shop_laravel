@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart
 {
-    public $user_id;
-    public $product_rows;
-    public $delivery_id;
-    public $promocode_id;
-    public $promocode_value;
+    public $userId;
+    public $productRows;
+    public $deliveryId;
+    public $promocodeId;
+    public $promocodeValue;
     public $totalProducts;
     public $totalAmount;
     public $priceHelper;

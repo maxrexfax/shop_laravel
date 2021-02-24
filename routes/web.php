@@ -40,11 +40,12 @@ Route::group(['middleware'=>'language'],function ()
     Route::get('/cart/add/{id?}', 'CartController@addProductToCart')->name('cart.add');
     Route::get('/cart/delete/{id?}', 'CartController@deleteProductFromCart')->name('cart.delete');
     Route::match(['get', 'post'],'/cart/calculate', 'CartController@calculate')->name('cart.calculate');
-    Route::match(['get', 'post'],'/cart/edit', 'CartController@editOneRow')->name('cart.edit');
+    Route::match(['get', 'post'],'/cart/edit', 'CartController@edit')->name('cart.edit');
     Route::match(['get', 'post'],'/cart/changedelivery', 'CartController@changeDelivery')->name('cart.changedelivery');
     Route::post('/cart/addpromo', 'CartController@addpromo')->name('cart.addpromo');
     Route::get('/cart/data', 'CartController@data')->name('cart.data');
     Route::get('/cart/productquantity', 'CartController@cartProductQuantity')->name('cart.productquantity');
+    Route::get('/cart/reset', 'CartController@reset')->name('cart.reset');
 
     Route::get('/category/create/{id?}', 'CategoryController@create')->name('category.create');
     Route::get('/categories/root/list', 'CategoryController@categoriesRootList')->name('category.rootlist');

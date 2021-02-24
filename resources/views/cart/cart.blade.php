@@ -3,14 +3,13 @@
     <div class="w-100 bg-white p-0">
         <section class="place-holder"></section>
         <div class="shopping-cart-main">
-
             <div class="row">
-                    @csrf
                 <div class="offset-md-1 col-md-7 col-sm-12">
                     <div class="text-center">
                         <h2 class="h4">{{__('messages.shopping_cart')}}</h2>
                     </div>
                     <form method="POST" action="{{ route('cart.calculate') }}">
+                        @csrf
                     <div class="d-none d-md-block overflow-auto">
                         <table class="table">
                             <thead>
@@ -23,35 +22,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @if(isset($cart->product_rows))
-                            @foreach($cart->product_rows as $product)
-                                <tr class="tr">
+                            @if(isset($cart->productRows))
+                            @foreach($cart->productRows as $product)
+                                <tr class="tr" id="tr-{{$product['productId']}}">
                                     <td>
                                         <div class="image-in-cart">
-                                            <a href="{{route('product.show', ['id' => $product['product_id']])}}" target="_blank">
-                                                <img class="w-100" src="{{asset('/img/logo/' . $product['product_logo'])}}">
+                                            <a href="{{route('product.show', ['id' => $product['productId']])}}" target="_blank">
+                                                <img class="w-100" src="{{asset('/img/logo/' . $product['productLogo'])}}">
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div>
-                                            <h3>{{$product['product_name']}}</h3>
+                                            <h3>{{$product['productName']}}</h3>
                                         </div>
                                     </td>
                                     <td>
-                                        <input type="hidden" value="{{$product['product_id']}}" name="product_ids[]">
-                                        <input type="hidden" value="{{$product['product_price']}}" name="product_prices[]">
-                                        <input type="number" min="0" max="999" id="{{$product['product_id']}}" name="quantity[]" class="text-center pl-3 input-product-quantity-cart form-control" value="{{$product['product_quantity']}}">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <span class="cursor-pointer minus-product"><i class="fas fa-minus-square fa-2x"></i></span>
+                                            <input type="number" min="0" max="999" name="quantity[]" class="input{{$product['productId']}} pl-1 pr-1 col-sm-4 text-center input-product-quantity-cart form-control" value="{{$product['productQuantity']}}" readonly>
+                                            <span class="cursor-pointer plus-product"><i class="fas fa-plus-square fa-2x"></i></span>
+                                        </div>
                                     </td>
                                     <td>
-                                       {{$cart->calculatePrice($product['product_price'])}}{{$cart->getCurrencySymbol()}}
+                                       {{$cart->calculatePrice($product['productPrice'])}}{{$cart->getCurrencySymbol()}}
                                     </td>
-                                    <td class="row-price-holder">
-                                        {{$cart->calculatePrice($product['product_row_price'])}}{{$cart->getCurrencySymbol()}}
+                                    <td class="row-price-holder row-price-{{$product['productId']}}">
+                                        {{$cart->calculatePrice($product['productRowPrice'])}}{{$cart->getCurrencySymbol()}}
                                     </td>
                                     <td class="text-center">
                                         <span class="font-italic">
-                                            <a data-id="{{$product['product_id']}}" data-confirm="{{__('actions.really_delete?')}}" class="delete-from-cart" href="{{route('cart.delete', ['id' => $product['product_id']])}}" title="{{__('messages.remove_this_item_from_cart')}}">
+                                            <a data-id="{{$product['productId']}}" data-confirm="{{__('actions.really_delete?')}}" class="delete-from-cart" href="{{route('cart.delete', ['id' => $product['productId']])}}" title="{{__('messages.remove_this_item_from_cart')}}">
                                                 <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                                             </a>
                                         </span>
@@ -63,16 +64,16 @@
                         </table>
                     </div>
                     <div class="d-md-none d-lg-none">
-                        @if(isset($cart->product_rows))
-                            @foreach($cart->product_rows as $product)
-                                <div class="tr">
+                        @if(isset($cart->productRows))
+                            @foreach($cart->productRows as $product)
+                                <div class="tr" id="div{{$product['productId']}}">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div>
-                                            <h3>{{$product['product_name']}}</h3>
+                                            <h3>{{$product['productName']}}</h3>
                                         </div>
                                         <div>
                                         <span>
-                                            <a data-id="{{$product['product_id']}}" data-confirm="{{__('actions.really_delete?')}}" class="delete-from-cart" href="{{route('cart.delete', ['id' => $product['product_id']])}}" title="{{__('messages.remove_this_item_from_cart')}}">
+                                            <a data-id="{{$product['productId']}}" data-confirm="{{__('actions.really_delete?')}}" class="delete-from-cart" href="{{route('cart.delete', ['id' => $product['productId']])}}" title="{{__('messages.remove_this_item_from_cart')}}">
                                                 <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                                             </a>
                                         </span>
@@ -81,18 +82,18 @@
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-inline">{{__('messages.price')}}: </div>
                                         <div class="d-inline">
-                                            {{$cart->calculatePrice($product['product_price'])}}{{$cart->getCurrencySymbol()}}
+                                            {{$cart->calculatePrice($product['productPrice'])}}{{$cart->getCurrencySymbol()}}
                                         </div>
                                         <div class="d-inline">{{__('messages.quantity')}}: </div>
                                         <div class="d-inline col-xs-2">
-                                            <input type="hidden" value="{{$product['product_id']}}" name="product_ids[]">
-                                            <input type="hidden" value="{{$product['product_price']}}" name="product_prices[]">
-                                            <input type="number" min="0" max="999" id="{{$product['product_id']}}" name="quantity[]" class="text-center input-product-quantity-cart form-control" value="{{$product['product_quantity']}}">
+                                            <span class="cursor-pointer minus-product"><i class="fas fa-minus-square"></i></span>
+                                            <input type="number" min="0" max="999" name="quantity[]" class="input{{$product['productId']}} text-center input-product-quantity-cart form-control" value="{{$product['productQuantity']}}" readonly>
+                                            <span class="cursor-pointer plus-product"><i class="fas fa-plus-square"></i></span>
                                         </div>
                                     </div>
                                     <div class="text-right">
-                                        <div class="row-price-holder">
-                                            {{__('messages.total_one_product')}}: {{$cart->calculatePrice($product['product_row_price'])}}{{$cart->getCurrencySymbol()}}
+                                        <div class="row-price-holder row-price-{{$product['productId']}}">
+                                            {{__('messages.total_one_product')}}: {{$cart->calculatePrice($product['productRowPrice'])}}{{$cart->getCurrencySymbol()}}
                                         </div>
                                     </div>
 
@@ -121,7 +122,7 @@
                             <option value="0">{{__('messages.no_delivery')}}</option>
                             @foreach($activeStore->deliveries as $delivery)
                                 <option value="{{$delivery->id}}"
-                                    @if($cart->delivery_id == $delivery->id)
+                                    @if($cart->deliveryId == $delivery->id)
                                     selected
                                     @endif
                                     >{{$delivery->delivery_name}} - {{$cart->calculatePrice($delivery->delivery_price)}}{{$cart->getCurrencySymbol()}} </option>
@@ -142,8 +143,8 @@
                         <p>
 
                                 {{__('messages.activated_discount')}}:
-                            @if($cart->promocode_value)
-                                {{$cart->promocode_value}}%
+                            @if($cart->promocodeValue)
+                                {{$cart->promocodeValue}}%
                             @endif
                         </p>
                         <br>

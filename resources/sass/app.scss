@@ -687,7 +687,17 @@ body {
         width: 100%;
     }
 
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
 
     .product-description {
         max-height: 200px;
@@ -697,4 +707,16 @@ body {
     .promocode-usage {
         display: none;
     }
+    
+    .cursor-pointer {
+        cursor: pointer;
+    }
+}
+
+.arrows-scroll-class {
+    font-size:2em;
+
+}
+.arrows-scroll-class:hover {
+    color:grey;
 }

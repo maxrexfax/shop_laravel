@@ -47,17 +47,18 @@ class CartController extends Controller
         $this->cartService->deleteFromCart($id);
     }
 
-    public function editOneRow(Request $request)
+    public function edit(Request $request)
     {
-        $new_row_price = $this->cartService->editOneRow($request->post('product_id'), $request->post('quantity'));
+        $tmp = $request->post();
+        $new_row_price = $this->cartService->editOneRow($request->post('productId'), $request->post('productQuantity'));
 
         $cart = Session::get('cart');
 
         return response()->json([
-            'new_row_price' => $this->cart->calculatePrice($new_row_price),
+            'newRowPrice' => $this->cart->calculatePrice($new_row_price),
             'totalProducts' => $this->cart->calculatePrice($cart->totalProducts),
             'totalAmount' => $this->cart->calculatePrice($cart->totalAmount),
-            'currency_symbol' => $this->cart->getCurrencySymbol()
+            'currencySymbol' => $this->cart->getCurrencySymbol()
         ]);
     }
 
@@ -89,7 +90,7 @@ class CartController extends Controller
         return response()->json([
             'totalProducts' => $this->cart->calculatePrice($cart->totalProducts),
             'totalAmount' => $this->cart->calculatePrice($cart->totalAmount),
-            'currency_symbol' => $this->cart->getCurrencySymbol()
+            'currencySymbol' => $this->cart->getCurrencySymbol()
         ]);
     }
 
@@ -103,6 +104,11 @@ class CartController extends Controller
         }
 
         return 0;
+    }
+
+    public function reset()
+    {
+        Session::forget('cart');
     }
 
 }

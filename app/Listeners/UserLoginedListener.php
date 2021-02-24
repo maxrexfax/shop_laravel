@@ -27,6 +27,6 @@ class UserLoginedListener
      */
     public function handle($event)
     {
-        \Illuminate\Support\Facades\Session::put('logined_user_id', Auth::user()->id);
+        \Illuminate\Support\Facades\Session::put('loginUserId', Auth::user()->id);
     }
 }

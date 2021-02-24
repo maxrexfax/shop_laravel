@@ -14,12 +14,24 @@
                                         <img height="200px" src="{{ asset('/img/empty.png')}}" alt="{{__('text.no_current_logo_image!')}}"/>
                                     @endif
                             </div>
-                            <div class="d-flex" style="overflow: auto; width: 100%">
-                                @foreach($product->images as $img)
-                                    <div class="border m-2">
-                                        <img class="img-to-show-modal" height="100px" src="{{ asset('/img/images/' . $img->image_name) }}" alt="{{$img->image_name}}"/>
-                                    </div>
-                                @endforeach
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="text-center" style="width: 10%">
+                                    @if(count($product->images)>0)
+                                        <i id="leftScroll" class="fa fa-chevron-left arrows-scroll-class" aria-hidden="true"></i>
+                                    @endif
+                                </div>
+                                <div class="d-flex div-icons-container" style="overflow: auto; width: 80%">
+                                    @foreach($product->images as $img)
+                                        <div class="border m-2">
+                                            <img class="img-to-show-modal" height="100px" src="{{ asset('/img/images/' . $img->image_name) }}" alt="{{$img->image_name}}"/>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="text-center" style="width: 10%">
+                                    @if(count($product->images)>0)
+                                        <i id="rightScroll" class="fa fa-chevron-right arrows-scroll-class" aria-hidden="true"></i>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>

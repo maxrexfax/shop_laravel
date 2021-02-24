@@ -323,7 +323,6 @@ $(document).ready(function() {
         let parentId = $(this).closest('.tr').attr('id');
         let idDigit = parentId.substring(3);
         let currentQuantity = $('.input'+idDigit).val();
-        console.log('currentQuantity=' + currentQuantity);
         currentQuantity--;
         if (currentQuantity === 0) {
             currentQuantity = 1;
@@ -336,7 +335,6 @@ $(document).ready(function() {
         let parentId = $(this).closest('.tr').attr('id');
         let idDigit = parentId.substring(3);
         let currentQuantity = $('.input'+idDigit).val();
-        console.log('currentQuantity=' + currentQuantity);
         $('.input'+idDigit).val(++currentQuantity);
         recalculateCart(idDigit, currentQuantity)
     });
@@ -366,21 +364,43 @@ $(document).ready(function() {
             });
     });
 
-    let divWithImages = $('.div-icons-container');
-    if (divWithImages.offsetWidth < divWithImages.scrollWidth) {
-        console.log('overflow');
-    } else {
-        console.log('no overflow');
+    //let divWithImages = $('.div-icons-container');
+    let divWithImages = document.querySelector('.div-icons-container');
+
+    if (divWithImages) {
+        checkImagesContainer();
+    }
+
+    $( window ).resize(function() {
+        if (divWithImages) {
+            checkImagesContainer();
+        }
+    });
+
+    function checkImagesContainer() {
+        if ($(divWithImages)[0].offsetWidth < $(divWithImages)[0].scrollWidth) {
+            showScrollControl();
+        } else {
+            hideScrollControl();
+        }
+    }
+
+    function showScrollControl() {
+        $('.scroll-control').show();
+    }
+
+    function hideScrollControl() {
+        $('.scroll-control').hide();
     }
 
     $(document).on('click', '#leftScroll', function (e) {
         let currentPosition = $('.div-icons-container').scrollLeft();
-        $('.div-icons-container').animate( { scrollLeft: '-=120' }, 1000);
+        $('.div-icons-container').animate( { scrollLeft: '-=120' }, 600);
     });
 
     $(document).on('click', '#rightScroll', function (e) {
         let currentPosition = $('.div-icons-container').scrollLeft();
-        $('.div-icons-container').animate( { scrollLeft: '+=120' }, 1000);
+        $('.div-icons-container').animate( { scrollLeft: '+=120' }, 600);
     });
 
     $( window ).scroll(function() {

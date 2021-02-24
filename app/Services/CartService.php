@@ -35,12 +35,10 @@ class CartService
     public function deleteFromCart($id)
     {
         $sessionCart = Session::get('cart');
-        $indexToDelete = 0;
 
         unset($sessionCart->productRows[$id]);
 
         Session::put('cart', $sessionCart);
-        return true;
     }
 
     public function calculate($request)
@@ -79,7 +77,6 @@ class CartService
         $sessionCart->totalAmount = $totalAmount;
 
         Session::put('cart', $sessionCart);
-        return true;
     }
 
     public function editOneRow($productId, $quantity)
@@ -99,7 +96,6 @@ class CartService
     public function recalculateCart()
     {
         $sessionCart = Session::get('cart');
-
         $totalProductsPrice = 0;
         $promocodeDiscountSum = 0;
 
@@ -125,7 +121,6 @@ class CartService
         $sessionCart->deliveryId = $deliveryId;
         Session::put('cart', $sessionCart);
         $this->recalculateCart();
-        return true;
     }
 
     public static function getDeliverySum($delivery_id)

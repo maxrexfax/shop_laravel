@@ -14,8 +14,8 @@
                                         <img height="200px" src="{{ asset('/img/empty.png')}}" alt="{{__('text.no_current_logo_image!')}}"/>
                                     @endif
                             </div>
-                            <div class="d-flex align-items-center justify-content-between">
-                                <div class="text-center" style="width: 10%">
+                            <div class="d-flex align-items-center justify-content-around">
+                                <div class="text-center scroll-control" style="width: 10%">
                                     @if(count($product->images)>0)
                                         <i id="leftScroll" class="fa fa-chevron-left arrows-scroll-class" aria-hidden="true"></i>
                                     @endif
@@ -27,7 +27,7 @@
                                         </div>
                                     @endforeach
                                 </div>
-                                <div class="text-center" style="width: 10%">
+                                <div class="text-center scroll-control" style="width: 10%">
                                     @if(count($product->images)>0)
                                         <i id="rightScroll" class="fa fa-chevron-right arrows-scroll-class" aria-hidden="true"></i>
                                     @endif
@@ -58,7 +58,7 @@
                                         <input class="form-control text-center" type="text" value="1" min="1" max="999">
                                     </div>
                                     <div class="col-md-9 mb-3">
-                                        <span class="btn btn-primary w-100">{{__('actions.add_to_cart')}}</span>
+                                        <span class="btn btn-primary w-100 btn-adder-to-cart" data-message="{{__('messages.added_to_cart')}}" data-id="{{$product->id}}">{{__('actions.add_to_cart')}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +97,7 @@
     </div>
     <div id="modalWithImages">
         <p id="closePopupSymbol" class="float-right modal-control-elements" title="Close"><i class="fa fa-window-close" aria-hidden="true"></i></p><br>
-        <div style="max-width: 60%;" class="text-center"><img class="w-100" src="" alt="" /></div>
+        <div class="image-container-modal w-100"><img class="w-100" src="" alt="" /></div>
         <p id="imagesGalleryInfo" class="float-right text-white"></p>
     </div>
 </div>

@@ -3,15 +3,14 @@
     <div class="w-100 bg-white p-0">
         <section class="place-holder"></section>
         <div class="shopping-cart-main">
-            {{var_dump($cart->productRows)}}
             <div class="row">
-                <div class="offset-md-1 col-md-7 col-sm-12">
+                <div class="offset-md-1 col-md-7 col-sm-12 overflow-auto">
                     <div class="text-center">
                         <h2 class="h4">{{__('messages.shopping_cart')}}</h2>
                     </div>
                     <form method="POST" action="{{ route('cart.calculate') }}">
                         @csrf
-                        <div class="d-none d-md-block overflow-auto">
+                        <div class="table-container">
                             <table class="table">
                                 <thead>
                                 <tr>
@@ -45,7 +44,7 @@
                                                     <span class="cursor-pointer minus-product"><i
                                                                 class="fas fa-minus-square fa-2x"></i></span>
                                                     <input type="number" min="0" max="999" name="quantity[]"
-                                                           class="input{{$productId}} pl-1 pr-1 col-sm-4 text-center input-product-quantity-cart form-control"
+                                                           class="input{{$productId}} ml-1 mr-1 text-center input-product-quantity-cart form-control"
                                                            value="{{$product['productQuantity']}}" readonly>
                                                     <span class="cursor-pointer plus-product"><i
                                                                 class="fas fa-plus-square fa-2x"></i></span>
@@ -72,53 +71,6 @@
                                 @endif
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="d-md-none d-lg-none">
-                            @if(isset($cart->productRows))
-                                @foreach($cart->productRows as $productId => $product)
-                                    <div class="tr" id="div{{$productId}}">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <h3>{{$product['productName']}}</h3>
-                                            </div>
-                                            <div>
-                                        <span>
-                                            <a data-id="{{$productId}}" data-confirm="{{__('actions.really_delete?')}}"
-                                               class="delete-from-cart"
-                                               href="{{route('cart.delete', ['id' => $productId])}}"
-                                               title="{{__('messages.remove_this_item_from_cart')}}">
-                                                <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
-                                            </a>
-                                        </span>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div class="d-inline">{{__('messages.price')}}:</div>
-                                            <div class="d-inline">
-                                                {{$cart->calculatePrice($product['productPrice'])}}{{$cart->getCurrencySymbol()}}
-                                            </div>
-                                            <div class="d-inline">{{__('messages.quantity')}}:</div>
-                                            <div class="d-inline col-xs-2">
-                                                <span class="cursor-pointer minus-product"><i
-                                                            class="fas fa-minus-square"></i></span>
-                                                <input type="number" min="0" max="999" name="quantity[]"
-                                                       class="input{{$productId}} text-center input-product-quantity-cart form-control"
-                                                       value="{{$product['productQuantity']}}" readonly>
-                                                <span class="cursor-pointer plus-product"><i
-                                                            class="fas fa-plus-square"></i></span>
-                                            </div>
-                                        </div>
-                                        <div class="text-right">
-                                            <div class="row-price-holder row-price-{{$productId}}">
-                                                {{__('messages.total_one_product')}}
-                                                : {{$cart->calculatePrice($product['productRowPrice'])}}{{$cart->getCurrencySymbol()}}
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <hr>
-                                @endforeach
-                            @endif
                         </div>
                     </form>
                 </div>

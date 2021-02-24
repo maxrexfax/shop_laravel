@@ -97,10 +97,8 @@ class CartController extends Controller
     public function cartProductQuantity()
     {
         $cart = Session::get('cart');
-        if (!empty($cart->product_rows)) {
-            if (count($cart->product_rows)>0) {
-                return count($cart->product_rows);
-            }
+        if (!empty($cart->productRows)) {
+            return count($cart->productRows);
         }
 
         return 0;

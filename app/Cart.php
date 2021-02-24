@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Cart
 {
     public $userId;
-    public $productRows;
+    public $productRows = [];
     public $deliveryId;
     public $promocodeId;
     public $promocodeValue;

@@ -42,7 +42,6 @@ Route::group(['middleware'=>'language'],function ()
     Route::match(['get', 'post'],'/cart/calculate', 'CartController@calculate')->name('cart.calculate');
     Route::match(['get', 'post'],'/cart/edit', 'CartController@edit')->name('cart.edit');
     Route::match(['get', 'post'],'/cart/changedelivery', 'CartController@changeDelivery')->name('cart.changedelivery');
-    Route::post('/cart/addpromo', 'CartController@addpromo')->name('cart.addpromo');
     Route::get('/cart/data', 'CartController@data')->name('cart.data');
     Route::get('/cart/productquantity', 'CartController@cartProductQuantity')->name('cart.productquantity');
     Route::get('/cart/reset', 'CartController@reset')->name('cart.reset');
@@ -50,6 +49,7 @@ Route::group(['middleware'=>'language'],function ()
     Route::get('/category/create/{id?}', 'CategoryController@create')->name('category.create');
     Route::get('/categories/root/list', 'CategoryController@categoriesRootList')->name('category.rootlist');
     Route::post('/category/store/{id?}', 'CategoryController@store')->name('category.store');
+    Route::get('/category/list', 'CategoryController@list')->name('category.list');
 
     Route::get('/currency/create/{id?}', 'CurrencyController@create')->name('currency.create');
     Route::post('/currency/store/{id?}', 'CurrencyController@store')->name('currency.store');

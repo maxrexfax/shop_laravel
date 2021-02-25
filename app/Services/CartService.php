@@ -53,7 +53,6 @@ class CartService
         }
 
         $totalProductsPrice = 0;
-        $totalAmount = 0;
 
         if (Session::has('loginUserId')) {
             $sessionCart->userId = Session::get('loginUserId');
@@ -68,13 +67,12 @@ class CartService
             $totalProductsPrice = $totalProductsPrice - $promocodeDiscountSum;
         }
 
-        $totalAmount = $totalProductsPrice + self::getDeliverySum($request->post('delivery_id'));
         if ($request->post('delivery_id')) {
             $sessionCart->delivery_id = $request->post('delivery_id');
         }
 
+        $sessionCart->totalAmount = $totalProductsPrice + self::getDeliverySum($request->post('delivery_id'));
         $sessionCart->totalProducts = $totalProductsPrice;
-        $sessionCart->totalAmount = $totalAmount;
 
         Session::put('cart', $sessionCart);
     }
@@ -84,9 +82,12 @@ class CartService
         $sessionCart = Session::get('cart');
         $newRowPrice = 0;
 
-        $sessionCart->productRows[$productId]['productQuantity'] = $quantity;
-        $newRowPrice = $sessionCart->productRows[$productId]['productRowPrice'] = $sessionCart->productRows[$productId]['productPrice'] * $quantity;
+        if (isset($sessionCart->productRows[$productId])) {
 
+            $sessionCart->productRows[$productId]['productQuantity'] = $quantity;
+            $newRowPrice = $sessionCart->productRows[$productId]['productRowPrice'] = $sessionCart->productRows[$productId]['productPrice'] * $quantity;
+
+        }
         Session::put('cart', $sessionCart);
 
         $this->recalculateCart();
@@ -133,14 +134,4 @@ class CartService
         return $delivery;
     }
 
-    public function setPromo($promoText)
-    {
-        $sessionCart = Session::get('cart');
-        $promocode = Promocode::where('promocode_name', $promoText)->first();
-        if ($promocode) {
-            $sessionCart->promocodeId = $promocode->id;
-            $sessionCart->promocodeValue = $promocode->promocode_value;
-        }
-        $this->recalculateCart();
-    }
 }

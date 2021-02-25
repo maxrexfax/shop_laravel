@@ -3,6 +3,7 @@
     <div class="w-100 bg-white p-0">
         <section class="place-holder"></section>
         <div class="shopping-cart-main">
+            {{var_dump($cart->productRows)}}
             <div class="row">
                 <div class="offset-md-1 col-md-7 col-sm-12 overflow-auto">
                     <div class="text-center">
@@ -26,7 +27,7 @@
                                     @foreach($cart->productRows as $productId => $product)
                                         <tr class="tr" id="tr-{{ $productId }}">
                                             <td>
-                                                <div class="image-in-cart">
+                                                <div class="image-in-cart d-none d-md-block">
                                                     <a href="{{route('product.show', ['id' => $productId])}}"
                                                        target="_blank">
                                                         <img class="w-100"
@@ -43,9 +44,9 @@
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <span class="cursor-pointer minus-product"><i
                                                                 class="fas fa-minus-square fa-2x"></i></span>
-                                                    <input type="number" min="0" max="999" name="quantity[]"
+                                                    <input type="number" min="0" max="999"
                                                            class="input{{$productId}} ml-1 mr-1 text-center input-product-quantity-cart form-control"
-                                                           value="{{$product['productQuantity']}}" readonly>
+                                                           value="{{$product['productQuantity']}}">
                                                     <span class="cursor-pointer plus-product"><i
                                                                 class="fas fa-plus-square fa-2x"></i></span>
                                                 </div>
@@ -73,6 +74,13 @@
                             </table>
                         </div>
                     </form>
+                    @if(empty($cart->productRows))
+                        <div class="text-center text-secondary">
+                            <p>{{__('text.cart_is_empty')}}, <a href="{{route('category.list')}}">{{__('text.lets_go_shopping')}}</a>!</p>
+                        </div>
+                        @else
+                        <a href="{{route('cart.reset')}}" class="btn btn-secondary btn-sm float-right">Reset cart</a>
+                    @endif
                 </div>
                 <div class="col-md-4 col-sm-12 pt-3">
                     <div class="bg-light p-2">
@@ -115,10 +123,8 @@
                               class="btn btn-dark btn-block">{{__('messages.checkout')}}</span>
                         <br>
                         <p>
-
-                            {{__('messages.activated_discount')}}:
                             @if($cart->promocodeValue)
-                                {{$cart->promocodeValue}}%
+                                {{__('messages.activated_discount')}}: {{$cart->promocodeValue}}%
                             @endif
                         </p>
                         <br>

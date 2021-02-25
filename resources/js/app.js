@@ -301,10 +301,35 @@ $(document).ready(function() {
     $(document).on('click', '.btn-adder-to-cart', function(e) {
         let buttonClicked = this;
         let message = this.getAttribute('data-message');
+        let text = $(this).text();
         $.get( "/cart/add/" + this.getAttribute('data-id'))
             .done(function( data ) {
-                $('<div class="message-added-popup">' +  message + '</div>').insertBefore(buttonClicked).delay(TIME_TO_SHOW_MESSAGE).fadeOut();
+                //$('<div class="message-added-popup">' +  message + '</div>').insertBefore(buttonClicked).delay(TIME_TO_SHOW_MESSAGE).fadeOut();
+                restoreText(buttonClicked, text, message);
         });
+    });
+
+    restoreText = function(target, oldText, newText) {
+        $(target).html(newText);
+        $(target).removeClass('btn-secondary').addClass('btn-success');
+        setTimeout(function() {
+            $(target).html(oldText);
+            $(target).removeClass('btn-success').addClass('btn-secondary');
+        }, 1000);
+    }
+
+    $( ".input-product-quantity-cart" ).change(function() {
+        let inputChanged = $(this);
+        let parentId = $(this).closest('.tr').attr('id');
+        let productId = parentId.substring(3);
+        $.post( "/cart/edit", { "_token": $('meta[name="csrf-token"]').attr('content'), productId: productId, productQuantity: $(this).val() })
+            .done(function( data ) {
+                let tdWithPrice = $(inputChanged).closest('.tr').find('.row-price-holder');
+                $(tdWithPrice).html(data['newRowPrice'] + data['currencySymbol']);
+                $('#spanWithTotalProductsPrice').html(data['totalProducts'] + data['currencySymbol']);
+                $('#spanWithTotalPrice').html(data['totalAmount'] + data['currencySymbol']);
+            });
+
     });
 
     $(document).on('click', '.minus-product', function (e) {
@@ -348,7 +373,6 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '#btnUsePromocode', function(e) {
-        console.log($('#promoCodeInput').val())
         $.post( "/cart/addpromo", { "_token": $('meta[name="csrf-token"]').attr('content'), promo_text: $('#promoCodeInput').val() })
             .done(function( data ) {
             });
@@ -383,12 +407,10 @@ $(document).ready(function() {
     }
 
     $(document).on('click', '#leftScroll', function (e) {
-        let currentPosition = $('.div-icons-container').scrollLeft();
         $('.div-icons-container').animate( { scrollLeft: '-=120' }, 600);
     });
 
     $(document).on('click', '#rightScroll', function (e) {
-        let currentPosition = $('.div-icons-container').scrollLeft();
         $('.div-icons-container').animate( { scrollLeft: '+=120' }, 600);
     });
 

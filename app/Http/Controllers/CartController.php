@@ -49,7 +49,6 @@ class CartController extends Controller
 
     public function edit(Request $request)
     {
-        $tmp = $request->post();
         $new_row_price = $this->cartService->editOneRow($request->post('productId'), $request->post('productQuantity'));
 
         $cart = Session::get('cart');
@@ -79,11 +78,6 @@ class CartController extends Controller
         ]);
     }
 
-    public function addpromo(Request $request)
-    {
-        $this->cartService->setPromo($request->post('promo_text'));
-    }
-
     public function data()
     {
         $cart = Session::get('cart');
@@ -107,6 +101,7 @@ class CartController extends Controller
     public function reset()
     {
         Session::forget('cart');
+        return redirect('/cart');
     }
 
 }

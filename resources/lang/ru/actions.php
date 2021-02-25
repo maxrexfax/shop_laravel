@@ -100,6 +100,7 @@ return [
     'rating' => 'Рейтинг',
     'really_delete?' => 'Действительно удалить?',
     'register' => 'Регистрация',
+    'reset_cart' => 'Очистить корзину',
     'resources' => 'Ресурсы',
     're_new_currency_values' => 'Обновить значения стоимости валют',
     're_new_values' => 'Обновить курсы валют',

@@ -100,6 +100,7 @@ return [
     'rating' => 'Rating',
     'really_delete?' => 'Really delete?',
     'register' => 'Register',
+    'reset_cart' => 'Reset cart',
     'resources' => 'Resources',
     're_new_currency_values' => 'Reload currencies values',
     're_new_values' => 'Reload values',

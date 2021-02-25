@@ -6,26 +6,24 @@
             <div class="row">
                 <div class="offset-md-1 col-md-7 col-sm-12 overflow-auto">
                     <div class="text-center">
-                        <h2 class="h4">{{__('messages.shopping_cart')}}</h2>
+                        <h2 class="h4 mb-3">{{__('messages.shopping_cart')}}</h2>
                     </div>
                     <form method="POST" action="{{ route('cart.calculate') }}">
                         @csrf
                         <div class="table-container">
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th colspan="2">{{__('messages.product_details')}}</th>
-                                    <th>{{__('messages.quantity')}}</th>
-                                    <th>{{__('messages.price')}}</th>
-                                    <th>{{__('messages.total')}}</th>
-                                    <th>{{__('messages.delete')}}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @if(isset($cart->productRows))
-                                    @foreach($cart->productRows as $productId => $product)
-                                        <tr class="tr" id="tr-{{ $productId }}">
-                                            <td>
+                            <div class="d-flex justify-content-between align-items-center border-bottom">
+                                <div class="w-25 h5">{{__('messages.product_details')}}</div>
+                                <div class="text-left h5">{{__('messages.quantity')}}</div>
+                                <div class="text-right h5">{{__('messages.price')}}</div>
+                                <div class="text-right h5">{{__('messages.total')}}</div>
+                                <div class="text-right h5">{{__('messages.delete')}}</div>
+                            </div>
+                            @if(isset($cart->productRows))
+                                @foreach($cart->productRows as $productId => $product)
+                                <div class="border-bottom">
+                                    <div class="tr pt-1 d-flex justify-content-between align-items-center" id="tr-{{ $productId }} ">
+                                        <div class="w-25">
+                                            <div>
                                                 <div class="image-in-cart d-none d-md-block">
                                                     <a href="{{route('product.show', ['id' => $productId])}}"
                                                        target="_blank">
@@ -33,44 +31,44 @@
                                                              src="{{asset('/img/logo/' . $product['productLogo'])}}">
                                                     </a>
                                                 </div>
-                                            </td>
-                                            <td>
+                                            </div>
+                                            <div>
                                                 <div>
                                                     <h3>{{$product['productName']}}</h3>
                                                 </div>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <span class="cursor-pointer minus-product"><i
-                                                                class="fas fa-minus-square fa-2x"></i></span>
-                                                    <input type="number" min="0" max="999"
-                                                           class="input{{$productId}} ml-1 mr-1 text-center input-product-quantity-cart form-control"
-                                                           value="{{$product['productQuantity']}}">
-                                                    <span class="cursor-pointer plus-product"><i
-                                                                class="fas fa-plus-square fa-2x"></i></span>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                {{$cart->calculatePrice($product['productPrice'])}}{{$cart->getCurrencySymbol()}}
-                                            </td>
-                                            <td class="row-price-holder row-price-{{$productId}}">
-                                                {{$cart->calculatePrice($product['productRowPrice'])}}{{$cart->getCurrencySymbol()}}
-                                            </td>
-                                            <td class="text-center">
-                                        <span class="font-italic">
-                                            <a data-id="{{$productId}}" data-confirm="{{__('actions.really_delete?')}}"
-                                               class="delete-from-cart"
-                                               href="{{route('cart.delete', ['id' => $productId])}}"
-                                               title="{{__('messages.remove_this_item_from_cart')}}">
-                                                <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
-                                            </a>
-                                        </span>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                @endif
-                                </tbody>
-                            </table>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <span class="cursor-pointer minus-product"><i
+                                                            class="fas fa-minus-square fa-2x"></i></span>
+                                                <input type="number" min="0" max="999"
+                                                       class="input{{$productId}} ml-1 mr-1 text-center input-product-quantity-cart form-control"
+                                                       value="{{$product['productQuantity']}}">
+                                                <span class="cursor-pointer plus-product"><i
+                                                            class="fas fa-plus-square fa-2x"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            {{$cart->calculatePrice($product['productPrice'])}}{{$cart->getCurrencySymbol()}}
+                                        </div>
+                                        <div class="row-price-holder row-price-{{$productId}}">
+                                            {{$cart->calculatePrice($product['productRowPrice'])}}{{$cart->getCurrencySymbol()}}
+                                        </div>
+                                        <div class="text-center" style="width: 10%">
+                                            <span class="font-italic">
+                                                <a data-id="{{$productId}}" data-confirm="{{__('actions.really_delete?')}}"
+                                                   class="delete-from-cart"
+                                                   href="{{route('cart.delete', ['id' => $productId])}}"
+                                                   title="{{__('messages.remove_this_item_from_cart')}}">
+                                                    <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                                                </a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            @endif
                         </div>
                     </form>
                     @if(empty($cart->productRows))
@@ -78,7 +76,7 @@
                             <p>{{__('text.cart_is_empty')}}, <a href="{{route('category.list')}}">{{__('text.lets_go_shopping')}}</a>!</p>
                         </div>
                         @else
-                        <a href="{{route('cart.reset')}}" class="btn btn-secondary btn-sm float-right">Reset cart</a>
+                        <a href="{{route('cart.reset')}}" class="btn btn-secondary btn-sm float-right mt-1">{{__('actions.reset_cart')}}</a>
                     @endif
                 </div>
                 <div class="col-md-4 col-sm-12 pt-3">

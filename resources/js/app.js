@@ -15,6 +15,7 @@ $(document).ready(function() {
         $('#modalWithImages').find('img').attr('title', $('h2').text());
         arrayOfImages = $('.div-img-modal-show').find('img');
         numberOfImageToShow = getNumberOfChosenImage(arrayOfImages);
+        $('#imagesGalleryInfo').text('Image ' + (numberOfImageToShow+1) + ' from ' + arrayOfImages.length);
     });
 
     $(document).on('click', '#shadow', function(e) {
@@ -117,7 +118,7 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on('click', '#btnToAddDeliveryToStoreDiv', function (e){
+    $(document).on('click', '#btnToAddDeliveryToStoreDiv', function (e) {
         let tbWithDeliveries = $('#tbodyWithDeliveries').find('tr');
         let isExist = false;
 
@@ -179,12 +180,12 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on('click', '.i-deleter', function (e){
+    $(document).on('click', '.i-deleter', function (e) {
         $(this).parent().remove();
         e.stopPropagation();
     });
 
-    $(document).on('click', '.i-tr-deleter', function (e){
+    $(document).on('click', '.i-tr-deleter', function (e) {
         $(this).closest('tr').remove();
         e.stopPropagation();
     });
@@ -220,8 +221,7 @@ $(document).ready(function() {
         $('.root-menu-container').hide();
     }
 
-    function createDivElementForRootCatgoryLink(id, name)
-    {
+    function createDivElementForRootCatgoryLink(id, name) {
         return divElementForRootCatgoryLink = '<a class="url-no-decoration" href="/product/category/' + id + '"><div class="col-lg-12 popup-root-categories-item">' +
             '' + name + '' +
             '</div></a>';
@@ -234,18 +234,6 @@ $(document).ready(function() {
     $( "#sortBySelect" ).change(function() {
         createUrlToRedirect();
     });
-
-    /*$( ".input-product-quantity-cart" ).change(function() {
-        let inputChanged = $(this);
-        let product_id = $(this).attr('id');
-        $.post( "/cart/edit", { "_token": $('meta[name="csrf-token"]').attr('content'), product_id: product_id, quantity: $(this).val() })
-            .done(function( data ) {
-                let tdWithPrice = $(inputChanged).closest('.tr').find('.row-price-holder');
-                $(tdWithPrice).html(data['new_row_price'] + data['currency_symbol']);
-                $('#spanWithTotalProductsPrice').html(data['totalProducts'] + data['currency_symbol']);
-                $('#spanWithTotalPrice').html(data['totalAmount'] + data['currency_symbol']);
-            });
-    });*/
 
     $( "#selectTypeOfDeliveryInCart" ).change(function() {
         $.post( "/cart/changedelivery", { "_token": $('meta[name="csrf-token"]').attr('content'), delivery_id: $('#selectTypeOfDeliveryInCart option:selected').val() })
@@ -288,7 +276,7 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.btnToDeletePhone, .btn-delete-promocode', function(e) {
-        event.preventDefault();
+        e.preventDefault();
 
         let choice = confirm(this.getAttribute('data-confirm'));
 
@@ -298,7 +286,7 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.delete-from-cart', function(e) {
-        event.preventDefault();
+        e.preventDefault();
 
         let choice = confirm(this.getAttribute('data-confirm'));
 
@@ -324,9 +312,11 @@ $(document).ready(function() {
         let idDigit = parentId.substring(3);
         let currentQuantity = $('.input'+idDigit).val();
         currentQuantity--;
+
         if (currentQuantity === 0) {
             currentQuantity = 1;
         }
+
         $('.input'+idDigit).val(currentQuantity);
         recalculateCart(idDigit, currentQuantity)
     });
@@ -364,15 +354,14 @@ $(document).ready(function() {
             });
     });
 
-    //let divWithImages = $('.div-icons-container');
-    let divWithImages = document.querySelector('.div-icons-container');
+    let divWithImages = $('.div-icons-container');
 
-    if (divWithImages) {
+    if ($('.div-icons-container').length) {
         checkImagesContainer();
     }
 
     $( window ).resize(function() {
-        if (divWithImages) {
+        if ($('.div-icons-container').length) {
             checkImagesContainer();
         }
     });
@@ -422,12 +411,12 @@ $(document).ready(function() {
     function setCartDigit(number) {
         $('.div-button-card-shower-right').html(number);
     }
+
     checkProductsInCart();
 
     let ckeditor = document.getElementById('summary-ckeditor');
     if(ckeditor) {
         CKEDITOR.replace( 'summary-ckeditor' );
     }
-
 
 });

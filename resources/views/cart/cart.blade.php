@@ -3,7 +3,6 @@
     <div class="w-100 bg-white p-0">
         <section class="place-holder"></section>
         <div class="shopping-cart-main">
-            {{var_dump($cart->productRows)}}
             <div class="row">
                 <div class="offset-md-1 col-md-7 col-sm-12 overflow-auto">
                     <div class="text-center">

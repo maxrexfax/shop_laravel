@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class CurrencyController extends Controller
 {
+    public $currencyValueReloadService;
+
+    public function __construct()
+    {
+        $this->currencyValueReloadService = new CurrencyValueReloadService();
+    }
+
     public function create($id = null)
     {
         if (!empty($id)) {
@@ -36,14 +43,15 @@ class CurrencyController extends Controller
             $currency = new Currency();
         }
 
-        (new CurrencyStoreService())->store($currency ,$request);
+        $this->currencyValueReloadService->store($currency ,$request);
 
         return redirect('/admin/currencies/list');
     }
 
     public function reloadCurrencyValue()
     {
-        (new CurrencyValueReloadService())->reloadCurrenciesValues();
+        $this->currencyValueReloadService->reloadCurrenciesValues();
+
         return redirect()->back();
     }
 }

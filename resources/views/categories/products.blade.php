@@ -60,7 +60,7 @@
                                             <p class="overflow-hidden">{{$product->short_description}}</p>
                                         </div>
                                         <div class="product-item-button">
-                                            <button id="{{$product->id}}" class="btn btn-secondary w-100 m-0 btn-add-to-cart">{{__('actions.add_to_cart')}}</button>
+                                            <span data-message="{{__('messages.added_to_cart')}}" data-id="{{$product->id}}" class="btn btn-secondary w-100 m-0 btn-adder-to-cart">{{__('actions.add_to_cart')}}</span>
                                         </div>
                                     </div>
                                 </div>

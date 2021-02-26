@@ -20,7 +20,7 @@
                                             <tr>
                                                 <th>{{__('actions.currency')}}</th>
                                                 <th class="text-center">{{__('actions.default?')}}</th>
-                                                <th class="text-right">{{__('actions.delete')}}</th>
+                                                <th class="text-center">{{__('actions.delete')}}</th>
                                             </tr>
                                             </thead>
                                             <tbody id="tbodyWithCurrency">
@@ -40,7 +40,7 @@
                                                         " for="radio{{$currency->id}}">{{__('actions.default')}}</label>
                                                     <input type="hidden" name="currencies[]" value="{{$currency->id}}">
                                                 </td>
-                                                <td class="text-right"><i class="fa fa-minus-circle class-cursor-pointer i-tr-deleter" title="{{__('actions.delete_this_currency')}}"></i></td>
+                                                <td class="text-center"><i class="fa fa-minus-circle class-cursor-pointer i-tr-deleter" title="{{__('actions.delete_this_currency')}}"></i></td>
                                             </tr>
                                         @endforeach
                                             </tbody>
@@ -65,7 +65,7 @@
                                     </select>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <span id="btnToAddCurrencyToStoreDiv" data-confirm="{{__('text.already_in_use')}}" class="btn btn-secondary w-100">{{__('actions.add')}}</span>
+                                    <span id="btnToAddCurrencyToStoreDiv" data-confirm="{{__('text.already_in_use')}}" data-default="{{__('actions.default')}}" data-title="{{__('actions.delete_this_currency')}}" class="btn btn-secondary w-100">{{__('actions.add')}}</span>
                                 </div>
                             </div>
 

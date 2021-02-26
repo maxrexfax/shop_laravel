@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Services\ProductPriceGetterService;
+use App\Helpers\PriceHelper;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -14,11 +14,17 @@ class Product extends Model
         'product_name', 'rating', 'price', 'logo_image', 'description', 'title', 'short_description', 'full_description'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function images()
     {
         return $this->hasMany('App\Image');
     }
 
+    /**
+     * @return mixed|string
+     */
     public function getProductImages()
     {
         if ($this->images) {
@@ -28,11 +34,17 @@ class Product extends Model
         return '';
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_product', 'product_id', 'category_id' );
     }
 
+    /**
+     * @return array|mixed
+     */
     public function getProductCategories()
     {
         if (!empty($this->categories)) {
@@ -42,9 +54,12 @@ class Product extends Model
         return [];
     }
 
+    /**
+     * @return string
+     */
     public function currentPrice()
     {
-        return (new ProductPriceGetterService())->getPriceWithSymbol($this->price);
+        return (new PriceHelper())->getPriceWithSymbol($this->price);
     }
 
 }

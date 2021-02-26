@@ -28,6 +28,6 @@ class StoreCurrency extends Model
 
     public function getCurrency()
     {
-        return $this->hasOne(Currency::class);
+        return $this->hasOne(Currency::class, 'currency_id');
     }
 }

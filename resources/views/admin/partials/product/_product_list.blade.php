@@ -7,7 +7,7 @@
                 <span class="addButton" title="{{ __('actions.add_new') }}">+</span>
             </a>
         </div>
-            <div class="col-12 p-0">
+            <div class="col-12 p-0 overflow-auto">
                 <table class="table table-striped w-100 table-for-users-list">
                     <thead class="thead-dark">
                     <tr>

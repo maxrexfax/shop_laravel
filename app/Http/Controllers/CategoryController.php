@@ -68,6 +68,17 @@ class CategoryController extends Controller
         }
     }
 
+    public function list()
+    {
+        $categoriesHierarchically = Category::whereNull('category_id')
+            ->with('childrenCategories')
+            ->get();
+        return view('categories.index', [
+            'categories' => Category::all(),
+            'categoriesHierarchically' => $categoriesHierarchically,
+        ]);
+    }
+
     public function categoriesRootList()
     {
         $rootCategories = Category::whereNull('category_id')->get();

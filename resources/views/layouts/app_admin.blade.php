@@ -18,8 +18,8 @@
 
     <script src="https://kit.fontawesome.com/53707af6ce.js" crossorigin="anonymous"></script>
 
-    <script src="{{ asset('js/jquery-3.5.1.min.js') }}" defer></script>
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -48,11 +48,11 @@
                         </button>
                     </div>
                     <div class="p-0" id="divButtonCardShower">
-                        <button class="btn btn-primary" id="btnButtonCardShower">
+                        <a href="{{route('cart')}}" class="btn btn-primary" id="btnButtonCardShower">
                             <i class="fa fa-shopping-cart d-inline"></i>
                             {{__('actions.cart')}}
-                        </button>
-                        <span class="d-inline-block div-button-card-shower-right">
+                        </a>
+                        <span class="d-inline-block div-button-card-shower-right text-white" title="{{__('messages.now_products_in_cart')}}">
                             0
                         </span>
                     </div>

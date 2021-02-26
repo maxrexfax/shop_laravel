@@ -134,6 +134,7 @@ return [
     'turn_off' => 'Turn OFF',
     'turned_off' => 'Turned off',
     'upload_logo_picture' => 'Upload logo picture',
+    'use' => 'Use',
     'users' => 'Users',
     'user_id' => 'User ID',
     'user_login' => 'User login',

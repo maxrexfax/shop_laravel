@@ -31,7 +31,7 @@ class CartController extends Controller
         $this->cartService->recalculateCart();
         return view('cart.cart', [
             'activeStore' => Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE),
-            'cart' => Session::get('cart')
+            'cart' => Session::get('cart'),
         ]);
     }
 

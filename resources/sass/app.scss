@@ -730,7 +730,6 @@ body {
 
 .arrows-scroll-class {
     font-size:2em;
-
 }
 .arrows-scroll-class:hover {
     color:grey;
@@ -738,4 +737,13 @@ body {
 
 .scroll-control {
     display: none;
+}
+
+.promo-input-name {
+    width: 60% !important;
+}
+
+.promo-button-use {
+    margin-left: 2px;
+    width: 38%;
 }

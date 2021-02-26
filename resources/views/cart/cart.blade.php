@@ -132,18 +132,17 @@
                             @csrf
                             <div class="text-center promocode-usage">
 
-                                <input type="text" id="promoCodeInput" class="form-control w-75 float-left"
+                                <input type="text" id="promoCodeInput" class="form-control float-left promo-input-name"
                                        name="promocode">
 
                                 <button type="submit" value="promoadd" id="btnUsePromocode"
-                                        class="btn btn-secondary w-25 float-right">Use
+                                        class="btn btn-secondary float-right promo-button-use">{{__('actions.use')}}Use
                                 </button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
     <section class="place-holder"></section>

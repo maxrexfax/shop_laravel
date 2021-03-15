@@ -32,6 +32,8 @@ class CartController extends Controller
         return view('cart.cart', [
             'activeStore' => Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE),
             'cart' => Session::get('cart'),
+            'additionalProducts' => $this->cartService->getAdditionalProducts(),
+            // 'additionalProducts' => 0,
         ]);
     }
 

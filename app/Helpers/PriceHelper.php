@@ -4,12 +4,26 @@ namespace App\Helpers;
 
 use App\Currency;
 use App\Store;
+use Illuminate\Support\Facades\Session;
 
 class PriceHelper
 {
     public function __construct() {}
 
     public function getCurrentCurrency()
+    {
+        $defaultCurrency = null;
+        if (session()->has('defaultCurrency')) {
+            $defaultCurrency = Session::get('defaultCurrency');
+        } else {
+            $defaultCurrency = $this->getCurrentCurrencyFromDb();
+            Session::put('defaultCurrency', $defaultCurrency);
+        }
+
+        return $defaultCurrency;
+    }
+
+    public function getCurrentCurrencyFromDb()
     {
         $defaultCurrency = Currency::firstWhere('currency_code', Currency::CURRENCY_MAIN);
 

@@ -4,15 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Helpers\PaginationQuantityHelper;
 use App\Category;
+use App\Helpers\PriceHelper;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Services\CategoryStoreService;
 use App\Services\GetProductsService;
 use App\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+
+    }
+
     public function create($id = null)
     {
         if (!empty($id)) {
@@ -48,6 +55,10 @@ class CategoryController extends Controller
 
     public function show($id, Request $request)
     {
+        if (!Session::has('defaultCurrency')) {
+            Session::put('defaultCurrency', (new PriceHelper())->getCurrentCurrency());
+        }
+
         $category = Category::find($id);
         $paginateQuantity = (new PaginationQuantityHelper())->getPaginationQuantity($request->get('paginateQuantity'));
         $products = (new GetProductsService())
@@ -60,7 +71,7 @@ class CategoryController extends Controller
                 'currentCategory' => $category,
                 'paginateQuantity' => $paginateQuantity,
                 'sortType' => $request->get('sortType'),
-                'activeCurrency' => session('defaultCurrency'),
+                'defaultCurrency' => Session::get('defaultCurrency'),
                 'alternativeTitle' => $category->category_name,
             ]);
         } else {

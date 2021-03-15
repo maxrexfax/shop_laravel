@@ -143,6 +143,23 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-8 offset-2">
+                    @if(!empty($cart->productRows))
+                        Additional items from category
+                        @foreach($additionalProducts as $additionalProduct)
+                            <div class="col-md-2">
+                                <div class="w-100">
+                                    {{$additionalProduct->logo_image}}
+                                </div>
+                                <div class="product-item-button">
+                                    <span data-message="{{__('messages.added_to_cart')}}" data-id="{{$additionalProduct->id}}" class="btn btn-secondary w-100 m-0 btn-adder-to-cart">{{__('actions.add_to_cart')}}</span>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
         </div>
     </div>
     <section class="place-holder"></section>

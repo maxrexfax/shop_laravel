@@ -20,7 +20,6 @@ class CurrenciesList extends Component
     {
         $this->currencies = Currency::where('currency_code', 'usd')->get();
         $this->defaultCurrency = Currency::find(1);
-        Session::put('defaultCurrency', $this->defaultCurrency);
 
         $activeStore = Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE);
         if ($activeStore) {
@@ -28,7 +27,6 @@ class CurrenciesList extends Component
             if ($tmpStoreCurrency) {
                 $this->defaultCurrency = Currency::where('id', '=', $tmpStoreCurrency->currency_id)->first();
                 $this->currencies = $activeStore->currencies;
-                Session::put('defaultCurrency', $this->defaultCurrency);
             }
         }
     }

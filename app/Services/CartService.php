@@ -134,4 +134,22 @@ class CartService
         return $delivery;
     }
 
+    public function getAdditionalProducts()
+    {
+        $sessionCart = Session::get('cart');
+        $arrayOfProducts = [];
+        if (!empty($sessionCart->productRows)) {
+            foreach ($sessionCart->productRows as $key => $productRow) {
+                $product = Product::find($key);
+                if ($product) {
+                    foreach ($product->categories as $category) {
+                        $arrayOfProducts[] = $category->id;
+                    }
+                }
+            }
+        }
+        $arrayOfProducts = array_unique($arrayOfProducts);
+        return Product::find($arrayOfProducts);
+    }
+
 }

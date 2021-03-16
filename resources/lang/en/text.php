@@ -100,6 +100,7 @@ return [
     'no_phone_number' => 'No phone!',
     'oils_teas_salts' => 'Oils, Teas & Salts',
     'orders_shipping' => 'Orders/Shipping',
+    'other_items_from_selected_categories' => 'Other items from selected categories',
     'personal_care_products' => 'Personal Care Products',
     'phone' => 'Phone',
     'phones' => 'Phones',

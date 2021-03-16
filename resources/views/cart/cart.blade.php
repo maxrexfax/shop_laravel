@@ -20,42 +20,47 @@
                             </div>
                             @if(isset($cart->productRows))
                                 @foreach($cart->productRows as $productId => $product)
-                                <div class="border-bottom">
-                                    <div class="tr pt-1 d-flex justify-content-between align-items-center" id="tr-{{ $productId }} ">
-                                        <div class="w-25">
-                                            <div>
-                                                <div class="image-in-cart d-none d-md-block">
-                                                    <a href="{{route('product.show', ['id' => $productId])}}"
-                                                       target="_blank">
-                                                        <img class="w-100"
-                                                             src="{{asset('/img/logo/' . $product['productLogo'])}}">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div>
+                                    <div class="border-bottom">
+                                        <div class="tr pt-1 d-flex justify-content-between align-items-center" id="tr-{{ $productId }} ">
+                                            <div class="w-25">
                                                 <div>
-                                                    <h3>{{$product['productName']}}</h3>
+                                                    <div class="image-in-cart d-none d-md-block">
+                                                        <a href="{{route('product.show', ['id' => $productId])}}"
+                                                           target="_blank">
+                                                            @if(!empty($product['productLogo']))
+                                                                <img class="w-100"
+                                                                     src="{{asset('/img/logo/' . $product['productLogo'])}}">
+                                                            @else
+                                                                <img class="w-100"
+                                                                     src="{{asset('/img/empty.png')}}">
+                                                            @endif
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div>
+                                                        <h3>{{$product['productName']}}</h3>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div>
-                                            <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <div class="d-flex justify-content-between align-items-center">
                                                 <span class="cursor-pointer minus-product"><i
                                                             class="fas fa-minus-square fa-2x"></i></span>
-                                                <input type="number" min="0" max="999"
-                                                       class="input{{$productId}} ml-1 mr-1 text-center input-product-quantity-cart form-control"
-                                                       value="{{$product['productQuantity']}}">
-                                                <span class="cursor-pointer plus-product"><i
-                                                            class="fas fa-plus-square fa-2x"></i></span>
+                                                    <input type="number" min="0" max="999"
+                                                           class="input{{$productId}} ml-1 mr-1 text-center input-product-quantity-cart form-control"
+                                                           value="{{$product['productQuantity']}}">
+                                                    <span class="cursor-pointer plus-product"><i
+                                                                class="fas fa-plus-square fa-2x"></i></span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="">
-                                            {{$cart->calculatePrice($product['productPrice'])}}{{$cart->getCurrencySymbol()}}
-                                        </div>
-                                        <div class="row-price-holder row-price-{{$productId}}">
-                                            {{$cart->calculatePrice($product['productRowPrice'])}}{{$cart->getCurrencySymbol()}}
-                                        </div>
-                                        <div class="text-center" style="width: 10%">
+                                            <div class="">
+                                                {{$cart->calculatePrice($product['productPrice'])}}{{$cart->getCurrencySymbol()}}
+                                            </div>
+                                            <div class="row-price-holder row-price-{{$productId}}">
+                                                {{$cart->calculatePrice($product['productRowPrice'])}}{{$cart->getCurrencySymbol()}}
+                                            </div>
+                                            <div class="text-center" style="width: 10%">
                                             <span class="font-italic">
                                                 <a data-id="{{$productId}}" data-confirm="{{__('actions.really_delete?')}}"
                                                    class="delete-from-cart"
@@ -64,9 +69,9 @@
                                                     <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                                                 </a>
                                             </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endforeach
                             @endif
                         </div>
@@ -75,7 +80,7 @@
                         <div class="text-center text-secondary">
                             <p>{{__('text.cart_is_empty')}}, <a href="{{route('category.list')}}">{{__('text.lets_go_shopping')}}</a>!</p>
                         </div>
-                        @else
+                    @else
                         <a href="{{route('cart.reset')}}" class="btn btn-secondary btn-sm float-right mt-1">{{__('actions.reset_cart')}}</a>
                     @endif
                 </div>
@@ -144,14 +149,23 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-8 offset-2">
+                <div class="text-center w-100"><h3>{{__('text.other_items_from_selected_categories')}}</h3></div>
+                <div class="col-md-8 offset-1 d-flex justify-content-between align-items-center flex-wrap">
                     @if(!empty($cart->productRows))
-                        Additional items from category
                         @foreach($additionalProducts as $additionalProduct)
-                            <div class="col-md-2">
-                                <div class="w-100">
-                                    {{$additionalProduct->logo_image}}
-                                </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12" title="{{$additionalProduct->product_name}}">
+                                <a href="{{route('product.show',  ['id' => $additionalProduct->id])}}">
+                                    <div class="cart-image" style="background-image:url(
+                                    @if(!empty($additionalProduct->logo_image))
+                                    {{asset('/img/logo/' . $additionalProduct->logo_image)}}); background-color: transparent;
+                                    @else
+                                    {{ asset('/img/empty.png')}}); background-color: transparent;
+                                    @endif
+                                            "></div>
+                                    <div>
+                                        <p>{{$additionalProduct->product_name}}</p>
+                                    </div>
+                                </a>
                                 <div class="product-item-button">
                                     <span data-message="{{__('messages.added_to_cart')}}" data-id="{{$additionalProduct->id}}" class="btn btn-secondary w-100 m-0 btn-adder-to-cart">{{__('actions.add_to_cart')}}</span>
                                 </div>

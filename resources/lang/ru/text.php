@@ -100,6 +100,7 @@ return [
     'no_phone_number' => 'Нет телефона!',
     'oils_teas_salts' => 'Oils, Teas & Salts',
     'orders_shipping' => 'Orders/Shipping',
+    'other_items_from_selected_categories' => 'Другие товары из выбранных категорий',
     'personal_care_products' => 'Personal Care Products',
     'phone' => 'Телефон',
     'phones' => 'Телефоны',

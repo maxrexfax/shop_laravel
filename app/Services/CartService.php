@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Cart;
+use App\Category;
+use App\CategoryProduct;
 use App\Delivery;
 use App\Product;
 use App\Promocode;
@@ -22,7 +24,7 @@ class CartService
         } else {
             $sessionCart->productRows[$product->id] = [
                 'productName' => $product->product_name,
-                'productLogo' => $product->logo_image,
+                'productLogo' => $product->logo_image ? $product->logo_image : '',
                 'productQuantity' => 1,
                 'productPrice' => $product->price,
                 'productRowPrice' => $product->price
@@ -137,19 +139,35 @@ class CartService
     public function getAdditionalProducts()
     {
         $sessionCart = Session::get('cart');
+        $arrayOfCategoryIds = [];
         $arrayOfProducts = [];
+        $arrayOfProductIds = [];
         if (!empty($sessionCart->productRows)) {
             foreach ($sessionCart->productRows as $key => $productRow) {
+                $arrayOfProductIds[] = $key;
                 $product = Product::find($key);
                 if ($product) {
                     foreach ($product->categories as $category) {
-                        $arrayOfProducts[] = $category->id;
+                        $arrayOfCategoryIds[] = $category->id;
                     }
                 }
             }
         }
-        $arrayOfProducts = array_unique($arrayOfProducts);
-        return Product::find($arrayOfProducts);
+
+        $arrayOfCategoryIds = array_unique($arrayOfCategoryIds);
+        $categories = Category::find($arrayOfCategoryIds);
+        foreach ($categories as $category) {
+            foreach ($category->products as $product) {
+                $arrayOfProducts[] = $product;
+            }
+        }
+
+        foreach ($arrayOfProducts as $key => $product) {
+            if (in_array($product->id, $arrayOfProductIds)) {
+                unset($arrayOfProducts[$key]);
+            }
+        }
+        return $arrayOfProducts;
     }
 
 }

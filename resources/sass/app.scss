@@ -539,14 +539,6 @@ body {
     }
 }
 
-.product-right-banner {
-    box-shadow: 0px 5px 16px 3px rgba(0,0,0,0.2), 0px -5px 16px 3px rgba(0,0,0,0.2);
-}
-
-.product-main-description {
-    box-shadow: 0px 5px 16px 3px rgba(0,0,0,0.2), 0px -5px 16px 3px rgba(0,0,0,0.2);
-}
-
 .table-for-users-list {
     .td-short-description {
         max-width: 200px;
@@ -726,29 +718,98 @@ body {
     .input-product-quantity-cart {
         width: 50px;
     }
+
+    .promo-input-name {
+        width: 60% !important;
+    }
+
+    .promo-button-use {
+        margin-left: 2px;
+        width: 38%;
+    }
+
+    .cart-image {
+        height:100px;
+    }
+
+    .div-products-category-container {
+        overflow: hidden;
+    }
+
+    .parent-for-scroll {
+        position: relative;
+    }
+
+    .scroll-product-control {
+        position:absolute;
+        z-index:100;
+        font-size: 2em;
+        cursor: pointer;
+    }
+
+    .scroll-product-control:hover {
+        color:blue;
+    }
+
+    .scroll-left-btn {
+        top: 50%;
+        left: 1%;
+    }
+
+    .scroll-right-btn {
+        top: 50%;
+        right: 1%;
+    }
 }
 
-.arrows-scroll-class {
-    font-size:2em;
-}
-.arrows-scroll-class:hover {
-    color:grey;
+.product-show-container {
+
+    .div-icons-container {
+        overflow: auto;
+        width: 80%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .scroll-control {
+        display: none;
+    }
+
+    .arrows-scroll-class {
+        font-size:2em;
+    }
+
+    .arrows-scroll-class:hover {
+        color:grey;
+    }
+
+    .product-right-banner {
+        box-shadow: 0px 5px 16px 3px rgba(0,0,0,0.2), 0px -5px 16px 3px rgba(0,0,0,0.2);
+    }
+
+    .product-main-description {
+        box-shadow: 0px 5px 16px 3px rgba(0,0,0,0.2), 0px -5px 16px 3px rgba(0,0,0,0.2);
+    }
 }
 
-.scroll-control {
-    display: none;
-}
 
-.promo-input-name {
-    width: 60% !important;
-}
 
-.promo-button-use {
-    margin-left: 2px;
-    width: 38%;
-}
 
-.cart-image {
-    display:block;
-    height:100px;
+.cart-image-additional {
+    height:150px;
+    text-align: center;
+    position: relative;
+    white-space: nowrap;
+    margin: 1em 0;
+
+    .helper {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+    }
+
+    .additional-image-in-cart {
+        max-height: 100px;
+        max-width: 100%;
+    }
 }

@@ -16,6 +16,8 @@ class Cart
     public $totalAmount;
     public $priceHelper;
 
+    const NUMBER_OF_ADDITIONAL_PRODUCTS = 15;
+
     public function __construct()
     {
         $this->priceHelper = new PriceHelper();

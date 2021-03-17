@@ -15,11 +15,6 @@ use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
-    public function __construct()
-    {
-
-    }
-
     public function create($id = null)
     {
         if (!empty($id)) {
@@ -37,7 +32,6 @@ class CategoryController extends Controller
         return view('admin.partials.category._category_edit_create', [
                 'categories' => Category::all()
             ]);
-
     }
 
     public function store($id = null, StoreCategoryRequest $request)

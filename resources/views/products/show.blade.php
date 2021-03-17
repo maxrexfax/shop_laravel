@@ -1,18 +1,18 @@
 @extends('layouts.app')
 @section('content')
 <div class="bg-white w-100">
-    <div class="container">
+    <div class="container product-show-container">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-lg-8 col-md-8 col-sm-12 div-img-modal-show p-0">
                         <div class="p-2">
                             <div class="text-center p-2">
-                                    @if($product->logo_image)
-                                        <img class="img-to-show-modal" height="300px" src="{{ asset('/img/logo/' . $product->logo_image)}}" alt="{{$product->product_name}}"/>
-                                    @else
-                                        <img height="200px" src="{{ asset('/img/empty.png')}}" alt="{{__('text.no_current_logo_image!')}}"/>
-                                    @endif
+                                @if($product->logo_image)
+                                    <img class="img-to-show-modal" height="300px" src="{{ asset('/img/logo/' . $product->logo_image)}}" alt="{{$product->product_name}}"/>
+                                @else
+                                    <img height="200px" src="{{ asset('/img/empty.png')}}" alt="{{__('text.no_current_logo_image!')}}"/>
+                                @endif
                             </div>
                             <div class="d-flex align-items-center justify-content-between">
                                 <div class="text-center" style="width: 10%">
@@ -20,7 +20,7 @@
                                         <i id="leftScroll" class="fa fa-chevron-left arrows-scroll-class scroll-control" aria-hidden="true"></i>
                                     @endif
                                 </div>
-                                <div class="d-flex align-items-center justify-content-around div-icons-container" style="overflow: auto; width: 80%; margin-right: auto; margin-left: auto;">
+                                <div class="d-flex align-items-center justify-content-around div-icons-container">
                                     @foreach($product->images as $img)
                                         <div class="border m-2">
                                             <img class="img-to-show-modal" height="100px" src="{{ asset('/img/images/' . $img->image_name) }}" alt="{{$img->image_name}}"/>

@@ -130,9 +130,11 @@ class CartService
     {
         $delivery_obj = Delivery::find($delivery_id);
         $delivery = 0;
+
         if ($delivery_obj) {
             $delivery = $delivery_obj->delivery_price;
         }
+
         return $delivery;
     }
 
@@ -147,9 +149,9 @@ class CartService
                 $arrayOfProductIds[] = $key;
                 $product = Product::find($key);
                 if ($product) {
-                    foreach ($product->categories as $category) {
-                        $arrayOfCategoryIds[] = $category->id;
-                    }
+                    //foreach ($product->categories as $category) {//if necessary get all categories
+                        $arrayOfCategoryIds[] = $product->categories[0]->id;
+                    //}
                 }
             }
         }
@@ -167,6 +169,11 @@ class CartService
                 unset($arrayOfProducts[$key]);
             }
         }
+
+        if ( count($arrayOfProducts) > Cart::NUMBER_OF_ADDITIONAL_PRODUCTS) {
+            $arrayOfProducts = array_slice($arrayOfProducts, 0, Cart::NUMBER_OF_ADDITIONAL_PRODUCTS);
+        }
+
         return $arrayOfProducts;
     }
 

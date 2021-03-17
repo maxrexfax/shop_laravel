@@ -432,11 +432,13 @@ $(document).ready(function() {
     });
 
     $(document).on('click', '.scroll-left-btn', function (e) {
-        $('.div-products-category-container').animate( { scrollLeft: '-=600' }, 600);
+        let parentClassName = this.getAttribute('data-scroll');
+        $('.' + parentClassName).animate( { scrollLeft: '-=600' }, 600);
     });
 
     $(document).on('click', '.scroll-right-btn', function (e) {
-        $('.div-products-category-container').animate( { scrollLeft: '+=600' }, 600);
+        let parentClassName = this.getAttribute('data-scroll');
+        $('.' + parentClassName).animate( { scrollLeft: '+=600' }, 600);
     });
 
     $( window ).scroll(function() {

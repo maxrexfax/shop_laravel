@@ -732,9 +732,7 @@ body {
         height:100px;
     }
 
-    .div-products-category-container {
-        overflow: hidden;
-    }
+
 
     .parent-for-scroll {
         position: relative;
@@ -792,7 +790,9 @@ body {
     }
 }
 
-
+.div-products-category-container {/*DONT MOVE INSIDE!*/
+    overflow: hidden;
+}
 
 
 .cart-image-additional {
@@ -806,6 +806,15 @@ body {
         display: inline-block;
         height: 100%;
         vertical-align: middle;
+        color: transparent;
+        background-color: transparent;
+        opacity: 0;
+    }
+
+    .helper:hover {
+        color: transparent;
+        background-color: transparent;
+        opacity: 0;
     }
 
     .additional-image-in-cart {

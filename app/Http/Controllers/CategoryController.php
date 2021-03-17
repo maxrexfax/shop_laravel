@@ -58,6 +58,7 @@ class CategoryController extends Controller
         $products = (new GetProductsService())
                 ->getUserListBySortData($id, $request
                 ->get('sortType'), $paginateQuantity);
+
         if ($category) {
             return view('categories.products', [
                 'products' => $products,

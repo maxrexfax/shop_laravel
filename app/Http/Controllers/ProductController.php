@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Helpers\PriceHelper;
 use App\Http\Requests\StoreProductRequest;
 use App\Product;
 use App\Services\ProductStoreService;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -44,13 +46,19 @@ class ProductController extends Controller
 
     public function show($id)
     {
+        if (!Session::has('arrayOfVisitedProducts')) {
+            Session::put('arrayOfVisitedProducts', []);
+        }
+
         $product = Product::find($id);
 
         if ($product) {
+            (new ProductStoreService())->addProductToSessionArray($id);
             return view('products.show', [
                 'product' => $product,
                 'alternativeTitle' => $product->title,
                 'alternativeDescription' => $product->description,
+                'arrayOfVisitedProducts' => Product::find(Session::get('arrayOfVisitedProducts')),
             ]);
         }
 

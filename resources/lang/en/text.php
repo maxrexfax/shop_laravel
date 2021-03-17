@@ -124,6 +124,7 @@ return [
     'there_are_no_additional_images_for_this_product!' => 'There are no additional images for this product!',
     'upload_new_picture' => 'Upload new picture',
     'users_list_control' => 'Users list control',
+    'visited_products' => 'Visited products',
     'you_are_logged_in' => 'You are logged in!',
     'wellness_kits' => 'Wellness Kits',
     'water_filtration_exercise' => 'Water Filtration & Exercises',

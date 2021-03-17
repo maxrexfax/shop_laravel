@@ -124,6 +124,7 @@ return [
     'there_are_no_additional_images_for_this_product!' => 'Нет дополнительных изображений для товара!',
     'upload_new_picture' => 'Выгрузить новое изображение',
     'users_list_control' => 'Управление списком пользователей',
+    'visited_products' => 'Просмотренные товары',
     'you_are_logged_in' => 'Вы успешно вошли на сайт!',
     'wellness_kits' => 'Wellness Kits',
     'water_filtration_exercise' => 'Water Filtration & Exercises',

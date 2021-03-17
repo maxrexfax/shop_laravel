@@ -33,7 +33,7 @@ class CartController extends Controller
             'activeStore' => Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE),
             'cart' => Session::get('cart'),
             'additionalProducts' => $this->cartService->getAdditionalProducts(),
-            // 'additionalProducts' => 0,
+            'arrayOfVisitedProducts' => Product::find(Session::get('arrayOfVisitedProducts')),
         ]);
     }
 

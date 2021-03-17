@@ -434,12 +434,28 @@ $(document).ready(function() {
     $(document).on('click', '.scroll-left-btn', function (e) {
         let parentClassName = this.getAttribute('data-scroll');
         $('.' + parentClassName).animate( { scrollLeft: '-=600' }, 600);
+        if ($('.' + parentClassName)[0].scrollLeft == 0) {
+            $(this).hide();
+        }
+        let RB = $(this).parent().find('.scroll-right-btn');
+        $(RB).show();
+        checkEndOfScroll($('.' + parentClassName), this, RB, e);
     });
 
     $(document).on('click', '.scroll-right-btn', function (e) {
         let parentClassName = this.getAttribute('data-scroll');
         $('.' + parentClassName).animate( { scrollLeft: '+=600' }, 600);
+        let LB = $(this).parent().find('.scroll-left-btn');
+        $(LB).show();
+        checkEndOfScroll($('.' + parentClassName), LB, this, e);
     });
+
+    function checkEndOfScroll(scrollable, leftButton, rightButton, e) {
+        if (scrollable[0].offsetWidth + $(scrollable)[0].scrollLeft >= scrollable[0].scrollWidth) {
+            $(rightButton).hide();
+        } else {
+        }
+    }
 
     $( window ).scroll(function() {
         $( '.to-top-button' ).show();

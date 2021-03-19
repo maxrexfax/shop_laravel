@@ -5,6 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="row">
+                    <div class="breadcrumbs-container container w-100 breadcrumb-decoration"><a href="{{route('main.page')}}">{{__('actions.home')}}</a><span class="gray-category-name-breadcrumb"> / {{$product->product_name}}</span></div>
                     <div class="col-lg-8 col-md-8 col-sm-12 div-img-modal-show p-0">
                         <div class="p-2">
                             <div class="text-center p-2">

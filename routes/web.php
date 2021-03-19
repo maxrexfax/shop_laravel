@@ -28,6 +28,7 @@ Route::group(['middleware'=>'language'],function ()
 
     Route::get('/admin', 'AdminController@index')->name('admin');
     Route::get('/admin/category/list', 'AdminController@categoryList')->name('admin.category.list');
+    Route::get('/admin/paymethod/list', 'AdminController@paymethodList')->name('admin.paymethod.list');
     Route::get('/admin/product/list', 'AdminController@productList')->name('admin.product.list');
     Route::get('/admin/users/list', 'AdminController@userList')->name('admin.users.list');
     Route::get('/admin/stores/list', 'AdminController@storeList')->name('admin.stores.list');
@@ -37,6 +38,8 @@ Route::group(['middleware'=>'language'],function ()
     Route::get('/admin/promocodes/list', 'AdminController@promocodesList')->name('admin.promocodes.list');
 
     Route::get('/cart', 'CartController@cart')->name('cart');
+    Route::get('/cart/checkout', 'CartController@checkoutCart')->name('cart.checkout');
+    Route::post('/cart/checkout/check', 'CartController@checkoutCheck')->name('cart.checkout.check');
     Route::get('/cart/add/{id?}', 'CartController@addProductToCart')->name('cart.add');
     Route::get('/cart/delete/{id?}', 'CartController@deleteProductFromCart')->name('cart.delete');
     Route::match(['get', 'post'],'/cart/calculate', 'CartController@calculate')->name('cart.calculate');
@@ -60,6 +63,9 @@ Route::group(['middleware'=>'language'],function ()
 
     Route::get('/locale/create/{id?}', 'LocaleController@create')->name('locale.create');
     Route::post('/locale/store/{id?}', 'LocaleController@store')->name('locale.store');
+
+    Route::get('/paymethod/create/{id?}', 'PaymentMethodController@create')->name('payment.method.create');
+    Route::post('/paymethod/store/{id?}', 'PaymentMethodController@store')->name('payment.method.store');
 
     Route::get('/phone/create/{store_id?}/{phone_id?}', 'PhoneController@create')->name('phone.create');
     Route::post('/phone/store/{id?}', 'PhoneController@store')->name('phone.store');

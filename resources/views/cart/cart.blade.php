@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="w-100 bg-white p-0">
+        <div class="breadcrumbs-container container w-100 breadcrumb-decoration"><a href="{{route('main.page')}}">{{__('actions.home')}}</a><span class="gray-category-name-breadcrumb"> / {{__('messages.shopping_cart')}}</span></div>
         <section class="place-holder"></section>
         <div class="shopping-cart-main">
             <div class="row">
@@ -123,6 +124,8 @@
                         <br>
                         <span id="btnCheckout" data-info="{{__('messages.total_cost')}}"
                               class="btn btn-dark btn-block">{{__('messages.checkout')}}</span>
+                        <br>
+                        <a href="{{route('cart.checkout')}}" class="btn btn-dark btn-block">{{__('messages.checkout')}}</a>
                         <br>
                         <p>
                             @if($cart->promocodeValue)

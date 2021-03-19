@@ -242,6 +242,13 @@ $(document).ready(function() {
             });
     });
 
+    $( ".select-type-of-delivery-in-cart" ).change(function() {
+        $.post( "/cart/changedelivery", { "_token": $('meta[name="csrf-token"]').attr('content'), delivery_id: $(this).val() })
+            .done(function( data ) {
+                $('#spanWithTotalPrice').html(data['totalAmount'] + data['currency_symbol']);
+            });
+    });
+
     function getUrl() {
         let url = $(location).attr('href');
         if(url.indexOf('?')!=-1) {
@@ -293,7 +300,8 @@ $(document).ready(function() {
         if (choice) {
             $.get( "/cart/delete/" + this.getAttribute('data-id'))
                 .done(function( data ) {
-                    window.location.href = '/cart/calculate';
+                    //window.location.href = '/cart/calculate';
+                    window.location.reload();
             });
         }
     });
@@ -307,6 +315,15 @@ $(document).ready(function() {
                 //$('<div class="message-added-popup">' +  message + '</div>').insertBefore(buttonClicked).delay(TIME_TO_SHOW_MESSAGE).fadeOut();
                 restoreText(buttonClicked, text, message);
         });
+    });
+
+    $(document).on('click', '.payment-methods-select', function (e) {
+        $('.details-for-payment-method').empty();
+        let name = 'payMethodDetails' + $(this).val();
+        console.log(name);
+        console.log(window['name']);
+        //$('#containerForPayMethod' + $(this).val()).html($('.pay-method-details-' + $(this).val()).html());
+        //$('#containerForPayMethod' + $(this).val()).html(name);
     });
 
     restoreText = function(target, oldText, newText) {
@@ -485,3 +502,97 @@ $(document).ready(function() {
     }
 
 });
+
+
+var payMethodDetails1 = '<div class="pay-method-details-1">\n' +
+    '    <div class="form-group row m-0 p-0">\n' +
+    '        <label for="selectCardType" class="col-md-12 col-form-label font-size-mini">{{ __(\'text.choice_card_type\') }}<span style="color: red;">*</span></label>\n' +
+    '\n' +
+    '        <div class="col-md-12 m-0 p-0">\n' +
+    '            <select id="selectCardType" type="text" class="form-control w-100 @error(\'city\') is-invalid @enderror" name="city" value="" form="checkoutForm" required>\n' +
+    '                <option value="0"> </option>\n' +
+    '                <option value="1">First option</option>\n' +
+    '                <option value="2">Second option</option>\n' +
+    '            </select>\n' +
+    '            @error(\'city\')\n' +
+    '            <span class="invalid-feedback" role="alert">\n' +
+    '                <strong>{{ $message }}</strong>\n' +
+    '            </span>\n' +
+    '            @enderror\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '\n' +
+    '    <div class="form-group row m-0 p-0">\n' +
+    '        <label for="creditCardNumber" class="col-md-12 col-form-label font-size-mini">{{ __(\'text.credit_card_number\') }}<span style="color: red">*</span></label>\n' +
+    '\n' +
+    '        <div class="col-md-12 m-0 p-0">\n' +
+    '            <input id="creditCardNumber" type="text" class="w-100 @error(\'credit_card_number\') is-invalid @enderror" name="credit_card_number" form="checkoutForm" placeholder="{{ __(\'text.credit_card_number\') }}" required>\n' +
+    '            @error(\'city\')\n' +
+    '            <span class="invalid-feedback" role="alert">\n' +
+    '                <strong>{{ $message }}</strong>\n' +
+    '            </span>\n' +
+    '            @enderror\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '\n' +
+    '    <div class="d-flex">\n' +
+    '        <div class="col-md-9 m-0 p-0">\n' +
+    '            <label for="expirationYear" class="col-form-label text-md-right font-size-mini">{{ __(\'text.expire_date\') }}<span style="color: red">*</span></label>\n' +
+    '            <select id="expirationYear" type="text" class="form-control w-100 @error(\'expiration_year\') is-invalid @enderror" name="expiration_year" form="checkoutForm" required>\n' +
+    '                <option value="0"> </option>\n' +
+    '                <option value="21">21</option>\n' +
+    '                <option value="22">22</option>\n' +
+    '                <option value="23">23</option>\n' +
+    '                <option value="24">24</option>\n' +
+    '            </select>\n' +
+    '            @error(\'first_name\')\n' +
+    '            <span class="invalid-feedback" role="alert">\n' +
+    '                <strong>{{ $message }}</strong>\n' +
+    '            </span>\n' +
+    '            @enderror\n' +
+    '        </div>\n' +
+    '\n' +
+    '        <div class="col-md-3 m-0 p-0">\n' +
+    '            <label for="" class="col-form-label text-md-right font-size-mini"><span style="color: red">*</span></label>\n' +
+    '            <select id="expirationYear" type="text" class="form-control w-100 @error(\'expiration_year\') is-invalid @enderror" name="expiration_year" form="checkoutForm" required>\n' +
+    '                <option value="0"> </option>\n' +
+    '                <option value="01">01</option>\n' +
+    '                <option value="02">02</option>\n' +
+    '                <option value="03">03</option>\n' +
+    '                <option value="04">04</option>\n' +
+    '                <option value="05">05</option>\n' +
+    '                <option value="06">06</option>\n' +
+    '                <option value="07">07</option>\n' +
+    '                <option value="08">08</option>\n' +
+    '                <option value="09">09</option>\n' +
+    '                <option value="10">10</option>\n' +
+    '                <option value="11">11</option>\n' +
+    '                <option value="12">12</option>\n' +
+    '            </select>\n' +
+    '            @error(\'last_name\')\n' +
+    '            <span class="invalid-feedback" role="alert">\n' +
+    '                <strong>{{ $message }}</strong>\n' +
+    '            </span>\n' +
+    '            @enderror\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '\n' +
+    '    <div class="d-flex">\n' +
+    '        <div class="col-md-6 m-0 p-0">\n' +
+    '            <label for="creditCardVerificationNumber" class="col-form-label text-md-right font-size-mini">{{ __(\'text.card_verification_number\') }}<span style="color: red">*</span></label>\n' +
+    '            <input id="creditCardVerificationNumber" type="text" class="w-100 @error(\'card_verification_number\') is-invalid @enderror" name="card_verification_number" form="checkoutForm" placeholder="{{ __(\'text.number\') }}" required>\n' +
+    '            @error(\'first_name\')\n' +
+    '            <span class="invalid-feedback" role="alert">\n' +
+    '                <strong>{{ $message }}</strong>\n' +
+    '            </span>\n' +
+    '            @enderror\n' +
+    '        </div>\n' +
+    '\n' +
+    '        <div class="col-md-6 m-0 p-0">\n' +
+    '            <label>&nbsp;</label>\n' +
+    '            <p class="font-size-mini text-right"><a href="#">What is this?</a></p>\n' +
+    '        </div>\n' +
+    '    </div>\n' +
+    '</div>';
+var payMethodDetails2 = '<div class="pay-method-details-3">Cash Cash Cash Cash </div>';
+var payMethodDetails3 = '<div class="pay-method-details-3">Cash Cash Cash Cash </div>';

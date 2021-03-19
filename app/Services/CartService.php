@@ -150,7 +150,7 @@ class CartService
                 $product = Product::find($key);
                 if ($product) {
                     //foreach ($product->categories as $category) {//if necessary get all categories
-                        $arrayOfCategoryIds[] = $product->categories[0]->id;
+                        $arrayOfCategoryIds[] = $product->categories->first()->id;
                     //}
                 }
             }

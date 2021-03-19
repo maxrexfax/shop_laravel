@@ -39,6 +39,7 @@
                                 </div>
 
                                 <div class="accordion-content p-0">
+                                    <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.paymethod.list')}}">{{ __('actions.paymethod') }}</a></p>
                                     <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.stores.list')}}">{{ __('actions.stores') }}</a></p>
                                     <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.currency.list')}}">{{ __('actions.currency') }}</a></p>
                                     <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.locales.list')}}">{{ __('actions.locales') }}</a></p>

@@ -822,3 +822,95 @@ body {
         max-width: 100%;
     }
 }
+
+.shopping-cart-checkout {
+
+    .number-in-checkout {
+        color: #cb521c;
+        font-family: 'Nunito', sans-serif;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+    .btn-special-color {
+        background-color: #cb521c;
+    }
+
+    .border-right-dashed {
+        border-right: 1px dashed black;
+    }
+
+    input
+    {
+        font-size:0.7em;
+    }
+
+    .font-size-mini {
+        font-size: 0.7em;
+    }
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    [class*="pay-method-details-"] {
+        display: none;
+    }
+}
+
+.div-data-user-info {
+
+    .tabs {
+
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .tabs>input[type="radio"] {
+        display: none;
+    }
+
+    .tabs>div {
+        /* скрыть контент по умолчанию */
+        display: none;
+        font-size: 16px;
+    }
+
+    /* отобразить контент, связанный с вабранной радиокнопкой (input type="radio") */
+    #tab-btn-1:checked~#content-2,
+    #tab-btn-2:checked~#content-1 {
+        display: block;
+    }
+
+    .tabs>label {
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        user-select: none;
+        padding: 2px 8px;
+        font-size: 1em;
+        line-height: 1.5;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+        cursor: pointer;
+        position: relative;
+        top: 1px;
+    }
+
+    .tabs>label:not(:first-of-type) {
+        border-left: none;
+    }
+
+    .tabs>input[type="radio"]:checked+label {
+        background-color: #fff;
+        border-bottom: 1px solid #fff;
+    }
+}

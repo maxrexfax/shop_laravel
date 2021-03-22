@@ -122,8 +122,7 @@
                             </span></div>
                         <div class="clearfix"></div>
                         <br>
-                        <span id="btnCheckout" data-info="{{__('messages.total_cost')}}"
-                              class="btn btn-dark btn-block">{{__('messages.checkout')}}</span>
+
                         <br>
                         <a href="{{route('cart.checkout')}}" class="btn btn-dark btn-block">{{__('messages.checkout')}}</a>
                         <br>
@@ -144,7 +143,7 @@
                                        name="promocode">
 
                                 <button type="submit" value="promoadd" id="btnUsePromocode"
-                                        class="btn btn-secondary float-right promo-button-use">{{__('actions.use')}}Use
+                                        class="btn btn-secondary float-right promo-button-use">{{__('actions.use')}}
                                 </button>
                             </div>
                         </form>

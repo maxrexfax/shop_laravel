@@ -58,7 +58,7 @@
                             <br>
                             <p><input style="vertical-align: middle;" type="checkbox" form="checkoutForm" name="isWantNewsLetters">
                                 <span class="font-size-mini">{{__('text.subscribe_for_newsletters')}}</span></p>
-                            <input type="submit" class="btn btn-special-color" value="{{__('actions.place_order')}}" form="checkoutForm">
+                            <input type="submit" class="btn btn-special-color btn-block text-white font-weight-bold" value="{{__('actions.place_order')}}" form="checkoutForm">
                         </div>
                     </div>
                 </div>

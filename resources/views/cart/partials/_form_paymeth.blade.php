@@ -1,5 +1,6 @@
+<p>{{__('text.make_a_choiсe')}}:</p>
 <input type="radio" id="paymentMethod0" value="0" name="payment_method" class="payment-methods-select" form="checkoutForm" required>
-<label for="paymentMethod0">{{__('text.make_a_choiсe')}}</label><br>
+<label for="paymentMethod0">{{__('text.empty')}}</label><br>
 @if(!empty($paymentMethods))
 @foreach($paymentMethods as $paymentMethod)
     <div id="{{$paymentMethod->id}}">

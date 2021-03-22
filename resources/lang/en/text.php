@@ -77,6 +77,7 @@ return [
     'edit_user_data' => 'Edit user data',
     'empty_logo' => 'Empty logo',
     'email' => 'Email',
+    'empty' => 'Empty',
     'e_mail_address' => 'E-Mail Address',
     'enabled' => 'Enabled',
     'endorsed_supplements' => 'Endorsed Supplements',

@@ -77,6 +77,7 @@ return [
     'edit_store' => 'Редактировать магазин',
     'empty_logo' => 'Пустой логотип',
     'email' => 'Email',
+    'empty' => 'Пусто',
     'e_mail_address' => 'Адрес электронной почты',
     'enabled' => 'Включено',
     'endorsed_supplements' => 'Endorsed Supplements',

@@ -11,8 +11,9 @@
             <table class="table table-striped w-100">
                 <thead class="thead-dark">
                 <tr>
-                    <th>{{ __('text.paymethods_id') }}</th>
                     <th>{{ __('text.paymethods_pm_name') }}</th>
+                    <th>{{ __('text.paymethods_code') }}</th>
+                    <th>{{ __('text.logo_image') }}</th>
                     <th>{{ __('text.paymethods_other_data') }}</th>
                     <th>{{ __('text.edit') }}</th>
                 </tr>
@@ -20,8 +21,15 @@
                 <tbody>
                 @foreach($paymentMethods->sortBy('id') as $paymentMethod)
                     <tr>
-                        <td>{{$paymentMethod->id}}</td>
-                        <td>{{$paymentMethod->pm_name}}</td>
+                        <td>{{$paymentMethod->payment_method_name}}</td>
+                        <td>{{$paymentMethod->payment_method_code}}</td>
+                        <td>
+                            @if($paymentMethod->logo)
+                                <img height="30px" src="{{ asset('/img/logo/' . $paymentMethod->logo) }}" alt="{{$paymentMethod->payment_method_name}}"/>
+                            @else
+                                <img height="30px" src="{{ asset('/img/logo/empty_logo.jpg') }}" alt="{{ __('actions.no_logo') }}"/>
+                            @endif
+                        </td>
                         <td>{{$paymentMethod->other_data}}</td>
                         <td><a href="{{route('payment.method.create')}}/{{$paymentMethod->id}}"><i class="fas fa-pencil-alt"></i></a></td>
                     </tr>

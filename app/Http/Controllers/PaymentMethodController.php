@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\PaginationQuantityHelper;
+use App\Http\Requests\StorePaymethodRequest;
 use App\PaymentMethod;
 use Illuminate\Http\Request;
 
@@ -24,7 +25,7 @@ class PaymentMethodController extends Controller
         return view('admin.partials.paymethod._paymethod_edit_create');
     }
 
-    public function store($id = null, Request $request)
+    public function store($id = null, StorePaymethodRequest $request)
     {
         $paymentMethod = PaymentMethod::find($id);
 
@@ -32,7 +33,9 @@ class PaymentMethodController extends Controller
             $paymentMethod = new PaymentMethod();
         }
 
-        $paymentMethod->pm_name = $request->post('pm_name');
+        $paymentMethod->payment_method_name = $request->post('payment_method_name');
+        $paymentMethod->payment_method_code = $request->post('payment_method_code');
+        $paymentMethod->logo = $request->post('logo');
         $paymentMethod->other_data = $request->post('other_data');
         $paymentMethod->save();
 

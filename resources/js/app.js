@@ -298,10 +298,13 @@ $(document).ready(function() {
         let choice = confirm(this.getAttribute('data-confirm'));
 
         if (choice) {
+            let id = this.getAttribute('data-id');
             $.get( "/cart/delete/" + this.getAttribute('data-id'))
                 .done(function( data ) {
-                    //window.location.href = '/cart/calculate';
-                    window.location.reload();
+                    console.log(data['productRowsCount'] + ' ' + data['totalProducts'] + ' ' + data['totalAmount']);
+                    $('#tr-' + id).remove();
+                    $('#spanWithTotalProductsPrice').html(data['totalProducts'] + data['currencySymbol']);
+                    $('#spanWithTotalPrice').html(data['totalAmount'] + data['currencySymbol']);
             });
         }
     });

@@ -15,10 +15,10 @@ class CreatePaymentMethodsTable extends Migration
     {
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->id();
-            $table->string('pm_name')->default('Payment method');
+            $table->string('payment_method_name')->default('Payment method');
+            $table->string('payment_method_code');
             $table->string('other_data')->nullable();
-            $table->string('payment_code', 25)->nullable();
-            $table->string('logo', 255)->nullable();
+            $table->string('logo')->nullable();
             $table->timestamps();
         });
     }

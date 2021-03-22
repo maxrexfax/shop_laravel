@@ -74,7 +74,7 @@
     <div class="d-flex">
         <div class="col-md-6 m-0 p-0">
             <label for="creditCardVerificationNumber" class="col-form-label text-md-right font-size-mini">{{ __('text.card_verification_number') }}<span style="color: red">*</span></label>
-            <input id="creditCardVerificationNumber" type="text" class="w-100 @error('card_verification_number') is-invalid @enderror" name="card_verification_number" form="checkoutForm" placeholder="{{ __('text.number') }}" required>
+            <input id="creditCardVerificationNumber" type="text" class="w-100 @error('card_verification_number') is-invalid @enderror" name="card_verification_number" form="checkoutForm" placeholder="{{ __('CVV') }}" required>
             @error('first_name')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>

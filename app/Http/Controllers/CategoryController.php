@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        if (!Session::has('defaultCurrency')) {
+            Session::put('defaultCurrency', (new PriceHelper())->getCurrentCurrency());
+        }
+    }
+
     public function create($id = null)
     {
         if (!empty($id)) {
@@ -49,10 +56,6 @@ class CategoryController extends Controller
 
     public function show($id, Request $request)
     {
-        if (!Session::has('defaultCurrency')) {
-            Session::put('defaultCurrency', (new PriceHelper())->getCurrentCurrency());
-        }
-
         $category = Category::find($id);
         $paginateQuantity = (new PaginationQuantityHelper())->getPaginationQuantity($request->get('paginateQuantity'));
         $products = (new GetProductsService())

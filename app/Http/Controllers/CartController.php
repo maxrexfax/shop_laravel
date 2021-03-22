@@ -50,6 +50,15 @@ class CartController extends Controller
     public function deleteProductFromCart($id)
     {
         $this->cartService->deleteFromCart($id);
+        $this->cartService->recalculateCart();
+        $cart = Session::get('cart');
+
+        return response()->json([
+            'productRowsCount' => count($cart->productRows),
+            'totalProducts' => $this->cart->calculatePrice($cart->totalProducts),
+            'totalAmount' => $this->cart->calculatePrice($cart->totalAmount),
+            'currencySymbol' => $this->cart->getCurrencySymbol()
+        ]);
     }
 
     public function edit(Request $request)

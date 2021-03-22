@@ -1,7 +1,7 @@
 @if(isset($cart->productRows))
     @foreach($cart->productRows as $productId => $product)
-        <div class="border-bottom">
-            <div class="tr pt-1 d-flex justify-content-between align-items-center" id="tr-{{ $productId }} ">
+        <div class="border-bottom tr" id="tr-{{ $productId }}">
+            <div class="pt-1 d-flex justify-content-between align-items-center">
                 <div class="d-flex">
                     <div class="w-25">
                         <div>

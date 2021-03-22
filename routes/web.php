@@ -49,6 +49,8 @@ Route::group(['middleware'=>'language'],function ()
     Route::get('/cart/productquantity', 'CartController@cartProductQuantity')->name('cart.productquantity');
     Route::get('/cart/reset', 'CartController@reset')->name('cart.reset');
 
+    Route::get('/cart/paymentdetails/{path}','CartController@getPaymentDetails');
+
     Route::get('/category/create/{id?}', 'CategoryController@create')->name('category.create');
     Route::get('/categories/root/list', 'CategoryController@categoriesRootList')->name('category.rootlist');
     Route::post('/category/store/{id?}', 'CategoryController@store')->name('category.store');

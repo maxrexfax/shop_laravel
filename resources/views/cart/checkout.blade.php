@@ -55,8 +55,9 @@
                                 @endif
                             </span>
                             </div>
-                            <p><input type="checkbox" form="checkoutForm" name="isWantNewsLetters">
-                                <span style="vertical-align: top;" class="font-size-mini">{{__('text.subscribe_for_newsletters')}}</span></p>
+                            <br>
+                            <p><input style="vertical-align: middle;" type="checkbox" form="checkoutForm" name="isWantNewsLetters">
+                                <span class="font-size-mini">{{__('text.subscribe_for_newsletters')}}</span></p>
                             <input type="submit" class="btn btn-special-color" value="{{__('actions.place_order')}}" form="checkoutForm">
                         </div>
                     </div>

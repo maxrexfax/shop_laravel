@@ -26,13 +26,13 @@
                         <div>
                             <div>
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <span class="cursor-pointer minus-product"><i
-                                                class="fas fa-minus-square"></i></span>
-                                    <span class="cursor-pointer plus-product"><i
-                                                class="fas fa-plus-square"></i></span>
-                                    <input style="width: 50px;" type="number" min="0" max="999"
-                                           class="input{{$productId}} ml-1 mr-1 text-center input-product-quantity-cart form-control"
+                                    <span>
+                                    <input style="width: 40px; display: inline;" type="number" min="0" max="999"
+                                           class="input{{$productId}} text-center input-product-quantity-cart form-control"
                                            value="{{$product['productQuantity']}}">
+                                        <span class="cursor-pointer minus-product color-custom-gray"><i class="fas fa-minus-circle"></i></span>
+                                        <span class="cursor-pointer plus-product color-custom-gray"><i class="fas fa-plus-circle"></i></span>
+                                    </span>
                                     <div class="row-price-holder row-price-{{$productId}}">
                                         {{$cart->calculatePrice($product['productRowPrice'])}}{{$cart->getCurrencySymbol()}}
                                     </div>

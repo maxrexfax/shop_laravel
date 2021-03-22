@@ -123,6 +123,11 @@ class CartController extends Controller
         return back();
     }
 
+    public function getPaymentDetails($path)
+    {
+        return view("cart/paymethods/{$path}")->render();
+    }
+
     public function reset()
     {
         Session::forget('cart');

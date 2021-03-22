@@ -706,10 +706,7 @@ body {
     .promocode-usage {
         display: none;
     }
-    
-    .cursor-pointer {
-        cursor: pointer;
-    }
+
 
     .table-container {
         min-width: 560px;
@@ -862,7 +859,7 @@ body {
     }
 
     [class*="pay-method-details-"] {
-        display: none;
+
     }
 }
 
@@ -913,4 +910,13 @@ body {
         background-color: #fff;
         border-bottom: 1px solid #fff;
     }
+}
+
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.color-custom-gray {
+    color: lightgrey;
 }

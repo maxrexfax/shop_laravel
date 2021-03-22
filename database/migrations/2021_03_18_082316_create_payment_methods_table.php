@@ -17,6 +17,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->id();
             $table->string('pm_name')->default('Payment method');
             $table->string('other_data')->nullable();
+            $table->string('payment_code', 25)->nullable();
             $table->timestamps();
         });
     }

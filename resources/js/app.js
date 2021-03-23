@@ -301,7 +301,12 @@ $(document).ready(function() {
             let id = this.getAttribute('data-id');
             $.get( "/cart/delete/" + this.getAttribute('data-id'))
                 .done(function( data ) {
-                    console.log(data['productRowsCount'] + ' ' + data['totalProducts'] + ' ' + data['totalAmount']);
+                    if (data['productRowsCount'] === 0 ) {
+                        console.log(data['productRowsCount'] + 'надо прятать кнопку резет и показать приглашение в категории');
+                        $('#btnResetCart').removeClass('d-block').addClass('d-none');
+                        $('#cartInviteToBuy').addClass('d-block').removeClass('d-none');
+                    }
+                    //console.log(data['productRowsCount'] + ' ' + data['totalProducts'] + ' ' + data['totalAmount']);
                     $('#tr-' + id).remove();
                     $('#spanWithTotalProductsPrice').html(data['totalProducts'] + data['currencySymbol']);
                     $('#spanWithTotalPrice').html(data['totalAmount'] + data['currencySymbol']);
@@ -313,6 +318,8 @@ $(document).ready(function() {
         let buttonClicked = this;
         let message = this.getAttribute('data-message');
         let text = $(this).text();
+        $('#btnResetCart').addClass('d-block').removeClass('d-none');
+        $('#cartInviteToBuy').removeClass('d-block').addClass('d-none');
         $.get( "/cart/add/" + this.getAttribute('data-id'))
             .done(function( data ) {
                 //$('<div class="message-added-popup">' +  message + '</div>').insertBefore(buttonClicked).delay(TIME_TO_SHOW_MESSAGE).fadeOut();
@@ -493,6 +500,9 @@ $(document).ready(function() {
     function checkProductsInCart() {
         $.get( "/cart/productquantity")
             .done(function( data ) {
+                if($('#divCartElement').length === 1 && ($('.div-with-one-product').length != data)) {
+                    window.location.reload();
+                }
                 setCartDigit(data);
             });
     }

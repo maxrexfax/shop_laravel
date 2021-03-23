@@ -3,7 +3,7 @@
     <div class="w-100 bg-white p-0">
         <div class="breadcrumbs-container container w-100 breadcrumb-decoration"><a href="{{route('main.page')}}">{{__('actions.home')}}</a><span class="gray-category-name-breadcrumb"> / {{__('messages.shopping_cart')}}</span></div>
         <section class="place-holder"></section>
-        <div class="shopping-cart-main">
+        <div id="divCartElement" class="shopping-cart-main">
             <div class="row">
                 <div class="offset-md-1 col-md-7 col-sm-12 overflow-auto">
                     <div class="text-center">
@@ -21,7 +21,7 @@
                             </div>
                             @if(isset($cart->productRows))
                                 @foreach($cart->productRows as $productId => $product)
-                                    <div class="border-bottom tr" id="tr-{{ $productId }}">
+                                    <div class="border-bottom tr div-with-one-product" id="tr-{{ $productId }}">
                                         <div class="pt-1 d-flex justify-content-between align-items-center">
                                             <div class="w-25">
                                                 <div>
@@ -77,13 +77,13 @@
                             @endif
                         </div>
                     </form>
-                    @if(empty($cart->productRows))
-                        <div class="text-center text-secondary">
-                            <p>{{__('text.cart_is_empty')}}, <a href="{{route('category.list')}}">{{__('text.lets_go_shopping')}}</a>!</p>
-                        </div>
-                    @else
-                        <a href="{{route('cart.reset')}}" class="btn btn-secondary btn-sm float-right mt-1">{{__('actions.reset_cart')}}</a>
-                    @endif
+
+                    <div id="cartInviteToBuy" class="text-center text-secondary @if(empty($cart->productRows))d-block @else d-none @endif">
+                        <p>{{__('text.cart_is_empty')}}, <a href="{{route('category.list')}}">{{__('text.lets_go_shopping')}}</a>!</p>
+                    </div>
+
+                    <a href="{{route('cart.reset')}}" id="btnResetCart" class="btn btn-secondary btn-sm float-right mt-1 @if(!empty($cart->productRows))d-block @else d-none @endif">{{__('actions.reset_cart')}}</a>
+
                 </div>
                 <div class="col-md-4 col-sm-12 pt-3">
                     <div class="bg-light p-2">

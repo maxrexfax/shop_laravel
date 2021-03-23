@@ -58,6 +58,7 @@ Route::group(['middleware'=>'language'],function ()
 
     Route::get('/currency/create/{id?}', 'CurrencyController@create')->name('currency.create');
     Route::post('/currency/store/{id?}', 'CurrencyController@store')->name('currency.store');
+    Route::get('/currency/destroy/{id?}', 'CurrencyController@destroy')->name('currency.destroy');
 
     Route::get('/delivery/create/{id?}', 'DeliveryController@create')->name('delivery.create');
     Route::post('/delivery/store/{id?}', 'DeliveryController@store')->name('delivery.store');
@@ -65,9 +66,11 @@ Route::group(['middleware'=>'language'],function ()
 
     Route::get('/locale/create/{id?}', 'LocaleController@create')->name('locale.create');
     Route::post('/locale/store/{id?}', 'LocaleController@store')->name('locale.store');
+    Route::get('/locale/destroy/{id?}', 'LocaleController@destroy')->name('locale.destroy');
 
     Route::get('/paymethod/create/{id?}', 'PaymentMethodController@create')->name('payment.method.create');
     Route::post('/paymethod/store/{id?}', 'PaymentMethodController@store')->name('payment.method.store');
+    Route::get('/paymethod/destroy/{id?}', 'PaymentMethodController@destroy')->name('payment.destroy');
 
     Route::get('/phone/create/{store_id?}/{phone_id?}', 'PhoneController@create')->name('phone.create');
     Route::post('/phone/store/{id?}', 'PhoneController@store')->name('phone.store');

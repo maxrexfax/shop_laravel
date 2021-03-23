@@ -16,6 +16,7 @@
                     <th>{{ __('text.logo_image') }}</th>
                     <th>{{ __('text.paymethods_other_data') }}</th>
                     <th>{{ __('text.edit') }}</th>
+                    <th class="text-right">{{ __('actions.delete') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,6 +33,11 @@
                         </td>
                         <td>{{$paymentMethod->other_data}}</td>
                         <td><a href="{{route('payment.method.create')}}/{{$paymentMethod->id}}"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td>
+                            <a href="{{route('payment.destroy', ['id'=>$paymentMethod->id])}}" title="{{__('text.delete')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btnToDeletePhone">
+                                <span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

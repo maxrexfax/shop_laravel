@@ -24,7 +24,7 @@ class StorePaymethodRequest extends FormRequest
     public function rules()
     {
         return [
-            'logo' => 'image',
+            'logo' => 'image|required',
             'payment_method_name' => 'string|required|max:500',
             'payment_method_code' => 'string|required|max:25',
             'other_data' => 'string|max:500|nullable',

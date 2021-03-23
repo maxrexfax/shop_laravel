@@ -21,7 +21,6 @@
                 <div class="card-body">
                     <form method="POST" enctype="multipart/form-data" action="{{ route('payment.method.store', ['id' => isset($paymentMethod) ? $paymentMethod->id : '']) }}">
                         @csrf
-
                         <input id="id" type="hidden" name="id" value="@if(!empty($paymentMethod)){{$paymentMethod->id}}@endif">
 
                         <div class="form-group row">
@@ -85,8 +84,8 @@
                                 <input id="logo" type="file" class="form-control p-1 @error('logo') is-invalid @enderror" name="logo" title="{{ __('text.upload_logo_picture') }}">
                                 @error('logo')
                                 <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>

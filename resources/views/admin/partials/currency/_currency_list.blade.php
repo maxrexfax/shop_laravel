@@ -19,6 +19,7 @@
                     <th>{{ __('actions.currency_code') }}</th>
                     <th>{{ __('actions.currency_value') }}</th>
                     <th>{{ __('actions.edit') }}</th>
+                    <th class="text-right">{{ __('actions.delete') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,6 +30,11 @@
                         <td>{{$currency->currency_code}}</td>
                         <td>{{$currency->currency_value}}</td>
                         <td><a href="{{route('currency.create')}}/{{$currency->id}}"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td>
+                            <a href="{{route('currency.destroy', ['id'=>$currency->id])}}" title="{{__('text.delete')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btnToDeletePhone">
+                                <span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

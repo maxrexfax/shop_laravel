@@ -302,11 +302,9 @@ $(document).ready(function() {
             $.get( "/cart/delete/" + this.getAttribute('data-id'))
                 .done(function( data ) {
                     if (data['productRowsCount'] === 0 ) {
-                        console.log(data['productRowsCount'] + 'надо прятать кнопку резет и показать приглашение в категории');
                         $('#btnResetCart').removeClass('d-block').addClass('d-none');
                         $('#cartInviteToBuy').addClass('d-block').removeClass('d-none');
                     }
-                    //console.log(data['productRowsCount'] + ' ' + data['totalProducts'] + ' ' + data['totalAmount']);
                     $('#tr-' + id).remove();
                     $('#spanWithTotalProductsPrice').html(data['totalProducts'] + data['currencySymbol']);
                     $('#spanWithTotalPrice').html(data['totalAmount'] + data['currencySymbol']);
@@ -322,7 +320,6 @@ $(document).ready(function() {
         $('#cartInviteToBuy').removeClass('d-block').addClass('d-none');
         $.get( "/cart/add/" + this.getAttribute('data-id'))
             .done(function( data ) {
-                //$('<div class="message-added-popup">' +  message + '</div>').insertBefore(buttonClicked).delay(TIME_TO_SHOW_MESSAGE).fadeOut();
                 restoreText(buttonClicked, text, message);
         });
     });

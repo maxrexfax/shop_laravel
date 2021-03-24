@@ -61,7 +61,7 @@ class ProductController extends Controller
                 'product' => $product,
                 'alternativeTitle' => $product->title,
                 'alternativeDescription' => $product->description,
-                'arrayOfVisitedProducts' => Product::find(Session::get('arrayOfVisitedProducts')),
+                'arrayOfVisitedProducts' => Product::find(Session::get('arrayOfVisitedProducts')),//str N59 protects from null
             ]);
         }
 

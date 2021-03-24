@@ -14,7 +14,7 @@
                         <th>{{ __('actions.product_id') }}</th>
                         <th>{{ __('actions.product_image') }}</th>
                         <th>{{ __('actions.product_name') }}</th>
-                        <th>{{ __('actions.product_price') }}</th>
+                        <th>{{ __('actions.product_price_main') }}</th>
                         <th>{{ __('actions.product_title') }}</th>
                         <th>{{ __('actions.product_short_description') }}</th>
                         <th>{{ __('actions.product_rating') }}</th>
@@ -49,7 +49,7 @@
                     </tbody>
                 </table>
             </div>
-        <div class="col-sm-2 class-text-center">
+        <div class="class-text-center">
             @if(!empty($products))
                 {{ $products->links() }}
             @endif

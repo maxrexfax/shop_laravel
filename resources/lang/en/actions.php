@@ -89,6 +89,7 @@ return [
     'product_image' => 'Product image',
     'product_name' => 'Product name',
     'product_price' => 'Product price',
+    'product_price_main' => 'Product price main currency',
     'product_title' => 'Product title',
     'product_short_description' => 'Product short description',
     'product_full_description' => 'Product full description',

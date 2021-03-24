@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="bg-white w-100">
+    {{var_dump($arrayOfVisitedProducts)}}
     <div class="container product-show-container">
         <div class="row justify-content-center">
             <div class="col-md-12">

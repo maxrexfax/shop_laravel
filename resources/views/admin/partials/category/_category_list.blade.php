@@ -47,5 +47,11 @@
                 </table>
             </div>
         </div>
+
+        <div class="class-text-center">
+            @if(!empty($categories))
+                {{ $categories->links() }}
+            @endif
+        </div>
     </div>
 @endsection

@@ -89,6 +89,7 @@ return [
     'product_image' => 'Логотип товара',
     'product_name' => 'Название товара',
     'product_price' => 'Цена товара',
+    'product_price_main' => 'Цена товара в основной валюте',
     'product_title' => 'Заголовок товара',
     'product_short_description' => 'Короткое описание товара',
     'product_full_description' => 'Полное описание товара',

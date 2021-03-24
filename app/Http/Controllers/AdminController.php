@@ -41,7 +41,7 @@ class AdminController extends Controller
 
         return view('admin.partials.category._category_list', [
             'categoriesHierarchically' => $categoriesHierarchically,
-            'categories' => Category::all()->sortBy('sort_number'),
+            'categories' => Category::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
             'alternativeTitle' => Lang::get('messages.categories_list'),
         ]);
     }

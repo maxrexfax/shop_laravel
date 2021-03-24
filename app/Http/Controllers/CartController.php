@@ -117,7 +117,7 @@ class CartController extends Controller
         $activeStore = Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE);
         return view('cart.checkout', [
             'activeStore' => $activeStore,
-            'cart' => Session::get('cart'),
+            'cart' => Session::get('cart') ? Session::get('cart') : new Cart(),
             'additionalProducts' => $this->cartService->getAdditionalProducts(),
             'arrayOfVisitedProducts' => Session::get('arrayOfVisitedProducts') ? Product::find(Session::get('arrayOfVisitedProducts')): '',
             'loginUser' => Session::get('loginUserId') ? User::find(Session::get('loginUserId')) : '',

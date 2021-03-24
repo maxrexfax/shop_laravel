@@ -729,8 +729,6 @@ body {
         height:100px;
     }
 
-
-
     .parent-for-scroll {
         position: relative;
     }
@@ -760,10 +758,8 @@ body {
 .product-show-container {
 
     .div-icons-container {
-        overflow: auto;
-        width: 80%;
-        margin-right: auto;
-        margin-left: auto;
+        overflow-x: auto;
+        position: relative;
     }
 
     .scroll-control {
@@ -771,11 +767,28 @@ body {
     }
 
     .arrows-scroll-class {
-        font-size:2em;
+        position:absolute;
+        z-index:100;
+        font-size: 2em;
+        cursor: pointer;
     }
 
     .arrows-scroll-class:hover {
         color:grey;
+    }
+
+    #leftScroll {
+        top: 50%;
+        left: 1%;
+    }
+
+    #rightScroll {
+        top: 50%;
+        right: 1%;
+    }
+
+    .parent-for-scroll {
+        position: relative;
     }
 
     .product-right-banner {

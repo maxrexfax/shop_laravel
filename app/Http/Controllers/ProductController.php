@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        if (!Session::has('arrayOfVisitedProducts')) {
+            Session::put('arrayOfVisitedProducts', []);
+        }
+    }
+
     public function create($id = null)
     {
         if (!empty($id)) {
@@ -46,10 +53,6 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        if (!Session::has('arrayOfVisitedProducts')) {
-            Session::put('arrayOfVisitedProducts', []);
-        }
-
         $product = Product::find($id);
 
         if ($product) {

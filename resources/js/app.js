@@ -479,6 +479,12 @@ $(document).ready(function() {
     });
 
     function checkEndOfScroll(scrollable, leftButton, rightButton, e) {
+        // console.log('scrollable');
+        // console.log(scrollable);
+        // console.log('leftButton');
+        // console.log(leftButton);
+        // console.log('rightButton');
+        // console.log(rightButton);
         if (scrollable[0].offsetWidth + $(scrollable)[0].scrollLeft >= scrollable[0].scrollWidth) {
             $(rightButton).hide();
         } else {

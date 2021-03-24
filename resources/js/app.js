@@ -302,8 +302,8 @@ $(document).ready(function() {
             $.get( "/cart/delete/" + this.getAttribute('data-id'))
                 .done(function( data ) {
                     if (data['productRowsCount'] === 0 ) {
-                        $('#btnResetCart').removeClass('d-block').addClass('d-none');
                         $('#cartInviteToBuy').addClass('d-block').removeClass('d-none');
+                        $('.item-to-hide-in-empty-cart').removeClass('d-block').addClass('d-none');
                     }
                     $('#tr-' + id).remove();
                     $('#spanWithTotalProductsPrice').html(data['totalProducts'] + data['currencySymbol']);
@@ -316,8 +316,8 @@ $(document).ready(function() {
         let buttonClicked = this;
         let message = this.getAttribute('data-message');
         let text = $(this).text();
-        $('#btnResetCart').addClass('d-block').removeClass('d-none');
         $('#cartInviteToBuy').removeClass('d-block').addClass('d-none');
+        $('.item-to-hide-in-empty-cart').addClass('d-block').removeClass('d-none');
         $.get( "/cart/add/" + this.getAttribute('data-id'))
             .done(function( data ) {
                 restoreText(buttonClicked, text, message);
@@ -479,12 +479,6 @@ $(document).ready(function() {
     });
 
     function checkEndOfScroll(scrollable, leftButton, rightButton, e) {
-        // console.log('scrollable');
-        // console.log(scrollable);
-        // console.log('leftButton');
-        // console.log(leftButton);
-        // console.log('rightButton');
-        // console.log(rightButton);
         if (scrollable[0].offsetWidth + $(scrollable)[0].scrollLeft >= scrollable[0].scrollWidth) {
             $(rightButton).hide();
         } else {

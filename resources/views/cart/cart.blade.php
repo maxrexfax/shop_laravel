@@ -6,10 +6,10 @@
         <div id="divCartElement" class="shopping-cart-main">
             <div class="row">
                 <div class="offset-md-1 col-md-7 col-sm-12 overflow-auto">
-                    <div class="text-center">
+                    <div class="text-center item-to-hide-in-empty-cart @if(!empty($cart->productRows))d-block @else d-none @endif">
                         <h2 class="h4 mb-3">{{__('messages.shopping_cart')}}</h2>
                     </div>
-                    <form method="POST" action="{{ route('cart.calculate') }}">
+                    <form method="POST" class="item-to-hide-in-empty-cart @if(!empty($cart->productRows))d-block @else d-none @endif" action="{{ route('cart.calculate') }}">
                         @csrf
                         <div class="table-container">
                             <div class="d-flex justify-content-between align-items-center border-bottom">
@@ -78,15 +78,11 @@
                         </div>
                     </form>
 
-                    <div id="cartInviteToBuy" class="text-center text-secondary @if(empty($cart->productRows))d-block @else d-none @endif">
-                        <p>{{__('text.cart_is_empty')}}, <a href="{{route('category.list')}}">{{__('text.lets_go_shopping')}}</a>!</p>
-                    </div>
-
-                    <a href="{{route('cart.reset')}}" id="btnResetCart" class="btn btn-secondary btn-sm float-right mt-1 @if(!empty($cart->productRows))d-block @else d-none @endif">{{__('actions.reset_cart')}}</a>
+                    <a href="{{route('cart.reset')}}" id="btnResetCart" class="btn btn-secondary btn-sm float-right mt-1 item-to-hide-in-empty-cart @if(!empty($cart->productRows))d-block @else d-none @endif">{{__('actions.reset_cart')}}</a>
 
                 </div>
                 <div class="col-md-4 col-sm-12 pt-3">
-                    <div class="bg-light p-2">
+                    <div class="bg-light p-2 item-to-hide-in-empty-cart @if(!empty($cart->productRows))d-block @else d-none @endif">
                         <p class="font-weight-bold">{{__('messages.order_summary')}}</p>
                         <hr>
                         <div class="font-weight-bold w-100">{{__('messages.items')}}:
@@ -148,6 +144,13 @@
                             </div>
                         </form>
                     </div>
+                </div>
+            </div>
+            <div id="cartInviteToBuy" class="text-center text-secondary @if(empty($cart->productRows))d-block @else d-none @endif">
+                <p>{{__('text.cart_is_empty')}}, <a href="{{route('category.list')}}">{{__('text.lets_go_shopping')}}</a>!</p>
+                <div style="max-width: 350px; width: 100%; margin-left: auto; margin-right: auto;"><a href="{{route('category.list')}}">
+                        <img style="width: 100%" src="{{ asset('/img/serviceimages/cart_empty.jpg')}}">
+                    </a>
                 </div>
             </div>
             <div class="row">

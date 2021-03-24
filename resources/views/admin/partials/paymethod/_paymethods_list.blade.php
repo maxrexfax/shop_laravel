@@ -32,9 +32,9 @@
                             @endif
                         </td>
                         <td>{{$paymentMethod->other_data}}</td>
-                        <td><a href="{{route('payment.method.create')}}/{{$paymentMethod->id}}"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td><a href="{{route('payment.method.create', ['id' => $paymentMethod->id])}}"><i class="fas fa-pencil-alt"></i></a></td>
                         <td>
-                            <a href="{{route('payment.destroy', ['id'=>$paymentMethod->id])}}" title="{{__('text.delete')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btnToDeletePhone">
+                            <a href="{{route('payment.destroy', ['id' => $paymentMethod->id])}}" title="{{__('text.delete')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btnToDeletePhone">
                                 <span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>
                             </a>
                         </td>

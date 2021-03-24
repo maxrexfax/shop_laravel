@@ -52,8 +52,7 @@ class PriceHelper
     public function calculate($basePrice)
     {
         $defaultCurrency = $this->getCurrentCurrency();
-        $mainCurrency = $this->getMainCurrency();
-        return number_format(($basePrice * $mainCurrency->currency_value / $defaultCurrency->currency_value), 2, '.', '');
+        return number_format(($basePrice * $this->getMainCurrency()->currency_value / $defaultCurrency->currency_value), 2, '.', '');
     }
 
     public function getCurrentCurrencySymbol()
@@ -65,8 +64,8 @@ class PriceHelper
     public function getPriceWithSymbol($price)
     {
         $defaultCurrency = $this->getCurrentCurrency();
-        $mainCurrency = $this->getMainCurrency();
-        $price = number_format(($price * $mainCurrency->currency_value / $defaultCurrency->currency_value), 2, '.', '');
+        //$mainCurrency = $this->getMainCurrency();
+        $price = number_format(($price * $this->getMainCurrency()->currency_value / $defaultCurrency->currency_value), 2, '.', '');
         return $price . $defaultCurrency->currency_symbol;
     }
 }

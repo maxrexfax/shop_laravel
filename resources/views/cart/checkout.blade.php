@@ -35,7 +35,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 col-sm-10 col-xs-12 pl-2 pr-2 border-right-dashed">
-                        <div class="">
+                        <div class="div-shipping-payment-methods">
                             <p><span class="number-in-checkout">2.</span> {{__('text.shipping_method')}}</p>
                             <p>{{__('text.please_choose_the_shipping_options')}}:</p>
                                 @include('cart.partials._form_shipping')

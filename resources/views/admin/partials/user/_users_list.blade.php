@@ -16,13 +16,14 @@
             <table class="table table-striped w-100">
                 <thead class="thead-dark">
                 <tr>
-                    <th>{{ __('actions.user_id') }}</th>
+                    <th>ID</th>
                     <th>{{ __('actions.user_login') }}</th>
                     <th>{{ __('actions.user_first_name') }}</th>
                     <th>{{ __('actions.user_second_name') }}</th>
                     <th>{{ __('actions.user_last_name') }}</th>
                     <th>{{ __('actions.user_email') }}</th>
                     <th>{{ __('actions.edit') }}</th>
+                    <th>{{ __('actions.delete') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,11 @@
                         <td>{{$user->last_name}}</td>
                         <td>{{$user->email}}</td>
                         <td><a href="{{route('user.create')}}/{{$user->id}}"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td>
+                            <a href="{{route('user.destroy', ['id'=>$user->id])}}" title="{{__('text.delete')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btnToDeletePhone">
+                                <span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

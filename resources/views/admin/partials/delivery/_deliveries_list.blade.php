@@ -17,6 +17,7 @@
                     <th>{{ __('actions.price') }}</th>
                     <th>{{ __('actions.active') }}</th>
                     <th>{{ __('actions.edit') }}</th>
+                    <th>{{ __('actions.delete') }}</th>
                 </tr>
                 </thead>
                 <tbody>

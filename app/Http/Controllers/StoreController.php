@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Currency;
 use App\Delivery;
+use App\Helpers\PriceHelper;
 use App\Http\Requests\StoreDeliveryStoreRequest;
 use App\Http\Requests\StoreStoreRequest;
 use App\Locale;
@@ -15,6 +16,7 @@ use App\Store;
 use App\StoreCurrency;
 use App\StoreLocale;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class StoreController extends Controller
 {
@@ -140,15 +142,11 @@ class StoreController extends Controller
         $storeCurrencies = StoreCurrency::where('store_id', '=', $store->id)->get();
 
         foreach ($storeCurrencies as $storeCurrency) {
-
-            $storeCurrency->default = 0;
             if ($storeCurrency->currency_id == $id) {
-                $storeCurrency->default = 1;
+                Session::put('defaultCurrency', Currency::find($id));
             }
-            $storeCurrency->save();
         }
 
         return redirect()->back();
     }
-
 }

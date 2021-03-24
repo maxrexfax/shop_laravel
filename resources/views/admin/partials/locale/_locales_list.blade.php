@@ -16,6 +16,7 @@
                     <th>{{ __('actions.locale_name') }}</th>
                     <th>{{ __('actions.locale_code') }}</th>
                     <th>{{ __('actions.edit') }}</th>
+                    <th class="text-right">{{ __('actions.delete') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,6 +33,11 @@
                         <td>{{$locale->locale_name}}</td>
                         <td>{{$locale->locale_code}}</td>
                         <td><a href="{{route('locale.create')}}/{{$locale->id}}"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td>
+                            <a href="{{route('locale.destroy', ['id'=>$locale->id])}}" title="{{__('text.delete')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btnToDeletePhone">
+                                <span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>

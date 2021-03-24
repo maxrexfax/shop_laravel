@@ -8,6 +8,7 @@ use App\Delivery;
 use App\Helpers\PaginationQuantityHelper;
 use App\Image;
 use App\Locale;
+use App\PaymentMethod;
 use App\Product;
 use App\Promocode;
 use App\Store;
@@ -40,7 +41,7 @@ class AdminController extends Controller
 
         return view('admin.partials.category._category_list', [
             'categoriesHierarchically' => $categoriesHierarchically,
-            'categories' => Category::all()->sortBy('sort_number'),
+            'categories' => Category::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
             'alternativeTitle' => Lang::get('messages.categories_list'),
         ]);
     }
@@ -104,6 +105,13 @@ class AdminController extends Controller
     {
         return view('admin.partials.promocode._promocodes_list', [
             'promocodes' => Promocode::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
+        ]);
+    }
+
+    public function paymethodList()
+    {
+        return view('admin.partials.paymethod._paymethods_list', [
+            'paymentMethods' => PaymentMethod::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
         ]);
     }
 

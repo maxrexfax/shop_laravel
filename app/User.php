@@ -17,6 +17,7 @@ class User extends Authenticatable
         'first_name' => ['nullable', 'max:255'],
         'second_name' => ['nullable', 'max:255'],
         'last_name' => ['nullable', 'max:255'],
+        'telephone' => ['nullable', 'max:255'],
         'email' => ['string', 'max:255', 'required'],
     ];
 
@@ -27,7 +28,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'login', 'first_name', 'second_name', 'last_name', 'email', 'password',
+        'login', 'first_name', 'second_name', 'last_name', 'email', 'password', 'telephone',
     ];
 
     /**

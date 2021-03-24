@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Delivery;
+use App\PaymentMethod;
 use App\Product;
 use App\Promocode;
 use App\Services\CartService;
 use App\Store;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -29,9 +31,12 @@ class CartController extends Controller
     public function cart()
     {
         $this->cartService->recalculateCart();
+
         return view('cart.cart', [
             'activeStore' => Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE),
-            'cart' => Session::get('cart'),
+            'cart' => Session::get('cart') ? Session::get('cart') : new Cart(),
+            'additionalProducts' => $this->cartService->getAdditionalProducts(),
+            'arrayOfVisitedProducts' => Session::get('arrayOfVisitedProducts') ? Product::find(Session::get('arrayOfVisitedProducts')): '',
         ]);
     }
 
@@ -45,6 +50,15 @@ class CartController extends Controller
     public function deleteProductFromCart($id)
     {
         $this->cartService->deleteFromCart($id);
+        $this->cartService->recalculateCart();
+        $cart = Session::get('cart');
+
+        return response()->json([
+            'productRowsCount' => count($cart->productRows),
+            'totalProducts' => $this->cart->calculatePrice($cart->totalProducts),
+            'totalAmount' => $this->cart->calculatePrice($cart->totalAmount),
+            'currencySymbol' => $this->cart->getCurrencySymbol()
+        ]);
     }
 
     public function edit(Request $request)
@@ -96,6 +110,31 @@ class CartController extends Controller
         }
 
         return 0;
+    }
+
+    public function checkoutCart()
+    {
+        $activeStore = Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE);
+        return view('cart.checkout', [
+            'activeStore' => $activeStore,
+            'cart' => Session::get('cart') ? Session::get('cart') : new Cart(),
+            'additionalProducts' => $this->cartService->getAdditionalProducts(),
+            'arrayOfVisitedProducts' => Session::get('arrayOfVisitedProducts') ? Product::find(Session::get('arrayOfVisitedProducts')): '',
+            'loginUser' => Session::get('loginUserId') ? User::find(Session::get('loginUserId')) : '',
+            'deliveries' => $activeStore->deliveries,
+            'paymentMethods' => PaymentMethod::all(),
+        ]);
+    }
+
+    public function checkoutCheck(Request $request)
+    {
+        dd($request->post());
+        return back();
+    }
+
+    public function getPaymentDetails($path)
+    {
+        return view("cart/paymethods/{$path}")->render();
     }
 
     public function reset()

@@ -48,6 +48,17 @@ class CurrencyController extends Controller
         return redirect('/admin/currencies/list');
     }
 
+    public function destroy($id)
+    {
+        $currency = Currency::find($id);
+
+        if ($currency) {
+            $currency->delete();
+        }
+
+        return redirect('/admin/currencies/list');
+    }
+
     public function reloadCurrencyValue()
     {
         $this->currencyValueReloadService->reloadCurrenciesValues();

@@ -3,12 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Helpers\PriceHelper;
 use App\Http\Requests\StoreProductRequest;
 use App\Product;
 use App\Services\ProductStoreService;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        if (!Session::has('arrayOfVisitedProducts')) {
+            Session::put('arrayOfVisitedProducts', []);
+        }
+    }
+
     public function create($id = null)
     {
         if (!empty($id)) {
@@ -47,10 +56,12 @@ class ProductController extends Controller
         $product = Product::find($id);
 
         if ($product) {
+            (new ProductStoreService())->addProductToSessionArray($id);
             return view('products.show', [
                 'product' => $product,
                 'alternativeTitle' => $product->title,
                 'alternativeDescription' => $product->description,
+                'arrayOfVisitedProducts' => Product::find(Session::get('arrayOfVisitedProducts')),//str N59 protects from null
             ]);
         }
 
@@ -68,6 +79,16 @@ class ProductController extends Controller
         }
 
         return redirect('admin/product/list');
+    }
+
+    public function destroy($id)
+    {
+        $product = Product::find($id);
+        if ($product) {
+            $product->delete();
+        }
+
+        return back();
     }
 
 }

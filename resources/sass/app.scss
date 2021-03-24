@@ -539,14 +539,6 @@ body {
     }
 }
 
-.product-right-banner {
-    box-shadow: 0px 5px 16px 3px rgba(0,0,0,0.2), 0px -5px 16px 3px rgba(0,0,0,0.2);
-}
-
-.product-main-description {
-    box-shadow: 0px 5px 16px 3px rgba(0,0,0,0.2), 0px -5px 16px 3px rgba(0,0,0,0.2);
-}
-
 .table-for-users-list {
     .td-short-description {
         max-width: 200px;
@@ -714,10 +706,7 @@ body {
     .promocode-usage {
         display: none;
     }
-    
-    .cursor-pointer {
-        cursor: pointer;
-    }
+
 
     .table-container {
         min-width: 560px;
@@ -726,24 +715,221 @@ body {
     .input-product-quantity-cart {
         width: 50px;
     }
+
+    .promo-input-name {
+        width: 60% !important;
+    }
+
+    .promo-button-use {
+        margin-left: 2px;
+        width: 38%;
+    }
+
+    .cart-image {
+        height:100px;
+    }
+
+    .parent-for-scroll {
+        position: relative;
+    }
+
+    .scroll-product-control {
+        position:absolute;
+        z-index:100;
+        font-size: 2em;
+        cursor: pointer;
+    }
+
+    .scroll-product-control:hover {
+        color:blue;
+    }
+
+    .scroll-left-btn {
+        top: 50%;
+        left: 1%;
+    }
+
+    .scroll-right-btn {
+        top: 50%;
+        right: 1%;
+    }
 }
 
-.arrows-scroll-class {
-    font-size:2em;
-}
-.arrows-scroll-class:hover {
-    color:grey;
+.product-show-container {
+
+    .div-icons-container {
+        overflow-x: auto;
+        position: relative;
+    }
+
+    .scroll-control {
+        display: none;
+    }
+
+    .arrows-scroll-class {
+        position:absolute;
+        z-index:100;
+        font-size: 2em;
+        cursor: pointer;
+    }
+
+    .arrows-scroll-class:hover {
+        color:grey;
+    }
+
+    #leftScroll {
+        top: 50%;
+        left: 1%;
+    }
+
+    #rightScroll {
+        top: 50%;
+        right: 1%;
+    }
+
+    .parent-for-scroll {
+        position: relative;
+    }
+
+    .product-right-banner {
+        box-shadow: 0px 5px 16px 3px rgba(0,0,0,0.2), 0px -5px 16px 3px rgba(0,0,0,0.2);
+    }
+
+    .product-main-description {
+        box-shadow: 0px 5px 16px 3px rgba(0,0,0,0.2), 0px -5px 16px 3px rgba(0,0,0,0.2);
+    }
 }
 
-.scroll-control {
-    display: none;
+.div-products-category-container {/*DONT MOVE INSIDE!*/
+    overflow: hidden;
 }
 
-.promo-input-name {
-    width: 60% !important;
+
+.cart-image-additional {
+    height:150px;
+    text-align: center;
+    position: relative;
+    white-space: nowrap;
+    margin: 1em 0;
+
+    .helper {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+        color: transparent;
+        background-color: transparent;
+        opacity: 0;
+    }
+
+    .helper:hover {
+        color: transparent;
+        background-color: transparent;
+        opacity: 0;
+    }
+
+    .additional-image-in-cart {
+        max-height: 100px;
+        max-width: 100%;
+    }
 }
 
-.promo-button-use {
-    margin-left: 2px;
-    width: 38%;
+.shopping-cart-checkout {
+
+    .number-in-checkout {
+        color: #cb521c;
+        font-family: 'Nunito', sans-serif;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+    .btn-special-color {
+        background-color: #cb521c;
+    }
+
+    .border-right-dashed {
+        border-right: 1px dashed black;
+    }
+
+    input
+    {
+        font-size:0.7em;
+    }
+
+    .font-size-mini {
+        font-size: 0.7em;
+    }
+
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    [class*="pay-method-details-"] {
+
+    }
+}
+
+.div-data-user-info {
+
+    .tabs {
+
+        max-width: 350px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .tabs>input[type="radio"] {
+        display: none;
+    }
+
+    .tabs>div {
+        /* скрыть контент по умолчанию */
+        display: none;
+        font-size: 16px;
+    }
+
+    /* отобразить контент, связанный с вабранной радиокнопкой (input type="radio") */
+    #tab-btn-1:checked~#content-2,
+    #tab-btn-2:checked~#content-1 {
+        display: block;
+    }
+
+    .tabs>label {
+        display: inline-block;
+        text-align: center;
+        vertical-align: middle;
+        user-select: none;
+        padding: 2px 8px;
+        font-size: 1em;
+        line-height: 1.5;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+        cursor: pointer;
+        position: relative;
+        top: 1px;
+    }
+
+    .tabs>label:not(:first-of-type) {
+        border-left: none;
+    }
+
+    .tabs>input[type="radio"]:checked+label {
+        background-color: #fff;
+        border-bottom: 1px solid #fff;
+    }
+}
+
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.color-custom-gray {
+    color: lightgrey;
 }

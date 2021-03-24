@@ -6,6 +6,7 @@ use App\CategoryProduct;
 use App\Helpers\ImageHelper;
 use App\Http\Requests\StoreProductRequest;
 use App\Image;
+use Illuminate\Support\Facades\Session;
 
 class ProductStoreService
 {
@@ -44,6 +45,15 @@ class ProductStoreService
                 $categoryProduct->category_id = $category;
                 $categoryProduct->save();
             }
+        }
+    }
+
+    public function addProductToSessionArray($id)
+    {
+        $arrayOfIds = Session::get('arrayOfVisitedProducts');
+        if (is_array($arrayOfIds) && !in_array($id, $arrayOfIds)) {
+            $arrayOfIds[] = $id;
+            Session::put('arrayOfVisitedProducts', $arrayOfIds);
         }
     }
 }

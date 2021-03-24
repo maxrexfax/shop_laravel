@@ -36,4 +36,16 @@ class LocaleController extends Controller
 
         return redirect('/admin/locales/list');
     }
+
+
+    public function destroy($id)
+    {
+        $locale = Locale::find($id);
+
+        if ($locale) {
+            $locale->delete();
+        }
+
+        return redirect('/admin/locales/list');
+    }
 }

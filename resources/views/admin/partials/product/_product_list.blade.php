@@ -14,11 +14,12 @@
                         <th>{{ __('actions.product_id') }}</th>
                         <th>{{ __('actions.product_image') }}</th>
                         <th>{{ __('actions.product_name') }}</th>
-                        <th>{{ __('actions.product_price') }}</th>
+                        <th>{{ __('actions.product_price_main') }}</th>
                         <th>{{ __('actions.product_title') }}</th>
                         <th>{{ __('actions.product_short_description') }}</th>
                         <th>{{ __('actions.product_rating') }}</th>
                         <th>{{ __('actions.edit') }}</th>
+                        <th>{{ __('actions.delete') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,12 +39,17 @@
                             <td><div class="td-short-description">{{$product->short_description}}</div></td>
                             <td>{{$product->rating}}</td>
                             <td><a href="{{route('product.create', ['id' => $product->id])}}"><i class="fas fa-pencil-alt"></i></a></td>
+                            <td>
+                                <a href="{{route('product.destroy', ['id'=>$product->id])}}" title="{{__('text.delete')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btnToDeletePhone">
+                                    <span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
-        <div class="col-sm-2 class-text-center">
+        <div class="class-text-center">
             @if(!empty($products))
                 {{ $products->links() }}
             @endif

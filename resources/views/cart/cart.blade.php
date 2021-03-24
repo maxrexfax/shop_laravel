@@ -1,14 +1,15 @@
 @extends('layouts.app')
 @section('content')
     <div class="w-100 bg-white p-0">
+        <div class="breadcrumbs-container container w-100 breadcrumb-decoration"><a href="{{route('main.page')}}">{{__('actions.home')}}</a><span class="gray-category-name-breadcrumb"> / {{__('messages.shopping_cart')}}</span></div>
         <section class="place-holder"></section>
-        <div class="shopping-cart-main">
+        <div id="divCartElement" class="shopping-cart-main">
             <div class="row">
                 <div class="offset-md-1 col-md-7 col-sm-12 overflow-auto">
-                    <div class="text-center">
+                    <div class="text-center item-to-hide-in-empty-cart @if(!empty($cart->productRows))d-block @else d-none @endif">
                         <h2 class="h4 mb-3">{{__('messages.shopping_cart')}}</h2>
                     </div>
-                    <form method="POST" action="{{ route('cart.calculate') }}">
+                    <form method="POST" class="item-to-hide-in-empty-cart @if(!empty($cart->productRows))d-block @else d-none @endif" action="{{ route('cart.calculate') }}">
                         @csrf
                         <div class="table-container">
                             <div class="d-flex justify-content-between align-items-center border-bottom">
@@ -20,42 +21,47 @@
                             </div>
                             @if(isset($cart->productRows))
                                 @foreach($cart->productRows as $productId => $product)
-                                <div class="border-bottom">
-                                    <div class="tr pt-1 d-flex justify-content-between align-items-center" id="tr-{{ $productId }} ">
-                                        <div class="w-25">
-                                            <div>
-                                                <div class="image-in-cart d-none d-md-block">
-                                                    <a href="{{route('product.show', ['id' => $productId])}}"
-                                                       target="_blank">
-                                                        <img class="w-100"
-                                                             src="{{asset('/img/logo/' . $product['productLogo'])}}">
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div>
+                                    <div class="border-bottom tr div-with-one-product" id="tr-{{ $productId }}">
+                                        <div class="pt-1 d-flex justify-content-between align-items-center">
+                                            <div class="w-25">
                                                 <div>
-                                                    <h3>{{$product['productName']}}</h3>
+                                                    <div class="image-in-cart d-none d-md-block">
+                                                        <a href="{{route('product.show', ['id' => $productId])}}"
+                                                           target="_blank">
+                                                            @if(!empty($product['productLogo']))
+                                                                <img class="w-100"
+                                                                     src="{{asset('/img/logo/' . $product['productLogo'])}}">
+                                                            @else
+                                                                <img class="w-100"
+                                                                     src="{{asset('/img/empty.png')}}">
+                                                            @endif
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div>
+                                                        <h3>{{$product['productName']}}</h3>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div>
-                                            <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <div class="d-flex justify-content-between align-items-center">
                                                 <span class="cursor-pointer minus-product"><i
                                                             class="fas fa-minus-square fa-2x"></i></span>
-                                                <input type="number" min="0" max="999"
-                                                       class="input{{$productId}} ml-1 mr-1 text-center input-product-quantity-cart form-control"
-                                                       value="{{$product['productQuantity']}}">
-                                                <span class="cursor-pointer plus-product"><i
-                                                            class="fas fa-plus-square fa-2x"></i></span>
+                                                    <input type="number" min="0" max="999"
+                                                           class="input{{$productId}} ml-1 mr-1 text-center input-product-quantity-cart form-control"
+                                                           value="{{$product['productQuantity']}}">
+                                                    <span class="cursor-pointer plus-product"><i
+                                                                class="fas fa-plus-square fa-2x"></i></span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="">
-                                            {{$cart->calculatePrice($product['productPrice'])}}{{$cart->getCurrencySymbol()}}
-                                        </div>
-                                        <div class="row-price-holder row-price-{{$productId}}">
-                                            {{$cart->calculatePrice($product['productRowPrice'])}}{{$cart->getCurrencySymbol()}}
-                                        </div>
-                                        <div class="text-center" style="width: 10%">
+                                            <div class="">
+                                                {{$cart->calculatePrice($product['productPrice'])}}{{$cart->getCurrencySymbol()}}
+                                            </div>
+                                            <div class="row-price-holder row-price-{{$productId}}">
+                                                {{$cart->calculatePrice($product['productRowPrice'])}}{{$cart->getCurrencySymbol()}}
+                                            </div>
+                                            <div class="text-center" style="width: 10%">
                                             <span class="font-italic">
                                                 <a data-id="{{$productId}}" data-confirm="{{__('actions.really_delete?')}}"
                                                    class="delete-from-cart"
@@ -64,23 +70,19 @@
                                                     <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
                                                 </a>
                                             </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 @endforeach
                             @endif
                         </div>
                     </form>
-                    @if(empty($cart->productRows))
-                        <div class="text-center text-secondary">
-                            <p>{{__('text.cart_is_empty')}}, <a href="{{route('category.list')}}">{{__('text.lets_go_shopping')}}</a>!</p>
-                        </div>
-                        @else
-                        <a href="{{route('cart.reset')}}" class="btn btn-secondary btn-sm float-right mt-1">{{__('actions.reset_cart')}}</a>
-                    @endif
+
+                    <a href="{{route('cart.reset')}}" id="btnResetCart" class="btn btn-secondary btn-sm float-right mt-1 item-to-hide-in-empty-cart @if(!empty($cart->productRows))d-block @else d-none @endif">{{__('actions.reset_cart')}}</a>
+
                 </div>
                 <div class="col-md-4 col-sm-12 pt-3">
-                    <div class="bg-light p-2">
+                    <div class="bg-light p-2 item-to-hide-in-empty-cart @if(!empty($cart->productRows))d-block @else d-none @endif">
                         <p class="font-weight-bold">{{__('messages.order_summary')}}</p>
                         <hr>
                         <div class="font-weight-bold w-100">{{__('messages.items')}}:
@@ -116,8 +118,9 @@
                             </span></div>
                         <div class="clearfix"></div>
                         <br>
-                        <span id="btnCheckout" data-info="{{__('messages.total_cost')}}"
-                              class="btn btn-dark btn-block">{{__('messages.checkout')}}</span>
+
+                        <br>
+                        <a href="{{route('cart.checkout')}}" class="btn btn-dark btn-block">{{__('messages.checkout')}}</a>
                         <br>
                         <p>
                             @if($cart->promocodeValue)
@@ -136,12 +139,25 @@
                                        name="promocode">
 
                                 <button type="submit" value="promoadd" id="btnUsePromocode"
-                                        class="btn btn-secondary float-right promo-button-use">{{__('actions.use')}}Use
+                                        class="btn btn-secondary float-right promo-button-use">{{__('actions.use')}}
                                 </button>
                             </div>
                         </form>
                     </div>
                 </div>
+            </div>
+            <div id="cartInviteToBuy" class="text-center text-secondary @if(empty($cart->productRows))d-block @else d-none @endif">
+                <p>{{__('text.cart_is_empty')}}, <a href="{{route('category.list')}}">{{__('text.lets_go_shopping')}}</a>!</p>
+                <div style="max-width: 350px; width: 100%; margin-left: auto; margin-right: auto;"><a href="{{route('category.list')}}">
+                        <img style="width: 100%" src="{{ asset('/img/serviceimages/cart_empty.jpg')}}">
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                @include('cart.partials._other_products')
+            </div>
+            <div class="row">
+                @include('cart.partials._visited_products')
             </div>
         </div>
     </div>

@@ -4,6 +4,7 @@
 /public/css
 /public/js
 /public/storage
+/public/mix-manifest.json
 /storage/
 /vendor
 .env

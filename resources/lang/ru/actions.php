@@ -53,7 +53,7 @@ return [
     'edit' => 'Редактировать',
     'edit_currency' => 'Редактировать валюту',
     'information' => 'Информация',
-    'home' => 'Домой',
+    'home' => 'Главная',
     'languages' => 'Языки',
     'list_of_products' => 'Список продуктов',
     'list_of_users' => 'Список пользователей',

@@ -85,7 +85,7 @@ return [
     'enabled' => 'Включено',
     'endorsed_supplements' => 'Endorsed Supplements',
     'enter_category_name' => 'Введите имя категории',
-    'expire_date' => 'Дата конца работы',
+    'expire_date' => 'Дата конца обслуживания',
     'first_name' => 'Первое имя',
     'footer_01' => '6555 Powerline Rd., Suite 101Ft.',
     'footer_02' => 'Lauderdale, FL 33309',

@@ -94,4 +94,14 @@ class CategoryController extends Controller
         return response()->json($rootCategories);
     }
 
+    public function destroy($id)
+    {
+        $category = Category::find($id);
+        if ($category) {
+            $category->delete();
+        }
+
+        return back();
+    }
+
 }

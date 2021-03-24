@@ -23,6 +23,19 @@ class PriceHelper
         return $defaultCurrency;
     }
 
+    public function getMainCurrency()
+    {
+        $mainCurrency = null;
+        if (session()->has('mainCurrency')) {
+            $mainCurrency = Session::get('mainCurrency');
+        } else {
+            $mainCurrency = Currency::where('currency_code', '=', Currency::CURRENCY_MAIN)->first();
+            Session::put('mainCurrency', $mainCurrency);
+        }
+
+        return $mainCurrency;
+    }
+
     public function getCurrentCurrencyFromDb()
     {
         $defaultCurrency = Currency::firstWhere('currency_code', Currency::CURRENCY_MAIN);
@@ -39,7 +52,7 @@ class PriceHelper
     public function calculate($basePrice)
     {
         $defaultCurrency = $this->getCurrentCurrency();
-        $mainCurrency = Currency::where('currency_code', '=', Currency::CURRENCY_MAIN)->first();
+        $mainCurrency = $this->getMainCurrency();
         return number_format(($basePrice * $mainCurrency->currency_value / $defaultCurrency->currency_value), 2, '.', '');
     }
 
@@ -52,7 +65,7 @@ class PriceHelper
     public function getPriceWithSymbol($price)
     {
         $defaultCurrency = $this->getCurrentCurrency();
-        $mainCurrency = Currency::where('currency_code', '=', Currency::CURRENCY_MAIN)->first();
+        $mainCurrency = $this->getMainCurrency();
         $price = number_format(($price * $mainCurrency->currency_value / $defaultCurrency->currency_value), 2, '.', '');
         return $price . $defaultCurrency->currency_symbol;
     }

@@ -39,7 +39,7 @@
                 <option value="23">23</option>
                 <option value="24">24</option>
             </select>
-            @error('first_name')
+            @error('expiration_year')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
@@ -48,7 +48,7 @@
 
         <div class="col-md-3 m-0 p-0">
             <label for="" class="col-form-label text-md-right font-size-mini"><span style="color: red">*</span></label>
-            <select id="expirationYear" type="text" class="form-control w-100 @error('expiration_year') is-invalid @enderror" name="expiration_year" form="checkoutForm" required>
+            <select id="expirationMonth" type="text" class="form-control w-100 @error('expiration_month') is-invalid @enderror" name="expiration_month" form="checkoutForm" required>
                 <option value="0"> </option>
                 <option value="01">01</option>
                 <option value="02">02</option>
@@ -63,7 +63,7 @@
                 <option value="11">11</option>
                 <option value="12">12</option>
             </select>
-            @error('last_name')
+            @error('expiration_month')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>

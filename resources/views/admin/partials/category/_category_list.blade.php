@@ -12,12 +12,13 @@
                 <table class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
-                        <th>{{ __('actions.category_id') }}</th>
+                        <th>ID</th>
                         <th>{{ __('actions.category_image') }}</th>
                         <th>{{ __('actions.category_name') }}</th>
                         <th>{{ __('actions.order') }}</th>
                         <th>{{ __('actions.parent_category') }}</th>
                         <th>{{ __('actions.edit') }}</th>
+                        <th>{{ __('actions.delete') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,6 +36,11 @@
                             <td>{{$category->sort_number}}</td>
                             <td>{{$category->getParentCategoryName()}}</td>
                             <td><a href="{{ route('category.create', ['id' => $category->id]) }}"><i class="fas fa-pencil-alt"></i></a></td>
+                            <td>
+                                <a href="{{route('category.destroy', ['id'=>$category->id])}}" title="{{__('text.delete')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btnToDeletePhone">
+                                    <span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

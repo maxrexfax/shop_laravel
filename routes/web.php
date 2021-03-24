@@ -54,6 +54,7 @@ Route::group(['middleware'=>'language'],function ()
     Route::get('/category/create/{id?}', 'CategoryController@create')->name('category.create');
     Route::get('/categories/root/list', 'CategoryController@categoriesRootList')->name('category.rootlist');
     Route::post('/category/store/{id?}', 'CategoryController@store')->name('category.store');
+    Route::get('/category/destroy/{id}', 'CategoryController@destroy')->name('category.destroy');
     Route::get('/category/list', 'CategoryController@list')->name('category.list');
 
     Route::get('/currency/create/{id?}', 'CurrencyController@create')->name('currency.create');
@@ -82,6 +83,7 @@ Route::group(['middleware'=>'language'],function ()
     Route::get('/product/images/{id}', 'ProductController@images')->name('product.images');
     Route::get('/product/show/{id}', 'ProductController@show')->name('product.show');
     Route::post('/product/store/{id?}', 'ProductController@store')->name('product.store');
+    Route::get('/product/destroy/{id}', 'ProductController@destroy')->name('product.destroy');
 
     Route::get('/promocode/create/{id?}', 'PromocodeController@create')->name('promocode.create');
     Route::post('/promocode/store/{id?}', 'PromocodeController@store')->name('promocode.store');
@@ -101,6 +103,7 @@ Route::group(['middleware'=>'language'],function ()
     Route::get('/user/delete/{id}', 'UserController@destroy')->name('user.delete');
     Route::get('/user/create/{id?}', 'UserController@create')->name('user.create');
     Route::post('/user/store/{id?}', 'UserController@store')->name('user.store');
+    Route::get('/user/destroy/{id?}', 'UserController@destroy')->name('user.destroy');
 
     Route::get('/image/delete/{id}', 'ImageController@delete')->name('image.delete');
     Route::post('/image/store', 'ImageController@store')->name('image.store');

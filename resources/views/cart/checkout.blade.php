@@ -11,7 +11,7 @@
                             <div>
                                 <p><span class="number-in-checkout">1.</span> BILLING ADDRESS</p>
                             </div>
-                            <div class="tabs">
+                            <div class="tabs m-0 w-100">
                                 <input type="radio" name="tab-btn" id="tab-btn-1" value="" checked>
                                 <label for="tab-btn-1" class="font-size-mini">Without login</label>
                                 <input type="radio" name="tab-btn" id="tab-btn-2" value="">

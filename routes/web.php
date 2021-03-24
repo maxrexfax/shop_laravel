@@ -39,7 +39,7 @@ Route::group(['middleware'=>'language'],function ()
 
     Route::get('/cart', 'CartController@cart')->name('cart');
     Route::get('/cart/checkout', 'CartController@checkoutCart')->name('cart.checkout');
-    Route::post('/cart/checkout/check', 'CartController@checkoutCheck')->name('cart.checkout.check');
+    Route::post('/cart/checkout/check', 'OrderController@store')->name('cart.checkout.check');
     Route::get('/cart/add/{id?}', 'CartController@addProductToCart')->name('cart.add');
     Route::get('/cart/delete/{id?}', 'CartController@deleteProductFromCart')->name('cart.delete');
     Route::match(['get', 'post'],'/cart/calculate', 'CartController@calculate')->name('cart.calculate');

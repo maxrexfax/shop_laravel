@@ -28,14 +28,15 @@ Route::group(['middleware'=>'language'],function ()
 
     Route::get('/admin', 'AdminController@index')->name('admin');
     Route::get('/admin/category/list', 'AdminController@categoryList')->name('admin.category.list');
+    Route::get('/admin/currencies/list', 'AdminController@currencyList')->name('admin.currency.list');
+    Route::get('/admin/deliveries/list', 'AdminController@deliveriesList')->name('admin.deliveries.list');
+    Route::get('/admin/locales/list', 'AdminController@localesList')->name('admin.locales.list');
+    Route::get('/admin/orders/list', 'AdminController@ordersList')->name('admin.orders.list');
     Route::get('/admin/paymethod/list', 'AdminController@paymethodList')->name('admin.paymethod.list');
     Route::get('/admin/product/list', 'AdminController@productList')->name('admin.product.list');
-    Route::get('/admin/users/list', 'AdminController@userList')->name('admin.users.list');
-    Route::get('/admin/stores/list', 'AdminController@storeList')->name('admin.stores.list');
-    Route::get('/admin/currencies/list', 'AdminController@currencyList')->name('admin.currency.list');
-    Route::get('/admin/locales/list', 'AdminController@localesList')->name('admin.locales.list');
-    Route::get('/admin/deliveries/list', 'AdminController@deliveriesList')->name('admin.deliveries.list');
     Route::get('/admin/promocodes/list', 'AdminController@promocodesList')->name('admin.promocodes.list');
+    Route::get('/admin/stores/list', 'AdminController@storeList')->name('admin.stores.list');
+    Route::get('/admin/users/list', 'AdminController@userList')->name('admin.users.list');
 
     Route::get('/cart', 'CartController@cart')->name('cart');
     Route::get('/cart/checkout', 'CartController@checkoutCart')->name('cart.checkout');
@@ -68,6 +69,12 @@ Route::group(['middleware'=>'language'],function ()
     Route::get('/locale/create/{id?}', 'LocaleController@create')->name('locale.create');
     Route::post('/locale/store/{id?}', 'LocaleController@store')->name('locale.store');
     Route::get('/locale/destroy/{id?}', 'LocaleController@destroy')->name('locale.destroy');
+
+    Route::get('/order/create', 'OrderController@create')->name('order.create');
+    Route::get('/order/destroy/{id}', 'OrderController@destroy')->name('order.destroy');
+    Route::post('/order/store', 'OrderController@store')->name('order.store');
+    Route::get('/order/show/{id}', 'OrderController@show')->name('order.show');
+    Route::get('/order/edit/{id?}', 'OrderController@edit')->name('order.edit');
 
     Route::get('/paymethod/create/{id?}', 'PaymentMethodController@create')->name('payment.method.create');
     Route::post('/paymethod/store/{id?}', 'PaymentMethodController@store')->name('payment.method.store');

@@ -23,16 +23,26 @@ class Order extends Model
 
     public function delivery()
     {
-        return $this->hasOne(Delivery::class);
+        return $this->belongsTo(Delivery::class);
+    }
+
+    public function getDeliveryName()
+    {
+        return !empty($this->delivery) ? $this->delivery->delivery_name : null;
+    }
+
+    public function getDeliveryPrice()
+    {
+        return !empty($this->delivery) ? $this->delivery->delivery_price : 0;
     }
 
     public function products()
     {
-        return $this->hasMany(Product::class, 'order_id', 'id');
+        return $this->belongsToMany(Product::class, 'order_product');
     }
 
-    public function orderProduct($pro)
+    public function orderProduct()
     {
-
+        return $this->hasMany(OrderProduct::class);
     }
 }

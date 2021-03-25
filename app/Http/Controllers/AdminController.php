@@ -8,6 +8,7 @@ use App\Delivery;
 use App\Helpers\PaginationQuantityHelper;
 use App\Image;
 use App\Locale;
+use App\Order;
 use App\PaymentMethod;
 use App\Product;
 use App\Promocode;
@@ -112,6 +113,15 @@ class AdminController extends Controller
     {
         return view('admin.partials.paymethod._paymethods_list', [
             'paymentMethods' => PaymentMethod::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
+            'alternativeTitle' => Lang::get('text.paymethods_list'),
+        ]);
+    }
+
+    public function ordersList()
+    {
+        return view('admin.partials.orders._orders_list', [
+            'orders' => Order::with('products')->get(),
+            'alternativeTitle' => Lang::get('text.orders_list'),
         ]);
     }
 

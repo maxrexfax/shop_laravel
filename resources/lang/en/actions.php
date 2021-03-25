@@ -71,6 +71,7 @@ return [
     'name' => 'Name',
     'no_logo' => 'No logo',
     'order' => 'Order',
+    'orders' => 'Orders',
     'paymethod' => 'Payment method',
     'parent_category' => 'Parent category',
     'password' => 'Password',

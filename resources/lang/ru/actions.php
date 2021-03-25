@@ -71,6 +71,7 @@ return [
     'name' => 'Имя',
     'no_logo' => 'Нет логотипа',
     'order' => 'Порядок',
+    'orders' => 'Заказы',
     'paymethod' => 'Метод оплаты',
     'parent_category' => 'Родительская категория',
     'password' => 'Пароль',

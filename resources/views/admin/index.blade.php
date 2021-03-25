@@ -30,6 +30,7 @@
 
                                 <div class="accordion-content p-0">
                                     <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.promocodes.list')}}">{{ __('actions.promocodes') }}</a></p>
+                                    <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.orders.list')}}">{{ __('actions.orders') }}</a></p>
                                 </div>
                             </div>
                             <div>

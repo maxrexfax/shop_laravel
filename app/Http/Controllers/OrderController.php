@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\CreditCard;
 use App\Order;
+use App\OrderProduct;
 use App\PaymentMethod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -31,11 +33,63 @@ class OrderController extends Controller
         $order->city = $request->post('city');
         $order->postcode = $request->post('postcode');
         $order->country = $request->post('country');
-        $order->delivery_id = $request->post('delivery_id');
+        $order->delivery_id = $request->post('delivery_id') ? $request->post('delivery_id') : null;
         $order->payment_method_name = $request->post('payment_method_name');
         $order->payment_method_id = 0;
         $order->save();
-dd($request->post());
-        //return back();
+
+        foreach ($request->post('products') as $key => $product) {
+            $orderProduct = new OrderProduct();
+            $orderProduct->order_id = $order->id;
+            $orderProduct->product_id = $request->post('products')[$key];
+            $orderProduct->products_quantity = $request->post('quantity')[$key];
+            $orderProduct->save();
+        }
+
+        return back();
+    }
+
+    public function show($id)
+    {
+        $order = Order::find($id);
+
+
+        if ($order) {
+            $totalProductsPrice = 0;
+            foreach ($order->products as $product) {
+                $totalProductsPrice += $product->orderProduct($id)->products_quantity * $product->price;
+            }
+            return view('admin.partials.orders._show_order', [
+                'order' => $order,
+                'products' =>$order->products,
+                'orderProducts' => $order->orderProduct,
+                'totalCost' => $order->getDeliveryPrice() + $totalProductsPrice,
+            ]);
+        }
+
+        return redirect('admin/orders/list');
+    }
+
+    public function destroy($id)
+    {
+        $order = Order::find($id);
+
+        if ($order) {
+            OrderProduct::where('order_id', '=', $id)->delete();
+            $order->delete();
+        }
+
+        return redirect('admin/orders/list');
+    }
+
+    public function create()
+    {
+        return back();
+    }
+
+
+    public function edit()
+    {
+        return back();
     }
 }

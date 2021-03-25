@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('cart.checkout.check') }}" id="checkoutForm">
+<form method="POST" action="{{ route('order.store') }}" id="checkoutForm">
     @csrf
 <div class="d-flex">
     <div class="col-md-6 m-0 p-0">

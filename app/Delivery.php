@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Helpers\PriceHelper;
 use Illuminate\Database\Eloquent\Model;
 
 class Delivery extends Model
@@ -13,5 +14,10 @@ class Delivery extends Model
     public function stores()
     {
         return $this->belongsToMany(Store::class, 'store_delivery');
+    }
+
+    public function currentPrice()
+    {
+        return (new PriceHelper())->getPriceWithSymbol($this->delivery_price);
     }
 }

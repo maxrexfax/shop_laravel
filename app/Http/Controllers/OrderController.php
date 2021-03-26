@@ -2,18 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\CreditCard;
+use App\Delivery;
 use App\Order;
 use App\OrderProduct;
 use App\PaymentMethod;
+use App\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
-    public function store(Request $request)
+    public function store($id = null, Request $request)
     {
+        //dd($request->post());
         $paying = null;
+        $order = Order::find($id);
+
+        if (!$order) {
+            $order = new Order();
+        }
+
         if ($request->post('payment_method_name') === PaymentMethod::PAYMENT_METHOD_CREDIT) {
             $paying = new CreditCard();
             $paying->card_type = $request->post('card_type');
@@ -23,7 +33,7 @@ class OrderController extends Controller
             $paying->card_verification_number = $request->post('card_verification_number');
             $paying->save();
         }
-        $order = new Order();
+
         $order->first_name = $request->post('first_name');
         $order->last_name = $request->post('last_name');
         $order->email = $request->post('email');
@@ -36,8 +46,10 @@ class OrderController extends Controller
         $order->delivery_id = $request->post('delivery_id') ? $request->post('delivery_id') : null;
         $order->payment_method_name = $request->post('payment_method_name');
         $order->payment_method_id = 0;
+        $order->statuses_id = $request->post('statuses_id');
         $order->save();
 
+        OrderProduct::where('order_id', '=', $id)->delete();
         foreach ($request->post('products') as $key => $product) {
             $orderProduct = new OrderProduct();
             $orderProduct->order_id = $order->id;
@@ -52,7 +64,6 @@ class OrderController extends Controller
     public function show($id)
     {
         $order = Order::find($id);
-
 
         if ($order) {
             $totalProductsPrice = 0;
@@ -70,6 +81,18 @@ class OrderController extends Controller
         return redirect('admin/orders/list');
     }
 
+    public function softDelete($id)
+    {
+        $order = Order::find($id);
+
+        if ($order) {
+            $order->statuses_id = Order::ORDER_STATUS_DELETED;
+            $order->save();
+        }
+
+        return redirect('admin/orders/list');
+    }
+
     public function destroy($id)
     {
         $order = Order::find($id);
@@ -82,14 +105,26 @@ class OrderController extends Controller
         return redirect('admin/orders/list');
     }
 
-    public function create()
+    public function create($id = null)
     {
-        return back();
-    }
+        if (!empty($id)) {
+            $order = Order::find($id);
+            if ($order) {
+                return view('admin.partials.orders._order_create', [
+                    'order' => $order,
+                    'statuses' => Status::all(),
+                    'categories' => Category::all(),
+                    'deliveries' => Delivery::all(),
+                    'paymentMethods' => PaymentMethod::all(),
+                ]);
+            }
 
+            return redirect('admin/orders/list');
+        }
 
-    public function edit()
-    {
-        return back();
+        return view('admin.partials.orders._order_create', [
+            'statuses' => Status::all(),
+            'categories' => Category::all(),
+        ]);
     }
 }

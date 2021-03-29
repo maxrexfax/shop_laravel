@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\CreditCard;
 use App\Delivery;
+use App\Discount;
+use App\Http\Requests\StoreOrderRequest;
 use App\Order;
 use App\OrderProduct;
 use App\PaymentMethod;
+use App\Promocode;
 use App\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
-    public function store($id = null, Request $request)
+    public function store($id = null, StoreOrderRequest $request)
     {
         //dd($request->post());
         $paying = null;
@@ -47,15 +50,18 @@ class OrderController extends Controller
         $order->payment_method_name = $request->post('payment_method_name');
         $order->payment_method_id = 0;
         $order->statuses_id = $request->post('statuses_id');
+        $order->promocode_id = $request->post('promocode_id');
         $order->save();
 
         OrderProduct::where('order_id', '=', $id)->delete();
-        foreach ($request->post('products') as $key => $product) {
-            $orderProduct = new OrderProduct();
-            $orderProduct->order_id = $order->id;
-            $orderProduct->product_id = $request->post('products')[$key];
-            $orderProduct->products_quantity = $request->post('quantity')[$key];
-            $orderProduct->save();
+        if (!empty($request->post('products'))) {
+            foreach ($request->post('products') as $key => $product) {
+                $orderProduct = new OrderProduct();
+                $orderProduct->order_id = $order->id;
+                $orderProduct->product_id = $request->post('products')[$key];
+                $orderProduct->products_quantity = $request->post('quantity')[$key];
+                $orderProduct->save();
+            }
         }
 
         return back();
@@ -116,6 +122,7 @@ class OrderController extends Controller
                     'categories' => Category::all(),
                     'deliveries' => Delivery::all(),
                     'paymentMethods' => PaymentMethod::all(),
+                    'promocodes' => Promocode::all(),
                 ]);
             }
 
@@ -125,6 +132,9 @@ class OrderController extends Controller
         return view('admin.partials.orders._order_create', [
             'statuses' => Status::all(),
             'categories' => Category::all(),
+            'deliveries' => Delivery::all(),
+            'paymentMethods' => PaymentMethod::all(),
+            'promocodes' => Promocode::all(),
         ]);
     }
 }

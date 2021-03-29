@@ -40,6 +40,7 @@
                     <h3>Options:</h3>
                     <p>Delivery name: {{$order->getDeliveryName()}}</p>
                     <p>Delivery cost: {{$order->getDeliveryPrice()}}$</p>
+                    <p>Discount: {{$order->getDiscount()}}%</p>
                     <p>Order created at: {{$order->created_at}}</p>
                     <p>Order updated at: {{$order->updated_at}}</p>
                 </div>

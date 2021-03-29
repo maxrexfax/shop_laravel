@@ -6,6 +6,7 @@ return [
     'add' => 'Add',
     'add_new' => 'Add New',
     'add_this' => 'Add this',
+    'add_this_product' => 'Add this product',
     'add_phone' => 'Add phone',
     'add_new_phone' => 'Add new phone',
     'add_to_cart' => 'Add to cart',

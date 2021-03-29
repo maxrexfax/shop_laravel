@@ -25,6 +25,7 @@ class Order extends Model
         'payment_method_name',
         'payment_method_id',
         'statuses_id',
+        'promocode_id'
     ];
 
     public function delivery()
@@ -40,6 +41,11 @@ class Order extends Model
     public function getDeliveryName()
     {
         return !empty($this->delivery) ? $this->delivery->delivery_name : null;
+    }
+
+    public function getDeliveryId()
+    {
+        return !empty($this->delivery) ? $this->delivery->id : '';
     }
 
     public function getDeliveryPrice()
@@ -67,4 +73,16 @@ class Order extends Model
     {
         return !empty($this->status) ? $this->status : '0';
     }
+
+    public function discount()
+    {
+        return $this->hasOne(Promocode::class, 'id', 'promocode_id');
+    }
+
+    public function getDiscount()
+    {
+        return !empty($this->discount) ? $this->discount->promocode_value : '0';
+    }
+
+
 }

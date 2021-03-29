@@ -4,6 +4,6 @@
 @foreach($deliveries as $delivery)
     <input type="radio" id="deliveryType{{$delivery->id}}" value="{{$delivery->id}}" name="delivery_id"
            class="select-type-of-delivery-in-cart" form="checkoutForm" @if($cart->deliveryId == $delivery->id) checked @endif>
-    <label for="deliveryType{{$delivery->id}}">{{$delivery->delivery_name}}</label><br>
+    <label for="deliveryType{{$delivery->id}}">{{$delivery->delivery_name}}</label><span class="float-right">{{$delivery->currentPrice()}}</span><br>
 @endforeach
 @endif

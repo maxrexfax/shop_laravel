@@ -91,4 +91,16 @@ class ProductController extends Controller
         return back();
     }
 
+    public function productsList($category_id)
+    {
+        $category = Category::find($category_id);
+        return !empty($category) ? response()->json($category->getProducts()) : 0;
+    }
+
+    public function productInfo($product_id)
+    {
+        $product = Product::find($product_id);
+        return $product ? response()->json($product) : 'null';
+    }
+
 }

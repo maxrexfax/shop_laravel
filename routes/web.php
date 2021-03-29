@@ -101,11 +101,13 @@ Route::group(['middleware'=>'language'],function ()
 
     Route::prefix('/product')->group(function() {
         Route::get('/category/{id}', 'CategoryController@show')->name('product.category');
+        Route::get('/productsList/{id}', 'ProductController@productsList')->name('product.productsList');
         Route::get('/create/{id?}', 'ProductController@create')->name('product.create');
         Route::get('/images/{id}', 'ProductController@images')->name('product.images');
         Route::get('/show/{id}', 'ProductController@show')->name('product.show');
         Route::post('/store/{id?}', 'ProductController@store')->name('product.store');
         Route::get('/destroy/{id}', 'ProductController@destroy')->name('product.destroy');
+        Route::get('/info/{id}', 'ProductController@productInfo')->name('product.info');
     });
 
     Route::prefix('/promocode')->group(function() {

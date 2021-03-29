@@ -48,6 +48,12 @@
                             <p><span class="number-in-checkout">4.</span> {{__('text.review_your_order')}}</p>
                                 @include('cart.partials._form_all_products_checkout')
                             <br>
+                            <div class="font-weight-bold w-100 border-bottom border-top bg-light text-center">
+                                @if(!empty($cart->promocodeValue))
+                                    <span>{{__('text.discount')}}: {{$cart->promocodeValue}}%</span>
+                                    <input type="hidden" name="discount_id" value="{{$cart->promocodeId}}">
+                                @endif
+                            </div>
                             <div class="font-weight-bold w-100 border-bottom border-top bg-light d-flex">
                                <span class="w-75 d-inline-block text-center">{{__('messages.total_cost')}}</span> <span class="w-25 d-inline-block" id="spanWithTotalPrice">
                                 @if(isset($cart->totalAmount))

@@ -41,6 +41,8 @@
                     <p>Delivery name: {{$order->getDeliveryName()}}</p>
                     <p>Delivery cost: {{$order->getDeliveryPrice()}}$</p>
                     <p>Discount: {{$order->getDiscount()}}%</p>
+                    <p>{{__('text.payment_method')}}:{{$order->getPaymentMethodName()}}</p>
+                    <p>@if(!empty($paymentArray)) {{$paymentArray['paymentDescription']}}: {{$paymentArray['paymentDetails']}} @endif</p>
                     <p>Order created at: {{$order->created_at}}</p>
                     <p>Order updated at: {{$order->updated_at}}</p>
                 </div>

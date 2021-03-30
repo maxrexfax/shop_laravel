@@ -193,15 +193,18 @@ $(document).ready(function() {
     $(document).on('click', '#btnAddProductToCart', function (e) {
         let tbWithProducts = $('.tbody-for-order-products').find('tr');
         let isExist = false;
+        let selectedProductId = $('#selectForProductsFromCategory option:selected').val();
 
         $( tbWithProducts ).each(function( ) {
-            if ($(this).attr('id') ===  $('#selectForProductsFromCategory option:selected').val()) {
+            if ($(this).attr('id') === selectedProductId) {
                 isExist = true;
             }
         });
 
         if (isExist) {
-            alert(this.getAttribute('data-confirm'));
+            let parentTr = $('#' + selectedProductId);
+            let quantity = parseInt($(parentTr).find('.input-quantity').val());
+            $(parentTr).find('.input-quantity').val(++quantity);
         } else {
             $.get( "/product/info/" + $('#selectForProductsFromCategory option:selected').val(), function( data ) {
                 $('.tbody-for-order-products').append(createTableRowWithProduct(data));
@@ -213,7 +216,7 @@ $(document).ready(function() {
         return '<tr class="tr" id="' + product["id"] + '"><td>' + product["id"] + '</td>\n' +
     '<td>' + product["product_name"] + '</td>\n' +
     '<td>' + product["price"] + '$</td>\n' +
-    '<td><input type="number" value="1"  name="quantity[]"></td>\n' +
+    '<td><input type="number" class="input-quantity" value="1"  name="quantity[]"></td>\n' +
     '<td>' + product["price"]+ '$</td>\n' +
     '<td>\n' +
     '<span title="{{__(\'text.delete\')}}" class="float-right btn-delete-product-from-order cursor-pointer">\n' +
@@ -266,6 +269,15 @@ $(document).ready(function() {
 
     $( "#sortBySelect" ).change(function() {
         createUrlToRedirect();
+    });
+
+    $('#selectPaymentMethodsInOrder').change(function () {
+        let path = $('#selectPaymentMethodsInOrder option:selected').val();
+        $('.details-for-payment-method').empty();
+        $.get( "/cart/paymentdetails/" + path)
+            .done(function( data ) {
+            $('.details-for-payment-method').append(data.toString());
+        }, "json" );
     });
 
     $( "#selectTypeOfDeliveryInCart" ).change(function() {

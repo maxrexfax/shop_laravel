@@ -3,8 +3,8 @@
     <div class="card">
         <div class="card-header text-center">
             {{ __('text.list_of_orders') }}
-            <a class="url_in_accordion ml-2 mb-0 float-right" href="{{route('main.page')}}">
-                <span class="addButton" title="{{ __('actions.home') }}">+</span>
+            <a class="url_in_accordion ml-2 mb-0 float-right" href="{{route('order.create')}}">
+                <span class="addButton" title="{{ __('actions.create') }}">+</span>
             </a>
         </div>
         <div class="col-12 p-0 overflow-auto w-100">

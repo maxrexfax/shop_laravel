@@ -84,5 +84,10 @@ class Order extends Model
         return !empty($this->discount) ? $this->discount->promocode_value : '0';
     }
 
+    public function getPaymentMethodName()
+    {
+        $paymentMethod = PaymentMethod::where('payment_method_code', '=', $this->payment_method_code)->first();
+        return !empty($paymentMethod) ? $paymentMethod->payment_method_name : trans('text.payment_method_not_exist');
+    }
 
 }

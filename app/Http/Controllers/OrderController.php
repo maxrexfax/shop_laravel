@@ -10,9 +10,12 @@ use App\Http\Requests\StoreOrderRequest;
 use App\Order;
 use App\OrderProduct;
 use App\PaymentMethod;
+use App\PaypalPayment;
 use App\Promocode;
+use App\Services\OrderStoreService;
 use App\Status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
@@ -27,44 +30,9 @@ class OrderController extends Controller
             $order = new Order();
         }
 
-        if ($request->post('payment_method_name') === PaymentMethod::PAYMENT_METHOD_CREDIT) {
-            $paying = new CreditCard();
-            $paying->card_type = $request->post('card_type');
-            $paying->credit_card_number = $request->post('credit_card_number');
-            $paying->expiration_year = $request->post('expiration_year');
-            $paying->expiration_month = $request->post('expiration_month');
-            $paying->card_verification_number = $request->post('card_verification_number');
-            $paying->save();
-        }
+        (new OrderStoreService())->store($order, $request);
 
-        $order->first_name = $request->post('first_name');
-        $order->last_name = $request->post('last_name');
-        $order->email = $request->post('email');
-        $order->telephone = $request->post('telephone');
-        $order->address = $request->post('address');
-        $order->address_additional = $request->post('address_additional');
-        $order->city = $request->post('city');
-        $order->postcode = $request->post('postcode');
-        $order->country = $request->post('country');
-        $order->delivery_id = $request->post('delivery_id') ? $request->post('delivery_id') : null;
-        $order->payment_method_name = $request->post('payment_method_name');
-        $order->payment_method_id = 0;
-        $order->statuses_id = $request->post('statuses_id');
-        $order->promocode_id = $request->post('promocode_id');
-        $order->save();
-
-        OrderProduct::where('order_id', '=', $id)->delete();
-        if (!empty($request->post('products'))) {
-            foreach ($request->post('products') as $key => $product) {
-                $orderProduct = new OrderProduct();
-                $orderProduct->order_id = $order->id;
-                $orderProduct->product_id = $request->post('products')[$key];
-                $orderProduct->products_quantity = $request->post('quantity')[$key];
-                $orderProduct->save();
-            }
-        }
-
-        return back();
+        return redirect('admin/orders/list');
     }
 
     public function show($id)
@@ -76,11 +44,13 @@ class OrderController extends Controller
             foreach ($order->products as $product) {
                 $totalProductsPrice += $product->orderProduct($id)->products_quantity * $product->price;
             }
+            $paymentArray = $this->getOrderPaymentDetails($order);
             return view('admin.partials.orders._show_order', [
                 'order' => $order,
                 'products' =>$order->products,
                 'orderProducts' => $order->orderProduct,
                 'totalCost' => $order->getDeliveryPrice() + $totalProductsPrice,
+                'paymentArray' => $paymentArray,
             ]);
         }
 
@@ -111,11 +81,26 @@ class OrderController extends Controller
         return redirect('admin/orders/list');
     }
 
+    public function getOrderPaymentDetails($order)
+    {
+        $paymentArray = [];
+        if ($order->payment_method_code === PaymentMethod::PAYMENT_METHOD_CREDIT) {
+            $paymentArray['paymentDetails'] = (CreditCard::find($order->payment_method_id))->credit_card_number;
+            $paymentArray['paymentDescription'] = trans('text.credit_card_number');
+        } else if ($order->payment_method_code === PaymentMethod::PAYMENT_METHOD_PAYPAL) {
+                $paymentArray['paymentDetails'] = (PaypalPayment::find($order->payment_method_id)) ? (PaypalPayment::find($order->payment_method_id))->paypal_email : '';
+                $paymentArray['paymentDescription'] = trans('text.paypal_method_details');
+        }
+        return $paymentArray;
+    }
+
     public function create($id = null)
     {
         if (!empty($id)) {
             $order = Order::find($id);
+            $paymentDetails = null;
             if ($order) {
+                $paymentArray = $this->getOrderPaymentDetails($order);
                 return view('admin.partials.orders._order_create', [
                     'order' => $order,
                     'statuses' => Status::all(),
@@ -123,6 +108,7 @@ class OrderController extends Controller
                     'deliveries' => Delivery::all(),
                     'paymentMethods' => PaymentMethod::all(),
                     'promocodes' => Promocode::all(),
+                    'paymentArray' => $paymentArray,
                 ]);
             }
 

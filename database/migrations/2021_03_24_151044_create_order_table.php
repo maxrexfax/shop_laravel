@@ -27,7 +27,7 @@ class CreateOrderTable extends Migration
             $table->string('country');
             $table->unsignedBigInteger('delivery_id')->nullable();
             $table->foreign('delivery_id')->references('id')->on('deliveries');
-            $table->string('payment_method_name')->nullable();
+            $table->string('payment_method_code')->nullable();
             $table->integer('payment_method_id')->nullable();
 
         });

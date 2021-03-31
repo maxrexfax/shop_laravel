@@ -22,7 +22,6 @@ class OrderController extends Controller
 {
     public function store($id = null, StoreOrderRequest $request)
     {
-        //dd($request->post());
         $paying = null;
         $order = Order::find($id);
 
@@ -44,13 +43,13 @@ class OrderController extends Controller
             foreach ($order->products as $product) {
                 $totalProductsPrice += $product->orderProduct($id)->products_quantity * $product->price;
             }
-            $paymentArray = $this->getOrderPaymentDetails($order);
+
             return view('admin.partials.orders._show_order', [
                 'order' => $order,
                 'products' =>$order->products,
                 'orderProducts' => $order->orderProduct,
                 'totalCost' => $order->getDeliveryPrice() + $totalProductsPrice,
-                'paymentArray' => $paymentArray,
+                'paymentArray' => $this->getOrderPaymentDetails($order),
             ]);
         }
 
@@ -90,6 +89,9 @@ class OrderController extends Controller
         } else if ($order->payment_method_code === PaymentMethod::PAYMENT_METHOD_PAYPAL) {
                 $paymentArray['paymentDetails'] = (PaypalPayment::find($order->payment_method_id)) ? (PaypalPayment::find($order->payment_method_id))->paypal_email : '';
                 $paymentArray['paymentDescription'] = trans('text.paypal_method_details');
+        } else if ($order->payment_method_code === PaymentMethod::PAYMENT_METHOD_CASH) {
+            $paymentArray['paymentDetails'] = '';
+            $paymentArray['paymentDescription'] = trans('text.cash_method_details');
         }
         return $paymentArray;
     }
@@ -100,7 +102,6 @@ class OrderController extends Controller
             $order = Order::find($id);
             $paymentDetails = null;
             if ($order) {
-                $paymentArray = $this->getOrderPaymentDetails($order);
                 return view('admin.partials.orders._order_create', [
                     'order' => $order,
                     'statuses' => Status::all(),
@@ -108,7 +109,7 @@ class OrderController extends Controller
                     'deliveries' => Delivery::all(),
                     'paymentMethods' => PaymentMethod::all(),
                     'promocodes' => Promocode::all(),
-                    'paymentArray' => $paymentArray,
+                    'paymentArray' => $this->getOrderPaymentDetails($order),
                 ]);
             }
 

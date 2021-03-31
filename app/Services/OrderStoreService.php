@@ -48,6 +48,7 @@ class OrderStoreService
         $order->postcode = $request->post('postcode');
         $order->country = $request->post('country');
         $order->delivery_id = $request->post('delivery_id') ? $request->post('delivery_id') : null;
+
         if ($request->post('payment_method_code') != 'defaultValue') {
             $order->payment_method_code = $request->post('payment_method_code');
         }

@@ -3,6 +3,9 @@
     <div class="card bg-white p-1">
         <div class="card-header text-center">
             <span class="h3">Details of order N {{$order->id}}</span>
+            <a class="url_in_accordion ml-2 float-left" href="{{route('admin.orders.list')}}">
+                <span class="btn btn-secondary"><i class="fas fa-fast-backward"></i> {{ __('text.back_to_orders_list') }}</span>
+            </a>
             <a class="url_in_accordion ml-2 float-right" href="{{route('order.destroy', ['id' => $order->id])}}">
                 <span class="addButton" title="{{ __('actions.delete') }}"><i class="fas fa-trash"></i></span>
             </a>
@@ -42,7 +45,7 @@
                     <p>Delivery cost: {{$order->getDeliveryPrice()}}$</p>
                     <p>Discount: {{$order->getDiscount()}}%</p>
                     <p>{{__('text.payment_method')}}:{{$order->getPaymentMethodName()}}</p>
-                    <p>@if(!empty($paymentArray)) {{$paymentArray['paymentDescription']}}: {{$paymentArray['paymentDetails']}} @endif</p>
+                    <p>@if(!empty($paymentArray)) {{$paymentArray['paymentDescription']}} {{$paymentArray['paymentDetails']}} @endif</p>
                     <p>Order created at: {{$order->created_at}}</p>
                     <p>Order updated at: {{$order->updated_at}}</p>
                 </div>

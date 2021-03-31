@@ -7,6 +7,9 @@
             @else
                 {{__('text.create_order')}}
             @endif
+            <a class="url_in_accordion ml-2 float-left" href="{{route('admin.orders.list')}}">
+                <span class="btn btn-secondary" title="{{ __('text.back_to_orders_list') }}"><i class="fas fa-fast-backward"></i> {{ __('text.back_to_orders_list') }}</span>
+            </a>
             @if(!empty($order))
                 <a class="url_in_accordion ml-2 float-right" href="{{route('order.destroy', ['id' => $order->id])}}">
                     <span class="addButton" title="{{ __('actions.delete') }}"><i class="fas fa-trash"></i></span>

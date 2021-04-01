@@ -13,11 +13,11 @@
                         @csrf
                         <div class="table-container">
                             <div class="d-flex justify-content-between align-items-center border-bottom">
-                                <div class="w-25 h5">{{__('messages.product_details')}}</div>
-                                <div class="text-left h5">{{__('messages.quantity')}}</div>
-                                <div class="text-right h5">{{__('messages.price')}}</div>
-                                <div class="text-right h5">{{__('messages.total')}}</div>
-                                <div class="text-right h5">{{__('messages.delete')}}</div>
+                                <div class="w-25 text-bold">{{__('messages.product_details')}}</div>
+                                <div class="text-left text-bold">{{__('messages.quantity')}}</div>
+                                <div class="text-right text-bold">{{__('messages.price')}}</div>
+                                <div class="text-right text-bold">{{__('messages.total')}}</div>
+                                <div class="text-right text-bold">{{__('messages.delete')}}</div>
                             </div>
                             @if(isset($cart->productRows))
                                 @foreach($cart->productRows as $productId => $product)

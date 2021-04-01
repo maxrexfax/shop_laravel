@@ -1,4 +1,3 @@
-
     <option value="">Choose country</option>
     <option value="Afganistan">Afghanistan</option>
     <option value="Albania">Albania</option>

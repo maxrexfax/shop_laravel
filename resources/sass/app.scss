@@ -879,8 +879,8 @@ body {
 .div-data-user-info {
 
     .tabs {
-
-        max-width: 350px;
+        max-width: 450px;
+        width: 100%;
         margin-left: auto;
         margin-right: auto;
     }
@@ -925,6 +925,15 @@ body {
     }
 }
 
+.table-orders-list {
+        th,td {
+        font-family: 'Nunito',sans-serif;
+    }
+}
+
+.order-details-font {
+    font-family: 'Nunito',sans-serif;
+}
 
 .cursor-pointer {
     cursor: pointer;
@@ -932,4 +941,9 @@ body {
 
 .color-custom-gray {
     color: lightgrey;
+}
+
+.div-for-choose-products {
+    margin-left: auto;
+    margin-right: auto;
 }

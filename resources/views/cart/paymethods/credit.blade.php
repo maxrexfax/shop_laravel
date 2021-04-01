@@ -3,7 +3,7 @@
         <label for="selectCardType" class="col-md-12 col-form-label font-size-mini">{{ __('text.choice_card_type') }}<span style="color: red">*</span></label>
 
         <div class="col-md-12 m-0 p-0">
-            <select id="selectCardType" type="text" class="form-control w-100 @error('city') is-invalid @enderror" name="city" value="" form="checkoutForm" required>
+            <select id="selectCardType" type="text" class="form-control w-100 @error('city') is-invalid @enderror" name="card_type" value="" form="checkoutForm" required>
                 <option value="0"> </option>
                 <option value="1">First option</option>
                 <option value="2">Second option</option>

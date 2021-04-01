@@ -62,4 +62,14 @@ class Product extends Model
         return (new PriceHelper())->getPriceWithSymbol($this->price);
     }
 
+    public function order()
+    {
+        return $this->belongsToMany(Order::class, 'order_product', 'product_id', 'order_id');
+    }
+
+    public function orderProduct($order_id)
+    {
+        return OrderProduct::where('product_id', '=', $this->id)->where('order_id', '=', $order_id)->first();
+    }
+
 }

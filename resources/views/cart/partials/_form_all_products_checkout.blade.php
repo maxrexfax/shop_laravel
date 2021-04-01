@@ -27,9 +27,10 @@
                             <div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span>
+                                        <input type="hidden" name="products[]" value="{{$productId}}" form="checkoutForm">
                                     <input style="width: 40px; display: inline;" type="number" min="0" max="999"
                                            class="input{{$productId}} text-center input-product-quantity-cart form-control"
-                                           value="{{$product['productQuantity']}}">
+                                           value="{{$product['productQuantity']}}" name="quantity[]" form="checkoutForm">
                                         <span class="cursor-pointer minus-product color-custom-gray"><i class="fas fa-minus-circle"></i></span>
                                         <span class="cursor-pointer plus-product color-custom-gray"><i class="fas fa-plus-circle"></i></span>
                                     </span>

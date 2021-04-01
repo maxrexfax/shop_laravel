@@ -185,14 +185,50 @@ $(document).ready(function() {
         e.stopPropagation();
     });
 
-    $(document).on('click', '.i-tr-deleter', function (e) {
+    $(document).on('click', '.i-tr-deleter, .btn-delete-product-from-order', function (e) {
         $(this).closest('tr').remove();
         e.stopPropagation();
     });
 
+    $(document).on('click', '#btnAddProductToCart', function (e) {
+        let tbWithProducts = $('.tbody-for-order-products').find('tr');
+        let isExist = false;
+        let selectedProductId = $('#selectForProductsFromCategory option:selected').val();
+
+        $( tbWithProducts ).each(function( ) {
+            if ($(this).attr('id') === selectedProductId) {
+                isExist = true;
+            }
+        });
+
+        if (isExist) {
+            let parentTr = $('#' + selectedProductId);
+            let quantity = parseInt($(parentTr).find('.input-quantity').val());
+            $(parentTr).find('.input-quantity').val(++quantity);
+        } else {
+            $.get( "/product/info/" + $('#selectForProductsFromCategory option:selected').val(), function( data ) {
+                $('.tbody-for-order-products').append(createTableRowWithProduct(data));
+            }, "json" );
+        }
+    });
+
+    function createTableRowWithProduct(product) {
+        return '<tr class="tr" id="' + product["id"] + '"><td>' + product["id"] + '</td>\n' +
+    '<td>' + product["product_name"] + '</td>\n' +
+    '<td>' + product["price"] + '$</td>\n' +
+    '<td><input type="number" class="input-quantity" value="1"  name="quantity[]"></td>\n' +
+    '<td>' + product["price"]+ '$</td>\n' +
+    '<td>\n' +
+    '<span title="{{__(\'text.delete\')}}" class="float-right btn-delete-product-from-order cursor-pointer">\n' +
+    '<span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>\n' +
+    '</span>\n' +
+    '</td>' +
+    '<input type="hidden" value="' + product["id"] + '" name="products[]"></tr>';
+    }
+
     $(document).on('click', '#btnShowParentCategories', function(e) {
         if(!$('.root-menu-container').is(":visible")) {
-            $.get( "/categories/root/list", function( data ) {
+            $.get( "/category/root/list", function( data ) {
                 $.each(data, function( index, value ) {
                     if(index < data.length/2) {
                         $( "#divToShowRootCategories1" )
@@ -235,12 +271,37 @@ $(document).ready(function() {
         createUrlToRedirect();
     });
 
+    $('#selectPaymentMethodsInOrder').change(function () {
+        let path = $('#selectPaymentMethodsInOrder option:selected').val();
+        $('.details-for-payment-method').empty();
+        $.get( "/cart/paymentdetails/" + path)
+            .done(function( data ) {
+            $('.details-for-payment-method').append(data.toString());
+        }, "json" );
+    });
+
     $( "#selectTypeOfDeliveryInCart" ).change(function() {
         $.post( "/cart/changedelivery", { "_token": $('meta[name="csrf-token"]').attr('content'), delivery_id: $('#selectTypeOfDeliveryInCart option:selected').val() })
             .done(function( data ) {
                 $('#spanWithTotalPrice').html(data['totalAmount'] + data['currency_symbol']);
             });
     });
+
+    $( "#selectCategoryOfProduct" ).change(function() {
+        $.get( "/product/productsList/" + $(this).val(), function( data ) {
+            $( "#selectForProductsFromCategory" ).empty();
+            if (data != 0) {
+                $.each(data, function( index, value ) {
+                    $( "#selectForProductsFromCategory" )
+                        .append(createOptionElementWithProducts(value['id'], value['product_name'], value['price']))
+                });
+            }
+        }, "json" );
+    });
+
+    function createOptionElementWithProducts(product_id, product_name, price) {
+        return '<option value="' + product_id + '">' + product_name + ' - ' + price + '$' + '</option>';
+    }
 
     $( ".select-type-of-delivery-in-cart" ).change(function() {
         $.post( "/cart/changedelivery", { "_token": $('meta[name="csrf-token"]').attr('content'), delivery_id: $(this).val() })

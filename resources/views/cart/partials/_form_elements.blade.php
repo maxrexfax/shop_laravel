@@ -1,6 +1,6 @@
 <form method="POST" action="{{ route('order.store') }}" id="checkoutForm">
     @csrf
-<input type="hidden" value="1" name="statuses_id">
+<input type="hidden" value="1" name="order_statuses_id">
 <input type="hidden" value="1" name="customer">
 <div class="d-flex">
     <div class="col-md-6 m-0 p-0">

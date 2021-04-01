@@ -5,6 +5,13 @@
         <section class="place-holder"></section>
         <div class="shopping-cart-checkout">
             <div class="container">
+                <div class="errors text-center bg-danger">
+                    @if($errors)
+                        @foreach($errors->all() as $error)
+                            {{$error}}
+                        @endforeach
+                    @endif
+                </div>
                 <div class="row">
                     <div class="col-md-4 col-sm-10 col-xs-12 pr-2 border-right-dashed">
                         <div class="div-data-user-info">
@@ -16,7 +23,6 @@
                                 <label for="tab-btn-1" class="font-size-mini">Without login</label>
                                 <input type="radio" name="tab-btn" id="tab-btn-2" value="">
                                 <label for="tab-btn-2" class="font-size-mini">Login</label>
-
                                 <div id="content-1">
                                     @guest
                                         @include('cart.partials._login_partial')
@@ -51,7 +57,7 @@
                             <div class="font-weight-bold w-100 border-bottom border-top bg-light text-center">
                                 @if(!empty($cart->promocodeValue))
                                     <span>{{__('text.discount')}}: {{$cart->promocodeValue}}%</span>
-                                    <input type="hidden" name="discount_id" value="{{$cart->promocodeId}}">
+                                    <input type="hidden" name="promocode_id" form="checkoutForm" value="{{$cart->promocodeId}}">
                                 @endif
                             </div>
                             <div class="font-weight-bold w-100 border-bottom border-top bg-light d-flex">

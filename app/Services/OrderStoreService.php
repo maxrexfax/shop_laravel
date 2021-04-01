@@ -12,6 +12,7 @@ class OrderStoreService
 {
     public function store($order, $request)
     {
+        //dd($request->post());
         $paying = null;
 
         if ($request->post('payment_method_code') === PaymentMethod::PAYMENT_METHOD_CREDIT) {

@@ -36,7 +36,7 @@ class StoreOrderRequest extends FormRequest
             'delivery_id' => 'nullable|integer|exists:deliveries,id',
             'payment_method_name' => 'nullable|string|max:50',
             'payment_method_id' => 'integer|nullable',
-            'statuses_id' => 'nullable|integer|exists:statuses,id',
+            'order_statuses_id' => 'nullable|integer|exists:order_statuses,id',
             'promocode_id' => 'nullable|integer|exists:promocodes,id',
         ];
     }

@@ -13,7 +13,7 @@ use App\PaymentMethod;
 use App\PaypalPayment;
 use App\Promocode;
 use App\Services\OrderStoreService;
-use App\Status;
+use App\OrderStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -29,40 +29,41 @@ class OrderController extends Controller
             $order = new Order();
         }
 
-        (new OrderStoreService())->store($order, $request);
+        $order = (new OrderStoreService())->store($order, $request);
 
+        if ($request->post('customer')) {
+            return redirect()->route('cart.show.order', [
+                'uniq_id' => $order->uniq_id,
+            ]);
+        }
         return redirect('admin/orders/list');
     }
 
     public function show($id)
     {
         $order = Order::find($id);
-
+        $productPriceWithDiscount = 0;
         if ($order) {
             $totalProductsPrice = 0;
             foreach ($order->products as $product) {
                 $totalProductsPrice += $product->orderProduct($id)->products_quantity * $product->price;
             }
 
+            if ($order->getDiscount() > 0) {
+                $productPriceWithDiscount = $totalProductsPrice - ($totalProductsPrice * $order->getDiscount()) / 100;
+            } else {
+                $productPriceWithDiscount = $totalProductsPrice;
+            }
+
             return view('admin.partials.orders._show_order', [
                 'order' => $order,
                 'products' =>$order->products,
                 'orderProducts' => $order->orderProduct,
-                'totalCost' => $order->getDeliveryPrice() + $totalProductsPrice,
+                'totalProductsPrice' => $totalProductsPrice,
+                'productPriceWithDiscount' => $productPriceWithDiscount,
+                'totalCost' => $order->getDeliveryPrice() + $productPriceWithDiscount,
                 'paymentArray' => $this->getOrderPaymentDetails($order),
             ]);
-        }
-
-        return redirect('admin/orders/list');
-    }
-
-    public function softDelete($id)
-    {
-        $order = Order::find($id);
-
-        if ($order) {
-            $order->statuses_id = Order::ORDER_STATUS_DELETED;
-            $order->save();
         }
 
         return redirect('admin/orders/list');
@@ -104,7 +105,7 @@ class OrderController extends Controller
             if ($order) {
                 return view('admin.partials.orders._order_create', [
                     'order' => $order,
-                    'statuses' => Status::all(),
+                    'statuses' => OrderStatus::all(),
                     'categories' => Category::all(),
                     'deliveries' => Delivery::all(),
                     'paymentMethods' => PaymentMethod::all(),
@@ -117,7 +118,7 @@ class OrderController extends Controller
         }
 
         return view('admin.partials.orders._order_create', [
-            'statuses' => Status::all(),
+            'statuses' => OrderStatus::all(),
             'categories' => Category::all(),
             'deliveries' => Delivery::all(),
             'paymentMethods' => PaymentMethod::all(),

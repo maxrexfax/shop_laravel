@@ -1,23 +1,7 @@
-@extends('admin.index')
-@section('admin.content')
-    <div class="card bg-white p-1">
-        <div class="card-header text-center">
-            <span class="h3">{{__('text.details_of_order_n')}} {{$order->id}}</span>
-            <a class="url_in_accordion ml-2 float-left" href="{{route('admin.orders.list')}}">
-                <span class="btn btn-secondary" title="{{ __('text.back_to_orders_list') }}"><i class="fas fa-fast-backward"></i> {{ __('text.back_to_orders_list') }}</span>
-            </a>
-            @if(!empty($order))
-                <a class="url_in_accordion ml-2 float-right" href="{{route('order.destroy', ['id' => $order->id])}}">
-                    <span class="addButton" title="{{ __('actions.delete') }}"><i class="fas fa-trash"></i></span>
-                </a>
-                <a class="url_in_accordion ml-2 float-right" href="{{route('order.create', ['id' => $order->id])}}">
-                    <span class="addButton" title="{{ __('actions.edit') }}"><i class="fas fa-pencil-alt"></i></span>
-                </a>
-                <a class="url_in_accordion ml-2 float-right" href="{{route('order.create')}}">
-                    <span class="addButton" title="{{ __('actions.create') }}"><i class="fas fa-plus-circle"></i></span>
-                </a>
-            @endif
-        </div>
+@extends('layouts.app')
+@section('content')
+    <div class="container bg-light">
+        <span class="text-muted h4">{{__('text.details_of_order_n')}}</span> <span class="h3 text-bold">{{$order->uniq_id}}</span> <span class="text-muted small">{{__('text.please_save_this_number')}}!</span>
         <div class="row m-0">
             <div class="col-lg-4 p-2">
                 <div class="bg-light order-details-font p-2">
@@ -28,7 +12,6 @@
                     <p>{{__('text.city')}}: {{$order->city}}</p>
                     <p>{{__('text.country')}}: {{$order->country}}</p>
                     <p>{{__('text.postcode')}}: {{$order->postcode}}</p>
-                    <p>{{__('text.uniq_id')}}: {{$order->uniq_id}}</p>
                 </div>
             </div>
             <div class="col-lg-4 p-2">
@@ -86,4 +69,7 @@
             </div>
         </div>
     </div>
+    <section class="place-holder"></section>
+    <section class="place-holder"></section>
+    <section class="place-holder"></section>
 @endsection

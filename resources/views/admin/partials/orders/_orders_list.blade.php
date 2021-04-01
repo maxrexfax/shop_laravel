@@ -30,11 +30,11 @@
                         <td>{{$order->city}}</td>
                         <td>{{$order->getStatus()->status_name}}</td>
                         <td>
-                            <a href="{{route('order.show', ['id'=>$order->id])}}"><i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
+                            <a href="{{route('order.show', ['id' => $order->id])}}"><i class="fa fa-eye fa-lg" aria-hidden="true"></i></a>
                         </td>
-                        <td><a href="{{route('order.create', ['id'=>$order->id])}}"><i class="fas fa-pencil-alt fa-lg"></i></a></td>
+                        <td><a href="{{route('order.create', ['id' => $order->id])}}"><i class="fas fa-pencil-alt fa-lg"></i></a></td>
                         <td class="text-right">
-                            <a href="{{route('order.destroy', ['id'=>$order->id])}}" class="url-no-decoration" title="{{__('text.delete_finally')}}">
+                            <a href="{{route('order.destroy', ['id' => $order->id])}}" class="url-no-decoration" title="{{__('text.delete_finally')}}">
                                 <span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>
                             </a>
                         </td>

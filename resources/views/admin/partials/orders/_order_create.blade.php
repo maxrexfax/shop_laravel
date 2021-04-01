@@ -14,9 +14,6 @@
                 <a class="url_in_accordion ml-2 float-right" href="{{route('order.destroy', ['id' => $order->id])}}">
                     <span class="addButton" title="{{ __('actions.delete') }}"><i class="fas fa-trash"></i></span>
                 </a>
-                <a class="url_in_accordion ml-2 float-right" href="{{route('order.create', ['id' => $order->id])}}">
-                    <span class="addButton" title="{{ __('actions.edit') }}"><i class="fas fa-pencil-alt"></i></span>
-                </a>
                 <a class="url_in_accordion ml-2 float-right" href="{{route('order.create')}}">
                     <span class="addButton" title="{{ __('actions.create') }}"><i class="fas fa-plus-circle"></i></span>
                 </a>
@@ -37,7 +34,7 @@
                     <h3>{{__('text.order_information')}}:</h3>
                     <div class="d-flex">
                         <p class="w-50">{{__('text.order_status')}}:</p>
-                        <select name="statuses_id" class="w-50">
+                        <select name="order_statuses_id" class="w-50">
                             @foreach($statuses as $status)
                                 <option value="{{$status->id}}"
                                     @if(!empty($order) && $status->id === $order->getStatus()->id)
@@ -70,6 +67,10 @@
                     <hr>
                     <div class="d-flex">
                         <span class="w-50">{{__('text.postcode')}}: </span><input class="w-50 form-control @error('postcode') is-invalid @enderror" value="@if(!empty($order)){{$order->postcode}}@endif" name="postcode" required>
+                    </div>
+                    <hr>
+                    <div class="d-flex">
+                        <span class="w-50">{{__('text.uniq_id')}}: </span><span class="w-50">@if(!empty($order)){{$order->uniq_id}}@endif</span>
                     </div>
                 </div>
             </div>

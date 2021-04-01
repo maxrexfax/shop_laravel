@@ -9,7 +9,7 @@
                     <div class="col-md-4 col-sm-10 col-xs-12 pr-2 border-right-dashed">
                         <div class="div-data-user-info">
                             <div>
-                                <p><span class="number-in-checkout">1.</span> BILLING ADDRESS</p>
+                                <p><span class="number-in-checkout">1.</span> {{__('text.billing_address')}}</p>
                             </div>
                             <div class="tabs m-0 w-100">
                                 <input type="radio" name="tab-btn" id="tab-btn-1" value="" checked>
@@ -21,7 +21,7 @@
                                     @guest
                                         @include('cart.partials._login_partial')
                                     @else
-                                        Logined as user: @if(!empty($loginUser)){{$loginUser->login}} @else @endif
+                                        {{__('text.logined_as_user')}}: @if(!empty($loginUser)){{$loginUser->login}} @else @endif
                                     @endguest
                                 </div>
 

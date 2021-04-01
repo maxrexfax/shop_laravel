@@ -13,13 +13,13 @@ class ProductSeeder extends Seeder
     {
         for($i = 0; $i < 10; $i++) {
             $product = [
-                'product_name'                 => 'Product N'. $i,
+                'product_name'          => 'Product N'. $i,
                 'price'                 => 10.0,
-                'description'                 => 'Description N'.$i,
+                'description'           => 'Description N'.$i,
                 'title'                 => 'Title N'.$i,
-                'short_description'              => 'Short description N'.$i,
-                'full_description'              => 'Full description N'.$i,
-                'rating'                 => 0,
+                'short_description'     => 'Short description N'.$i,
+                'full_description'      => 'Full description N'.$i,
+                'rating'                => 0,
                 'created_at'            => now()
             ];
             \App\Product::create($product);

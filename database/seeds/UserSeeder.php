@@ -18,9 +18,9 @@ class UserSeeder extends Seeder
         for($i = 0; $i < 10; $i++) {
             $user = [
                 'login'                 => 'Login_'.Str::random(4),
-                'first_name'                 => 'FN_'.Str::random(4),
-                'second_name'                 => 'SN_'.Str::random(4),
-                'last_name'                 => 'LN_'.Str::random(4),
+                'first_name'            => 'FN_'.Str::random(4),
+                'second_name'           => 'SN_'.Str::random(4),
+                'last_name'             => 'LN_'.Str::random(4),
                 'password'              => Hash::make('123456'),
                 'email'                 => Str::random(5).'@gmail.com',
                 'email_verified_at'     => Carbon::now(),

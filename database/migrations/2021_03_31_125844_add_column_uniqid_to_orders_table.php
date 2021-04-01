@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnToOrdersTable extends Migration
+class AddColumnUniqidToOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class AddColumnToOrdersTable extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->unsignedBigInteger('order_statuses_id')->default(1);
-            $table->foreign('order_statuses_id')->references('id')->on('order_statuses');
+            $table->string('uniq_id');
         });
     }
 
@@ -27,7 +26,7 @@ class AddColumnToOrdersTable extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->dropForeign('order_statuses_id');
+            //
         });
     }
 }

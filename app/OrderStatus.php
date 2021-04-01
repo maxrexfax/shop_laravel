@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Status extends Model
+class OrderStatus extends Model
 {
-    protected $table = 'statuses';
+    protected $table = 'order_statuses';
 
     protected $fillable = [
         'status_name', 'status_code', 'status_description',

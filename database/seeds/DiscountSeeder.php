@@ -13,12 +13,12 @@ class DiscountSeeder extends Seeder
     {
         DB::table('discounts')->insert([
             [
-                'discount_name'                 => 'Discount N 1',
+                'discount_name'         => 'Discount N 1',
                 'discount'              => 10.1,
                 'created_at'            => now()
             ],
             [
-                'discount_name'                 => 'Discount N 21',
+                'discount_name'         => 'Discount N 21',
                 'discount'              => 20.2,
                 'created_at'            => now()
             ],

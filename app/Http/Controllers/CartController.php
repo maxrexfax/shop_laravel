@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\Delivery;
+use App\Order;
 use App\PaymentMethod;
 use App\Product;
 use App\Promocode;
@@ -126,10 +127,31 @@ class CartController extends Controller
         ]);
     }
 
-    public function checkoutCheck(Request $request)
+    public function showOrder($uniq_id)
     {
-        dd($request->post());
-        return back();
+        $order = Order::where('uniq_id', '=', $uniq_id)->first();
+        if ($order) {
+            $paymentArray = (new OrderController())->getOrderPaymentDetails($order);
+            $totalProductsPrice = 0;
+            $productPriceWithDiscount = 0;
+            foreach ($order->products as $product) {
+                $totalProductsPrice += $product->orderProduct($order->id)->products_quantity * $product->price;
+            }
+
+            if ($order->getDiscount() > 0) {
+                $productPriceWithDiscount = $totalProductsPrice - ($totalProductsPrice * $order->getDiscount()) / 100;
+            } else {
+                $productPriceWithDiscount = $totalProductsPrice;
+            }
+
+            return view('cart.show_order', [
+                'order' => $order,
+                'paymentArray' => $paymentArray,
+                'totalCost' => $order->getDeliveryPrice() + $productPriceWithDiscount,
+            ]);
+        }
+
+        return redirect('/');
     }
 
     public function getPaymentDetails($path)

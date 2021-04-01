@@ -24,7 +24,7 @@ class Order extends Model
         'delivery_id',
         'payment_method_name',
         'payment_method_id',
-        'statuses_id',
+        'order_statuses_id',
         'promocode_id'
     ];
 
@@ -65,8 +65,8 @@ class Order extends Model
 
     public function status()
     {
-        //return $this->hasOne(Status::class, 'id', 'statuses_id');//эквивалентно друг другу
-        return $this->belongsTo(Status::class, 'statuses_id', 'id');
+        //return $this->hasOne(Status::class, 'id', 'order_statuses_id');//эквивалентно друг другу
+        return $this->belongsTo(OrderStatus::class, 'order_statuses_id', 'id');
     }
 
     public function getStatus()
@@ -88,6 +88,16 @@ class Order extends Model
     {
         $paymentMethod = PaymentMethod::where('payment_method_code', '=', $this->payment_method_code)->first();
         return !empty($paymentMethod) ? $paymentMethod->payment_method_name : trans('text.payment_method_not_exist');
+    }
+
+    public function orderProducts()
+    {
+        return $this->hasMany(OrderProduct::class);
+    }
+
+    public function getOrderProducts()
+    {
+        return !empty($this->orderProducts) ? $this->orderProducts : '';
     }
 
 }

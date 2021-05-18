@@ -22,6 +22,11 @@ class CategoryController extends Controller
         }
     }
 
+    /**
+     *  Create new or edit existing Category
+     * @param null $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function create($id = null)
     {
         if (!empty($id)) {
@@ -41,6 +46,12 @@ class CategoryController extends Controller
             ]);
     }
 
+    /**
+     * Store Categories function in controller
+     * @param null $id
+     * @param StoreCategoryRequest $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store($id = null, StoreCategoryRequest $request)
     {
         $category = Category::find($id);

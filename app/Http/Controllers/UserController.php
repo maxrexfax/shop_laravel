@@ -3,35 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUserRequest;
-use App\Role;
-use App\Services\UserStoreService;
+use App\Repository\UserRepositoryInterface;
 use App\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    private $userRepository;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->middleware('auth');
+        $this->userRepository = $userRepository;
     }
 
     /**
-     * Display a listing of the resource.
+     * Display the JSON listing of the users list.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-
+        //return response()->json("Data1:1, Data2:2", 200);
+        return response()->json($this->userRepository->all(), 200);
     }
 
     /**
+     *  Create new or edit existing User
      * @param null $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
@@ -53,6 +55,7 @@ class UserController extends Controller
     }
 
     /**
+     * Store User function in controller
      * @param null $id
      * @param StoreUserRequest $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
@@ -67,7 +70,8 @@ class UserController extends Controller
                 $user = new User();
             }
 
-            (new UserStoreService())->storeuser($request, $user);
+            $this->userRepository->storeuser($request, $user);
+            //(new UserStoreService())->storeuser($request, $user);
         }
         return redirect('admin/users/list');
     }

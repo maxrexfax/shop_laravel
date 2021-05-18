@@ -63,10 +63,13 @@
                                 <div class="pl-3" style="max-width: 300px; width: 100%;">
                                     @if($locale->locale_logo)
                                         <img width="100%" src="{{asset('/img/logo/' . $locale->locale_logo)}}" alt="{{$locale->locale_logo}}" title="Current logo for {{$locale->locale_name}}"/>
+                                        <input type="hidden" name="localeLogo" value="1">
                                     @else
                                         {{__('text.no current logo image!')}}
                                     @endif
                                 </div>
+                            @else
+                                <input type="hidden" name="localeLogo" value="0">
                             @endif
                         </div>
 

@@ -61,7 +61,7 @@
                             <label for="currency_value" class="col-md-4 col-form-label text-md-right">{{ __('actions.currency_value') }}</label>
 
                             <div class="col-md-6">
-                                <input id="currency_value" type="number" min="0" max="99999" step="0.01" class="form-control @error('currency_value') is-invalid @enderror" name="currency_value" value="@if(!empty($currency)){{$currency->currency_value}}@endif">
+                                <input id="currency_value" type="number" min="0" max="99999" step="0.00001" class="form-control @error('currency_value') is-invalid @enderror" name="currency_value" value="@if(!empty($currency)){{$currency->currency_value}}@endif">
                                 @error('currency_value')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

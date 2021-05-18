@@ -4,10 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Delivery;
 use App\Http\Requests\StoreDeliveryRequest;
+use App\Repository\DeliveryRepositoryInterface;
 use App\Services\DeliveryStoreService;
 
 class DeliveryController extends Controller
 {
+    protected $deliveryRepository;
+
+    public function __construct(DeliveryRepositoryInterface $deliveryRepository)
+    {
+        $this->deliveryRepository = $deliveryRepository;
+    }
+
+    /**
+     * Create new or edit existing Delivery
+     * @param null $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function create($id = null)
     {
         if (!empty($id)) {
@@ -24,6 +37,12 @@ class DeliveryController extends Controller
         return view ('admin.partials.delivery._delivery_edit_create');
     }
 
+    /**
+     * Store Delivery function in controller
+     * @param null $id
+     * @param StoreDeliveryRequest $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store($id = null, StoreDeliveryRequest $request)
     {
         $delivery = Delivery::find($id);
@@ -31,7 +50,8 @@ class DeliveryController extends Controller
             $delivery = new Delivery();
         }
 
-        (new DeliveryStoreService())->store($delivery, $request);
+        $this->deliveryRepository->store($delivery, $request);
+        //(new DeliveryStoreService())->store($delivery, $request);
 
         return redirect('/admin/deliveries/list');
     }

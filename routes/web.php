@@ -20,6 +20,22 @@ Route::group(['middleware'=>'language'],function ()
 {
     Route::get('/', 'HomeController@index')->name('main.page');
 
+    Route::prefix('/cart')->group(function() {
+        Route::get('/', 'CartController@cart')->name('cart');
+        Route::get('/checkout', 'CartController@checkoutCart')->name('cart.checkout');
+        Route::get('/show/order/{uniq_id}', 'CartController@showOrder')->name('cart.show.order');
+        Route::post('/checkout/check', 'OrderController@store')->name('cart.checkout.check');
+        Route::get('/add/{id?}', 'CartController@addProductToCart')->name('cart.add');
+        Route::get('/delete/{id?}', 'CartController@deleteProductFromCart')->name('cart.delete');
+        Route::match(['get', 'post'], '/calculate', 'CartController@calculate')->name('cart.calculate');
+        Route::match(['get', 'post'], '/edit', 'CartController@edit')->name('cart.edit');
+        Route::match(['get', 'post'], '/changedelivery', 'CartController@changeDelivery')->name('cart.changedelivery');
+        Route::get('/data', 'CartController@data')->name('cart.data');
+        Route::get('/productquantity', 'CartController@cartProductQuantity')->name('cart.productquantity');
+        Route::get('/reset', 'CartController@reset')->name('cart.reset');
+        Route::get('/paymentdetails/{path}','CartController@getPaymentDetails');
+    });
+
     Auth::routes();
 
     Route::get('/home', 'HomeController@home')->name('home');
@@ -36,22 +52,7 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/promocodes/list', 'AdminController@promocodesList')->name('admin.promocodes.list');
         Route::get('/stores/list', 'AdminController@storeList')->name('admin.stores.list');
         Route::get('/users/list', 'AdminController@userList')->name('admin.users.list');
-    });
-
-    Route::prefix('/cart')->group(function() {
-        Route::get('/', 'CartController@cart')->name('cart');
-        Route::get('/checkout', 'CartController@checkoutCart')->name('cart.checkout');
-        Route::get('/show/order/{uniq_id}', 'CartController@showOrder')->name('cart.show.order');
-        Route::post('/checkout/check', 'OrderController@store')->name('cart.checkout.check');
-        Route::get('/add/{id?}', 'CartController@addProductToCart')->name('cart.add');
-        Route::get('/delete/{id?}', 'CartController@deleteProductFromCart')->name('cart.delete');
-        Route::match(['get', 'post'], '/calculate', 'CartController@calculate')->name('cart.calculate');
-        Route::match(['get', 'post'], '/edit', 'CartController@edit')->name('cart.edit');
-        Route::match(['get', 'post'], '/changedelivery', 'CartController@changeDelivery')->name('cart.changedelivery');
-        Route::get('/data', 'CartController@data')->name('cart.data');
-        Route::get('/productquantity', 'CartController@cartProductQuantity')->name('cart.productquantity');
-        Route::get('/reset', 'CartController@reset')->name('cart.reset');
-        Route::get('/paymentdetails/{path}','CartController@getPaymentDetails');
+        Route::get('/users/index', 'UserController@index')->name('user.index');
     });
 
     Route::prefix('/category')->group(function() {
@@ -135,6 +136,7 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/create/{id?}', 'UserController@create')->name('user.create');
         Route::post('/store/{id?}', 'UserController@store')->name('user.store');
         Route::get('/destroy/{id?}', 'UserController@destroy')->name('user.destroy');
+
     });
 
     Route::prefix('/image')->group(function() {

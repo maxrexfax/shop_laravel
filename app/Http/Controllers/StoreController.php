@@ -8,6 +8,7 @@ use App\Helpers\PriceHelper;
 use App\Http\Requests\StoreDeliveryStoreRequest;
 use App\Http\Requests\StoreStoreRequest;
 use App\Locale;
+use App\Repository\StoreRepositoryInterface;
 use App\Services\StoreCurrencyStoreService;
 use App\Services\StoreDeliveryStoreService;
 use App\Services\StoreLocaleStoreService;
@@ -20,6 +21,18 @@ use Illuminate\Support\Facades\Session;
 
 class StoreController extends Controller
 {
+    private $storeRepository;
+
+    public function __construct(StoreRepositoryInterface $storeRepository)
+    {
+        $this->storeRepository = $storeRepository;
+    }
+
+    /**
+     * Create new or edit existing Store
+     * @param null $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function create($id = null)
     {
         if (!empty($id)) {
@@ -36,6 +49,12 @@ class StoreController extends Controller
         return view ('admin.partials.store._store_edit_create');
     }
 
+    /**
+     * Store Store function in controller
+     * @param null $id
+     * @param StoreStoreRequest $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store($id = null, StoreStoreRequest $request)
     {
         $store = Store::find($id);
@@ -44,7 +63,8 @@ class StoreController extends Controller
             $store = new Store();
         }
 
-        (new StoreStoreService())->store($store ,$request);
+        $this->storeRepository->store($store ,$request);
+        //(new StoreStoreService())->store($store ,$request);
 
         return redirect('/admin/stores/list');
     }

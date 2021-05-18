@@ -6,18 +6,27 @@ use App\Category;
 use App\Helpers\PriceHelper;
 use App\Http\Requests\StoreProductRequest;
 use App\Product;
+use App\Repository\ProductRepositoryInterface;
 use App\Services\ProductStoreService;
 use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
-    public function __construct()
+    private $productRepository;
+
+    public function __construct(ProductRepositoryInterface $productRepository)
     {
         if (!Session::has('arrayOfVisitedProducts')) {
             Session::put('arrayOfVisitedProducts', []);
         }
+        $this->productRepository = $productRepository;
     }
 
+    /**
+     * Create new or edit existing Product
+     * @param null $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function create($id = null)
     {
         if (!empty($id)) {
@@ -38,6 +47,12 @@ class ProductController extends Controller
 
     }
 
+    /**
+     * Store Product function in controller
+     * @param null $id
+     * @param StoreProductRequest $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store($id = null, StoreProductRequest $request)
     {
         $product = Product::find($id);
@@ -46,7 +61,8 @@ class ProductController extends Controller
             $product = new Product();
         }
 
-        (new ProductStoreService())->store($request, $product);
+        $this->productRepository->store($request, $product);
+        //(new ProductStoreService())->store($request, $product);
 
         return redirect('admin/product/list');
     }

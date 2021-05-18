@@ -7,6 +7,7 @@ use App\Helpers\ImageHelper;
 use App\Http\Requests\StoreImageRequest;
 use App\Image;
 use App\Product;
+use App\Repository\ImageRepositoryInterface;
 use App\Services\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -14,14 +15,24 @@ use Illuminate\Support\Facades\Log;
 
 class ImageController extends Controller
 {
-    public function __construct()
+    protected $imageRepository;
+    public function __construct(ImageRepositoryInterface $imageRepository)
     {
         $this->middleware('auth');
+        $this->imageRepository = $imageRepository;
     }
+
+    /**
+     * Store Image function in controller
+     * @param StoreImageRequest $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
 
     public function store(StoreImageRequest $request)
     {
-        (new ImageService())->store($request);
+
+        $this->imageRepository->store($request);
+        //(new ImageService())->store($request);
 
         return redirect('product/images/' . $request->post('product_id'));
 

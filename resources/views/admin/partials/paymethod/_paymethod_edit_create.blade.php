@@ -70,9 +70,13 @@
                                         <div style="max-width: 50px; width: 100%;">
                                             <img width="100%" src="{{ asset('/img/logo/' . $paymentMethod->logo) }}" alt="{{$paymentMethod->payment_method_name}}" title="Current logo for {{$paymentMethod->payment_method_name}}"/>
                                         </div>
+                                        <input type="hidden" name="logoExist" value="1">
                                     @else
                                         {{__('text.no_current_logo_image!')}}
                                     @endif
+
+                                @else
+                                    <input type="hidden" name="logoExist" value="0">
                                 @endif
                             </div>
                         </div>

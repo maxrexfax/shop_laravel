@@ -377,9 +377,11 @@ $(document).ready(function() {
         let buttonClicked = this;
         let message = this.getAttribute('data-message');
         let text = $(this).text();
+        let urlToSendRequest = "/cart/add/" + this.getAttribute('data-id');
+        console.log("urlToSendRequest:" + urlToSendRequest);
         $('#cartInviteToBuy').removeClass('d-block').addClass('d-none');
         $('.item-to-hide-in-empty-cart').addClass('d-block').removeClass('d-none');
-        $.get( "/cart/add/" + this.getAttribute('data-id'))
+        $.get(urlToSendRequest)
             .done(function( data ) {
                 restoreText(buttonClicked, text, message);
         });

@@ -4,11 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePromocodeRequest;
 use App\Promocode;
-use App\Services\PromocodeStoreService;
-use Illuminate\Http\Request;
+use App\Repository\PromocodeRepositoryInterface;
 
 class PromocodeController extends Controller
 {
+    private $promocodeRepository;
+
+    public function __construct(PromocodeRepositoryInterface $promocodeRepository)
+    {
+        $this->promocodeRepository = $promocodeRepository;
+    }
+    /**
+     * Create new or edit existing Promocode
+     * @param null $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function create($id = null)
     {
         if ($id) {
@@ -24,6 +34,12 @@ class PromocodeController extends Controller
         return view('admin.partials.promocode._promocode_edit_create');
     }
 
+    /**
+     * Store Promocode function in controller
+     * @param null $id
+     * @param StorePromocodeRequest $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store($id = null, StorePromocodeRequest $request)
     {
         $promocode = Promocode::find($id);
@@ -32,7 +48,8 @@ class PromocodeController extends Controller
             $promocode = new Promocode();
         }
 
-        (new PromocodeStoreService())->store($promocode, $request);
+        $this->promocodeRepository->store($promocode, $request);
+        //(new PromocodeStoreService())->store($promocode, $request);
 
         return redirect('/admin/promocodes/list');
     }

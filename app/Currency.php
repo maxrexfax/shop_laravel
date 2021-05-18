@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Http;
 
 class Currency extends Model
 {
@@ -22,5 +23,6 @@ class Currency extends Model
 
         return $storeCurrency->isDefault();
     }
+
 
 }

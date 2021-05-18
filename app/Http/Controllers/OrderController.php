@@ -12,14 +12,25 @@ use App\OrderProduct;
 use App\PaymentMethod;
 use App\PaypalPayment;
 use App\Promocode;
+use App\Repository\OrderRepositoryInterface;
 use App\Services\OrderStoreService;
 use App\OrderStatus;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
+    private $orderRepository;
+
+    public function __construct(OrderRepositoryInterface $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+    }
+
+    /**
+     * Store Order function in controller
+     * @param null $id
+     * @param StoreOrderRequest $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store($id = null, StoreOrderRequest $request)
     {
         $paying = null;
@@ -29,7 +40,8 @@ class OrderController extends Controller
             $order = new Order();
         }
 
-        $order = (new OrderStoreService())->store($order, $request);
+        $this->orderRepository->store($order, $request);
+        //$order = (new OrderStoreService())->store($order, $request);
 
         if ($request->post('customer')) {
             return redirect()->route('cart.show.order', [
@@ -81,22 +93,11 @@ class OrderController extends Controller
         return redirect('admin/orders/list');
     }
 
-    public function getOrderPaymentDetails($order)
-    {
-        $paymentArray = [];
-        if ($order->payment_method_code === PaymentMethod::PAYMENT_METHOD_CREDIT) {
-            $paymentArray['paymentDetails'] = (CreditCard::find($order->payment_method_id))->credit_card_number;
-            $paymentArray['paymentDescription'] = trans('text.credit_card_number');
-        } else if ($order->payment_method_code === PaymentMethod::PAYMENT_METHOD_PAYPAL) {
-                $paymentArray['paymentDetails'] = (PaypalPayment::find($order->payment_method_id)) ? (PaypalPayment::find($order->payment_method_id))->paypal_email : '';
-                $paymentArray['paymentDescription'] = trans('text.paypal_method_details');
-        } else if ($order->payment_method_code === PaymentMethod::PAYMENT_METHOD_CASH) {
-            $paymentArray['paymentDetails'] = '';
-            $paymentArray['paymentDescription'] = trans('text.cash_method_details');
-        }
-        return $paymentArray;
-    }
-
+    /**
+     * Create new or edit existing Order
+     * @param null $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function create($id = null)
     {
         if (!empty($id)) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Currency;
 use App\Http\Requests\StoreCurrencyRequest;
+use App\Repository\CurrencyRepositoryInterface;
 use App\Services\CurrencyStoreService;
 use App\Services\CurrencyValueReloadService;
 use Illuminate\Http\Request;
@@ -11,12 +12,19 @@ use Illuminate\Http\Request;
 class CurrencyController extends Controller
 {
     public $currencyValueReloadService;
+    protected $currencyRepository;
 
-    public function __construct()
+    public function __construct(CurrencyRepositoryInterface $currencyRepository)
     {
         $this->currencyValueReloadService = new CurrencyValueReloadService();
+        $this->currencyRepository = $currencyRepository;
     }
 
+    /**
+     * Create new or edit existing Currency
+     * @param null $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function create($id = null)
     {
         if (!empty($id)) {
@@ -35,6 +43,12 @@ class CurrencyController extends Controller
         }
     }
 
+    /**
+     * Store Currency function in controller
+     * @param null $id
+     * @param StoreCurrencyRequest $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store($id = null, StoreCurrencyRequest $request)
     {
         $currency = Currency::find($id);
@@ -43,7 +57,8 @@ class CurrencyController extends Controller
             $currency = new Currency();
         }
 
-        $this->currencyValueReloadService->store($currency ,$request);
+        $this->currencyRepository->store($currency ,$request);
+       // $this->currencyValueReloadService->store($currency ,$request);
 
         return redirect('/admin/currencies/list');
     }

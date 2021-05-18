@@ -131,7 +131,7 @@ class CartController extends Controller
     {
         $order = Order::where('uniq_id', '=', $uniq_id)->first();
         if ($order) {
-            $paymentArray = (new OrderController())->getOrderPaymentDetails($order);
+            $paymentArray = $order->getOrderPaymentDetails($order);
             $totalProductsPrice = 0;
             $productPriceWithDiscount = 0;
             foreach ($order->products as $product) {

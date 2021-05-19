@@ -38,7 +38,7 @@
                             <td>{{$product->title}}</td>
                             <td><div class="td-short-description">{{$product->short_description}}</div></td>
                             <td>{{$product->rating}}</td>
-                            <td><a href="{{route('product.create', ['id' => $product->id])}}"><i class="fas fa-pencil-alt"></i></a></td>
+                            <td><a href="{{route('product.edit', ['id' => $product->id])}}"><i class="fas fa-pencil-alt"></i></a></td>
                             <td>
                                 <a href="{{route('product.destroy', ['id'=>$product->id])}}" title="{{__('text.delete')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btnToDeletePhone">
                                     <span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>

@@ -16,7 +16,7 @@ class PaymentMethodRepository extends BaseRepository implements PaymentMethodRep
         $this->model = $model;
     }
 
-    public function store($paymentMethod, $request)
+    public function store($request, $paymentMethod)
     {
         $paymentMethod->payment_method_name = $request->post('payment_method_name');
         $paymentMethod->payment_method_code = $request->post('payment_method_code');

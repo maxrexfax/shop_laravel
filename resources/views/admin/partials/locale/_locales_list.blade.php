@@ -32,7 +32,7 @@
                         </td>
                         <td>{{$locale->locale_name}}</td>
                         <td>{{$locale->locale_code}}</td>
-                        <td><a href="{{route('locale.create', ['id'=>$locale->id])}}"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td><a href="{{route('locale.edit', ['id'=>$locale->id])}}"><i class="fas fa-pencil-alt"></i></a></td>
                         <td>
                             <a href="{{route('locale.destroy', ['id'=>$locale->id])}}" title="{{__('text.delete')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btnToDeletePhone">
                                 <span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>

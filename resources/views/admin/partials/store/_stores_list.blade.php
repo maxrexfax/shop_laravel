@@ -47,7 +47,7 @@
                         <td><a class="btn btn-secondary url-no-decoration" href="{{route('store.currencylist', ['id' => $store->id])}}">{{ __('actions.currency') }}</a></td>
                         <td><a class="btn btn-secondary url-no-decoration" href="{{route('store.langlist', ['id' => $store->id])}}">{{ __('actions.languages') }}</a></td>
                         <td><a class="btn btn-secondary url-no-decoration" href="{{route('store.phonelist', ['id' => $store->id])}}">{{ __('actions.phones') }}</a></td>
-                        <td><a href="{{route('store.create')}}/{{$store->id}}"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td><a href="{{route('store.edit', ['id' => $store->id])}}"><i class="fas fa-pencil-alt"></i></a></td>
                     </tr>
                 @endforeach
                 </tbody>

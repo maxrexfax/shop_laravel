@@ -40,7 +40,8 @@ class UserController extends Controller
     public function create($id = null)
     {
         if (!empty($id)) {
-            $user = User::find($id);
+            $user = $this->userRepository->findById($id);//After implementing repository
+            //$user = User::find($id);//Before repository
             if ($user) {
                 return view('admin.partials.user._user_edit_create', [
                     'user' => $user,
@@ -48,7 +49,6 @@ class UserController extends Controller
             }
 
             return redirect('/admin/users/list');
-
         }
 
         return view('admin.partials.user._user_edit_create');
@@ -63,15 +63,17 @@ class UserController extends Controller
     public function store($id = null, StoreUserRequest $request)
     {
         if (Auth::user()->isAdmin() || Auth::user()->id === (int)$id) {
-
-            $user = User::find($id);
+            if($id != null) {
+                $user = $this->userRepository->findById($id);
+            } else {
+                $user = null;
+            }
 
             if (!$user) {
                 $user = new User();
             }
 
             $this->userRepository->storeuser($request, $user);
-            //(new UserStoreService())->storeuser($request, $user);
         }
         return redirect('admin/users/list');
     }
@@ -83,9 +85,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
+        $user = $this->userRepository->findById($id);
         if ($user) {
-            $user->delete();
+            $this->userRepository->destroy($id);
         }
 
         return back();

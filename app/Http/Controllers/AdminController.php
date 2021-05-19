@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Lang;
 
 class AdminController extends Controller
 {
-
     /**
      * Create a new controller instance.
      *

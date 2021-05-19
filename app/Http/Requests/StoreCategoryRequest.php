@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use function PHPUnit\Framework\countOf;
 
 class StoreCategoryRequest extends FormRequest
 {
@@ -23,13 +24,14 @@ class StoreCategoryRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'category_logo' => 'image',
             'category_name' => 'string|required|max:255',
             'category_id' => 'integer|exists:categories,id|nullable',
             'sort_number' => 'integer|nullable',
             'category_description' => 'string|max:500',
         ];
+        return $rules;
     }
 
     /**

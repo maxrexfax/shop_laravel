@@ -25,35 +25,66 @@ class OrderController extends Controller
         $this->orderRepository = $orderRepository;
     }
 
-    /**
-     * Store Order function in controller
-     * @param null $id
-     * @param StoreOrderRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function store($id = null, StoreOrderRequest $request)
-    {
-        $paying = null;
-        $order = Order::find($id);
 
-        if (!$order) {
-            $order = new Order();
+    public function create()
+    {
+        return view('admin.partials.orders._order_create', [
+            'statuses' => OrderStatus::all(),
+            'categories' => Category::all(),
+            'deliveries' => Delivery::all(),
+            'paymentMethods' => PaymentMethod::all(),
+            'promocodes' => Promocode::all(),
+        ]);
+    }
+
+    public function edit($id = null)
+    {
+        if($id == null) {
+            return redirect('admin/orders/list');
         }
 
-        $this->orderRepository->store($order, $request);
-        //$order = (new OrderStoreService())->store($order, $request);
+        $order = $this->orderRepository->findById($id);
 
-        if ($request->post('customer')) {
-            return redirect()->route('cart.show.order', [
-                'uniq_id' => $order->uniq_id,
+        if ($order) {
+            return view('admin.partials.orders._order_create', [
+                'order' => $order,
+                'statuses' => OrderStatus::all(),
+                'categories' => Category::all(),
+                'deliveries' => Delivery::all(),
+                'paymentMethods' => PaymentMethod::all(),
+                'promocodes' => Promocode::all(),
+                'paymentArray' => $order->getOrderPaymentDetails(),
             ]);
         }
+
+        return redirect('admin/orders/list');
+    }
+
+    public function store(StoreOrderRequest $request)
+    {
+        $order = new Order();
+
+        $this->orderRepository->store($request, $order);
+
+        return redirect()->route('cart.show.order', [
+            'uniq_id' => $order->uniq_id,
+        ]);
+    }
+
+    public function update($id = null, StoreOrderRequest $request)
+    {
+        $order = $this->orderRepository->findById($id);
+
+        if ($order) {
+            $this->orderRepository->store($request, $order);
+        }
+
         return redirect('admin/orders/list');
     }
 
     public function show($id)
     {
-        $order = Order::find($id);
+        $order = $this->orderRepository->findById($id);
         $productPriceWithDiscount = 0;
         if ($order) {
             $totalProductsPrice = 0;
@@ -83,47 +114,15 @@ class OrderController extends Controller
 
     public function destroy($id)
     {
-        $order = Order::find($id);
+        $order = $this->orderRepository->findById($id);
 
         if ($order) {
             OrderProduct::where('order_id', '=', $id)->delete();
-            $order->delete();
+            $this->orderRepository->destroy($id);
         }
 
         return redirect('admin/orders/list');
     }
 
-    /**
-     * Create new or edit existing Order
-     * @param null $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
-     */
-    public function create($id = null)
-    {
-        if (!empty($id)) {
-            $order = Order::find($id);
-            $paymentDetails = null;
-            if ($order) {
-                return view('admin.partials.orders._order_create', [
-                    'order' => $order,
-                    'statuses' => OrderStatus::all(),
-                    'categories' => Category::all(),
-                    'deliveries' => Delivery::all(),
-                    'paymentMethods' => PaymentMethod::all(),
-                    'promocodes' => Promocode::all(),
-                    'paymentArray' => $this->getOrderPaymentDetails($order),
-                ]);
-            }
 
-            return redirect('admin/orders/list');
-        }
-
-        return view('admin.partials.orders._order_create', [
-            'statuses' => OrderStatus::all(),
-            'categories' => Category::all(),
-            'deliveries' => Delivery::all(),
-            'paymentMethods' => PaymentMethod::all(),
-            'promocodes' => Promocode::all(),
-        ]);
-    }
 }

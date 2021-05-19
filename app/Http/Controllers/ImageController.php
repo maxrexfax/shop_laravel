@@ -30,12 +30,9 @@ class ImageController extends Controller
 
     public function store(StoreImageRequest $request)
     {
-
         $this->imageRepository->store($request);
-        //(new ImageService())->store($request);
 
         return redirect('product/images/' . $request->post('product_id'));
-
     }
 
     public function delete($imageId, Request $request)

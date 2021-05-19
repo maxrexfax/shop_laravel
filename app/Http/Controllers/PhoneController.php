@@ -7,6 +7,7 @@ use App\Phone;
 use App\Repository\PhoneRepositoryInterface;
 use App\Services\PhoneStoreService;
 use App\Store;
+use Illuminate\Database\Eloquent\Model;
 
 class PhoneController extends Controller
 {
@@ -16,55 +17,57 @@ class PhoneController extends Controller
     {
         $this->phoneRepository = $phoneRepository;
     }
-    /**
-     * Create new or edit existing Phone
-     * @param null $phone_id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function create($store_id = null, $phone_id = null)
+
+    public function create($store_id = null)
     {
-        $store = Store::find($store_id);
-        $phone = Phone::find($phone_id);
+        return view('admin.partials.phones._phone_edit_create', [
+            'store' => Store::find($store_id),
+        ]);
+    }
+
+    public function edit($store_id = null, $phone_id = null)
+    {
+        $phone = $this->phoneRepository->findById($phone_id);
+
         if ($phone) {
             return view('admin.partials.phones._phone_edit_create', [
                 'phone' => $phone,
-                'store' => $store
+                'store' => Store::find($store_id)
             ]);
         }
 
-        return view('admin.partials.phones._phone_edit_create', [
-            'store' => $store
-        ]);
+        return redirect('/store/phonelist/' . $store_id);
+    }
+
+    public function store(StorePhoneRequest $request)
+    {
+        $phone = new Phone();
+
+        $this->phoneRepository->storePhone($request, $phone);
+
+        return redirect('/store/phonelist/' . $request->post('store_id'));
+    }
+
+    public function update($id = null, StorePhoneRequest $request)
+    {
+        $phone = $this->phoneRepository->findById($id);
+
+        if ($phone) {
+            $this->phoneRepository->storePhone($request, $phone);
+        }
+
+        return redirect('admin/category/list');
     }
 
     public function destroy($id)
     {
-        $phone = Phone::find($id);
+        $phone = $this->phoneRepository->findById($id);
 
         if ($phone) {
-            $phone->delete();
+            $this->phoneRepository->destroy($id);
         }
 
         return redirect()->back();
     }
 
-    /**
-     * Store Phone function in controller
-     * @param null $id
-     * @param StorePhoneRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function store($id = null, StorePhoneRequest $request)
-    {
-        $phone = Phone::find($id);
-
-        if (!$phone) {
-            $phone = new Phone();
-        }
-
-        $this->phoneRepository->storePhone($request, $phone);
-        //(new PhoneStoreService())->storePhone($request, $phone);
-
-        return redirect('/store/phonelist/' . $request->post('store_id'));
-    }
 }

@@ -14,7 +14,7 @@ class PromocodeRepository extends BaseRepository implements PromocodeRepositoryI
         $this->model = $model;
     }
 
-    public function store($promocode, $request)
+    public function store($request, $promocode)
     {
         $promocode->fill($request->post());
         $promocode->save();

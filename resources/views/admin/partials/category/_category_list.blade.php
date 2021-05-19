@@ -35,7 +35,7 @@
                             <td>{{$category->category_name}}</td>
                             <td>{{$category->sort_number}}</td>
                             <td>{{$category->getParentCategoryName()}}</td>
-                            <td><a href="{{ route('category.create', ['id' => $category->id]) }}"><i class="fas fa-pencil-alt"></i></a></td>
+                            <td><a href="{{ route('category.edit', ['id' => $category->id]) }}"><i class="fas fa-pencil-alt"></i></a></td>
                             <td>
                                 <a href="{{route('category.destroy', ['id'=>$category->id])}}" title="{{__('text.delete')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btnToDeletePhone">
                                     <span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>

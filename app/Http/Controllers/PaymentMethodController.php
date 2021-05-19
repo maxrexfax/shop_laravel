@@ -18,52 +18,57 @@ class PaymentMethodController extends Controller
         $this->paymentMethodRepository = $paymentMethodRepository;
     }
 
-    /**
-     * Create new or edit existing PaymentMethod
-     * @param null $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
-     */
-    public function create($id = null)
+    public function create()
     {
-        if (!empty($id)) {
-            $paymentMethod = PaymentMethod::find($id);
-            if ($paymentMethod) {
-                return view('admin.partials.paymethod._paymethod_edit_create', [
-                    'paymentMethod' => $paymentMethod,
-                ]);
-            }
-
-            return redirect('admin/category/list');
-        }
-
         return view('admin.partials.paymethod._paymethod_edit_create');
     }
 
-    /**
-     * Store PaymentMethod function in controller
-     * @param null $id
-     * @param StorePaymethodRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function store($id = null, StorePaymethodRequest $request)
+    public function edit($id = null)
     {
-        $paymentMethod = PaymentMethod::find($id);
-
-        if (!$paymentMethod) {
-            $paymentMethod = new PaymentMethod();
+        if($id == null) {
+            return redirect('admin/paymethod/list');
         }
 
-        $this->paymentMethodRepository->store($paymentMethod, $request);
-        //(new PaymentMethodStoreService())->store($paymentMethod, $request);
+        $paymentMethod = $this->paymentMethodRepository->findById($id);
+
+        if ($paymentMethod) {
+            return view('admin.partials.paymethod._paymethod_edit_create', [
+                'paymentMethod' => $paymentMethod,
+            ]);
+        }
+
+        return redirect('admin/paymethod/list');
+    }
+
+    public function store(StorePaymethodRequest $request)
+    {
+        $paymentMethod = new PaymentMethod();
+
+        $this->paymentMethodRepository->store($request, $paymentMethod);
 
         return redirect('/admin/paymethod/list');
     }
 
+    public function update($id = null, StorePaymethodRequest $request)
+    {
+        if ($id == null) {
+            return redirect('admin/paymethod/list');
+        }
+
+        $paymentMethod = $this->paymentMethodRepository->findById($id);
+
+        if ($paymentMethod) {
+            $this->paymentMethodRepository->store($request, $paymentMethod);
+        }
+
+        return redirect('admin/paymethod/list');
+    }
+
     public function destroy($id)
     {
-        $paymentMethod = PaymentMethod::find($id);
+        $paymentMethod = $this->paymentMethodRepository->findById($id);
         if ($paymentMethod) {
-            $paymentMethod->delete();
+            $this->paymentMethodRepository->destroy($id);
         }
 
         return redirect('/admin/paymethod/list');

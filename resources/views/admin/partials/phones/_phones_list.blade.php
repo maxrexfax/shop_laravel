@@ -26,7 +26,7 @@
                     <td>{{$phone->phone_number}}</td>
                     <td>{{$phone->phone_info}}</td>
                     <td>
-                        <a title="Edit this phone"  class="btn btn-primary" href="{{route('phone.create', ['store_id' => $store->id, 'phone_id'=>$phone->id])}}">
+                        <a title="Edit this phone"  class="btn btn-primary" href="{{route('phone.edit', ['store_id' => $store->id, 'phone_id'=>$phone->id])}}">
                             <i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i>
                         </a>
                     </td>

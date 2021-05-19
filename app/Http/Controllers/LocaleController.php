@@ -16,42 +16,38 @@ class LocaleController extends Controller
         $this->localeRepository = $localeRepository;
     }
 
-    /**
-     * Create new or edit existing Locale
-     * @param null $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
-     */
-    public function create($id = null)
+    public function create()
     {
-        if (!empty($id)) {
-            $locale = Locale::find($id);
-            if ($locale) {
-                return view('admin.partials.locale._locale_edit_create', [
-                    'locale' => $locale,
-                ]);
-            }
-
-            return redirect('/admin/locales/list');
-        }
-
         return view('admin.partials.locale._locale_edit_create');
     }
 
-    /**
-     * Store Locale function in controller
-     * @param null $id
-     * @param StoreLocaleRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function store($id = null, StoreLocaleRequest $request)
+    public function edit($id = null)
     {
-        $locale = Locale::find($id);
-
-        if (!$locale) {
-            $locale = new Locale();
+        if($id == null) {
+            return redirect('admin/locales/list');
         }
-        $this->localeRepository->storeLocale($locale, $request);
-        //(new LocaleStoreService())->storeLocale($locale, $request);
+
+        return view('admin.partials.locale._locale_edit_create', [
+            'locale' => $this->localeRepository->findById($id),
+        ]);
+    }
+
+    public function update($id = null, StoreLocaleRequest $request)
+    {
+        $locale = $this->localeRepository->findById($id);
+
+        if($locale) {
+            $this->localeRepository->storeLocale($request, $locale);
+        }
+
+        return redirect('admin/locales/list');
+    }
+
+    public function store(StoreLocaleRequest $request)
+    {
+        $locale = new Locale();
+
+        $this->localeRepository->storeLocale($request, $locale);
 
         return redirect('/admin/locales/list');
     }
@@ -59,10 +55,10 @@ class LocaleController extends Controller
 
     public function destroy($id)
     {
-        $locale = Locale::find($id);
+        $locale = $this->localeRepository->findById($id);
 
         if ($locale) {
-            $locale->delete();
+            $this->localeRepository->destroy($id);
         }
 
         return redirect('/admin/locales/list');

@@ -14,7 +14,7 @@ class LocaleRepository extends BaseRepository implements LocaleRepositoryInterfa
         $this->model = $model;
     }
 
-    public function storeLocale($locale, $request)
+    public function storeLocale($request, $locale)
     {
         $logo = null;
 

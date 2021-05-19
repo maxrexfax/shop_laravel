@@ -19,7 +19,7 @@
                     @endif
                 </div>
                 <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data" action="{{ route('payment.method.store', ['id' => isset($paymentMethod) ? $paymentMethod->id : '']) }}">
+                    <form method="POST" enctype="multipart/form-data" action="@if(!isset($paymentMethod)){{ route('payment.method.store')}} @else {{ route('payment.method.update', ['id' => $paymentMethod->id])}} @endif">
                         @csrf
                         <input id="id" type="hidden" name="id" value="@if(!empty($paymentMethod)){{$paymentMethod->id}}@endif">
 

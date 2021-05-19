@@ -3,6 +3,7 @@
 namespace App\Repository\Eloquent;
 
 use App\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use App\Repository\UserRepositoryInterface;
 

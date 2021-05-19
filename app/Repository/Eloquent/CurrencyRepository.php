@@ -14,7 +14,7 @@ class CurrencyRepository extends BaseRepository implements CurrencyRepositoryInt
         $this->model = $model;
     }
 
-    public function store($currency ,$request)
+    public function store($request, $currency)
     {
         $currency->currency_name = $request->post('currency_name');
         $currency->currency_code = $request->post('currency_code');

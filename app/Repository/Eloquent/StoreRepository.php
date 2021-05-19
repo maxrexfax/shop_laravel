@@ -14,7 +14,7 @@ class StoreRepository extends BaseRepository implements StoreRepositoryInterface
         $this->model = $model;
     }
 
-    public function store($store, $request)
+    public function store($request, $store)
     {
         $logo = null;
         if ($store->store_logo) {

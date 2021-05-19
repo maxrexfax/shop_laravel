@@ -14,7 +14,7 @@ class DeliveryRepository extends BaseRepository implements DeliveryRepositoryInt
         $this->model = $model;
     }
 
-    public function store($delivery, $request)
+    public function store($request, $delivery)
     {
         $delivery->fill($request->post());
         $delivery->save();

@@ -16,42 +16,36 @@ class DeliveryController extends Controller
         $this->deliveryRepository = $deliveryRepository;
     }
 
-    /**
-     * Create new or edit existing Delivery
-     * @param null $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
-     */
-    public function create($id = null)
+    public function create()
     {
-        if (!empty($id)) {
-            $delivery = Delivery::find($id);
-            if ($delivery) {
-                return view ('admin.partials.delivery._delivery_edit_create', [
-                    'delivery' => $delivery,
-                ]);
-            }
-
-            return redirect('/admin/deliveries/list');
-        }
-
         return view ('admin.partials.delivery._delivery_edit_create');
     }
 
-    /**
-     * Store Delivery function in controller
-     * @param null $id
-     * @param StoreDeliveryRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function store($id = null, StoreDeliveryRequest $request)
+    public function edit($id = null)
     {
-        $delivery = Delivery::find($id);
-        if (!$delivery) {
-            $delivery = new Delivery();
+        if($id == null) {
+            return redirect('admin/deliveries/list');
         }
 
-        $this->deliveryRepository->store($delivery, $request);
-        //(new DeliveryStoreService())->store($delivery, $request);
+        return view ('admin.partials.delivery._delivery_edit_create', [
+            'delivery' => $this->deliveryRepository->findById($id),
+        ]);
+    }
+
+    public function update($id = null, StoreDeliveryRequest $request)
+    {
+        $delivery = $this->deliveryRepository->findById($id);
+
+        $this->deliveryRepository->store($request, $delivery);
+
+        return redirect('admin/deliveries/list');
+    }
+
+    public function store(StoreDeliveryRequest $request)
+    {
+        $delivery = new Delivery();
+
+        $this->deliveryRepository->store($request, $delivery);
 
         return redirect('/admin/deliveries/list');
     }

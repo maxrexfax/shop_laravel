@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Repository\CategoryRepositoryInterface;
 use App\Repository\CurrencyRepositoryInterface;
 use App\Repository\DeliveryRepositoryInterface;
 use App\Repository\Eloquent\BaseRepository;
+use App\Repository\Eloquent\CategoryRepository;
 use App\Repository\Eloquent\CurrencyRepository;
 use App\Repository\Eloquent\DeliveryRepository;
 use App\Repository\Eloquent\ImageRepository;
@@ -52,6 +54,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ImageRepositoryInterface::class, ImageRepository::class);
         $this->app->bind(DeliveryRepositoryInterface::class, DeliveryRepository::class);
         $this->app->bind(CurrencyRepositoryInterface::class, CurrencyRepository::class);
+        $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
     }
 
     /**

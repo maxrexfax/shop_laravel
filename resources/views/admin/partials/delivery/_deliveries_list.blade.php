@@ -35,7 +35,9 @@
                             @endif
                             </td>
                         <td>
-                            <a href="{{route('delivery.create', ['id' => $delivery->id])}}" title="{{__('text.edit_delivery')}}"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{{route('delivery.edit', ['id' => $delivery->id])}}" title="{{__('text.edit_delivery')}}"><i class="fas fa-pencil-alt"></i></a>
+                        </td>
+                        <td>
                             <a href="{{route('delivery.destroy', ['id'=>$delivery->id])}}" title="{{__('text.delete_this_delivery')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btnToDeletePhone">
                                 <span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>
                             </a>

@@ -20,55 +20,46 @@ class CurrencyController extends Controller
         $this->currencyRepository = $currencyRepository;
     }
 
-    /**
-     * Create new or edit existing Currency
-     * @param null $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
-     */
-    public function create($id = null)
+    public function create()
     {
-        if (!empty($id)) {
-            $currency = Currency::find($id);
+        return view ('admin.partials.currency._currency_edit_create');
+    }
 
-            if ($currency) {
-                return view ('admin.partials.currency._currency_edit_create', [
-                    'currency' => $currency,
-                ]);
-            } else {
-                return redirect('/admin/currencies/list');
-            }
+    public function edit($id = null)
+    {
+        $currency = $this->currencyRepository->findById($id);
 
-        } else {
-            return view ('admin.partials.currency._currency_edit_create');
+        if ($currency) {
+            return view ('admin.partials.currency._currency_edit_create', [
+                'currency' => $currency,
+            ]);
         }
     }
 
-    /**
-     * Store Currency function in controller
-     * @param null $id
-     * @param StoreCurrencyRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function store($id = null, StoreCurrencyRequest $request)
+    public function update($id = null, StoreCurrencyRequest $request)
     {
-        $currency = Currency::find($id);
+        $currency = $this->currencyRepository->findById($id);
 
-        if (!$currency) {
-            $currency = new Currency();
-        }
+        $this->currencyRepository->store($request, $currency);
 
-        $this->currencyRepository->store($currency ,$request);
-       // $this->currencyValueReloadService->store($currency ,$request);
+        return redirect('admin/currencies/list');
+    }
 
-        return redirect('/admin/currencies/list');
+    public function store(StoreCurrencyRequest $request)
+    {
+        $currency = new Currency();
+
+        $this->currencyRepository->store($request, $currency);
+
+        return redirect('admin/currencies/list');
     }
 
     public function destroy($id)
     {
-        $currency = Currency::find($id);
+        $currency = $this->currencyRepository->findById($id);
 
         if ($currency) {
-            $currency->delete();
+            $this->currencyRepository->destroy($id);
         }
 
         return redirect('/admin/currencies/list');

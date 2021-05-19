@@ -26,7 +26,7 @@
                 @endforeach
             @endif
         </div>
-        <form method="POST" action="{{ route('order.store', ['id' => isset($order) ? $order->id : 0]) }}" id="checkoutForm">
+        <form method="POST" action="@if(!isset($order)){{ route('order.store')}} @else {{ route('order.update', ['id' => $order->id])}} @endif" id="checkoutForm">
             @csrf
         <div class="row m-0">
             <div class="col-lg-4 col-md-6 col-sm-12 p-2">

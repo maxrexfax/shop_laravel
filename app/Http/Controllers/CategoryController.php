@@ -6,68 +6,72 @@ use App\Helpers\PaginationQuantityHelper;
 use App\Category;
 use App\Helpers\PriceHelper;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Repository\CategoryRepositoryInterface;
 use App\Services\CategoryStoreService;
 use App\Services\GetProductsService;
 use App\Store;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
-    public function __construct()
+    private $categoryRepository;
+
+    public function __construct(CategoryRepositoryInterface $categoryRepository)
     {
         if (!Session::has('defaultCurrency')) {
             Session::put('defaultCurrency', (new PriceHelper())->getCurrentCurrency());
         }
+        $this->categoryRepository = $categoryRepository;
     }
 
-    /**
-     *  Create new or edit existing Category
-     * @param null $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
-     */
-    public function create($id = null)
-    {
-        if (!empty($id)) {
-            $category = Category::find($id);
-            if($category) {
-                return view('admin.partials.category._category_edit_create', [
-                    'categories' => Category::all(),
-                    'category' => $category
-                ]);
-            }
 
+    public function create()
+    {
+        return view('admin.partials.category._category_edit_create', [
+                'categories' => $this->categoryRepository->all()
+            ]);
+    }
+
+    public function edit($id = null)
+    {
+        if($id == null) {
             return redirect('admin/category/list');
         }
 
         return view('admin.partials.category._category_edit_create', [
-                'categories' => Category::all()
-            ]);
+            'categories' => $this->categoryRepository->all(),
+            'category' => $this->categoryRepository->findById($id)
+        ]);
     }
 
-    /**
-     * Store Categories function in controller
-     * @param null $id
-     * @param StoreCategoryRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function store($id = null, StoreCategoryRequest $request)
+    public function update($id = null, StoreCategoryRequest $request)
     {
-        $category = Category::find($id);
+        $category = $this->categoryRepository->findById($id);
 
-        if (!$category) {
-            $category = new Category();
-        }
+        $this->categoryRepository->storeCategory($request, $category);
 
-        (new CategoryStoreService())->storeCategory($request, $category);
+        return redirect('admin/category/list');
+    }
+
+    public function store(StoreCategoryRequest $request)
+    {
+        $category = new Category();
+
+        $this->categoryRepository->storeCategory($request, $category);
 
         return redirect('admin/category/list');
     }
 
     public function show($id, Request $request)
     {
-        $category = Category::find($id);
+        $category = null;
+        if($id != null) {
+            $category = $this->categoryRepository->findById($id);
+        }
+
         $paginateQuantity = (new PaginationQuantityHelper())->getPaginationQuantity($request->get('paginateQuantity'));
         $products = (new GetProductsService())
                 ->getUserListBySortData($id, $request
@@ -76,7 +80,7 @@ class CategoryController extends Controller
         if ($category) {
             return view('categories.products', [
                 'products' => $products,
-                'categoriesAll' => Category::all(),
+                'categoriesAll' => $this->categoryRepository->all(),
                 'currentCategory' => $category,
                 'paginateQuantity' => $paginateQuantity,
                 'sortType' => $request->get('sortType'),
@@ -94,7 +98,7 @@ class CategoryController extends Controller
             ->with('childrenCategories')
             ->get();
         return view('categories.index', [
-            'categories' => Category::all(),
+            'categories' => $this->categoryRepository->all(),
             'categoriesHierarchically' => $categoriesHierarchically,
         ]);
     }
@@ -107,9 +111,9 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        $category = Category::find($id);
+        $category = $this->categoryRepository->findById($id);
         if ($category) {
-            $category->delete();
+            $this->categoryRepository->destroy($id);
         }
 
         return back();

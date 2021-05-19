@@ -19,8 +19,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         $this->model = $model;
     }
 
-
-    public function store($order, $request)
+    public function store($request, $order)
     {
         $paying = null;
 

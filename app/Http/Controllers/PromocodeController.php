@@ -14,51 +14,52 @@ class PromocodeController extends Controller
     {
         $this->promocodeRepository = $promocodeRepository;
     }
-    /**
-     * Create new or edit existing Promocode
-     * @param null $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
-     */
-    public function create($id = null)
+
+    public function create()
     {
-        if ($id) {
-            $promocode = Promocode::find($id);
+        return view('admin.partials.promocode._promocode_edit_create');
+    }
+
+    public function edit($id = null)
+    {
+        if ($id != null) {
+            $promocode = $this->promocodeRepository->findById($id);
             if ($promocode) {
                 return view('admin.partials.promocode._promocode_edit_create', [
                     'promocode' => $promocode,
                 ]);
             }
-            return redirect('/admin/promocodes/list');
         }
-
-        return view('admin.partials.promocode._promocode_edit_create');
+        return redirect('/admin/promocodes/list');
     }
 
-    /**
-     * Store Promocode function in controller
-     * @param null $id
-     * @param StorePromocodeRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function store($id = null, StorePromocodeRequest $request)
+    public function store(StorePromocodeRequest $request)
     {
-        $promocode = Promocode::find($id);
+        $promocode = new Promocode();
 
-        if (!$promocode) {
-            $promocode = new Promocode();
+        $this->promocodeRepository->store($request, $promocode);
+
+        return redirect('/admin/promocodes/list');
+    }
+
+    public function update($id = null, StorePromocodeRequest $request)
+    {
+        if($id != null) {
+            $promocode = $this->promocodeRepository->findById($id);
         }
 
-        $this->promocodeRepository->store($promocode, $request);
-        //(new PromocodeStoreService())->store($promocode, $request);
+        if ($promocode) {
+            $this->promocodeRepository->store($request, $promocode);
+        }
 
         return redirect('/admin/promocodes/list');
     }
 
     public function delete($id)
     {
-        $promocode = Promocode::find($id);
+        $promocode = $this->promocodeRepository->findById($id);
         if ($promocode) {
-            $promocode->delete();
+            $this->promocodeRepository->destroy($id);
         }
 
         return redirect()->back();

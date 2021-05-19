@@ -15,7 +15,7 @@ class PhoneRepository extends BaseRepository implements PhoneRepositoryInterface
         $this->model = $model;
     }
 
-    public function storePhone(StorePhoneRequest $request, $phone)
+    public function storePhone($request, $phone)
     {
         $phone->phone_number = $request->post('phone_number');
         $phone->phone_info = $request->post('phone_info');

@@ -19,7 +19,7 @@
                     @endif
                 </div>
                 <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data" action="{{ route('user.store') }}@if(!empty($user))/{{$user->id}}@endif">
+                    <form method="POST" enctype="multipart/form-data" action="@if(!isset($user)){{ route('user.store')}} @else {{ route('user.update', ['id' => $user->id])}} @endif">
                         @csrf
 
                         <div class="form-group row">

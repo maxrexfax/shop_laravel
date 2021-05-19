@@ -23,7 +23,7 @@
                     <th>{{ __('actions.user_last_name') }}</th>
                     <th>{{ __('actions.user_email') }}</th>
                     <th>{{ __('actions.edit') }}</th>
-                    <th>{{ __('actions.delete') }}</th>
+                    <th class="text-right">{{ __('actions.delete') }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -35,7 +35,7 @@
                         <td>{{$user->second_name}}</td>
                         <td>{{$user->last_name}}</td>
                         <td>{{$user->email}}</td>
-                        <td><a href="{{route('user.create')}}/{{$user->id}}"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td><a href="{{route('user.edit', [ 'id' => $user->id ])}}"><i class="fas fa-pencil-alt"></i></a></td>
                         <td>
                             <a href="{{route('user.destroy', ['id'=>$user->id])}}" title="{{__('text.delete')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btnToDeletePhone">
                                 <span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Repository\UserRepositoryInterface;
 use App\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -32,44 +33,48 @@ class UserController extends Controller
         return response()->json($this->userRepository->all(), 200);
     }
 
-    /**
-     *  Create new or edit existing User
-     * @param null $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
-     */
     public function create($id = null)
     {
-        if (!empty($id)) {
-            $user = $this->userRepository->findById($id);//After implementing repository
-            //$user = User::find($id);//Before repository
-            if ($user) {
-                return view('admin.partials.user._user_edit_create', [
-                    'user' => $user,
-                ]);
-            }
-
-            return redirect('/admin/users/list');
-        }
-
         return view('admin.partials.user._user_edit_create');
     }
 
-    /**
-     * Store User function in controller
-     * @param null $id
-     * @param StoreUserRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function store($id = null, StoreUserRequest $request)
+    public function edit($id = null)
+    {
+        if (empty($id)) {
+            return redirect('/admin/users/list');
+        }
+
+        $user = $this->userRepository->findById($id);
+
+        if ($user) {
+            return view('admin.partials.user._user_edit_create', [
+                'user' => $user,
+            ]);
+        }
+
+        return redirect('/admin/users/list');
+    }
+
+    public function store(StoreUserRequest $request)
+    {
+        $user = new User();
+
+        if ($user) {
+            $this->userRepository->storeUser($request, $user);
+        }
+
+        return redirect('admin/users/list');
+    }
+
+    public function update($id = null, StoreUserRequest $request)
     {
         if (Auth::user()->isAdmin() || Auth::user()->id === (int)$id) {
+            $user = null;
             if($id != null) {
                 $user = $this->userRepository->findById($id);
-            } else {
-                $user = null;
             }
 
-            if (!$user) {
+            if ($user == null) {
                 $user = new User();
             }
 

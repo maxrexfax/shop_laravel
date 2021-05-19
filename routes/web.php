@@ -153,8 +153,10 @@ Route::group(['middleware'=>'language'],function ()
 
     Route::prefix('/user')->group(function() {
         Route::get('/delete/{id}', 'UserController@destroy')->name('user.delete');
-        Route::get('/create/{id?}', 'UserController@create')->name('user.create');
-        Route::post('/store/{id?}', 'UserController@store')->name('user.store');
+        Route::get('/create', 'UserController@create')->name('user.create');
+        Route::get('/edit/{id?}', 'UserController@edit')->name('user.edit');
+        Route::post('/store', 'UserController@store')->name('user.store');
+        Route::post('/update/{id?}', 'UserController@update')->name('user.update');
         Route::get('/destroy/{id?}', 'UserController@destroy')->name('user.destroy');
 
     });

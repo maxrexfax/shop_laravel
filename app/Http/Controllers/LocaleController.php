@@ -6,6 +6,7 @@ use App\Http\Requests\StoreLocaleRequest;
 use App\Locale;
 use App\Repository\LocaleRepositoryInterface;
 use App\Services\LocaleStoreService;
+use Illuminate\Database\Eloquent\Model;
 
 class LocaleController extends Controller
 {
@@ -32,6 +33,15 @@ class LocaleController extends Controller
         ]);
     }
 
+    public function store(StoreLocaleRequest $request)
+    {
+        $locale = new Locale();
+
+        $this->localeRepository->storeLocale($request, $locale);
+
+        return redirect('/admin/locales/list');
+    }
+
     public function update($id = null, StoreLocaleRequest $request)
     {
         $locale = $this->localeRepository->findById($id);
@@ -42,16 +52,6 @@ class LocaleController extends Controller
 
         return redirect('admin/locales/list');
     }
-
-    public function store(StoreLocaleRequest $request)
-    {
-        $locale = new Locale();
-
-        $this->localeRepository->storeLocale($request, $locale);
-
-        return redirect('/admin/locales/list');
-    }
-
 
     public function destroy($id)
     {

@@ -25,7 +25,6 @@ class OrderController extends Controller
         $this->orderRepository = $orderRepository;
     }
 
-
     public function create()
     {
         return view('admin.partials.orders._order_create', [

@@ -48,13 +48,13 @@
                                 </div>
                             </div>
                             <div>
-                                <div class="accordion-header border-bottom oneHeight pl-2">
+                                <div id="management" class="accordion-header border-bottom oneHeight pl-2">
                                     <i class="fa fa-tags fw ml-2"></i>
                                     <span class="ml-2"><b>{{__('actions.management')}}</b></span>
                                 </div>
 
                                 <div class="accordion-content p-0">
-                                    <p class="w-100 border-bottom oneHeight"><a class="url-in-accordion ml-4 mb-0" href="{{route('admin.users.list')}}">{{ __('actions.users') }}</a></p>
+                                    <p class="w-100 border-bottom oneHeight"><a id="managementUsers" class="url-in-accordion ml-4 mb-0" href="{{route('admin.users.list')}}">{{ __('actions.users') }}</a></p>
                                 </div>
                             </div>
                         </div>

@@ -29,7 +29,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        //return response()->json("Data1:1, Data2:2", 200);
         return response()->json($this->userRepository->all(), 200);
     }
 
@@ -80,9 +79,9 @@ class UserController extends Controller
 
             $this->userRepository->storeuser($request, $user);
         }
+
         return redirect('admin/users/list');
     }
-
 
     /**
      * @param $id

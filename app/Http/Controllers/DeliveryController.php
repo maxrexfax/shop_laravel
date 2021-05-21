@@ -6,6 +6,7 @@ use App\Delivery;
 use App\Http\Requests\StoreDeliveryRequest;
 use App\Repository\DeliveryRepositoryInterface;
 use App\Services\DeliveryStoreService;
+use Illuminate\Database\Eloquent\Model;
 
 class DeliveryController extends Controller
 {
@@ -32,15 +33,6 @@ class DeliveryController extends Controller
         ]);
     }
 
-    public function update($id = null, StoreDeliveryRequest $request)
-    {
-        $delivery = $this->deliveryRepository->findById($id);
-
-        $this->deliveryRepository->store($request, $delivery);
-
-        return redirect('admin/deliveries/list');
-    }
-
     public function store(StoreDeliveryRequest $request)
     {
         $delivery = new Delivery();
@@ -50,12 +42,21 @@ class DeliveryController extends Controller
         return redirect('/admin/deliveries/list');
     }
 
+    public function update($id = null, StoreDeliveryRequest $request)
+    {
+        $delivery = $this->deliveryRepository->findById($id);
+
+        $this->deliveryRepository->store($request, $delivery);
+
+        return redirect('admin/deliveries/list');
+    }
+
     public function destroy($id)
     {
-        $delivery = Delivery::find($id);
+        $delivery = $this->deliveryRepository->findById($id);
 
         if ($delivery) {
-            $delivery->delete();
+            $this->deliveryRepository->destroy($id);
         }
 
         return redirect('/admin/deliveries/list');

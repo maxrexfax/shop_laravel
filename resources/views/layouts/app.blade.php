@@ -84,7 +84,7 @@
                             <ul class="navbar-nav ml-auto">
                                 @auth
                                     <li class="nav-item">
-                                        <a class="nav-link item-menu-non-root" href="{{ route('admin') }}">{{ __('actions.admin_control') }}</a>
+                                        <a id="adminConrol" class="nav-link item-menu-non-root" href="{{ route('admin') }}">{{ __('actions.admin_control') }}</a>
                                     </li>
                                 @endauth
 

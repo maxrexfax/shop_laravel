@@ -3,7 +3,7 @@
     <div class="card">
         <div class="card-header text-center">
             {{ __('text.list_of_locales') }}
-            <a class="url_in_accordion ml-2 mb-0 float-right" href="{{route('locale.create')}}">
+            <a id="btnCreateLocale" class="url_in_accordion ml-2 mb-0 float-right" href="{{route('locale.create')}}">
                 <span class="addButton" title="{{ __('actions.add_new') }}">+</span>
             </a>
         </div>

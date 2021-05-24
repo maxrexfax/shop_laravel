@@ -35,20 +35,14 @@ class LocaleController extends Controller
 
     public function store(StoreLocaleRequest $request)
     {
-        $locale = new Locale();
-
-        $this->localeRepository->storeLocale($request, $locale);
+        $this->localeRepository->storeLocale($request);
 
         return redirect('/admin/locales/list');
     }
 
-    public function update($id = null, StoreLocaleRequest $request)
+    public function update(StoreLocaleRequest $request)
     {
-        $locale = $this->localeRepository->findById($id);
-
-        if($locale) {
-            $this->localeRepository->storeLocale($request, $locale);
-        }
+        $this->localeRepository->storeLocale($request);
 
         return redirect('admin/locales/list');
     }

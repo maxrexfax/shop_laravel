@@ -42,24 +42,14 @@ class PaymentMethodController extends Controller
 
     public function store(StorePaymethodRequest $request)
     {
-        $paymentMethod = new PaymentMethod();
-
-        $this->paymentMethodRepository->store($request, $paymentMethod);
+        $this->paymentMethodRepository->store($request);
 
         return redirect('/admin/paymethod/list');
     }
 
-    public function update($id = null, StorePaymethodRequest $request)
+    public function update(StorePaymethodRequest $request)
     {
-        if ($id == null) {
-            return redirect('admin/paymethod/list');
-        }
-
-        $paymentMethod = $this->paymentMethodRepository->findById($id);
-
-        if ($paymentMethod) {
-            $this->paymentMethodRepository->store($request, $paymentMethod);
-        }
+        $this->paymentMethodRepository->store($request);
 
         return redirect('admin/paymethod/list');
     }
@@ -67,6 +57,7 @@ class PaymentMethodController extends Controller
     public function destroy($id)
     {
         $paymentMethod = $this->paymentMethodRepository->findById($id);
+
         if ($paymentMethod) {
             $this->paymentMethodRepository->destroy($id);
         }

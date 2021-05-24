@@ -59,7 +59,7 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/create', 'CategoryController@create')->name('category.create');
         Route::post('/store', 'CategoryController@store')->name('category.store');
         Route::get('/edit/{id?}', 'CategoryController@edit')->name('category.edit');
-        Route::post('/update/{id?}', 'CategoryController@update')->name('category.update');
+        Route::post('/update', 'CategoryController@update')->name('category.update');
         Route::get('/root/list', 'CategoryController@categoriesRootList')->name('category.rootlist');
         Route::get('/destroy/{id}', 'CategoryController@destroy')->name('category.destroy');
         Route::get('/list', 'CategoryController@list')->name('category.list');
@@ -69,7 +69,7 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/create', 'CurrencyController@create')->name('currency.create');
         Route::get('/edit/{id?}', 'CurrencyController@edit')->name('currency.edit');
         Route::post('/store', 'CurrencyController@store')->name('currency.store');
-        Route::post('/update/{id?}', 'CurrencyController@update')->name('currency.update');
+        Route::post('/update', 'CurrencyController@update')->name('currency.update');
         Route::get('/destroy/{id?}', 'CurrencyController@destroy')->name('currency.destroy');
     });
 
@@ -77,7 +77,7 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/create', 'DeliveryController@create')->name('delivery.create');
         Route::get('/edit/{id?}', 'DeliveryController@edit')->name('delivery.edit');
         Route::post('/store', 'DeliveryController@store')->name('delivery.store');
-        Route::post('/update/{id?}', 'DeliveryController@update')->name('delivery.update');
+        Route::post('/update', 'DeliveryController@update')->name('delivery.update');
         Route::get('/destroy/{id?}', 'DeliveryController@destroy')->name('delivery.destroy');
     });
 
@@ -85,7 +85,7 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/create', 'LocaleController@create')->name('locale.create');
         Route::get('/edit/{id?}', 'LocaleController@edit')->name('locale.edit');
         Route::post('/store', 'LocaleController@store')->name('locale.store');
-        Route::post('/update/{id?}', 'LocaleController@update')->name('locale.update');
+        Route::post('/update', 'LocaleController@update')->name('locale.update');
         Route::get('/destroy/{id?}', 'LocaleController@destroy')->name('locale.destroy');
     });
 
@@ -96,14 +96,14 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/create', 'OrderController@create')->name('order.create');
         Route::get('/edit/{id?}', 'OrderController@edit')->name('order.edit');
         Route::post('/store', 'OrderController@store')->name('order.store');
-        Route::post('/update/{id?}', 'OrderController@update')->name('order.update');
+        Route::post('/update', 'OrderController@update')->name('order.update');
     });
 
     Route::prefix('/paymethod')->group(function() {
         Route::get('/create', 'PaymentMethodController@create')->name('payment.method.create');
         Route::get('/edit/{id?}', 'PaymentMethodController@edit')->name('payment.method.edit');
         Route::post('/store', 'PaymentMethodController@store')->name('payment.method.store');
-        Route::post('/update/{id?}', 'PaymentMethodController@update')->name('payment.method.update');
+        Route::post('/update', 'PaymentMethodController@update')->name('payment.method.update');
         Route::get('/destroy/{id?}', 'PaymentMethodController@destroy')->name('payment.destroy');
     });
 
@@ -111,7 +111,7 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/create/{store_id?}', 'PhoneController@create')->name('phone.create');
         Route::get('/edit/{store_id?}/{phone_id?}', 'PhoneController@edit')->name('phone.edit');
         Route::post('/store/{id?}', 'PhoneController@store')->name('phone.store');
-        Route::post('/update/{id?}', 'PhoneController@update')->name('phone.update');
+        Route::post('/update', 'PhoneController@update')->name('phone.update');
         Route::get('/delete/{id}', 'PhoneController@destroy')->name('phone.delete');
     });
 
@@ -123,7 +123,7 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/images/{id}', 'ProductController@images')->name('product.images');
         Route::get('/show/{id}', 'ProductController@show')->name('product.show');
         Route::post('/store', 'ProductController@store')->name('product.store');
-        Route::post('/update/{id?}', 'ProductController@update')->name('product.update');
+        Route::post('/update', 'ProductController@update')->name('product.update');
         Route::get('/destroy/{id}', 'ProductController@destroy')->name('product.destroy');
         Route::get('/info/{id}', 'ProductController@productInfo')->name('product.info');
     });
@@ -132,7 +132,7 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/create', 'PromocodeController@create')->name('promocode.create');
         Route::get('/edit/{id?}', 'PromocodeController@edit')->name('promocode.edit');
         Route::post('/store', 'PromocodeController@store')->name('promocode.store');
-        Route::post('/update/{id?}', 'PromocodeController@update')->name('promocode.update');
+        Route::post('/update', 'PromocodeController@update')->name('promocode.update');
         Route::get('/delete/{id}', 'PromocodeController@delete')->name('promocode.delete');
     });
 
@@ -140,7 +140,7 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/create', 'StoreController@create')->name('store.create');
         Route::get('/edit/{id?}', 'StoreController@edit')->name('store.edit');
         Route::post('/store', 'StoreController@store')->name('store.store');
-        Route::post('/update/{id?}', 'StoreController@update')->name('store.update');
+        Route::post('/update', 'StoreController@update')->name('store.update');
         Route::post('/locales/store/{id?}', 'StoreController@storeLocales')->name('store.locales.store');
         Route::post('/currency/store/{id?}', 'StoreController@storeCurrency')->name('store.currency.store');
         Route::post('/delivery/store/{id?}', 'StoreController@storeDelivery')->name('store.delivery.store');
@@ -156,7 +156,7 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/create', 'UserController@create')->name('user.create');
         Route::get('/edit/{id?}', 'UserController@edit')->name('user.edit');
         Route::post('/store', 'UserController@store')->name('user.store');
-        Route::post('/update/{id?}', 'UserController@update')->name('user.update');
+        Route::post('/update', 'UserController@update')->name('user.update');
         Route::get('/destroy/{id?}', 'UserController@destroy')->name('user.destroy');
 
     });

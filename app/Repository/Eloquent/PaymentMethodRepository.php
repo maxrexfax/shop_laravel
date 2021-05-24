@@ -16,8 +16,18 @@ class PaymentMethodRepository extends BaseRepository implements PaymentMethodRep
         $this->model = $model;
     }
 
-    public function store($request, $paymentMethod)
+    public function paginateModel(int $numberToShow)
     {
+        return PaymentMethod::paginate($numberToShow);
+    }
+
+    public function store($request)
+    {
+        $paymentMethod = $this->model->find($request->post('id'));
+        if (empty($paymentMethod)) {
+            $paymentMethod = new PaymentMethod();
+        }
+
         $paymentMethod->payment_method_name = $request->post('payment_method_name');
         $paymentMethod->payment_method_code = $request->post('payment_method_code');
         $paymentMethod->other_data = $request->post('other_data');

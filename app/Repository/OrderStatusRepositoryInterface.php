@@ -2,6 +2,9 @@
 
 namespace App\Repository;
 
-interface DeliveryRepositoryInterface extends EloquentRepositoryInterface {
+interface OrderStatusRepositoryInterface extends EloquentRepositoryInterface
+{
     public function paginateModel(int $numberOfModels);
+
+
 }

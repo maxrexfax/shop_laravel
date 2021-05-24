@@ -14,8 +14,19 @@ class CurrencyRepository extends BaseRepository implements CurrencyRepositoryInt
         $this->model = $model;
     }
 
+    public function paginateModel(int $numberToShow)
+    {
+        return Currency::paginate($numberToShow);
+    }
+
     public function store($request, $currency)
     {
+        $currency = $this->currencyRepository->findById($request->post('id'));
+
+        if (empty($currency)) {
+            $currency = new Currency();
+        }
+
         $currency->currency_name = $request->post('currency_name');
         $currency->currency_code = $request->post('currency_code');
         $currency->currency_value = $request->post('currency_value');

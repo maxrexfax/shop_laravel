@@ -8,6 +8,10 @@ use App\Helpers\PriceHelper;
 use App\Http\Requests\StoreDeliveryStoreRequest;
 use App\Http\Requests\StoreStoreRequest;
 use App\Locale;
+use App\Repository\CurrencyRepositoryInterface;
+use App\Repository\DeliveryRepositoryInterface;
+use App\Repository\LocaleRepositoryInterface;
+use App\Repository\StoreCurrencyRepositoryInterface;
 use App\Repository\StoreRepositoryInterface;
 use App\Services\StoreCurrencyStoreService;
 use App\Services\StoreDeliveryStoreService;
@@ -22,11 +26,21 @@ use Illuminate\Support\Facades\Session;
 
 class StoreController extends Controller
 {
-    private $storeRepository;
+    protected $storeRepository;
+    protected $localeRepository;
+    protected $deliveryRepository;
+    protected $currencyRepository;
+    protected $storeCurrencyRepository;
 
-    public function __construct(StoreRepositoryInterface $storeRepository)
+    public function __construct(StoreRepositoryInterface $storeRepository, LocaleRepositoryInterface $localeRepository,
+                                DeliveryRepositoryInterface $deliveryRepository, CurrencyRepositoryInterface $currencyRepository,
+                                StoreCurrencyRepositoryInterface $storeCurrencyRepository)
     {
         $this->storeRepository = $storeRepository;
+        $this->localeRepository = $localeRepository;
+        $this->deliveryRepository = $deliveryRepository;
+        $this->currencyRepository = $currencyRepository;
+        $this->storeCurrencyRepository = $storeCurrencyRepository;
     }
 
     public function create($id = null)
@@ -50,23 +64,14 @@ class StoreController extends Controller
 
     public function store(StoreStoreRequest $request)
     {
-        $store = new Store();
-
-        $this->storeRepository->store($request, $store);
+        $this->storeRepository->store($request);
 
         return redirect('/admin/stores/list');
     }
 
-    public function update($id = null, StoreStoreRequest $request)
+    public function update(StoreStoreRequest $request)
     {
-        $store = null;
-        if($id != null) {
-            $store = $this->storeRepository->findById($id);
-        }
-
-        if ($store) {
-            $this->storeRepository->store($request, $store);
-        }
+        $this->storeRepository->store($request);
 
         return redirect('/admin/stores/list');
     }
@@ -92,7 +97,7 @@ class StoreController extends Controller
         if ($store) {
             return view('admin.partials.locale._store_locale_list', [
                 'store' => $store,
-                'locales' => Locale::all(),
+                'locales' => $this->localeRepository->all(),
             ]);
         }
     }
@@ -123,7 +128,7 @@ class StoreController extends Controller
     {
         return view('admin.partials.currency._store_currency_list', [
             'store' => $this->storeRepository->findById($id),
-            'currencies' => Currency::all()
+            'currencies' => $this->currencyRepository->all()
         ]);
     }
 
@@ -131,41 +136,32 @@ class StoreController extends Controller
     {
         return view('admin.partials.delivery._store_delivery_list', [
             'store' => $this->storeRepository->findById($id),
-            'deliveries' => Delivery::all()
+            'deliveries' => $this->deliveryRepository->all()
         ]);
     }
 
     public function storeCurrency($id, Request $request)
     {
-        $store = $this->storeRepository->findById($id);
-
-        if ($store) {
-            (new StoreCurrencyStoreService())->store($store, $request);
-        }
+        $this->storeCurrencyRepository->storeCurrenciesForStore($id, $request);
 
         return redirect()->back();
     }
 
     public function changeActive($id)
     {
-        $store = $this->storeRepository->findById($id);
-
-        if ($store) {
-            $store->active = !$store->active;
-            $store->save();
-        }
+        $this->storeRepository->changeStoreState($id);
 
         return redirect()->back();
     }
 
     public function setDefaultCurrency($id)
     {
-        $store = Store::where('active', '=', Store::STORE_IS_ACTIVE)->first();
-        $storeCurrencies = StoreCurrency::where('store_id', '=', $store->id)->get();
+        $store = $this->storeRepository->getActiveStore();
+        $storeCurrencies = $this->storeCurrencyRepository->getStoreCurrenciesByStoreId($store->id);
 
         foreach ($storeCurrencies as $storeCurrency) {
             if ($storeCurrency->currency_id == $id) {
-                Session::put('defaultCurrency', Currency::find($id));
+                Session::put('defaultCurrency', $this->currencyRepository->findById($id));
             }
         }
 

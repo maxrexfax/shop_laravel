@@ -14,8 +14,19 @@ class PromocodeRepository extends BaseRepository implements PromocodeRepositoryI
         $this->model = $model;
     }
 
-    public function store($request, $promocode)
+    public function paginateModel(int $numberToShow)
     {
+        return Promocode::paginate($numberToShow);
+    }
+
+    public function store($request)
+    {
+        $promocode = $this->model->find($request->post('id'));
+
+        if (empty($promocode)) {
+            $promocode = new Promocode();
+        }
+
         $promocode->fill($request->post());
         $promocode->save();
     }

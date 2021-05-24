@@ -2,4 +2,6 @@
 
 namespace App\Repository;
 
-interface PaymentMethodRepositoryInterface extends EloquentRepositoryInterface {}
+interface PaymentMethodRepositoryInterface extends EloquentRepositoryInterface {
+    public function paginateModel(int $numberOfModels);
+}

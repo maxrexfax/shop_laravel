@@ -6,27 +6,30 @@ use App\Category;
 use App\Helpers\PriceHelper;
 use App\Http\Requests\StoreProductRequest;
 use App\Product;
+use App\Repository\CategoryRepositoryInterface;
 use App\Repository\ProductRepositoryInterface;
 use App\Services\ProductStoreService;
 use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
-    private $productRepository;
+    protected $productRepository;
+    protected $categoryRepository;
 
-    public function __construct(ProductRepositoryInterface $productRepository)
+    public function __construct(ProductRepositoryInterface $productRepository, CategoryRepositoryInterface $categoryRepository)
     {
         if (!Session::has('arrayOfVisitedProducts')) {
             Session::put('arrayOfVisitedProducts', []);
         }
 
         $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     public function create($id = null)
     {
         return view('admin.partials.product._product_edit_create', [
-            'categories' => Category::all()
+            'categories' => $this->categoryRepository->all()
         ]);
     }
 
@@ -40,7 +43,7 @@ class ProductController extends Controller
 
         if ($product) {
             return view('admin.partials.product._product_edit_create', [
-                'categories' => Category::all(),
+                'categories' => $this->categoryRepository->all(),
                 'product' => $product
             ]);
         }
@@ -50,24 +53,14 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-        $product = new Product();
-
-        $this->productRepository->store($request, $product);
+        $this->productRepository->store($request);
 
         return redirect('admin/product/list');
     }
 
-    public function update($id = null, StoreProductRequest $request)
+    public function update(StoreProductRequest $request)
     {
-        if ($id == null) {
-            return redirect('admin/product/list');
-        }
-
-        $product = $this->productRepository->findById($id);
-
-        if ($product) {
-            $this->productRepository->store($request, $product);
-        }
+        $this->productRepository->store($request);
 
         return redirect('admin/product/list');
     }
@@ -82,7 +75,7 @@ class ProductController extends Controller
                 'product' => $product,
                 'alternativeTitle' => $product->title,
                 'alternativeDescription' => $product->description,
-                'arrayOfVisitedProducts' => Product::find(Session::get('arrayOfVisitedProducts')),//str N59 protects from null
+                'arrayOfVisitedProducts' => $this->productRepository->getArrayOfProductsByIds(Session::get('arrayOfVisitedProducts')),
             ]);
         }
 
@@ -114,7 +107,7 @@ class ProductController extends Controller
 
     public function productsList($category_id)
     {
-        $category = Category::find($category_id);
+        $category = $this->categoryRepository->findById($category_id);
 
         return !empty($category) ? response()->json($category->getProducts()) : 0;
     }

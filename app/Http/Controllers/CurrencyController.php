@@ -38,18 +38,14 @@ class CurrencyController extends Controller
 
     public function store(StoreCurrencyRequest $request)
     {
-        $currency = new Currency();
-
-        $this->currencyRepository->store($request, $currency);
+        $this->currencyRepository->store($request);
 
         return redirect('admin/currencies/list');
     }
 
-    public function update($id = null, StoreCurrencyRequest $request)
+    public function update(StoreCurrencyRequest $request)
     {
-        $currency = $this->currencyRepository->findById($id);
-
-        $this->currencyRepository->store($request, $currency);
+        $this->currencyRepository->store($request);
 
         return redirect('admin/currencies/list');
     }

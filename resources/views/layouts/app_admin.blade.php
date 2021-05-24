@@ -132,7 +132,7 @@
         <footer>
             <section class="place-holder"></section>
             <div class="text-center">
-                <p>Admin footer (TODO?)</p>
+                <p></p>
             </div>
         </footer>
     </div>

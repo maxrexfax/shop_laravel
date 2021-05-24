@@ -14,8 +14,18 @@ class DeliveryRepository extends BaseRepository implements DeliveryRepositoryInt
         $this->model = $model;
     }
 
-    public function store($request, $delivery)
+    public function paginateModel(int $numberToShow)
     {
+        return Delivery::paginate($numberToShow);
+    }
+
+    public function store($request)
+    {
+        $delivery = $this->model->find($request->post('id'));
+        if (empty($delivery)) {
+            $delivery = new Delivery();
+        }
+
         $delivery->fill($request->post());
         $delivery->save();
     }

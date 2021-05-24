@@ -35,18 +35,14 @@ class DeliveryController extends Controller
 
     public function store(StoreDeliveryRequest $request)
     {
-        $delivery = new Delivery();
-
-        $this->deliveryRepository->store($request, $delivery);
+        $this->deliveryRepository->store($request);
 
         return redirect('/admin/deliveries/list');
     }
 
-    public function update($id = null, StoreDeliveryRequest $request)
+    public function update(StoreDeliveryRequest $request)
     {
-        $delivery = $this->deliveryRepository->findById($id);
-
-        $this->deliveryRepository->store($request, $delivery);
+        $this->deliveryRepository->store($request);
 
         return redirect('admin/deliveries/list');
     }

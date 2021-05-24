@@ -12,20 +12,66 @@ use App\Order;
 use App\PaymentMethod;
 use App\Product;
 use App\Promocode;
+use App\Repository\CategoryRepositoryInterface;
+use App\Repository\CurrencyRepositoryInterface;
+use App\Repository\DeliveryRepositoryInterface;
+use App\Repository\ImageRepositoryInterface;
+use App\Repository\LocaleRepositoryInterface;
+use App\Repository\OrderRepositoryInterface;
+use App\Repository\PaymentMethodRepositoryInterface;
+use App\Repository\ProductRepositoryInterface;
+use App\Repository\StoreRepositoryInterface;
+use App\Repository\UserRepositoryInterface;
 use App\Store;
 use App\User;
 use Illuminate\Support\Facades\Lang;
 
 class AdminController extends Controller
 {
+    protected $imageRepository;
+    protected $productRepository;
+    protected $userRepository;
+    protected $categoryRepository;
+    protected $storeRepository;
+    protected $currencyRepository;
+    protected $localeRepository;
+    protected $deliveryRepository;
+    protected $promocodeRepository;
+    protected $paymentMethodRepository;
+    protected $ordersRepository;
+
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ImageRepositoryInterface $imageRepository,
+                                ProductRepositoryInterface $productRepository,
+                                UserRepositoryInterface $userRepository,
+                                CategoryRepositoryInterface $categoryRepository,
+                                StoreRepositoryInterface $storeRepository,
+                                CurrencyRepositoryInterface $currencyRepository,
+                                LocaleRepositoryInterface $localeRepository,
+                                DeliveryRepositoryInterface $deliveryRepository,
+                                ProductRepositoryInterface $promocodeRepository,
+                                PaymentMethodRepositoryInterface $paymentMethodRepository,
+                                OrderRepositoryInterface $ordersRepository
+    )
     {
         $this->middleware('auth');
+        $this->imageRepository = $imageRepository;
+        $this->productRepository = $productRepository;
+        $this->userRepository = $userRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->storeRepository = $storeRepository;
+        $this->currencyRepository = $currencyRepository;
+        $this->localeRepository = $localeRepository;
+        $this->deliveryRepository = $deliveryRepository;
+        $this->promocodeRepository = $promocodeRepository;
+        $this->paymentMethodRepository = $paymentMethodRepository;
+        $this->ordersRepository = $ordersRepository;
+
     }
 
     public function index()
@@ -35,27 +81,19 @@ class AdminController extends Controller
 
     public function categoryList()
     {
-        $categoriesHierarchically = Category::whereNull('category_id')
-            ->with('childrenCategories')
-            ->get();
-
         return view('admin.partials.category._category_list', [
-            'categoriesHierarchically' => $categoriesHierarchically,
-            'categories' => Category::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
+            'categoriesHierarchically' => $this->categoryRepository->getCategoriesWithChildren(),
+            'categories' =>$this->categoryRepository->paginateModel(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
             'alternativeTitle' => Lang::get('messages.categories_list'),
         ]);
     }
 
     public function productList()
     {
-        $categoriesHierarchically = Category::whereNull('category_id')
-            ->with('childrenCategories')
-            ->get();
-
         return view('admin.partials.product._product_list', [
-            'products' => Product::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
-            'images' => Image::all(),
-            'categoriesHierarchically' => $categoriesHierarchically,
+            'products' => $this->productRepository->paginateModel(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
+            'images' => $this->imageRepository->all(),
+            'categoriesHierarchically' => $this->categoryRepository->getCategoriesWithChildren(),
             'alternativeTitle' => Lang::get('messages.product_list'),
         ]);
     }
@@ -63,7 +101,7 @@ class AdminController extends Controller
     public function userList()
     {
         return view('admin.partials.user._users_list', [
-            'users' => User::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
+            'users' => $this->userRepository->paginateModel(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
             'alternativeTitle' => Lang::get('messages.users_list'),
         ]);
     }
@@ -71,7 +109,7 @@ class AdminController extends Controller
     public function storeList()
     {
         return view('admin.partials.store._stores_list', [
-            'stores' => Store::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
+            'stores' => $this->storeRepository->paginateModel(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
             'alternativeTitle' => Lang::get('messages.stores_list'),
         ]);
     }
@@ -79,7 +117,7 @@ class AdminController extends Controller
     public function currencyList()
     {
         return view('admin.partials.currency._currency_list', [
-                'currencies' => Currency::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
+                'currencies' => $this->currencyRepository->paginateModel(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
                 'alternativeTitle' => Lang::get('messages.currency_list'),
             ]
         );
@@ -88,7 +126,7 @@ class AdminController extends Controller
     public function localesList()
     {
         return view('admin.partials.locale._locales_list', [
-            'locales' => Locale::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
+            'locales' => $this->localeRepository->paginateModel(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
             'alternativeTitle' => Lang::get('messages.locales_list'),
         ]);
     }
@@ -96,7 +134,7 @@ class AdminController extends Controller
     public function deliveriesList()
     {
         return view('admin.partials.delivery._deliveries_list', [
-            'deliveries' => Delivery::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
+            'deliveries' => $this->deliveryRepository->paginateModel(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
             'alternativeTitle' => Lang::get('messages.deliveries_list'),
         ]);
     }
@@ -104,14 +142,14 @@ class AdminController extends Controller
     public function promocodesList()
     {
         return view('admin.partials.promocode._promocodes_list', [
-            'promocodes' => Promocode::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
+            'promocodes' => $this->promocodeRepository->paginateModel(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
         ]);
     }
 
     public function paymethodList()
     {
         return view('admin.partials.paymethod._paymethods_list', [
-            'paymentMethods' => PaymentMethod::paginate(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
+            'paymentMethods' => $this->paymentMethodRepository->paginateModel(PaginationQuantityHelper::DEFAULT_PAGINATION_QUANTITY),
             'alternativeTitle' => Lang::get('text.paymethods_list'),
         ]);
     }
@@ -119,7 +157,7 @@ class AdminController extends Controller
     public function ordersList()
     {
         return view('admin.partials.orders._orders_list', [
-            'orders' => Order::with('products')->get(),
+            'orders' => $this->ordersRepository->ordersWithProducts(),
             'alternativeTitle' => Lang::get('text.orders_list'),
         ]);
     }

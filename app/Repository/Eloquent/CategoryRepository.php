@@ -17,8 +17,30 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         $this->model = $model;
     }
 
-    public function storeCategory($request, $category)
+    public function paginateModel(int $numberToShow)
     {
+        return Category::paginate($numberToShow);
+    }
+
+    public function getCategoriesWithChildren()
+    {
+        $categoriesHierarchically = Category::whereNull('category_id')
+            ->with('childrenCategories')
+            ->get();
+        return $categoriesHierarchically;
+    }
+
+    public function getRootCategories()
+    {
+        return Category::whereNull('category_id')->get();
+    }
+
+    public function storeCategory($request)
+    {
+        $category = $this->model->find($request->post('id'));
+        if (empty($category)) {
+            $category = new Category();
+        }
         $category->category_name = $request->post('category_name');
         $category->sort_number = $request->post('sort_number');
         $category->category_id = $request->post('category_id');

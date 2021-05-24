@@ -3,25 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePhoneRequest;
-use App\Phone;
 use App\Repository\PhoneRepositoryInterface;
-use App\Services\PhoneStoreService;
-use App\Store;
-use Illuminate\Database\Eloquent\Model;
+use App\Repository\StoreRepositoryInterface;
 
 class PhoneController extends Controller
 {
-    private $phoneRepository;
+    protected $phoneRepository;
+    protected $storeRepository;
 
-    public function __construct(PhoneRepositoryInterface $phoneRepository)
+    public function __construct(PhoneRepositoryInterface $phoneRepository, StoreRepositoryInterface $storeRepository)
     {
         $this->phoneRepository = $phoneRepository;
+        $this->storeRepository = $storeRepository;
     }
 
     public function create($store_id = null)
     {
         return view('admin.partials.phones._phone_edit_create', [
-            'store' => Store::find($store_id),
+            'store' => $this->storeRepository->findById($store_id),
         ]);
     }
 
@@ -32,7 +31,7 @@ class PhoneController extends Controller
         if ($phone) {
             return view('admin.partials.phones._phone_edit_create', [
                 'phone' => $phone,
-                'store' => Store::find($store_id)
+                'store' => $this->storeRepository->findById($store_id)
             ]);
         }
 
@@ -41,20 +40,14 @@ class PhoneController extends Controller
 
     public function store(StorePhoneRequest $request)
     {
-        $phone = new Phone();
-
-        $this->phoneRepository->storePhone($request, $phone);
+        $this->phoneRepository->storePhone($request);
 
         return redirect('/store/phonelist/' . $request->post('store_id'));
     }
 
-    public function update($id = null, StorePhoneRequest $request)
+    public function update(StorePhoneRequest $request)
     {
-        $phone = $this->phoneRepository->findById($id);
-
-        if ($phone) {
-            $this->phoneRepository->storePhone($request, $phone);
-        }
+        $this->phoneRepository->storePhone($request);
 
         return redirect('admin/category/list');
     }
@@ -69,5 +62,4 @@ class PhoneController extends Controller
 
         return redirect()->back();
     }
-
 }

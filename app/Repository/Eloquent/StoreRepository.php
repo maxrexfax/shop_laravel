@@ -14,9 +14,29 @@ class StoreRepository extends BaseRepository implements StoreRepositoryInterface
         $this->model = $model;
     }
 
-    public function store($request, $store)
+    public function paginateModel(int $numberToShow)
+    {
+        return Store::paginate($numberToShow);
+    }
+
+    public function getActiveStore()
+    {
+        return Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE);
+    }
+
+    public function changeStoreState($id)
+    {
+        $store = $this->model->find($id);
+        $store->active = !$store->active;
+    }
+
+    public function store($request)
     {
         $logo = null;
+        $store = $this->model->findById($request->post('id'));
+        if (empty($store)) {
+            $store = new Store();
+        }
         if ($store->store_logo) {
             $logo = $store->store_logo;
         }

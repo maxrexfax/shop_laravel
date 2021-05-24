@@ -32,4 +32,6 @@ interface EloquentRepositoryInterface
 
     public function destroy(int $model): bool;
 
+    //public function paginateModel(int $numberOfModels);
+
 }

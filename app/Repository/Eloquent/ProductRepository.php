@@ -2,6 +2,7 @@
 
 namespace App\Repository\Eloquent;
 
+use App\Category;
 use App\CategoryProduct;
 use App\Helpers\ImageHelper;
 use App\Http\Requests\StoreProductRequest;
@@ -18,6 +19,34 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         $this->model = $model;
     }
 
+    public function paginateModel(int $numberToShow)
+    {
+        return Product::paginate($numberToShow);
+    }
+
+    public function getArrayOfProductsByIds($arrayOfIds)
+    {
+        return Product::find($arrayOfIds);
+    }
+
+    public function getUserListBySortData($id, $sortType, $paginateQuantity)
+    {
+        $cmd = '';
+        if ($sortType === Category::ASCENDING_TYPE_OF_SORT) {
+            $cmd = 'price ASC';
+        } else if ($sortType === Category::DESCENDING_TYPE_OF_SORT){
+            $cmd = 'price DESC';
+        } else {
+            $cmd = 'product_name ASC';
+        }
+
+        return Product::whereHas('categories', function ($subQuery) use ($id) {
+            $subQuery->where('categories.id', $id);
+        })
+            ->orderByRaw($cmd)
+            ->paginate($paginateQuantity);
+    }
+
     /**
      * Store all properties of the Product
      * @param StoreProductRequest $request
@@ -26,6 +55,10 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     public function store(StoreProductRequest $request, $product)
     {
         $logo = null;
+        $product = $this->model->findById($request->post('id'));
+        if (empty($product)) {
+            $product = new Product();
+        }
 
         if ($product->logo_image) {
             $logo = $product->logo_image;

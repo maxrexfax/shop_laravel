@@ -2,4 +2,6 @@
 
 namespace App\Repository;
 
-interface LocaleRepositoryInterface extends EloquentRepositoryInterface {}
+interface LocaleRepositoryInterface extends EloquentRepositoryInterface {
+    public function paginateModel(int $numberOfModels);
+}

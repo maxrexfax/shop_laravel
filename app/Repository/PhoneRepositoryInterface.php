@@ -2,4 +2,6 @@
 
 namespace App\Repository;
 
-interface PhoneRepositoryInterface extends EloquentRepositoryInterface {}
+interface PhoneRepositoryInterface extends EloquentRepositoryInterface {
+    public function paginateModel(int $numberOfModels);
+}

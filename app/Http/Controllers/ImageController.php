@@ -37,9 +37,10 @@ class ImageController extends Controller
 
     public function delete($imageId, Request $request)
     {
-        $image = Image::find($imageId);
+        $image = $this->imageRepository->findById($imageId);
+
         if ($image) {
-            $image->delete();
+            $this->imageRepository->destroy($imageId);
             (new ImageHelper())->deleteImage($image->image_name, '/img/' . $request->get('subPath') . '/');
         }
 
@@ -48,7 +49,7 @@ class ImageController extends Controller
 
     public function changeSortOrder(Request $request)
     {
-        $image = Image::find($request->post('image_id'));
+        $image = $this->imageRepository->findById($request->post('image_id'));
         $image->sort_number = $request->post('sort_number');
         $image->save();
 

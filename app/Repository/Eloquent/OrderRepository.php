@@ -19,8 +19,27 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
         $this->model = $model;
     }
 
-    public function store($request, $order)
+    public function paginateModel(int $numberToShow)
     {
+        return Order::paginate($numberToShow);
+    }
+
+    public function ordersWithProducts()
+    {
+        return Order::with('products')->get();
+    }
+
+    public function getOrderByUniqId($uid)
+    {
+        return Order::where('uniq_id', '=', $uid)->first();
+    }
+
+    public function store($request)
+    {
+        $order = $this->model->find($request->post('orderId'));
+        if (empty($order)) {
+            $order = new Order();
+        }
         $paying = null;
 
         if ($request->post('payment_method_code') === PaymentMethod::PAYMENT_METHOD_CREDIT) {

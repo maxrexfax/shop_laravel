@@ -12,31 +12,57 @@ use App\OrderProduct;
 use App\PaymentMethod;
 use App\PaypalPayment;
 use App\Promocode;
+use App\Repository\CategoryRepositoryInterface;
+use App\Repository\DeliveryRepositoryInterface;
+use App\Repository\OrderProductRepositoryInterface;
 use App\Repository\OrderRepositoryInterface;
+use App\Repository\OrderStatusRepositoryInterface;
+use App\Repository\PaymentMethodRepositoryInterface;
+use App\Repository\PromocodeRepositoryInterface;
 use App\Services\OrderStoreService;
 use App\OrderStatus;
 
 class OrderController extends Controller
 {
-    private $orderRepository;
+    protected $orderRepository;
+    protected $categoryRepository;
+    protected $deliveryRepository;
+    protected $paymethodRepository;
+    protected $promocodeRepository;
+    protected $orderStatusRepository;
+    protected $orderProductRepository;
 
-    public function __construct(OrderRepositoryInterface $orderRepository)
+    public function __construct(
+        OrderRepositoryInterface $orderRepository,
+        CategoryRepositoryInterface $categoryRepository,
+        DeliveryRepositoryInterface $deliveryRepository,
+        PaymentMethodRepositoryInterface $paymethodRepository,
+        PromocodeRepositoryInterface $promocodeRepository,
+        OrderStatusRepositoryInterface $orderStatusRepository,
+        OrderProductRepositoryInterface $orderProductRepository
+    )
     {
         $this->orderRepository = $orderRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->deliveryRepository = $deliveryRepository;
+        $this->paymethodRepository = $paymethodRepository;
+        $this->promocodeRepository = $promocodeRepository;
+        $this->orderStatusRepository = $orderStatusRepository;
+        $this->orderProductRepository = $orderProductRepository;
     }
 
     public function create()
     {
         return view('admin.partials.orders._order_create', [
-            'statuses' => OrderStatus::all(),
-            'categories' => Category::all(),
-            'deliveries' => Delivery::all(),
-            'paymentMethods' => PaymentMethod::all(),
-            'promocodes' => Promocode::all(),
+            'statuses' => $this->orderStatusRepository->all(),
+            'categories' => $this->categoryRepository->all(),
+            'deliveries' => $this->deliveryRepository->all(),
+            'paymentMethods' => $this->paymethodRepository->all(),
+            'promocodes' => $this->promocodeRepository->all(),
         ]);
     }
 
-    public function edit($id = null)
+    public function edit($id = null)//сделать реквест проверку входящих данных в едиты
     {
         if($id == null) {
             return redirect('admin/orders/list');
@@ -47,12 +73,12 @@ class OrderController extends Controller
         if ($order) {
             return view('admin.partials.orders._order_create', [
                 'order' => $order,
-                'statuses' => OrderStatus::all(),
-                'categories' => Category::all(),
-                'deliveries' => Delivery::all(),
-                'paymentMethods' => PaymentMethod::all(),
-                'promocodes' => Promocode::all(),
+                'statuses' => $this->orderStatusRepository->all(),
+                'categories' => $this->categoryRepository->all(),
+                'deliveries' => $this->deliveryRepository->all(),
+                'paymentMethods' => $this->paymethodRepository->all(),
                 'paymentArray' => $order->getOrderPaymentDetails(),
+                'promocodes' => $this->promocodeRepository->all(),
             ]);
         }
 
@@ -61,22 +87,16 @@ class OrderController extends Controller
 
     public function store(StoreOrderRequest $request)
     {
-        $order = new Order();
-
-        $this->orderRepository->store($request, $order);
+        $order = $this->orderRepository->store($request);
 
         return redirect()->route('cart.show.order', [
             'uniq_id' => $order->uniq_id,
         ]);
     }
 
-    public function update($id = null, StoreOrderRequest $request)
+    public function update(StoreOrderRequest $request)
     {
-        $order = $this->orderRepository->findById($id);
-
-        if ($order) {
-            $this->orderRepository->store($request, $order);
-        }
+        $this->orderRepository->store($request);
 
         return redirect('admin/orders/list');
     }
@@ -116,7 +136,7 @@ class OrderController extends Controller
         $order = $this->orderRepository->findById($id);
 
         if ($order) {
-            OrderProduct::where('order_id', '=', $id)->delete();
+            $this->orderProductRepository->destroyByForeignKeyOrderId($id);
             $this->orderRepository->destroy($id);
         }
 

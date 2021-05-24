@@ -14,9 +14,19 @@ class LocaleRepository extends BaseRepository implements LocaleRepositoryInterfa
         $this->model = $model;
     }
 
-    public function storeLocale($request, $locale)
+    public function paginateModel(int $numberToShow)
+    {
+        return Locale::paginate($numberToShow);
+    }
+
+    public function storeLocale($request)
     {
         $logo = null;
+        $locale = $this->model->find($request->post('id'));
+
+        if (empty($locale)) {
+            $locale = new Locale();
+        }
 
         if ($locale->locale_logo) {
             $logo = $locale->locale_logo;

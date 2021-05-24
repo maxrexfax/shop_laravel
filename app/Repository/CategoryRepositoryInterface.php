@@ -2,4 +2,10 @@
 
 namespace App\Repository;
 
-interface CategoryRepositoryInterface extends EloquentRepositoryInterface {}
+interface CategoryRepositoryInterface extends EloquentRepositoryInterface {
+    public function paginateModel(int $numberOfModels);
+
+    public function getCategoriesWithChildren();
+
+    public function getRootCategories();
+}

@@ -35,22 +35,14 @@ class PromocodeController extends Controller
 
     public function store(StorePromocodeRequest $request)
     {
-        $promocode = new Promocode();
-
-        $this->promocodeRepository->store($request, $promocode);
+        $this->promocodeRepository->store($request);
 
         return redirect('/admin/promocodes/list');
     }
 
-    public function update($id = null, StorePromocodeRequest $request)
+    public function update(StorePromocodeRequest $request)
     {
-        if($id != null) {
-            $promocode = $this->promocodeRepository->findById($id);
-        }
-
-        if ($promocode) {
-            $this->promocodeRepository->store($request, $promocode);
-        }
+        $this->promocodeRepository->store($request);
 
         return redirect('/admin/promocodes/list');
     }
@@ -58,6 +50,7 @@ class PromocodeController extends Controller
     public function delete($id)
     {
         $promocode = $this->promocodeRepository->findById($id);
+
         if ($promocode) {
             $this->promocodeRepository->destroy($id);
         }

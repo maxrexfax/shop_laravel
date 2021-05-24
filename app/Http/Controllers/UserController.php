@@ -32,7 +32,7 @@ class UserController extends Controller
         return response()->json($this->userRepository->all(), 200);
     }
 
-    public function create($id = null)
+    public function create()
     {
         return view('admin.partials.user._user_edit_create');
     }
@@ -56,28 +56,15 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        $user = new User();
-
-        if ($user) {
-            $this->userRepository->storeUser($request, $user);
-        }
+        $this->userRepository->storeUser($request);
 
         return redirect('admin/users/list');
     }
 
-    public function update($id = null, StoreUserRequest $request)
+    public function update(StoreUserRequest $request)
     {
-        if (Auth::user()->isAdmin() || Auth::user()->id === (int)$id) {
-            $user = null;
-            if($id != null) {
-                $user = $this->userRepository->findById($id);
-            }
-
-            if ($user == null) {
-                $user = new User();
-            }
-
-            $this->userRepository->storeuser($request, $user);
+        if (Auth::user()->isAdmin() || Auth::user()->id === (int)$request->post('id')) {
+            $this->userRepository->storeuser($request);
         }
 
         return redirect('admin/users/list');

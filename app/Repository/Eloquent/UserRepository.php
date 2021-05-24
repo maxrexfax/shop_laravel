@@ -16,8 +16,17 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         $this->model = $model;
     }
 
-    public function storeUser($request, $user)
+    public function paginateModel(int $numberToShow)
     {
+        return User::paginate($numberToShow);
+    }
+
+    public function storeUser($request)
+    {
+        $user = $this->model->find($request->post('id'));
+        if (empty($user)) {
+            $user = new User();
+        }
         $user->login = $request->post('login');
         $user->password = Hash::make( $request->post('password'));
         $user->first_name = $request->post('first_name');

@@ -2,6 +2,7 @@
 
 namespace App\Repository\Eloquent;
 
+use App\Helpers\PaginationQuantityHelper;
 use App\Repository\EloquentRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
@@ -77,5 +78,4 @@ class BaseRepository
     {
         return $this->findById($modelId)->delete();
     }
-
 }

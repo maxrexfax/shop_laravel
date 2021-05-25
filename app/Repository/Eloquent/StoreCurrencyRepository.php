@@ -3,10 +3,7 @@
 namespace App\Repository\Eloquent;
 
 use App\Repository\StoreCurrencyRepositoryInterface;
-use App\Store;
-use App\Repository\StoreRepositoryInterface;
 use App\StoreCurrency;
-use Illuminate\Database\Eloquent\Model;
 
 class StoreCurrencyRepository extends BaseRepository implements StoreCurrencyRepositoryInterface
 {
@@ -22,11 +19,11 @@ class StoreCurrencyRepository extends BaseRepository implements StoreCurrencyRep
         return StoreCurrency::where('store_id', '=', $storeId)->get();
     }
 
-    public function storeCurrenciesForStore($id, $request)
+    public function storeCurrenciesForStore($request)
     {
         if ($request->post('currencies')) {
 
-            StoreCurrency::where('store_id', $id)->delete();
+            StoreCurrency::where('store_id', $request->post('storeId'))->delete();
 
             foreach ($request->post('currencies') as $currency) {
 
@@ -34,7 +31,7 @@ class StoreCurrencyRepository extends BaseRepository implements StoreCurrencyRep
                 if ($currency===$request->post('default')) {
                     $storeCurrency->default = 1;
                 }
-                $storeCurrency->store_id = $id;
+                $storeCurrency->store_id = $request->post('storeId');
                 $storeCurrency->currency_id = $currency;
                 $storeCurrency->save();
             }

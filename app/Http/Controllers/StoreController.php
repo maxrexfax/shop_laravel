@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Currency;
 use App\Delivery;
 use App\Helpers\PriceHelper;
+use App\Http\Requests\EditStoreRequest;
 use App\Http\Requests\StoreDeliveryStoreRequest;
 use App\Http\Requests\StoreStoreRequest;
 use App\Locale;
@@ -12,6 +13,8 @@ use App\Repository\CurrencyRepositoryInterface;
 use App\Repository\DeliveryRepositoryInterface;
 use App\Repository\LocaleRepositoryInterface;
 use App\Repository\StoreCurrencyRepositoryInterface;
+use App\Repository\StoreDeliveryRepositoryInterface;
+use App\Repository\StoreLocaleRepositoryInterface;
 use App\Repository\StoreRepositoryInterface;
 use App\Services\StoreCurrencyStoreService;
 use App\Services\StoreDeliveryStoreService;
@@ -31,16 +34,21 @@ class StoreController extends Controller
     protected $deliveryRepository;
     protected $currencyRepository;
     protected $storeCurrencyRepository;
+    protected $storeLocaleRepository;
+    protected $storeDeliveryRepository;
 
     public function __construct(StoreRepositoryInterface $storeRepository, LocaleRepositoryInterface $localeRepository,
                                 DeliveryRepositoryInterface $deliveryRepository, CurrencyRepositoryInterface $currencyRepository,
-                                StoreCurrencyRepositoryInterface $storeCurrencyRepository)
+                                StoreCurrencyRepositoryInterface $storeCurrencyRepository, StoreLocaleRepositoryInterface $storeLocaleRepository,
+                                StoreDeliveryRepositoryInterface $storeDeliveryRepository)
     {
         $this->storeRepository = $storeRepository;
         $this->localeRepository = $localeRepository;
         $this->deliveryRepository = $deliveryRepository;
         $this->currencyRepository = $currencyRepository;
         $this->storeCurrencyRepository = $storeCurrencyRepository;
+        $this->storeLocaleRepository = $storeLocaleRepository;
+        $this->storeDeliveryRepository = $storeDeliveryRepository;
     }
 
     public function create($id = null)
@@ -48,18 +56,11 @@ class StoreController extends Controller
         return view ('admin.partials.store._store_edit_create');
     }
 
-    public function edit($id = null)
+    public function edit(EditStoreRequest $request)
     {
-        if (!empty($id)) {
-            $store = $this->storeRepository->findById($id);
-            if ($store) {
-                return view ('admin.partials.store._store_edit_create', [
-                    'store' => $store,
-                ]);
-            }
-        }
-
-        return redirect('/admin/stores/list');
+        return view ('admin.partials.store._store_edit_create', [
+            'store' => $this->storeRepository->findById($request->get('id')),
+        ]);
     }
 
     public function store(StoreStoreRequest $request)
@@ -102,24 +103,23 @@ class StoreController extends Controller
         }
     }
 
-    public function storeLocales($id, Request $request)
+    public function storeLocales(Request $request)
     {
-        $store = $this->storeRepository->findById($id);
-
-        if ($store) {
-            (new StoreLocaleStoreService())->store($store, $request);
-        }
-
+        $this->storeLocaleRepository->store($request);
         return redirect()->back();
     }
 
-    public function storeDelivery($id, StoreDeliveryStoreRequest $request)
+    public function deliveryList($id)
     {
-        $store = $this->storeRepository->findById($id);
+        return view('admin.partials.delivery._store_delivery_list', [
+            'store' => $this->storeRepository->findById($id),
+            'deliveries' => $this->deliveryRepository->all()
+        ]);
+    }
 
-        if ($store) {
-            (new StoreDeliveryStoreService())->store($store, $request);
-        }
+    public function storeDelivery(StoreDeliveryStoreRequest $request)
+    {
+        $this->storeDeliveryRepository->store($request);
 
         return redirect()->back();
     }
@@ -132,17 +132,9 @@ class StoreController extends Controller
         ]);
     }
 
-    public function deliveryList($id)
+    public function storeCurrency(Request $request)
     {
-        return view('admin.partials.delivery._store_delivery_list', [
-            'store' => $this->storeRepository->findById($id),
-            'deliveries' => $this->deliveryRepository->all()
-        ]);
-    }
-
-    public function storeCurrency($id, Request $request)
-    {
-        $this->storeCurrencyRepository->storeCurrenciesForStore($id, $request);
+        $this->storeCurrencyRepository->storeCurrenciesForStore($request);
 
         return redirect()->back();
     }

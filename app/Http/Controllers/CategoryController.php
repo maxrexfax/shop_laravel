@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\PaginationQuantityHelper;
 use App\Category;
 use App\Helpers\PriceHelper;
+use App\Http\Requests\EditCategoryRequest;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Repository\CategoryRepositoryInterface;
 use App\Repository\ProductRepositoryInterface;
@@ -38,15 +39,11 @@ class CategoryController extends Controller
             ]);
     }
 
-    public function edit($id = null)
+    public function edit(EditCategoryRequest $request)
     {
-        if($id == null) {
-            return redirect('admin/category/list');
-        }
-
         return view('admin.partials.category._category_edit_create', [
             'categories' => $this->categoryRepository->all(),
-            'category' => $this->categoryRepository->findById($id)
+            'category' => $this->categoryRepository->findById($request->get('id'))
         ]);
     }
 

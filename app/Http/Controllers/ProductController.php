@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Helpers\PriceHelper;
+use App\Http\Requests\EditProductRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Product;
 use App\Repository\CategoryRepositoryInterface;
@@ -33,22 +34,12 @@ class ProductController extends Controller
         ]);
     }
 
-    public function edit($id = null)
+    public function edit(EditProductRequest $request)
     {
-        if($id == null) {
-            return redirect('admin/product/list');
-        }
-
-        $product = $this->productRepository->findById($id);
-
-        if ($product) {
-            return view('admin.partials.product._product_edit_create', [
-                'categories' => $this->categoryRepository->all(),
-                'product' => $product
-            ]);
-        }
-
-        return redirect('admin/product/list');
+        return view('admin.partials.product._product_edit_create', [
+            'categories' => $this->categoryRepository->all(),
+            'product' => $this->productRepository->findById($request->get('id'))
+        ]);
     }
 
     public function store(StoreProductRequest $request)

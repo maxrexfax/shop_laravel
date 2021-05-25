@@ -58,7 +58,8 @@ Route::group(['middleware'=>'language'],function ()
     Route::prefix('/category')->group(function() {
         Route::get('/create', 'CategoryController@create')->name('category.create');
         Route::post('/store', 'CategoryController@store')->name('category.store');
-        Route::get('/edit/{id?}', 'CategoryController@edit')->name('category.edit');
+        Route::get('/edit/{id}', function ($id) { return redirect('/category/edit', ['id'=>$id]); });
+        Route::get('/edit', 'CategoryController@edit')->name('category.edit');
         Route::post('/update', 'CategoryController@update')->name('category.update');
         Route::get('/root/list', 'CategoryController@categoriesRootList')->name('category.rootlist');
         Route::get('/destroy/{id}', 'CategoryController@destroy')->name('category.destroy');
@@ -67,7 +68,8 @@ Route::group(['middleware'=>'language'],function ()
 
     Route::prefix('/currency')->group(function() {
         Route::get('/create', 'CurrencyController@create')->name('currency.create');
-        Route::get('/edit/{id?}', 'CurrencyController@edit')->name('currency.edit');
+        Route::get('/edit/{id}', function ($id) { return redirect('/currency/edit', ['id'=>$id]); });
+        Route::get('/edit/', 'CurrencyController@edit')->name('currency.edit');
         Route::post('/store', 'CurrencyController@store')->name('currency.store');
         Route::post('/update', 'CurrencyController@update')->name('currency.update');
         Route::get('/destroy/{id?}', 'CurrencyController@destroy')->name('currency.destroy');
@@ -75,7 +77,8 @@ Route::group(['middleware'=>'language'],function ()
 
     Route::prefix('/delivery')->group(function() {
         Route::get('/create', 'DeliveryController@create')->name('delivery.create');
-        Route::get('/edit/{id?}', 'DeliveryController@edit')->name('delivery.edit');
+        Route::get('/edit/{id}', function ($id) { return redirect('/delivery/edit', ['id'=>$id]); });
+        Route::get('/edit/', 'DeliveryController@edit')->name('delivery.edit');
         Route::post('/store', 'DeliveryController@store')->name('delivery.store');
         Route::post('/update', 'DeliveryController@update')->name('delivery.update');
         Route::get('/destroy/{id?}', 'DeliveryController@destroy')->name('delivery.destroy');
@@ -83,7 +86,8 @@ Route::group(['middleware'=>'language'],function ()
 
     Route::prefix('/locale')->group(function() {
         Route::get('/create', 'LocaleController@create')->name('locale.create');
-        Route::get('/edit/{id?}', 'LocaleController@edit')->name('locale.edit');
+        Route::get('/edit/{id}', function ($id) { return redirect('/locale/edit', ['id'=>$id]); });
+        Route::get('/edit', 'LocaleController@edit')->name('locale.edit');
         Route::post('/store', 'LocaleController@store')->name('locale.store');
         Route::post('/update', 'LocaleController@update')->name('locale.update');
         Route::get('/destroy/{id?}', 'LocaleController@destroy')->name('locale.destroy');
@@ -94,14 +98,16 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/destroy/{id}', 'OrderController@destroy')->name('order.destroy');
         Route::get('/show/{id}', 'OrderController@show')->name('order.show');
         Route::get('/create', 'OrderController@create')->name('order.create');
-        Route::get('/edit/{id?}', 'OrderController@edit')->name('order.edit');
+        Route::get('/edit/{id}', function ($id) { return redirect('/order/edit', ['id'=>$id]); });
+        Route::get('/edit', 'OrderController@edit')->name('order.edit');
         Route::post('/store', 'OrderController@store')->name('order.store');
         Route::post('/update', 'OrderController@update')->name('order.update');
     });
 
     Route::prefix('/paymethod')->group(function() {
         Route::get('/create', 'PaymentMethodController@create')->name('payment.method.create');
-        Route::get('/edit/{id?}', 'PaymentMethodController@edit')->name('payment.method.edit');
+        Route::get('/edit/{id}', function ($id) { return redirect('/paymethod/edit', ['id'=>$id]); });
+        Route::get('/edit', 'PaymentMethodController@edit')->name('payment.method.edit');
         Route::post('/store', 'PaymentMethodController@store')->name('payment.method.store');
         Route::post('/update', 'PaymentMethodController@update')->name('payment.method.update');
         Route::get('/destroy/{id?}', 'PaymentMethodController@destroy')->name('payment.destroy');
@@ -109,7 +115,8 @@ Route::group(['middleware'=>'language'],function ()
 
     Route::prefix('/phone')->group(function() {
         Route::get('/create/{store_id?}', 'PhoneController@create')->name('phone.create');
-        Route::get('/edit/{store_id?}/{phone_id?}', 'PhoneController@edit')->name('phone.edit');
+        Route::get('/edit/{storeId}/{phoneId}', function ($storeId, $phoneId) { return redirect('/phone/edit', ['storeId'=>$storeId, 'phoneId' => $phoneId]); });
+        Route::get('/edit', 'PhoneController@edit')->name('phone.edit');
         Route::post('/store/{id?}', 'PhoneController@store')->name('phone.store');
         Route::post('/update', 'PhoneController@update')->name('phone.update');
         Route::get('/delete/{id}', 'PhoneController@destroy')->name('phone.delete');
@@ -119,7 +126,8 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/category/{id}', 'CategoryController@show')->name('product.category');
         Route::get('/productsList/{id}', 'ProductController@productsList')->name('product.productsList');
         Route::get('/create', 'ProductController@create')->name('product.create');
-        Route::get('/edit/{id?}', 'ProductController@edit')->name('product.edit');
+        Route::get('/edit/{id}', function ($id) { return redirect('/product/edit', ['id'=>$id]); });
+        Route::get('/edit', 'ProductController@edit')->name('product.edit');
         Route::get('/images/{id}', 'ProductController@images')->name('product.images');
         Route::get('/show/{id}', 'ProductController@show')->name('product.show');
         Route::post('/store', 'ProductController@store')->name('product.store');
@@ -130,7 +138,8 @@ Route::group(['middleware'=>'language'],function ()
 
     Route::prefix('/promocode')->group(function() {
         Route::get('/create', 'PromocodeController@create')->name('promocode.create');
-        Route::get('/edit/{id?}', 'PromocodeController@edit')->name('promocode.edit');
+        Route::get('/edit/{id}', function ($id) { return redirect('/promocode/edit', ['id'=>$id]); });
+        Route::get('/edit', 'PromocodeController@edit')->name('promocode.edit');
         Route::post('/store', 'PromocodeController@store')->name('promocode.store');
         Route::post('/update', 'PromocodeController@update')->name('promocode.update');
         Route::get('/delete/{id}', 'PromocodeController@delete')->name('promocode.delete');
@@ -138,13 +147,16 @@ Route::group(['middleware'=>'language'],function ()
 
     Route::prefix('/store')->group(function() {
         Route::get('/create', 'StoreController@create')->name('store.create');
-        Route::get('/edit/{id?}', 'StoreController@edit')->name('store.edit');
+        Route::get('/edit/{id}', function ($id) { return redirect('/store/edit', ['id'=>$id]); });
+        Route::get('/edit', 'StoreController@edit')->name('store.edit');
         Route::post('/store', 'StoreController@store')->name('store.store');
         Route::post('/update', 'StoreController@update')->name('store.update');
-        Route::post('/locales/store/{id?}', 'StoreController@storeLocales')->name('store.locales.store');
-        Route::post('/currency/store/{id?}', 'StoreController@storeCurrency')->name('store.currency.store');
-        Route::post('/delivery/store/{id?}', 'StoreController@storeDelivery')->name('store.delivery.store');
-        Route::get('/phonelist/{id}', 'StoreController@phoneList')->name('store.phonelist');
+        Route::post('/locales/store', 'StoreController@storeLocales')->name('store.locales.store');
+        Route::post('/currency/store', 'StoreController@storeCurrency')->name('store.currency.store');
+        Route::post('/delivery/store', 'StoreController@storeDelivery')->name('store.delivery.store');
+
+        Route::get('/phonelist/{id}', function ($id) { return redirect('/store/phonelist', ['id'=>$id]); });
+        Route::get('/phonelist', 'StoreController@phoneList')->name('store.phonelist');
         Route::get('/langlist/{id}', 'StoreController@languageList')->name('store.langlist');
         Route::get('/currencylist/{id}', 'StoreController@currencyList')->name('store.currencylist');
         Route::get('/changeactive/{id}', 'StoreController@changeActive')->name('store.changeactive');
@@ -154,7 +166,8 @@ Route::group(['middleware'=>'language'],function ()
     Route::prefix('/user')->group(function() {
         Route::get('/delete/{id}', 'UserController@destroy')->name('user.delete');
         Route::get('/create', 'UserController@create')->name('user.create');
-        Route::get('/edit/{id?}', 'UserController@edit')->name('user.edit');
+        Route::get('/edit/{id}', function ($id) { return redirect('/user/edit', ['id'=>$id]); });
+        Route::get('/edit', 'UserController@edit')->name('user.edit');
         Route::post('/store', 'UserController@store')->name('user.store');
         Route::post('/update', 'UserController@update')->name('user.update');
         Route::get('/destroy/{id?}', 'UserController@destroy')->name('user.destroy');

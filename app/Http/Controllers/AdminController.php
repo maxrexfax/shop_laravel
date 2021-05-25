@@ -20,6 +20,7 @@ use App\Repository\LocaleRepositoryInterface;
 use App\Repository\OrderRepositoryInterface;
 use App\Repository\PaymentMethodRepositoryInterface;
 use App\Repository\ProductRepositoryInterface;
+use App\Repository\PromocodeRepositoryInterface;
 use App\Repository\StoreRepositoryInterface;
 use App\Repository\UserRepositoryInterface;
 use App\Store;
@@ -54,7 +55,7 @@ class AdminController extends Controller
                                 CurrencyRepositoryInterface $currencyRepository,
                                 LocaleRepositoryInterface $localeRepository,
                                 DeliveryRepositoryInterface $deliveryRepository,
-                                ProductRepositoryInterface $promocodeRepository,
+                                PromocodeRepositoryInterface $promocodeRepository,
                                 PaymentMethodRepositoryInterface $paymentMethodRepository,
                                 OrderRepositoryInterface $ordersRepository
     )

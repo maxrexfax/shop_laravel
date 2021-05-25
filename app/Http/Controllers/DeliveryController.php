@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Delivery;
+use App\Http\Requests\EditDeliveryRequest;
 use App\Http\Requests\StoreDeliveryRequest;
 use App\Repository\DeliveryRepositoryInterface;
 use App\Services\DeliveryStoreService;
@@ -22,14 +23,10 @@ class DeliveryController extends Controller
         return view ('admin.partials.delivery._delivery_edit_create');
     }
 
-    public function edit($id = null)
+    public function edit(EditDeliveryRequest $request)
     {
-        if($id == null) {
-            return redirect('admin/deliveries/list');
-        }
-
         return view ('admin.partials.delivery._delivery_edit_create', [
-            'delivery' => $this->deliveryRepository->findById($id),
+            'delivery' => $this->deliveryRepository->findById($request->get('id')),
         ]);
     }
 

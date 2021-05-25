@@ -14,7 +14,7 @@
                 <a href="{{route('store.deliverylist', ['id' => $store->id])}}" title="{{__('text.edit_delivery')}}" class="btn btn-info w-100">{{__('text.delivery')}}</a>
             </div>
             <div class="col-lg-2 col-md-2 url-no-decoration text-right w-100 mb-1 p-1">
-                <a href="{{route('store.create', ['id' => $store->id])}}" title="{{__('text.edit_other_store_data')}}" class="btn btn-info w-100">{{__('actions.edit')}} {{$store->store_name}}</a>
+                <a href="{{route('store.edit', ['id' => $store->id])}}" title="{{__('text.edit_other_store_data')}}" class="btn btn-info w-100">{{__('actions.edit')}} {{$store->store_name}}</a>
             </div>
         </div>
     </div>

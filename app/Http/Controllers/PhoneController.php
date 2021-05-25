@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditPhoneRequest;
 use App\Http\Requests\StorePhoneRequest;
 use App\Repository\PhoneRepositoryInterface;
 use App\Repository\StoreRepositoryInterface;
@@ -24,18 +25,12 @@ class PhoneController extends Controller
         ]);
     }
 
-    public function edit($store_id = null, $phone_id = null)
+    public function edit(EditPhoneRequest $request)
     {
-        $phone = $this->phoneRepository->findById($phone_id);
-
-        if ($phone) {
-            return view('admin.partials.phones._phone_edit_create', [
-                'phone' => $phone,
-                'store' => $this->storeRepository->findById($store_id)
-            ]);
-        }
-
-        return redirect('/store/phonelist/' . $store_id);
+        return view('admin.partials.phones._phone_edit_create', [
+            'phone' => $this->phoneRepository->findById($request->get('phoneId')),
+            'store' => $this->storeRepository->findById($request->get('storeId'))
+        ]);
     }
 
     public function store(StorePhoneRequest $request)

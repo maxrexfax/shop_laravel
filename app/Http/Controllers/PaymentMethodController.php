@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\PaginationQuantityHelper;
+use App\Http\Requests\EditPayMethodRequest;
 use App\Http\Requests\StorePaymethodRequest;
 use App\PaymentMethod;
 use App\Repository\PaymentMethodRepositoryInterface;
@@ -23,21 +24,11 @@ class PaymentMethodController extends Controller
         return view('admin.partials.paymethod._paymethod_edit_create');
     }
 
-    public function edit($id = null)
+    public function edit(EditPayMethodRequest $request)
     {
-        if($id == null) {
-            return redirect('admin/paymethod/list');
-        }
-
-        $paymentMethod = $this->paymentMethodRepository->findById($id);
-
-        if ($paymentMethod) {
-            return view('admin.partials.paymethod._paymethod_edit_create', [
-                'paymentMethod' => $paymentMethod,
-            ]);
-        }
-
-        return redirect('admin/paymethod/list');
+        return view('admin.partials.paymethod._paymethod_edit_create', [
+            'paymentMethod' => $this->paymentMethodRepository->findById($request->get('id')),
+        ]);
     }
 
     public function store(StorePaymethodRequest $request)

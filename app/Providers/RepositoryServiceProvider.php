@@ -20,6 +20,8 @@ use App\Repository\Eloquent\ProductRepository;
 use App\Repository\Eloquent\PromocodeRepository;
 use App\Repository\Eloquent\RoleRepository;
 use App\Repository\Eloquent\StoreCurrencyRepository;
+use App\Repository\Eloquent\StoreDeliveryRepository;
+use App\Repository\Eloquent\StoreLocaleRepository;
 use App\Repository\Eloquent\StoreRepository;
 use App\Repository\Eloquent\UserRepository;
 use App\Repository\EloquentRepositoryInterface;
@@ -34,6 +36,8 @@ use App\Repository\ProductRepositoryInterface;
 use App\Repository\PromocodeRepositoryInterface;
 use App\Repository\RoleRepositoryInterface;
 use App\Repository\StoreCurrencyRepositoryInterface;
+use App\Repository\StoreDeliveryRepositoryInterface;
+use App\Repository\StoreLocaleRepositoryInterface;
 use App\Repository\StoreRepositoryInterface;
 use App\Repository\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
@@ -64,6 +68,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(OrderStatusRepositoryInterface::class, OrderStatusRepository::class);
         $this->app->bind(OrderProductRepositoryInterface::class, OrderProductRepository::class);
         $this->app->bind(StoreCurrencyRepositoryInterface::class, StoreCurrencyRepository::class);
+        $this->app->bind(StoreLocaleRepositoryInterface::class, StoreLocaleRepository::class);
+        $this->app->bind(StoreDeliveryRepositoryInterface::class, StoreDeliveryRepository::class);
     }
 
     /**

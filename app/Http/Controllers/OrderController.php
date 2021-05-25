@@ -6,6 +6,7 @@ use App\Category;
 use App\CreditCard;
 use App\Delivery;
 use App\Discount;
+use App\Http\Requests\EditOrderRequest;
 use App\Http\Requests\StoreOrderRequest;
 use App\Order;
 use App\OrderProduct;
@@ -62,27 +63,19 @@ class OrderController extends Controller
         ]);
     }
 
-    public function edit($id = null)//сделать реквест проверку входящих данных в едиты
+    public function edit(EditOrderRequest $request)//сделать реквест проверку входящих данных в едиты
     {
-        if($id == null) {
-            return redirect('admin/orders/list');
-        }
+        $order = $this->orderRepository->findById($request->get('id'));
 
-        $order = $this->orderRepository->findById($id);
-
-        if ($order) {
-            return view('admin.partials.orders._order_create', [
-                'order' => $order,
-                'statuses' => $this->orderStatusRepository->all(),
-                'categories' => $this->categoryRepository->all(),
-                'deliveries' => $this->deliveryRepository->all(),
-                'paymentMethods' => $this->paymethodRepository->all(),
-                'paymentArray' => $order->getOrderPaymentDetails(),
-                'promocodes' => $this->promocodeRepository->all(),
-            ]);
-        }
-
-        return redirect('admin/orders/list');
+        return view('admin.partials.orders._order_create', [
+            'order' => $order,
+            'paymentArray' => $order->getOrderPaymentDetails(),
+            'statuses' => $this->orderStatusRepository->all(),
+            'categories' => $this->categoryRepository->all(),
+            'deliveries' => $this->deliveryRepository->all(),
+            'paymentMethods' => $this->paymethodRepository->all(),
+            'promocodes' => $this->promocodeRepository->all(),
+        ]);
     }
 
     public function store(StoreOrderRequest $request)

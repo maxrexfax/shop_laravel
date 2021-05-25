@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditLocaleRequest;
 use App\Http\Requests\StoreLocaleRequest;
 use App\Locale;
 use App\Repository\LocaleRepositoryInterface;
@@ -22,14 +23,10 @@ class LocaleController extends Controller
         return view('admin.partials.locale._locale_edit_create');
     }
 
-    public function edit($id = null)
+    public function edit(EditLocaleRequest $request)
     {
-        if($id == null) {
-            return redirect('admin/locales/list');
-        }
-
         return view('admin.partials.locale._locale_edit_create', [
-            'locale' => $this->localeRepository->findById($id),
+            'locale' => $this->localeRepository->findById($request->get('id')),
         ]);
     }
 

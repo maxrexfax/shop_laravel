@@ -8,9 +8,12 @@ use App\Order;
 use App\PaymentMethod;
 use App\Product;
 use App\Promocode;
+use App\Repository\Eloquent\UserRepository;
 use App\Repository\OrderRepositoryInterface;
+use App\Repository\PaymentMethodRepositoryInterface;
 use App\Repository\ProductRepositoryInterface;
 use App\Repository\StoreRepositoryInterface;
+use App\Repository\UserRepositoryInterface;
 use App\Services\CartService;
 use App\Store;
 use App\User;
@@ -25,10 +28,14 @@ class CartController extends Controller
     protected $storeRepository;
     protected $productRepository;
     protected $orderRepository;
+    protected $userRepository;
+    protected $paymentMethodRepository;
 
     public function __construct(StoreRepositoryInterface $storeRepository,
                                 ProductRepositoryInterface $productRepository,
-                                OrderRepositoryInterface $orderRepository
+                                OrderRepositoryInterface $orderRepository,
+                                PaymentMethodRepositoryInterface $paymentMethodRepository,
+                                UserRepositoryInterface $userRepository
     )
     {
         if (!session()->has('cart')) {
@@ -39,6 +46,8 @@ class CartController extends Controller
         $this->storeRepository = $storeRepository;
         $this->productRepository = $productRepository;
         $this->orderRepository = $orderRepository;
+        $this->userRepository = $userRepository;
+        $this->paymentMethodRepository = $paymentMethodRepository;
     }
 
     public function cart()
@@ -132,10 +141,10 @@ class CartController extends Controller
             'activeStore' => $activeStore,
             'cart' => Session::get('cart') ? Session::get('cart') : new Cart(),
             'additionalProducts' => $this->cartService->getAdditionalProducts(),
-            'arrayOfVisitedProducts' => Session::get('arrayOfVisitedProducts') ? Product::find(Session::get('arrayOfVisitedProducts')): '',
-            'loginUser' => Session::get('loginUserId') ? User::find(Session::get('loginUserId')) : '',
+            'arrayOfVisitedProducts' => Session::get('arrayOfVisitedProducts') ? $this->productRepository->getArrayOfProductsByIds(Session::get('arrayOfVisitedProducts')): '',
+            'loginUser' => Session::get('loginUserId') ? $this->userRepository->findById(Session::get('loginUserId')) : '',
             'deliveries' => $activeStore->deliveries,
-            'paymentMethods' => PaymentMethod::all(),
+            'paymentMethods' => $this->paymentMethodRepository->all(),
         ]);
     }
 

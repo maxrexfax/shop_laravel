@@ -115,6 +115,7 @@ return [
     'set_sort_number' => 'Set sort number',
     'save' => 'Save',
     'save_currency_list' => 'Save currency list',
+    'save_deliveries_list' => 'Save delivery list',
     'save_locales_list' => 'Save locales list',
     'scroll_to_top' => 'Scroll to top',
     'short_description' => 'Short description:',

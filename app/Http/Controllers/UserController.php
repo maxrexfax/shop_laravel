@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Repository\UserRepositoryInterface;
 use App\User;
@@ -37,21 +38,11 @@ class UserController extends Controller
         return view('admin.partials.user._user_edit_create');
     }
 
-    public function edit($id = null)
+    public function edit(EditUserRequest $request)
     {
-        if (empty($id)) {
-            return redirect('/admin/users/list');
-        }
-
-        $user = $this->userRepository->findById($id);
-
-        if ($user) {
-            return view('admin.partials.user._user_edit_create', [
-                'user' => $user,
-            ]);
-        }
-
-        return redirect('/admin/users/list');
+        return view('admin.partials.user._user_edit_create', [
+            'user' => $this->userRepository->findById($request->get('id')),
+        ]);
     }
 
     public function store(StoreUserRequest $request)

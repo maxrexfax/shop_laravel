@@ -16,8 +16,9 @@
                 @endif
             </div>
             @include('admin.partials._language_currency_locale_switcher')
-            <form method="POST" id="formToAddLocales" action="{{ route('store.delivery.store', ['id' => $store->id]) }}">
+            <form method="POST" id="formToAddLocales" action="{{ route('store.delivery.store') }}">
                 @csrf
+                <input type="hidden" name="storeId" value="{{$store->id}}">
                 <div class="form-group row">
 
                     <div class="col-md-10 offset-md-1 mt-2">
@@ -71,7 +72,7 @@
                 <div class="form-group row mb-0">
 
                     <div class="col-md-8 offset-md-4">
-                        <button class="btn btn-primary" type="submit" form="formToAddLocales">{{__('actions.save_locales_list')}}</button>
+                        <button class="btn btn-primary" type="submit" form="formToAddLocales">{{__('actions.save_deliveries_list')}}</button>
                     </div>
                 </div>
             </form>

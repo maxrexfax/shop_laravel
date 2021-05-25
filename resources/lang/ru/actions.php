@@ -115,6 +115,7 @@ return [
     'set_sort_number' => 'Установить номер сортировки',
     'save' => 'Сохранить',
     'save_currency_list' => 'Сохранить список валют',
+    'save_deliveries_list' => 'Сохранить список доставок',
     'save_locales_list' => 'Сохранинть список языков',
     'scroll_to_top' => 'Наверх',
     'short_description' => 'Короткое описание:',

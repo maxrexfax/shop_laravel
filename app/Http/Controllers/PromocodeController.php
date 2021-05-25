@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditPromocodeRequest;
 use App\Http\Requests\StorePromocodeRequest;
 use App\Promocode;
 use App\Repository\PromocodeRepositoryInterface;
@@ -20,17 +21,11 @@ class PromocodeController extends Controller
         return view('admin.partials.promocode._promocode_edit_create');
     }
 
-    public function edit($id = null)
+    public function edit(EditPromocodeRequest $request)
     {
-        if ($id != null) {
-            $promocode = $this->promocodeRepository->findById($id);
-            if ($promocode) {
-                return view('admin.partials.promocode._promocode_edit_create', [
-                    'promocode' => $promocode,
-                ]);
-            }
-        }
-        return redirect('/admin/promocodes/list');
+        return view('admin.partials.promocode._promocode_edit_create', [
+            'promocode' => $this->promocodeRepository->findById($request->get('id')),
+        ]);
     }
 
     public function store(StorePromocodeRequest $request)

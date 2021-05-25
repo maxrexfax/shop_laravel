@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Currency;
+use App\Http\Requests\EditCurrencyRequest;
 use App\Http\Requests\StoreCurrencyRequest;
 use App\Repository\CurrencyRepositoryInterface;
 use App\Services\CurrencyStoreService;
@@ -25,15 +26,11 @@ class CurrencyController extends Controller
         return view ('admin.partials.currency._currency_edit_create');
     }
 
-    public function edit($id = null)
+    public function edit(EditCurrencyRequest $request)
     {
-        $currency = $this->currencyRepository->findById($id);
-
-        if ($currency) {
-            return view ('admin.partials.currency._currency_edit_create', [
-                'currency' => $currency,
-            ]);
-        }
+        return view ('admin.partials.currency._currency_edit_create', [
+            'currency' => $this->currencyRepository->findById($request->get('id')),
+        ]);
     }
 
     public function store(StoreCurrencyRequest $request)

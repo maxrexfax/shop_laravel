@@ -22,13 +22,13 @@ class PhoneRepository extends BaseRepository implements PhoneRepositoryInterface
 
     public function storePhone($request)
     {
-        $phone = $this->model->find($request->post('id'));
+        $phone = $this->model->find($request->post('phoneId'));
         if (empty($phone)) {
             $phone = new Phone();
         }
         $phone->phone_number = $request->post('phone_number');
         $phone->phone_info = $request->post('phone_info');
-        $phone->store_id = $request->post('store_id');
+        $phone->store_id = $request->post('storeId');
         $phone->save();
     }
 

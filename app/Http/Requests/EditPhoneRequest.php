@@ -24,7 +24,7 @@ class EditPhoneRequest extends FormRequest
     public function rules()
     {
         return [
-            'phoneId' => 'integer|exists:phones,id',
+            'phoneId' => 'integer|exists:phones,id|nullable',
             'storeId' => 'integer|exists:stores,id'
         ];
     }

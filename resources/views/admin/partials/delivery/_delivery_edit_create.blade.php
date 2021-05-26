@@ -19,7 +19,7 @@
                     @endif
                 </div>
                 <div class="card-body">
-                    <form id="formToAddDeliveries" method="POST" enctype="multipart/form-data" action="@if(!isset($delivery)){{ route('delivery.store')}} @else {{ route('delivery.update', ['id' => $delivery->id])}} @endif">
+                    <form id="formToAddDeliveries" method="POST" enctype="multipart/form-data" action="@if(!isset($delivery)){{ route('delivery.store')}} @else {{ route('delivery.update')}} @endif">
                         @csrf
 
                         <div class="form-group row">

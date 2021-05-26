@@ -52,10 +52,10 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
      * @param StoreProductRequest $request
      * @param $product
      */
-    public function store(StoreProductRequest $request, $product)
+    public function store(StoreProductRequest $request)
     {
         $logo = null;
-        $product = $this->model->findById($request->post('id'));
+        $product = $this->model->find($request->post('id'));
         if (empty($product)) {
             $product = new Product();
         }

@@ -33,7 +33,7 @@ class StoreRepository extends BaseRepository implements StoreRepositoryInterface
     public function store($request)
     {
         $logo = null;
-        $store = $this->model->findById($request->post('id'));
+        $store = $this->model->find($request->post('id'));
         if (empty($store)) {
             $store = new Store();
         }

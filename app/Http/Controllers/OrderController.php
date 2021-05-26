@@ -117,7 +117,7 @@ class OrderController extends Controller
                 'totalProductsPrice' => $totalProductsPrice,
                 'productPriceWithDiscount' => $productPriceWithDiscount,
                 'totalCost' => $order->getDeliveryPrice() + $productPriceWithDiscount,
-                'paymentArray' => $this->getOrderPaymentDetails($order),
+                'paymentArray' => $order->getOrderPaymentDetails(),
             ]);
         }
 

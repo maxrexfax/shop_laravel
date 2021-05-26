@@ -18,10 +18,10 @@ class PhoneController extends Controller
         $this->storeRepository = $storeRepository;
     }
 
-    public function create($store_id = null)
+    public function create(EditPhoneRequest $request)
     {
         return view('admin.partials.phones._phone_edit_create', [
-            'store' => $this->storeRepository->findById($store_id),
+            'store' => $this->storeRepository->findById($request->get('storeId')),
         ]);
     }
 
@@ -37,14 +37,14 @@ class PhoneController extends Controller
     {
         $this->phoneRepository->storePhone($request);
 
-        return redirect('/store/phonelist/' . $request->post('store_id'));
+        return redirect('/store/phonelist?storeId=' . $request->post('storeId'));
     }
 
     public function update(StorePhoneRequest $request)
     {
         $this->phoneRepository->storePhone($request);
 
-        return redirect('admin/category/list');
+        return redirect('/store/phonelist?storeId=' . $request->post('storeId'));
     }
 
     public function destroy($id)

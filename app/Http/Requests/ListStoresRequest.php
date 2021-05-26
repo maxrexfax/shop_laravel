@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ListPhonesRequest extends FormRequest
+class ListStoresRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class ListPhonesRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'storeId' => 'integer|exists:stores,id'
         ];
     }
 }

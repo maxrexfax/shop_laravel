@@ -2,16 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\Currency;
-use App\Delivery;
+
 use App\Helpers\PaginationQuantityHelper;
-use App\Image;
-use App\Locale;
-use App\Order;
-use App\PaymentMethod;
-use App\Product;
-use App\Promocode;
 use App\Repository\CategoryRepositoryInterface;
 use App\Repository\CurrencyRepositoryInterface;
 use App\Repository\DeliveryRepositoryInterface;
@@ -23,8 +15,6 @@ use App\Repository\ProductRepositoryInterface;
 use App\Repository\PromocodeRepositoryInterface;
 use App\Repository\StoreRepositoryInterface;
 use App\Repository\UserRepositoryInterface;
-use App\Store;
-use App\User;
 use Illuminate\Support\Facades\Lang;
 
 class AdminController extends Controller
@@ -48,9 +38,9 @@ class AdminController extends Controller
      * @return void
      */
     public function __construct(ImageRepositoryInterface $imageRepository,
+                                CategoryRepositoryInterface $categoryRepository,
                                 ProductRepositoryInterface $productRepository,
                                 UserRepositoryInterface $userRepository,
-                                CategoryRepositoryInterface $categoryRepository,
                                 StoreRepositoryInterface $storeRepository,
                                 CurrencyRepositoryInterface $currencyRepository,
                                 LocaleRepositoryInterface $localeRepository,

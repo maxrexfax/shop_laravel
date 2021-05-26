@@ -6,6 +6,7 @@ use App\Currency;
 use App\Delivery;
 use App\Helpers\PriceHelper;
 use App\Http\Requests\EditStoreRequest;
+use App\Http\Requests\ListStoresRequest;
 use App\Http\Requests\StoreDeliveryStoreRequest;
 use App\Http\Requests\StoreStoreRequest;
 use App\Locale;
@@ -77,9 +78,9 @@ class StoreController extends Controller
         return redirect('/admin/stores/list');
     }
 
-    public function phoneList($id = null)
+    public function phoneList(ListStoresRequest $request)
     {
-        $store = $this->storeRepository->findById($id);
+        $store = $this->storeRepository->findById($request->get('storeId'));
 
         if ($store) {
             return view('admin.partials.phones._phones_list', [
@@ -91,9 +92,9 @@ class StoreController extends Controller
         return redirect('/admin/stores/list');
     }
 
-    public function languageList($id = null)
+    public function localesList(ListStoresRequest $request)
     {
-        $store = $this->storeRepository->findById($id);
+        $store = $this->storeRepository->findById($request->get('storeId'));
 
         if ($store) {
             return view('admin.partials.locale._store_locale_list', [
@@ -109,10 +110,10 @@ class StoreController extends Controller
         return redirect()->back();
     }
 
-    public function deliveryList($id)
+    public function deliveryList(ListStoresRequest $request)
     {
         return view('admin.partials.delivery._store_delivery_list', [
-            'store' => $this->storeRepository->findById($id),
+            'store' => $this->storeRepository->findById($request->get('storeId')),
             'deliveries' => $this->deliveryRepository->all()
         ]);
     }
@@ -124,10 +125,10 @@ class StoreController extends Controller
         return redirect()->back();
     }
 
-    public function currencyList($id)
+    public function currencyList(ListStoresRequest $request)
     {
         return view('admin.partials.currency._store_currency_list', [
-            'store' => $this->storeRepository->findById($id),
+            'store' => $this->storeRepository->findById($request->get('storeId')),
             'currencies' => $this->currencyRepository->all()
         ]);
     }

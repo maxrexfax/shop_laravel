@@ -19,7 +19,7 @@
                     @endif
                 </div>
                 <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data" action="@if(!isset($currency)){{ route('currency.store')}} @else {{ route('currency.update', ['id' => $currency->id])}} @endif">
+                    <form method="POST" enctype="multipart/form-data" action="@if(!isset($currency)){{ route('currency.store')}} @else {{ route('currency.update')}} @endif">
                         @csrf
 
                         <div class="form-group row">

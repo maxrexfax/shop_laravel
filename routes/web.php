@@ -114,10 +114,11 @@ Route::group(['middleware'=>'language'],function ()
     });
 
     Route::prefix('/phone')->group(function() {
-        Route::get('/create/{store_id?}', 'PhoneController@create')->name('phone.create');
+        Route::get('/create/{storeId}', function ($storeId) { return redirect('/phone/create', ['storeId'=>$storeId]); });
+        Route::get('/create', 'PhoneController@create')->name('phone.create');
         Route::get('/edit/{storeId}/{phoneId}', function ($storeId, $phoneId) { return redirect('/phone/edit', ['storeId'=>$storeId, 'phoneId' => $phoneId]); });
         Route::get('/edit', 'PhoneController@edit')->name('phone.edit');
-        Route::post('/store/{id?}', 'PhoneController@store')->name('phone.store');
+        Route::post('/store', 'PhoneController@store')->name('phone.store');
         Route::post('/update', 'PhoneController@update')->name('phone.update');
         Route::get('/delete/{id}', 'PhoneController@destroy')->name('phone.delete');
     });
@@ -155,12 +156,19 @@ Route::group(['middleware'=>'language'],function ()
         Route::post('/currency/store', 'StoreController@storeCurrency')->name('store.currency.store');
         Route::post('/delivery/store', 'StoreController@storeDelivery')->name('store.delivery.store');
 
-        Route::get('/phonelist/{id}', function ($id) { return redirect('/store/phonelist', ['id'=>$id]); });
+        Route::get('/{storeId}/deliverylist/',function ($storeId) { return redirect('/store/deliverylist/', ['storeId'=>$storeId]); });
+        Route::get('/deliverylist/','StoreController@deliveryList')->name('store.deliverylist');
+
+        Route::get('/{storeId}/phonelist/', function ($storeId) { return redirect('/store/phonelist/', ['storeId'=>$storeId]); });
         Route::get('/phonelist', 'StoreController@phoneList')->name('store.phonelist');
-        Route::get('/langlist/{id}', 'StoreController@languageList')->name('store.langlist');
-        Route::get('/currencylist/{id}', 'StoreController@currencyList')->name('store.currencylist');
-        Route::get('/changeactive/{id}', 'StoreController@changeActive')->name('store.changeactive');
-        Route::get('/deliverylist/{id}', 'StoreController@deliveryList')->name('store.deliverylist');
+
+        Route::get('/{storeId}/localelist/', function ($storeId) { return redirect('/store/localelist/', ['storeId'=>$storeId]); });
+        Route::get('/localelist', 'StoreController@localesList')->name('store.localelist');
+
+        Route::get('/{storeId}/currencylist/', function ($storeId) { return redirect('/store/currencylist/', ['storeId'=>$storeId]); });
+        Route::get('/currencylist', 'StoreController@currencyList')->name('store.currencylist');
+
+        Route::get('/{storeId}/changeactive/', 'StoreController@changeActive')->name('store.changeactive');
     });
 
     Route::prefix('/user')->group(function() {

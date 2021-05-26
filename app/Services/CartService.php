@@ -13,9 +13,19 @@ use Illuminate\Support\Facades\Session;
 
 class CartService
 {
-    public function addToCart($id)
+    protected $productRepository;
+    protected $categoryRepository;
+    protected $deliveryRepository;
+
+    public function __construct($productRepository, $categoryRepository, $deliveryRepository)
     {
-        $product = Product::find($id);
+        $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->deliveryRepository = $deliveryRepository;
+    }
+
+    public function addToCart($product)
+    {
         $sessionCart = Session::get('cart');
 
         if (!empty($sessionCart->productRows) && !empty($sessionCart->productRows[$product->id])) {
@@ -43,11 +53,10 @@ class CartService
         Session::put('cart', $sessionCart);
     }
 
-    public function calculate($request)
+    public function calculate($request, $promocode)
     {
         $sessionCart = Session::get('cart');
         if ($request->post('promocode')) {
-            $promocode = Promocode::where('promocode_name', $request->post('promocode'))->first();
             if ($promocode) {
                 $sessionCart->promocodeId = $promocode->id;
                 $sessionCart->promocodeValue = $promocode->promocode_value;
@@ -73,7 +82,7 @@ class CartService
             $sessionCart->delivery_id = $request->post('delivery_id');
         }
 
-        $sessionCart->totalAmount = $totalProductsPrice + self::getDeliverySum($request->post('delivery_id'));
+        $sessionCart->totalAmount = $totalProductsPrice + $this->getDeliverySum($request->post('delivery_id'));
         $sessionCart->totalProducts = $totalProductsPrice;
 
         Session::put('cart', $sessionCart);
@@ -113,7 +122,7 @@ class CartService
         }
 
         $sessionCart->totalProducts = $totalProductsPrice - $promocodeDiscountSum;
-        $sessionCart->totalAmount = $sessionCart->totalProducts + self::getDeliverySum($sessionCart->deliveryId);
+        $sessionCart->totalAmount = $sessionCart->totalProducts + $this->getDeliverySum($sessionCart->deliveryId);
 
         Session::put('cart', $sessionCart);
     }
@@ -126,13 +135,14 @@ class CartService
         $this->recalculateCart();
     }
 
-    public static function getDeliverySum($delivery_id)
+    public function getDeliverySum($delivery_id)
     {
-        $delivery_obj = Delivery::find($delivery_id);
         $delivery = 0;
-
-        if ($delivery_obj) {
-            $delivery = $delivery_obj->delivery_price;
+        if(isset($delivery_id)) {
+            $delivery_obj = $this->deliveryRepository->findById($delivery_id);
+            if (isset($delivery_obj)) {
+                $delivery = $delivery_obj->delivery_price;
+            }
         }
 
         return $delivery;
@@ -147,7 +157,7 @@ class CartService
         if (!empty($sessionCart->productRows)) {
             foreach ($sessionCart->productRows as $key => $productRow) {
                 $arrayOfProductIds[] = $key;
-                $product = Product::find($key);
+                $product = $this->productRepository->findById($key);
                 if ($product) {
                     //foreach ($product->categories as $category) {//if necessary get all categories
                         $arrayOfCategoryIds[] = $product->categories->first()->id;
@@ -157,13 +167,15 @@ class CartService
         }
 
         $arrayOfCategoryIds = array_unique($arrayOfCategoryIds);
-        $categories = Category::find($arrayOfCategoryIds);
-        foreach ($categories as $category) {
-            foreach ($category->products as $product) {
-                $arrayOfProducts[] = $product;
+        $categories = $this->categoryRepository->getCategoriesByIdsArray($arrayOfCategoryIds);
+
+        if(isset($categories)) {
+            foreach ($categories as $category) {
+                foreach ($category->products as $product) {
+                    $arrayOfProducts[] = $product;
+                }
             }
         }
-
         foreach ($arrayOfProducts as $key => $product) {
             if (in_array($product->id, $arrayOfProductIds)) {
                 unset($arrayOfProducts[$key]);

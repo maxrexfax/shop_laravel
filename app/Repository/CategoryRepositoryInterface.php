@@ -8,4 +8,6 @@ interface CategoryRepositoryInterface extends EloquentRepositoryInterface {
     public function getCategoriesWithChildren();
 
     public function getRootCategories();
+
+    public function getCategoriesByIdsArray($arr);
 }

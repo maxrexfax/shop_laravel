@@ -31,4 +31,9 @@ class PromocodeRepository extends BaseRepository implements PromocodeRepositoryI
         $promocode->save();
     }
 
+    public function getPromocodeByName($name)
+    {
+        return Promocode::where('promocode_name', $name)->first();
+    }
+
 }

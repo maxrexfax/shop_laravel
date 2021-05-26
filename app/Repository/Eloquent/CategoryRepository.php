@@ -56,4 +56,12 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         }
         $category->save();
     }
+
+    public function getCategoriesByIdsArray($arr)
+    {
+        if (isset($arr)) {
+            return Category::find($arr);
+        }
+        return null;
+    }
 }

@@ -8,6 +8,8 @@ use App\Order;
 use App\PaymentMethod;
 use App\Product;
 use App\Promocode;
+use App\Repository\CategoryRepositoryInterface;
+use App\Repository\DeliveryRepositoryInterface;
 use App\Repository\Eloquent\UserRepository;
 use App\Repository\OrderRepositoryInterface;
 use App\Repository\PaymentMethodRepositoryInterface;
@@ -33,6 +35,8 @@ class CartController extends Controller
 
     public function __construct(StoreRepositoryInterface $storeRepository,
                                 ProductRepositoryInterface $productRepository,
+                                CategoryRepositoryInterface $categoryRepository,
+                                DeliveryRepositoryInterface $deliveryRepository,
                                 OrderRepositoryInterface $orderRepository,
                                 PaymentMethodRepositoryInterface $paymentMethodRepository,
                                 UserRepositoryInterface $userRepository
@@ -42,12 +46,14 @@ class CartController extends Controller
             Session::put('cart', new Cart());
         }
         $this->cart = new Cart();
-        $this->cartService = new CartService();
         $this->storeRepository = $storeRepository;
         $this->productRepository = $productRepository;
         $this->orderRepository = $orderRepository;
         $this->userRepository = $userRepository;
         $this->paymentMethodRepository = $paymentMethodRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->deliveryRepository = $deliveryRepository;
+        $this->cartService = new CartService($this->productRepository, $this->categoryRepository, $this->deliveryRepository);
     }
 
     public function cart()
@@ -64,7 +70,8 @@ class CartController extends Controller
 
     public function addProductToCart($id)
     {
-        $this->cartService->addToCart($id);
+
+        $this->cartService->addToCart($this->productRepository->findById($id));
 
         return redirect()->back();
     }
@@ -99,7 +106,7 @@ class CartController extends Controller
 
     public function calculate(Request $request)
     {
-        $this->cartService->calculate($request);
+        $this->cartService->calculate($request, $this->promocodeRepository->getPromocodeByName($request->post('promocode')));
 
         return redirect('/cart');
     }

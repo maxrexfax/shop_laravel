@@ -9,7 +9,7 @@
         </div>
         <div class="d-flex justify-content-between flex-wrap">
             <div class="col-12 p-0 overflow-auto">
-                <table class="table table-striped">
+                <table id="tableWithCategoriesData" class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
                         <th>ID</th>

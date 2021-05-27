@@ -65,12 +65,9 @@ class UserController extends Controller
      * @param $id
      * @return string
      */
-    public function destroy($id)
+    public function destroy(EditUserRequest $request)
     {
-        $user = $this->userRepository->findById($id);
-        if ($user) {
-            $this->userRepository->destroy($id);
-        }
+        $this->userRepository->destroy($request->get('id'));
 
         return back();
     }

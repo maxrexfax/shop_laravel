@@ -62,7 +62,8 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/edit', 'CategoryController@edit')->name('category.edit');
         Route::post('/update', 'CategoryController@update')->name('category.update');
         Route::get('/root/list', 'CategoryController@categoriesRootList')->name('category.rootlist');
-        Route::get('/destroy/{id}', 'CategoryController@destroy')->name('category.destroy');
+        Route::get('/destroy/{id}', function ($id) { return redirect('/category/destroy', ['id'=>$id]); });
+        Route::get('/destroy', 'CategoryController@destroy')->name('category.destroy');
         Route::get('/list', 'CategoryController@list')->name('category.list');
     });
 
@@ -72,7 +73,8 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/edit/', 'CurrencyController@edit')->name('currency.edit');
         Route::post('/store', 'CurrencyController@store')->name('currency.store');
         Route::post('/update', 'CurrencyController@update')->name('currency.update');
-        Route::get('/destroy/{id?}', 'CurrencyController@destroy')->name('currency.destroy');
+        Route::get('/destroy/{id}', function ($id) { return redirect('/currency/destroy', ['id'=>$id]); });
+        Route::get('/destroy', 'CurrencyController@destroy')->name('currency.destroy');
     });
 
     Route::prefix('/delivery')->group(function() {
@@ -81,7 +83,8 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/edit/', 'DeliveryController@edit')->name('delivery.edit');
         Route::post('/store', 'DeliveryController@store')->name('delivery.store');
         Route::post('/update', 'DeliveryController@update')->name('delivery.update');
-        Route::get('/destroy/{id?}', 'DeliveryController@destroy')->name('delivery.destroy');
+        Route::get('/destroy/{id}', function ($id) { return redirect('/delivery/destroy', ['id'=>$id]); });
+        Route::get('/destroy', 'DeliveryController@destroy')->name('delivery.destroy');
     });
 
     Route::prefix('/locale')->group(function() {
@@ -90,12 +93,14 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/edit', 'LocaleController@edit')->name('locale.edit');
         Route::post('/store', 'LocaleController@store')->name('locale.store');
         Route::post('/update', 'LocaleController@update')->name('locale.update');
-        Route::get('/destroy/{id?}', 'LocaleController@destroy')->name('locale.destroy');
+        Route::get('/destroy/{id}', function ($id) { return redirect('/locale/destroy', ['id'=>$id]); });
+        Route::get('/destroy', 'LocaleController@destroy')->name('locale.destroy');
     });
 
     Route::prefix('/order')->group(function() {
         Route::get('/softdelete/{id}', 'OrderController@softDelete')->name('order.softdelete');
-        Route::get('/destroy/{id}', 'OrderController@destroy')->name('order.destroy');
+        Route::get('/destroy/{id}', function ($id) { return redirect('/order/destroy', ['id'=>$id]); });
+        Route::get('/destroy', 'OrderController@destroy')->name('order.destroy');
         Route::get('/show/{id}', 'OrderController@show')->name('order.show');
         Route::get('/create', 'OrderController@create')->name('order.create');
         Route::get('/edit/{id}', function ($id) { return redirect('/order/edit', ['id'=>$id]); });
@@ -110,7 +115,8 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/edit', 'PaymentMethodController@edit')->name('payment.method.edit');
         Route::post('/store', 'PaymentMethodController@store')->name('payment.method.store');
         Route::post('/update', 'PaymentMethodController@update')->name('payment.method.update');
-        Route::get('/destroy/{id?}', 'PaymentMethodController@destroy')->name('payment.destroy');
+        Route::get('/destroy/{id}', function ($id) { return redirect('/paymethod/destroy', ['id'=>$id]); });
+        Route::get('/destroy', 'PaymentMethodController@destroy')->name('payment.destroy');
     });
 
     Route::prefix('/phone')->group(function() {
@@ -120,7 +126,8 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/edit', 'PhoneController@edit')->name('phone.edit');
         Route::post('/store', 'PhoneController@store')->name('phone.store');
         Route::post('/update', 'PhoneController@update')->name('phone.update');
-        Route::get('/delete/{id}', 'PhoneController@destroy')->name('phone.delete');
+        Route::get('/destroy/{phoneId}', function ($phoneId) { return redirect('/paymethod/destroy', ['phoneId'=>$phoneId]); });
+        Route::get('/destroy', 'PhoneController@destroy')->name('phone.destroy');
     });
 
     Route::prefix('/product')->group(function() {
@@ -133,7 +140,8 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/show/{id}', 'ProductController@show')->name('product.show');
         Route::post('/store', 'ProductController@store')->name('product.store');
         Route::post('/update', 'ProductController@update')->name('product.update');
-        Route::get('/destroy/{id}', 'ProductController@destroy')->name('product.destroy');
+        Route::get('/destroy/{id}', function ($id) { return redirect('/product/destroy', ['id'=>$id]); });
+        Route::get('/destroy', 'ProductController@destroy')->name('product.destroy');
         Route::get('/info/{id}', 'ProductController@productInfo')->name('product.info');
     });
 
@@ -143,7 +151,8 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/edit', 'PromocodeController@edit')->name('promocode.edit');
         Route::post('/store', 'PromocodeController@store')->name('promocode.store');
         Route::post('/update', 'PromocodeController@update')->name('promocode.update');
-        Route::get('/delete/{id}', 'PromocodeController@delete')->name('promocode.delete');
+        Route::get('/destroy/{id}', function ($id) { return redirect('/promocode/destroy', ['id'=>$id]); });
+        Route::get('/destroy', 'PromocodeController@destroy')->name('promocode.destroy');
     });
 
     Route::prefix('/store')->group(function() {
@@ -178,7 +187,8 @@ Route::group(['middleware'=>'language'],function ()
         Route::get('/edit', 'UserController@edit')->name('user.edit');
         Route::post('/store', 'UserController@store')->name('user.store');
         Route::post('/update', 'UserController@update')->name('user.update');
-        Route::get('/destroy/{id?}', 'UserController@destroy')->name('user.destroy');
+        Route::get('/destroy/{id}', function ($id) { return redirect('/user/destroy', ['id'=>$id]); });
+        Route::get('/destroy', 'UserController@destroy')->name('user.destroy');
 
     });
 

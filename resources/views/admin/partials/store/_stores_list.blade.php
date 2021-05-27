@@ -8,7 +8,7 @@
             </a>
         </div>
         <div class="col-12 p-0 overflow-auto">
-            <table class="table table-striped w-100">
+            <table id="tableWithStoresData" class="table table-striped w-100">
                 <thead class="thead-dark">
                 <tr>
                     <th>{{ __('actions.store_id') }}</th>

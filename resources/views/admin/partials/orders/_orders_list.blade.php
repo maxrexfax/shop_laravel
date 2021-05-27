@@ -8,7 +8,7 @@
             </a>
         </div>
         <div class="col-12 p-0 overflow-auto w-100">
-            <table class="table table-bordered w-100 table-orders-list">
+            <table id="tableWithOrdersData" class="table table-bordered w-100 table-orders-list">
                 <thead class="thead-dark">
                 <tr>
                     <th>ID</th>

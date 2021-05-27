@@ -47,13 +47,9 @@ class PhoneController extends Controller
         return redirect('/store/phonelist?storeId=' . $request->post('storeId'));
     }
 
-    public function destroy($id)
+    public function destroy(EditPhoneRequest $request)
     {
-        $phone = $this->phoneRepository->findById($id);
-
-        if ($phone) {
-            $this->phoneRepository->destroy($id);
-        }
+        $this->phoneRepository->destroy($request->get('phoneId'));
 
         return redirect()->back();
     }

@@ -44,13 +44,9 @@ class DeliveryController extends Controller
         return redirect('admin/deliveries/list');
     }
 
-    public function destroy($id)
+    public function destroy(EditDeliveryRequest $request)
     {
-        $delivery = $this->deliveryRepository->findById($id);
-
-        if ($delivery) {
-            $this->deliveryRepository->destroy($id);
-        }
+        $this->deliveryRepository->destroy($request->get('id'));
 
         return redirect('/admin/deliveries/list');
     }

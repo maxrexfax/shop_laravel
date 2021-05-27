@@ -8,7 +8,7 @@
             </a>
         </div>
         <div class="col-12 p-0">
-            <table class="table table-striped w-100">
+            <table id="tableWithPromocodesData" class="table table-striped w-100">
                 <thead class="thead-dark">
                 <tr>
                     <th>{{ __('actions.promocode_id') }}</th>

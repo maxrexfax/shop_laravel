@@ -124,14 +124,10 @@ class OrderController extends Controller
         return redirect('admin/orders/list');
     }
 
-    public function destroy($id)
+    public function destroy(EditOrderRequest $request)
     {
-        $order = $this->orderRepository->findById($id);
-
-        if ($order) {
-            $this->orderProductRepository->destroyByForeignKeyOrderId($id);
-            $this->orderRepository->destroy($id);
-        }
+        $this->orderProductRepository->destroyByForeignKeyOrderId($request->get('id'));
+        $this->orderRepository->destroy($request->get('id'));
 
         return redirect('admin/orders/list');
     }

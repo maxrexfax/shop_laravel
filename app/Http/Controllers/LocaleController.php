@@ -44,13 +44,9 @@ class LocaleController extends Controller
         return redirect('admin/locales/list');
     }
 
-    public function destroy($id)
+    public function destroy(EditLocaleRequest $request)
     {
-        $locale = $this->localeRepository->findById($id);
-
-        if ($locale) {
-            $this->localeRepository->destroy($id);
-        }
+        $this->localeRepository->destroy($request->get('id'));
 
         return redirect('/admin/locales/list');
     }

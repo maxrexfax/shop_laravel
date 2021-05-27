@@ -11,7 +11,7 @@
     @include('admin.partials._language_currency_locale_switcher')
     <div class="d-flex justify-content-between flex-wrap">
         <div class="col-md-10 offset-md-1 border rounded">
-            <table class="table table-striped">
+            <table id="tableWithPhonesData" class="table table-striped">
                 <thead>
                 <tr>
                     <th>{{__('actions.phone_number')}}</th>
@@ -31,7 +31,7 @@
                         </a>
                     </td>
                     <td class="text-center">
-                        <a href="{{route('phone.delete', ['id'=>$phone->id])}}" title="{{__('actions.delete_this_phone')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btnToDeletePhone">
+                        <a href="{{route('phone.destroy', ['phoneId'=>$phone->id])}}" title="{{__('actions.delete_this_phone')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btnToDeletePhone">
                             <span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>
                         </a>
                     </td>

@@ -45,13 +45,9 @@ class PaymentMethodController extends Controller
         return redirect('admin/paymethod/list');
     }
 
-    public function destroy($id)
+    public function destroy(EditPayMethodRequest $request)
     {
-        $paymentMethod = $this->paymentMethodRepository->findById($id);
-
-        if ($paymentMethod) {
-            $this->paymentMethodRepository->destroy($id);
-        }
+        $this->paymentMethodRepository->destroy($request->get('id'));
 
         return redirect('/admin/paymethod/list');
     }

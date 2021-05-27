@@ -100,12 +100,9 @@ class CategoryController extends Controller
         return response()->json($rootCategories);
     }
 
-    public function destroy($id)
+    public function destroy(EditCategoryRequest $request)
     {
-        $category = $this->categoryRepository->findById($id);
-        if ($category) {
-            $this->categoryRepository->destroy($id);
-        }
+        $this->categoryRepository->destroy($request->get('id'));
 
         return back();
     }

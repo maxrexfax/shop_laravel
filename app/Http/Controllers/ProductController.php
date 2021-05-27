@@ -86,12 +86,9 @@ class ProductController extends Controller
         return redirect('admin/product/list');
     }
 
-    public function destroy($id)
+    public function destroy(EditProductRequest $request)
     {
-        $product = $this->productRepository->findById($id);
-        if ($product) {
-            $this->productRepository->destroy($id);
-        }
+        $this->productRepository->destroy($request->get('id'));
 
         return back();
     }

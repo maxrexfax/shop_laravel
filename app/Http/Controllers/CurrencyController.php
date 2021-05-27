@@ -47,13 +47,9 @@ class CurrencyController extends Controller
         return redirect('admin/currencies/list');
     }
 
-    public function destroy($id)
+    public function destroy(EditCurrencyRequest $request)
     {
-        $currency = $this->currencyRepository->findById($id);
-
-        if ($currency) {
-            $this->currencyRepository->destroy($id);
-        }
+        $this->currencyRepository->destroy($request->get('id'));
 
         return redirect('/admin/currencies/list');
     }

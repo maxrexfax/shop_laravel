@@ -3,12 +3,12 @@
     <div class="card">
         <div class="card-header text-center">
             {{ __('text.list_of_deliveries') }}
-            <a class="url_in_accordion ml-2 mb-0 float-right" href="{{route('delivery.create')}}">
+            <a id="btnCreateDelivery" class="url_in_accordion ml-2 mb-0 float-right" href="{{route('delivery.create')}}">
                 <span class="addButton" title="{{ __('actions.add_new') }}">+</span>
             </a>
         </div>
         <div class="col-12 p-0">
-            <table class="table table-striped w-100">
+            <table id="tableWithDeliveriesData" class="table table-striped w-100">
                 <thead class="thead-dark">
                 <tr>
                     <th>{{ __('actions.delivery_id') }}</th>

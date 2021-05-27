@@ -42,13 +42,9 @@ class PromocodeController extends Controller
         return redirect('/admin/promocodes/list');
     }
 
-    public function delete($id)
+    public function destroy(EditPromocodeRequest $request)
     {
-        $promocode = $this->promocodeRepository->findById($id);
-
-        if ($promocode) {
-            $this->promocodeRepository->destroy($id);
-        }
+        $this->promocodeRepository->destroy($request->get('id'));
 
         return redirect()->back();
     }

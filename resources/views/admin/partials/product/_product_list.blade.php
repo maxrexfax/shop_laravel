@@ -8,7 +8,7 @@
             </a>
         </div>
             <div class="col-12 p-0 overflow-auto">
-                <table class="table table-striped w-100 table-for-users-list">
+                <table id="tableWithProductsData" class="table table-striped w-100 table-for-users-list">
                     <thead class="thead-dark">
                     <tr>
                         <th>{{ __('actions.product_id') }}</th>

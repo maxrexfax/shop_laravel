@@ -53,6 +53,7 @@ return [
     'description' => 'Description',
     'edit' => 'Edit',
     'edit_currency' => 'Edit currency',
+    'edit_profile' => 'Edit profile',
     'information' => 'Information',
     'home' => 'Home',
     'languages' => 'Languages',

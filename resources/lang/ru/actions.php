@@ -53,6 +53,7 @@ return [
     'description' => 'Описание',
     'edit' => 'Редактировать',
     'edit_currency' => 'Редактировать валюту',
+    'edit_profile' => 'Редактировать профиль',
     'information' => 'Информация',
     'home' => 'Главная',
     'languages' => 'Языки',

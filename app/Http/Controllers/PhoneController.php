@@ -2,50 +2,55 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditPhoneRequest;
 use App\Http\Requests\StorePhoneRequest;
-use App\Phone;
-use App\Services\PhoneStoreService;
-use App\Store;
+use App\Repository\PhoneRepositoryInterface;
+use App\Repository\StoreRepositoryInterface;
 
 class PhoneController extends Controller
 {
-    public function create($store_id = null, $phone_id = null)
-    {
-        $store = Store::find($store_id);
-        $phone = Phone::find($phone_id);
-        if ($phone) {
-            return view('admin.partials.phones._phone_edit_create', [
-                'phone' => $phone,
-                'store' => $store
-            ]);
-        }
+    protected $phoneRepository;
+    protected $storeRepository;
 
+    public function __construct(PhoneRepositoryInterface $phoneRepository, StoreRepositoryInterface $storeRepository)
+    {
+        $this->phoneRepository = $phoneRepository;
+        $this->storeRepository = $storeRepository;
+    }
+
+    public function create(EditPhoneRequest $request)
+    {
         return view('admin.partials.phones._phone_edit_create', [
-            'store' => $store
+            'store' => $this->storeRepository->findById($request->get('storeId')),
         ]);
     }
 
-    public function destroy($id)
+    public function edit(EditPhoneRequest $request)
     {
-        $phone = Phone::find($id);
-
-        if ($phone) {
-            $phone->delete();
-        }
-
-        return redirect()->back();
+        return view('admin.partials.phones._phone_edit_create', [
+            'phone' => $this->phoneRepository->findById($request->get('phoneId')),
+            'store' => $this->storeRepository->findById($request->get('storeId'))
+        ]);
     }
 
-    public function store($id = null, StorePhoneRequest $request)
+    public function store(StorePhoneRequest $request)
     {
-        $phone = Phone::find($id);
+        $this->phoneRepository->storePhone($request);
 
-        if (!$phone) {
-            $phone = new Phone();
-        }
+        return redirect('/store/phonelist?storeId=' . $request->post('storeId'));
+    }
 
-        (new PhoneStoreService())->storePhone($request, $phone);
+    public function update(StorePhoneRequest $request)
+    {
+        $this->phoneRepository->storePhone($request);
 
-        return redirect('/store/phonelist/' . $request->post('store_id'));
+        return redirect('/store/phonelist?storeId=' . $request->post('storeId'));
+    }
+
+    public function destroy(EditPhoneRequest $request)
+    {
+        $this->phoneRepository->destroy($request->get('phoneId'));
+
+        return redirect()->back();
     }
 }

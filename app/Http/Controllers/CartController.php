@@ -8,6 +8,14 @@ use App\Order;
 use App\PaymentMethod;
 use App\Product;
 use App\Promocode;
+use App\Repository\CategoryRepositoryInterface;
+use App\Repository\DeliveryRepositoryInterface;
+use App\Repository\Eloquent\UserRepository;
+use App\Repository\OrderRepositoryInterface;
+use App\Repository\PaymentMethodRepositoryInterface;
+use App\Repository\ProductRepositoryInterface;
+use App\Repository\StoreRepositoryInterface;
+use App\Repository\UserRepositoryInterface;
 use App\Services\CartService;
 use App\Store;
 use App\User;
@@ -19,14 +27,33 @@ class CartController extends Controller
 {
     public $cart;
     public $cartService;
+    protected $storeRepository;
+    protected $productRepository;
+    protected $orderRepository;
+    protected $userRepository;
+    protected $paymentMethodRepository;
 
-    public function __construct()
+    public function __construct(StoreRepositoryInterface $storeRepository,
+                                ProductRepositoryInterface $productRepository,
+                                CategoryRepositoryInterface $categoryRepository,
+                                DeliveryRepositoryInterface $deliveryRepository,
+                                OrderRepositoryInterface $orderRepository,
+                                PaymentMethodRepositoryInterface $paymentMethodRepository,
+                                UserRepositoryInterface $userRepository
+    )
     {
         if (!session()->has('cart')) {
             Session::put('cart', new Cart());
         }
         $this->cart = new Cart();
-        $this->cartService = new CartService();
+        $this->storeRepository = $storeRepository;
+        $this->productRepository = $productRepository;
+        $this->orderRepository = $orderRepository;
+        $this->userRepository = $userRepository;
+        $this->paymentMethodRepository = $paymentMethodRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->deliveryRepository = $deliveryRepository;
+        $this->cartService = new CartService($this->productRepository, $this->categoryRepository, $this->deliveryRepository);
     }
 
     public function cart()
@@ -34,16 +61,17 @@ class CartController extends Controller
         $this->cartService->recalculateCart();
 
         return view('cart.cart', [
-            'activeStore' => Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE),
+            'activeStore' => $this->storeRepository->getActiveStore(),
             'cart' => Session::get('cart') ? Session::get('cart') : new Cart(),
             'additionalProducts' => $this->cartService->getAdditionalProducts(),
-            'arrayOfVisitedProducts' => Session::get('arrayOfVisitedProducts') ? Product::find(Session::get('arrayOfVisitedProducts')): '',
+            'arrayOfVisitedProducts' => Session::get('arrayOfVisitedProducts') ? $this->productRepository->getArrayOfProductsByIds(Session::get('arrayOfVisitedProducts')): '',
         ]);
     }
 
     public function addProductToCart($id)
     {
-        $this->cartService->addToCart($id);
+
+        $this->cartService->addToCart($this->productRepository->findById($id));
 
         return redirect()->back();
     }
@@ -78,7 +106,7 @@ class CartController extends Controller
 
     public function calculate(Request $request)
     {
-        $this->cartService->calculate($request);
+        $this->cartService->calculate($request, $this->promocodeRepository->getPromocodeByName($request->post('promocode')));
 
         return redirect('/cart');
     }
@@ -115,23 +143,23 @@ class CartController extends Controller
 
     public function checkoutCart()
     {
-        $activeStore = Store::firstWhere('active', '=', Store::STORE_IS_ACTIVE);
+        $activeStore = $this->storeRepository->getActiveStore();
         return view('cart.checkout', [
             'activeStore' => $activeStore,
             'cart' => Session::get('cart') ? Session::get('cart') : new Cart(),
             'additionalProducts' => $this->cartService->getAdditionalProducts(),
-            'arrayOfVisitedProducts' => Session::get('arrayOfVisitedProducts') ? Product::find(Session::get('arrayOfVisitedProducts')): '',
-            'loginUser' => Session::get('loginUserId') ? User::find(Session::get('loginUserId')) : '',
+            'arrayOfVisitedProducts' => Session::get('arrayOfVisitedProducts') ? $this->productRepository->getArrayOfProductsByIds(Session::get('arrayOfVisitedProducts')): '',
+            'loginUser' => Session::get('loginUserId') ? $this->userRepository->findById(Session::get('loginUserId')) : '',
             'deliveries' => $activeStore->deliveries,
-            'paymentMethods' => PaymentMethod::all(),
+            'paymentMethods' => $this->paymentMethodRepository->all(),
         ]);
     }
 
     public function showOrder($uniq_id)
     {
-        $order = Order::where('uniq_id', '=', $uniq_id)->first();
+        $order = $this->orderRepository->getOrderByUniqId($uniq_id);
         if ($order) {
-            $paymentArray = (new OrderController())->getOrderPaymentDetails($order);
+            $paymentArray = $order->getOrderPaymentDetails($order);
             $totalProductsPrice = 0;
             $productPriceWithDiscount = 0;
             foreach ($order->products as $product) {

@@ -11,7 +11,7 @@
             </a>
         </div>
         <div class="col-12 p-0 overflow-auto">
-            <table class="table table-striped w-100">
+            <table id="tableWithCurrenciesData" class="table table-striped w-100">
                 <thead class="thead-dark">
                 <tr>
                     <th>{{ __('actions.currency_id') }}</th>
@@ -29,7 +29,7 @@
                         <td>{{$currency->currency_name}}</td>
                         <td>{{$currency->currency_code}}</td>
                         <td>{{$currency->currency_value}}</td>
-                        <td><a href="{{route('currency.create')}}/{{$currency->id}}"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td><a href="{{route('currency.edit', ['id' => $currency->id])}}"><i class="fas fa-pencil-alt"></i></a></td>
                         <td>
                             <a href="{{route('currency.destroy', ['id'=>$currency->id])}}" title="{{__('text.delete')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btnToDeletePhone">
                                 <span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>

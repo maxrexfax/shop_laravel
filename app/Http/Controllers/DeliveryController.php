@@ -3,46 +3,50 @@
 namespace App\Http\Controllers;
 
 use App\Delivery;
+use App\Http\Requests\EditDeliveryRequest;
 use App\Http\Requests\StoreDeliveryRequest;
+use App\Repository\DeliveryRepositoryInterface;
 use App\Services\DeliveryStoreService;
+use Illuminate\Database\Eloquent\Model;
 
 class DeliveryController extends Controller
 {
-    public function create($id = null)
+    protected $deliveryRepository;
+
+    public function __construct(DeliveryRepositoryInterface $deliveryRepository)
     {
-        if (!empty($id)) {
-            $delivery = Delivery::find($id);
-            if ($delivery) {
-                return view ('admin.partials.delivery._delivery_edit_create', [
-                    'delivery' => $delivery,
-                ]);
-            }
+        $this->deliveryRepository = $deliveryRepository;
+    }
 
-            return redirect('/admin/deliveries/list');
-        }
-
+    public function create()
+    {
         return view ('admin.partials.delivery._delivery_edit_create');
     }
 
-    public function store($id = null, StoreDeliveryRequest $request)
+    public function edit(EditDeliveryRequest $request)
     {
-        $delivery = Delivery::find($id);
-        if (!$delivery) {
-            $delivery = new Delivery();
-        }
+        return view ('admin.partials.delivery._delivery_edit_create', [
+            'delivery' => $this->deliveryRepository->findById($request->get('id')),
+        ]);
+    }
 
-        (new DeliveryStoreService())->store($delivery, $request);
+    public function store(StoreDeliveryRequest $request)
+    {
+        $this->deliveryRepository->store($request);
 
         return redirect('/admin/deliveries/list');
     }
 
-    public function destroy($id)
+    public function update(StoreDeliveryRequest $request)
     {
-        $delivery = Delivery::find($id);
+        $this->deliveryRepository->store($request);
 
-        if ($delivery) {
-            $delivery->delete();
-        }
+        return redirect('admin/deliveries/list');
+    }
+
+    public function destroy(EditDeliveryRequest $request)
+    {
+        $this->deliveryRepository->destroy($request->get('id'));
 
         return redirect('/admin/deliveries/list');
     }

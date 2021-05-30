@@ -9,8 +9,9 @@
         </div>
             <div class="col-lg-12 col-md-12 col-sm-12 pb-2">
                 @include('admin.partials._language_currency_locale_switcher')
-                        <form method="POST" id="formToAddLocales" action="{{ route('store.locales.store', ['id' => $store->id]) }}">
+                        <form method="POST" id="formToAddLocales" action="{{ route('store.locales.store') }}">
                             @csrf
+                            <input type="hidden" name="storeId" value="{{$store->id}}">
                             <div class="form-group row">
                                 <label for="" class="col-md-2 col-form-label text-md-right"> </label>
                                 <div class="col-md-10 offset-md-1 mt-2">

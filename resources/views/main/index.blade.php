@@ -83,4 +83,5 @@
     </div>
 </section>
 <section class="place-holder"></section>
+
 @endsection

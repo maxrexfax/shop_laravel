@@ -3,48 +3,51 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\PaginationQuantityHelper;
+use App\Http\Requests\EditPayMethodRequest;
 use App\Http\Requests\StorePaymethodRequest;
 use App\PaymentMethod;
+use App\Repository\PaymentMethodRepositoryInterface;
 use App\Services\PaymentMethodStoreService;
 use Illuminate\Http\Request;
 
 class PaymentMethodController extends Controller
 {
-    public function create($id = null)
+    private $paymentMethodRepository;
+
+    public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)
     {
-        if (!empty($id)) {
-            $paymentMethod = PaymentMethod::find($id);
-            if ($paymentMethod) {
-                return view('admin.partials.paymethod._paymethod_edit_create', [
-                    'paymentMethod' => $paymentMethod,
-                ]);
-            }
+        $this->paymentMethodRepository = $paymentMethodRepository;
+    }
 
-            return redirect('admin/category/list');
-        }
-
+    public function create()
+    {
         return view('admin.partials.paymethod._paymethod_edit_create');
     }
 
-    public function store($id = null, StorePaymethodRequest $request)
+    public function edit(EditPayMethodRequest $request)
     {
-        $paymentMethod = PaymentMethod::find($id);
+        return view('admin.partials.paymethod._paymethod_edit_create', [
+            'paymentMethod' => $this->paymentMethodRepository->findById($request->get('id')),
+        ]);
+    }
 
-        if (!$paymentMethod) {
-            $paymentMethod = new PaymentMethod();
-        }
-
-        (new PaymentMethodStoreService())->store($paymentMethod, $request);
+    public function store(StorePaymethodRequest $request)
+    {
+        $this->paymentMethodRepository->store($request);
 
         return redirect('/admin/paymethod/list');
     }
 
-    public function destroy($id)
+    public function update(StorePaymethodRequest $request)
     {
-        $paymentMethod = PaymentMethod::find($id);
-        if ($paymentMethod) {
-            $paymentMethod->delete();
-        }
+        $this->paymentMethodRepository->store($request);
+
+        return redirect('admin/paymethod/list');
+    }
+
+    public function destroy(EditPayMethodRequest $request)
+    {
+        $this->paymentMethodRepository->destroy($request->get('id'));
 
         return redirect('/admin/paymethod/list');
     }

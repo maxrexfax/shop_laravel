@@ -2,87 +2,72 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditUserRequest;
 use App\Http\Requests\StoreUserRequest;
-use App\Role;
-use App\Services\UserStoreService;
+use App\Repository\UserRepositoryInterface;
 use App\User;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    private $userRepository;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->middleware('auth');
+        $this->userRepository = $userRepository;
     }
 
     /**
-     * Display a listing of the resource.
+     * Display the JSON listing of the users list.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-
+        return response()->json($this->userRepository->all(), 200);
     }
 
-    /**
-     * @param null $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
-     */
-    public function create($id = null)
+    public function create()
     {
-        if (!empty($id)) {
-            $user = User::find($id);
-            if ($user) {
-                return view('admin.partials.user._user_edit_create', [
-                    'user' => $user,
-                ]);
-            }
-
-            return redirect('/admin/users/list');
-
-        }
-
         return view('admin.partials.user._user_edit_create');
     }
 
-    /**
-     * @param null $id
-     * @param StoreUserRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function store($id = null, StoreUserRequest $request)
+    public function edit(EditUserRequest $request)
     {
-        if (Auth::user()->isAdmin() || Auth::user()->id === (int)$id) {
+        return view('admin.partials.user._user_edit_create', [
+            'user' => $this->userRepository->findById($request->get('id')),
+        ]);
+    }
 
-            $user = User::find($id);
+    public function store(StoreUserRequest $request)
+    {
+        $this->userRepository->storeUser($request);
 
-            if (!$user) {
-                $user = new User();
-            }
-
-            (new UserStoreService())->storeuser($request, $user);
-        }
         return redirect('admin/users/list');
     }
 
+    public function update(StoreUserRequest $request)
+    {
+        if (Auth::user()->isAdmin() || Auth::user()->id === (int)$request->post('id')) {
+            $this->userRepository->storeuser($request);
+        }
+
+        return redirect('admin/users/list');
+    }
 
     /**
      * @param $id
      * @return string
      */
-    public function destroy($id)
+    public function destroy(EditUserRequest $request)
     {
-        $user = User::find($id);
-        if ($user) {
-            $user->delete();
-        }
+        $this->userRepository->destroy($request->get('id'));
 
         return back();
     }

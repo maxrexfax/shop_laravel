@@ -1,7 +1,7 @@
 @extends('admin.index')
 @section('admin.content')
     <div class="card">
-        <div class="card-header text-center">{{ __('actions.currency_control') }}</div>
+        <div class="card-header text-center">{{ __('actions.delivery_control') }}</div>
         <div class="d-flex justify-content-between flex-wrap">
             <div class="col-6 col-md-10 col-sm-12">
                 <p class="text-center">
@@ -19,7 +19,7 @@
                     @endif
                 </div>
                 <div class="card-body">
-                    <form id="formToAddDeliveries" method="POST" enctype="multipart/form-data" action="{{ route('delivery.store', ['id' => isset($delivery) ? $delivery->id : '']) }}">
+                    <form id="formToAddDeliveries" method="POST" enctype="multipart/form-data" action="@if(!isset($delivery)){{ route('delivery.store')}} @else {{ route('delivery.update')}} @endif">
                         @csrf
 
                         <div class="form-group row">
@@ -73,7 +73,7 @@
                         <div class="form-group row">
                             <label for="active" class="col-md-4 col-form-label text-md-right">{{ __('text.is_delivery_enabled') }}</label>
                             <div class="col-md-6">
-                                <select name="active" class="form-control">
+                                <select id="selectIfDeliveryActive" name="active" class="form-control">
                                     <option value="0"
                                     @if(!empty($delivery))
                                         @if(!$delivery->active)
@@ -94,7 +94,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button id="btnSaveDelivery" type="submit" class="btn btn-primary">
                                     {{ __('actions.save') }}
                                 </button>
                             </div>

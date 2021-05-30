@@ -2,49 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditLocaleRequest;
 use App\Http\Requests\StoreLocaleRequest;
 use App\Locale;
+use App\Repository\LocaleRepositoryInterface;
 use App\Services\LocaleStoreService;
+use Illuminate\Database\Eloquent\Model;
 
 class LocaleController extends Controller
 {
-    public function create($id = null)
+    protected $localeRepository;
+
+    public function __construct(LocaleRepositoryInterface $localeRepository)
     {
-        if (!empty($id)) {
-            $locale = Locale::find($id);
-            if ($locale) {
-                return view('admin.partials.locale._locale_edit_create', [
-                    'locale' => $locale,
-                ]);
-            }
+        $this->localeRepository = $localeRepository;
+    }
 
-            return redirect('/admin/locales/list');
-        }
-
+    public function create()
+    {
         return view('admin.partials.locale._locale_edit_create');
     }
 
-    public function store($id = null, StoreLocaleRequest $request)
+    public function edit(EditLocaleRequest $request)
     {
-        $locale = Locale::find($id);
+        return view('admin.partials.locale._locale_edit_create', [
+            'locale' => $this->localeRepository->findById($request->get('id')),
+        ]);
+    }
 
-        if (!$locale) {
-            $locale = new Locale();
-        }
-
-        (new LocaleStoreService())->storeLocale($locale, $request);
+    public function store(StoreLocaleRequest $request)
+    {
+        $this->localeRepository->storeLocale($request);
 
         return redirect('/admin/locales/list');
     }
 
-
-    public function destroy($id)
+    public function update(StoreLocaleRequest $request)
     {
-        $locale = Locale::find($id);
+        $this->localeRepository->storeLocale($request);
 
-        if ($locale) {
-            $locale->delete();
-        }
+        return redirect('admin/locales/list');
+    }
+
+    public function destroy(EditLocaleRequest $request)
+    {
+        $this->localeRepository->destroy($request->get('id'));
 
         return redirect('/admin/locales/list');
     }

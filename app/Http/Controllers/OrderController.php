@@ -6,42 +6,97 @@ use App\Category;
 use App\CreditCard;
 use App\Delivery;
 use App\Discount;
+use App\Http\Requests\EditOrderRequest;
 use App\Http\Requests\StoreOrderRequest;
 use App\Order;
 use App\OrderProduct;
 use App\PaymentMethod;
 use App\PaypalPayment;
 use App\Promocode;
+use App\Repository\CategoryRepositoryInterface;
+use App\Repository\DeliveryRepositoryInterface;
+use App\Repository\OrderProductRepositoryInterface;
+use App\Repository\OrderRepositoryInterface;
+use App\Repository\OrderStatusRepositoryInterface;
+use App\Repository\PaymentMethodRepositoryInterface;
+use App\Repository\PromocodeRepositoryInterface;
 use App\Services\OrderStoreService;
 use App\OrderStatus;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
-    public function store($id = null, StoreOrderRequest $request)
+    protected $orderRepository;
+    protected $categoryRepository;
+    protected $deliveryRepository;
+    protected $paymethodRepository;
+    protected $promocodeRepository;
+    protected $orderStatusRepository;
+    protected $orderProductRepository;
+
+    public function __construct(
+        OrderRepositoryInterface $orderRepository,
+        CategoryRepositoryInterface $categoryRepository,
+        DeliveryRepositoryInterface $deliveryRepository,
+        PaymentMethodRepositoryInterface $paymethodRepository,
+        PromocodeRepositoryInterface $promocodeRepository,
+        OrderStatusRepositoryInterface $orderStatusRepository,
+        OrderProductRepositoryInterface $orderProductRepository
+    )
     {
-        $paying = null;
-        $order = Order::find($id);
+        $this->orderRepository = $orderRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->deliveryRepository = $deliveryRepository;
+        $this->paymethodRepository = $paymethodRepository;
+        $this->promocodeRepository = $promocodeRepository;
+        $this->orderStatusRepository = $orderStatusRepository;
+        $this->orderProductRepository = $orderProductRepository;
+    }
 
-        if (!$order) {
-            $order = new Order();
-        }
+    public function create()
+    {
+        return view('admin.partials.orders._order_create', [
+            'statuses' => $this->orderStatusRepository->all(),
+            'categories' => $this->categoryRepository->all(),
+            'deliveries' => $this->deliveryRepository->all(),
+            'paymentMethods' => $this->paymethodRepository->all(),
+            'promocodes' => $this->promocodeRepository->all(),
+        ]);
+    }
 
-        $order = (new OrderStoreService())->store($order, $request);
+    public function edit(EditOrderRequest $request)//сделать реквест проверку входящих данных в едиты
+    {
+        $order = $this->orderRepository->findById($request->get('id'));
 
-        if ($request->post('customer')) {
-            return redirect()->route('cart.show.order', [
-                'uniq_id' => $order->uniq_id,
-            ]);
-        }
+        return view('admin.partials.orders._order_create', [
+            'order' => $order,
+            'paymentArray' => $order->getOrderPaymentDetails(),
+            'statuses' => $this->orderStatusRepository->all(),
+            'categories' => $this->categoryRepository->all(),
+            'deliveries' => $this->deliveryRepository->all(),
+            'paymentMethods' => $this->paymethodRepository->all(),
+            'promocodes' => $this->promocodeRepository->all(),
+        ]);
+    }
+
+    public function store(StoreOrderRequest $request)
+    {
+        $order = $this->orderRepository->store($request);
+
+        return redirect()->route('cart.show.order', [
+            'uniq_id' => $order->uniq_id,
+        ]);
+    }
+
+    public function update(StoreOrderRequest $request)
+    {
+        $this->orderRepository->store($request);
+
         return redirect('admin/orders/list');
     }
 
     public function show($id)
     {
-        $order = Order::find($id);
+        $order = $this->orderRepository->findById($id);
         $productPriceWithDiscount = 0;
         if ($order) {
             $totalProductsPrice = 0;
@@ -62,67 +117,20 @@ class OrderController extends Controller
                 'totalProductsPrice' => $totalProductsPrice,
                 'productPriceWithDiscount' => $productPriceWithDiscount,
                 'totalCost' => $order->getDeliveryPrice() + $productPriceWithDiscount,
-                'paymentArray' => $this->getOrderPaymentDetails($order),
+                'paymentArray' => $order->getOrderPaymentDetails(),
             ]);
         }
 
         return redirect('admin/orders/list');
     }
 
-    public function destroy($id)
+    public function destroy(EditOrderRequest $request)
     {
-        $order = Order::find($id);
-
-        if ($order) {
-            OrderProduct::where('order_id', '=', $id)->delete();
-            $order->delete();
-        }
+        $this->orderProductRepository->destroyByForeignKeyOrderId($request->get('id'));
+        $this->orderRepository->destroy($request->get('id'));
 
         return redirect('admin/orders/list');
     }
 
-    public function getOrderPaymentDetails($order)
-    {
-        $paymentArray = [];
-        if ($order->payment_method_code === PaymentMethod::PAYMENT_METHOD_CREDIT) {
-            $paymentArray['paymentDetails'] = (CreditCard::find($order->payment_method_id))->credit_card_number;
-            $paymentArray['paymentDescription'] = trans('text.credit_card_number');
-        } else if ($order->payment_method_code === PaymentMethod::PAYMENT_METHOD_PAYPAL) {
-                $paymentArray['paymentDetails'] = (PaypalPayment::find($order->payment_method_id)) ? (PaypalPayment::find($order->payment_method_id))->paypal_email : '';
-                $paymentArray['paymentDescription'] = trans('text.paypal_method_details');
-        } else if ($order->payment_method_code === PaymentMethod::PAYMENT_METHOD_CASH) {
-            $paymentArray['paymentDetails'] = '';
-            $paymentArray['paymentDescription'] = trans('text.cash_method_details');
-        }
-        return $paymentArray;
-    }
 
-    public function create($id = null)
-    {
-        if (!empty($id)) {
-            $order = Order::find($id);
-            $paymentDetails = null;
-            if ($order) {
-                return view('admin.partials.orders._order_create', [
-                    'order' => $order,
-                    'statuses' => OrderStatus::all(),
-                    'categories' => Category::all(),
-                    'deliveries' => Delivery::all(),
-                    'paymentMethods' => PaymentMethod::all(),
-                    'promocodes' => Promocode::all(),
-                    'paymentArray' => $this->getOrderPaymentDetails($order),
-                ]);
-            }
-
-            return redirect('admin/orders/list');
-        }
-
-        return view('admin.partials.orders._order_create', [
-            'statuses' => OrderStatus::all(),
-            'categories' => Category::all(),
-            'deliveries' => Delivery::all(),
-            'paymentMethods' => PaymentMethod::all(),
-            'promocodes' => Promocode::all(),
-        ]);
-    }
 }

@@ -10,7 +10,7 @@
                 <a class="url_in_accordion ml-2 float-right" href="{{route('order.destroy', ['id' => $order->id])}}">
                     <span class="addButton" title="{{ __('actions.delete') }}"><i class="fas fa-trash"></i></span>
                 </a>
-                <a class="url_in_accordion ml-2 float-right" href="{{route('order.create', ['id' => $order->id])}}">
+                <a class="url_in_accordion ml-2 float-right" href="{{route('order.edit', ['id' => $order->id])}}">
                     <span class="addButton" title="{{ __('actions.edit') }}"><i class="fas fa-pencil-alt"></i></span>
                 </a>
                 <a class="url_in_accordion ml-2 float-right" href="{{route('order.create')}}">

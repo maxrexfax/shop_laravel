@@ -4,56 +4,61 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Helpers\PriceHelper;
+use App\Http\Requests\EditProductRequest;
 use App\Http\Requests\StoreProductRequest;
 use App\Product;
+use App\Repository\CategoryRepositoryInterface;
+use App\Repository\ProductRepositoryInterface;
 use App\Services\ProductStoreService;
 use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
-    public function __construct()
+    protected $productRepository;
+    protected $categoryRepository;
+
+    public function __construct(ProductRepositoryInterface $productRepository, CategoryRepositoryInterface $categoryRepository)
     {
         if (!Session::has('arrayOfVisitedProducts')) {
             Session::put('arrayOfVisitedProducts', []);
         }
+
+        $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
     }
 
     public function create($id = null)
     {
-        if (!empty($id)) {
-            $product = Product::find($id);
-            if ($product) {
-                return view('admin.partials.product._product_edit_create', [
-                    'categories' => Category::all(),
-                    'product' => $product
-                ]);
-            }
-
-            return redirect('admin/product/list');
-        }
-
         return view('admin.partials.product._product_edit_create', [
-            'categories' => Category::all()
+            'categories' => $this->categoryRepository->all()
         ]);
-
     }
 
-    public function store($id = null, StoreProductRequest $request)
+    public function edit(EditProductRequest $request)
     {
-        $product = Product::find($id);
+        return view('admin.partials.product._product_edit_create', [
+            'categories' => $this->categoryRepository->all(),
+            'product' => $this->productRepository->findById($request->get('id'))
+        ]);
+    }
 
-        if (!$product) {
-            $product = new Product();
-        }
+    public function store(StoreProductRequest $request)
+    {
+        $this->productRepository->store($request);
 
-        (new ProductStoreService())->store($request, $product);
+        return redirect('admin/product/list');
+    }
+
+    public function update(StoreProductRequest $request)
+    {
+        $this->productRepository->store($request);
 
         return redirect('admin/product/list');
     }
 
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = $this->productRepository->findById($id);
 
         if ($product) {
             (new ProductStoreService())->addProductToSessionArray($id);
@@ -61,7 +66,7 @@ class ProductController extends Controller
                 'product' => $product,
                 'alternativeTitle' => $product->title,
                 'alternativeDescription' => $product->description,
-                'arrayOfVisitedProducts' => Product::find(Session::get('arrayOfVisitedProducts')),//str N59 protects from null
+                'arrayOfVisitedProducts' => $this->productRepository->getArrayOfProductsByIds(Session::get('arrayOfVisitedProducts')),
             ]);
         }
 
@@ -70,7 +75,7 @@ class ProductController extends Controller
 
     public function images($id = null)
     {
-        $product = Product::find($id);
+        $product = $this->productRepository->findById($id);
         if ($product) {
             return view('images._images_edit', [
                 'product' => $product,
@@ -81,25 +86,24 @@ class ProductController extends Controller
         return redirect('admin/product/list');
     }
 
-    public function destroy($id)
+    public function destroy(EditProductRequest $request)
     {
-        $product = Product::find($id);
-        if ($product) {
-            $product->delete();
-        }
+        $this->productRepository->destroy($request->get('id'));
 
         return back();
     }
 
     public function productsList($category_id)
     {
-        $category = Category::find($category_id);
+        $category = $this->categoryRepository->findById($category_id);
+
         return !empty($category) ? response()->json($category->getProducts()) : 0;
     }
 
     public function productInfo($product_id)
     {
-        $product = Product::find($product_id);
+        $product = $this->productRepository->findById($product_id);
+
         return $product ? response()->json($product) : 'null';
     }
 

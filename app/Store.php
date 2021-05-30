@@ -44,7 +44,11 @@ class Store extends Model
 
     public function getDefaultCurrency()
     {
-        return Currency::find($this->getActiveStoreCurrency()->currency_id);
+        $storeCurrency = $this->getActiveStoreCurrency();//if StoreCurrency is not set!
+        if (isset($storeCurrency)) {
+            return Currency::findOrFail($this->getActiveStoreCurrency()->currency_id);
+        }
+        return Currency::find(1);
     }
 
     public function currencies()

@@ -11,7 +11,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 0; $i < 10; $i++) {
+        for($i = 0; $i < 100; $i++) {
             $product = [
                 'product_name'          => 'Product N'. $i,
                 'price'                 => 10.0,

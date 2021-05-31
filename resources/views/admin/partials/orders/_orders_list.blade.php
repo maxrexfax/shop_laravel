@@ -9,14 +9,14 @@
         </div>
         <div class="col-12 p-0 overflow-auto w-100">
             <table id="tableWithOrdersData" class="table table-bordered w-100 table-orders-list">
-                <thead class="thead-dark">
+                <thead class="thead-custom-dark">
                 <tr>
                     <th>ID</th>
                     <th>{{ __('text.first_name') }}</th>
                     <th>{{ __('text.email') }}</th>
                     <th>{{ __('text.city') }}</th>
                     <th>{{ __('text.status') }}</th>
-                    <th>{{ __('text.view_order') }}</th>
+                    <th>{{ __('text.view') }}</th>
                     <th>{{ __('actions.edit') }}</th>
                     <th class="text-right">{{ __('actions.delete') }}</th>
                 </tr>

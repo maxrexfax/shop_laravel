@@ -23,7 +23,7 @@ Route::group(['middleware'=>'language'],function ()
     Route::prefix('/cart')->group(function() {
         Route::get('/', 'CartController@cart')->name('cart');
         Route::get('/checkout', 'CartController@checkoutCart')->name('cart.checkout');
-        Route::get('/show/order/{uniq_id}', 'CartController@showOrder')->name('cart.show.order');
+        Route::get('/show/order/{uniqId}', 'CartController@showOrder')->name('cart.show.order');
         Route::post('/checkout/check', 'OrderController@store')->name('cart.checkout.check');
         Route::get('/add/{id?}', 'CartController@addProductToCart')->name('cart.add');
         Route::get('/delete/{id?}', 'CartController@deleteProductFromCart')->name('cart.delete');

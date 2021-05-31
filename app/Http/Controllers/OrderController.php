@@ -83,7 +83,7 @@ class OrderController extends Controller
         $order = $this->orderRepository->store($request);
 
         return redirect()->route('cart.show.order', [
-            'uniq_id' => $order->uniq_id,
+            'uniqId' => $order->uniq_id,
         ]);
     }
 

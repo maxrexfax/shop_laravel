@@ -4,8 +4,8 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="d-flex justify-content-between flex-wrap">
-                        <div class="col-3 text-left admin-menu p-0">
+                    <div class="parent-container-dashboard">
+                        <div class="div-left-column text-left admin-menu p-0">
                             <div class="dashboard-menu border-bottom oneHeight pl-2">
                                 <i class="fa fa-dashboard fw ml-2"></i>
                                 <span class=""><a class="url-no-decoration roboto-font-family font-weight-bold" href="{{route('admin')}}">{{ __('actions.dashboard') }}</a></span>
@@ -58,16 +58,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-9 p-0 bg-secondary">
-                            <main>
-                                <div class="">
-                                    <div class="row justify-content-center">
-                                        <div class="col-md-12">
-                                            @yield('admin.content')
-                                        </div>
-                                    </div>
-                                </div>
-                            </main>
+                        <div class="div-right-column bg-secondary">
+                            <div class="col-md-12">
+                                @yield('admin.content')
+                            </div>
                         </div>
                     </div>
                 </div>

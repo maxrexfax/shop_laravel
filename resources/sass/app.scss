@@ -947,3 +947,24 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+
+.parent-container-dashboard {
+    min-width: 800px;
+}
+
+.div-left-column {
+    width: 250px;
+    float: left;
+    overflow: hidden;
+    min-height: 50px;
+}
+
+.div-right-column {
+    overflow: hidden;
+    min-height: 50px;
+    padding: 0;
+}
+
+.thead-custom-dark {
+    background-color: #514943;
+}

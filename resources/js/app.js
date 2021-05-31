@@ -1,5 +1,3 @@
-require('./bootstrap');
-
 const TIME_TO_RECHECK_CART = 3000;
 const TIME_TO_SHOW_MESSAGE = 2000;
 const TIME_TO_SLIDE_UP = 200;

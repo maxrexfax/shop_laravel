@@ -64,7 +64,7 @@ class CartController extends Controller
             'activeStore' => $this->storeRepository->getActiveStore(),
             'cart' => Session::get('cart') ? Session::get('cart') : new Cart(),
             'additionalProducts' => $this->cartService->getAdditionalProducts(),
-            'arrayOfVisitedProducts' => Session::get('arrayOfVisitedProducts') ? $this->productRepository->getArrayOfProductsByIds(Session::get('arrayOfVisitedProducts')): '',
+            'visitedProducts' => Session::get('visitedProducts') ? $this->productRepository->getArrayOfProductsByIds(Session::get('visitedProducts')) : '',
         ]);
     }
 
@@ -148,16 +148,16 @@ class CartController extends Controller
             'activeStore' => $activeStore,
             'cart' => Session::get('cart') ? Session::get('cart') : new Cart(),
             'additionalProducts' => $this->cartService->getAdditionalProducts(),
-            'arrayOfVisitedProducts' => Session::get('arrayOfVisitedProducts') ? $this->productRepository->getArrayOfProductsByIds(Session::get('arrayOfVisitedProducts')): '',
+            'visitedProducts' => Session::get('visitedProducts') ? $this->productRepository->getArrayOfProductsByIds(Session::get('visitedProducts')) : '',
             'loginUser' => Session::get('loginUserId') ? $this->userRepository->findById(Session::get('loginUserId')) : '',
             'deliveries' => $activeStore->deliveries,
             'paymentMethods' => $this->paymentMethodRepository->all(),
         ]);
     }
 
-    public function showOrder($uniq_id)
+    public function showOrder($uniqId)
     {
-        $order = $this->orderRepository->getOrderByUniqId($uniq_id);
+        $order = $this->orderRepository->getOrderByUniqId($uniqId);
         if ($order) {
             $paymentArray = $order->getOrderPaymentDetails($order);
             $totalProductsPrice = 0;

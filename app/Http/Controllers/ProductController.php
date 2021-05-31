@@ -19,8 +19,8 @@ class ProductController extends Controller
 
     public function __construct(ProductRepositoryInterface $productRepository, CategoryRepositoryInterface $categoryRepository)
     {
-        if (!Session::has('arrayOfVisitedProducts')) {
-            Session::put('arrayOfVisitedProducts', []);
+        if (!Session::has('visitedProducts')) {
+            Session::put('visitedProducts', []);
         }
 
         $this->productRepository = $productRepository;
@@ -66,7 +66,7 @@ class ProductController extends Controller
                 'product' => $product,
                 'alternativeTitle' => $product->title,
                 'alternativeDescription' => $product->description,
-                'arrayOfVisitedProducts' => $this->productRepository->getArrayOfProductsByIds(Session::get('arrayOfVisitedProducts')),
+                'visitedProducts' => $this->productRepository->getArrayOfProductsByIds(Session::get('visitedProducts')),
             ]);
         }
 

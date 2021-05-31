@@ -12,10 +12,10 @@ class ProductStoreService
 {
     public function addProductToSessionArray($id)
     {
-        $arrayOfIds = Session::get('arrayOfVisitedProducts');
+        $arrayOfIds = Session::get('visitedProducts');
         if (is_array($arrayOfIds) && !in_array($id, $arrayOfIds)) {
             $arrayOfIds[] = $id;
-            Session::put('arrayOfVisitedProducts', $arrayOfIds);
+            Session::put('visitedProducts', $arrayOfIds);
         }
     }
 }

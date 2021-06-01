@@ -26,7 +26,13 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 
     public function ordersWithProducts()
     {
-        return Order::with('products')->get();
+        $orders = Order::with('products')->get();
+
+        foreach ($orders as $order) {
+            $order->createProperty("orderPrice", $order->getPriceOfAllProducts() + $order->getDeliveryPrice());
+        }
+
+        return $orders;
     }
 
     public function getOrderByUniqId($uid)

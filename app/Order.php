@@ -100,6 +100,10 @@ class Order extends Model
         return !empty($this->orderProducts) ? $this->orderProducts : '';
     }
 
+    public function getOrderProductByProductId($productId) {
+        return OrderProduct::where('order_id', $this->id)->where('product_id', $productId)->first();
+    }
+
     public function getOrderPaymentDetails()
     {
         $paymentArray = [];
@@ -117,4 +121,20 @@ class Order extends Model
         return $paymentArray;
     }
 
+    public function createProperty($name, $value){
+        $this->{$name} = $value;
+    }
+
+    public function getPriceOfAllProducts() {
+        $products = $this->products;
+        $totalPrice = 0;
+
+        if (isset($products)) {
+            foreach ($products as $product) {
+                $totalPrice += $product->price * $this->getOrderProductByProductId($product->id)->products_quantity;
+            }
+        }
+
+        return $totalPrice;
+    }
 }

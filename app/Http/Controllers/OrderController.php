@@ -98,8 +98,8 @@ class OrderController extends Controller
     {
         $order = $this->orderRepository->findById($id);
         $productPriceWithDiscount = 0;
+        $totalProductsPrice = 0;
         if ($order) {
-            $totalProductsPrice = 0;
             foreach ($order->products as $product) {
                 $totalProductsPrice += $product->orderProduct($id)->products_quantity * $product->price;
             }

@@ -967,4 +967,18 @@ body {
 
 .thead-custom-dark {
     background-color: #514943;
+    color: white;
+    font-weight: bold;
+}
+
+.order-show-row {
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+    margin-bottom: .5rem;
+    background-color: #e8eaec;
+}
+
+.tr-in-order-list:hover{
+    background-color: beige;
 }

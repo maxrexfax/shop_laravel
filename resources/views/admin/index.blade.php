@@ -4,7 +4,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="parent-container-dashboard">
+                    <div class="parent-container-dashboard bg-secondary">
                         <div class="div-left-column text-left admin-menu p-0">
                             <div class="dashboard-menu border-bottom oneHeight pl-2">
                                 <i class="fa fa-dashboard fw ml-2"></i>
@@ -58,8 +58,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="div-right-column bg-secondary">
-                            <div class="col-md-12">
+                        <div class="div-right-column">
+                            <div class="col-md-12 p-0">
                                 @yield('admin.content')
                             </div>
                         </div>

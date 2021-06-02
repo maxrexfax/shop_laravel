@@ -21,7 +21,7 @@
         <div class="row m-0">
             <div class="col-lg-6 p-2">
                 <div class="bg-light order-details-font p-2">
-                    <h3>{{__('text.order_information')}}:</h3>
+                    <h3 class="text-center">{{__('text.order_information')}}:</h3>
                     <div class="order-show-row">
                         <span class="w-50">{{__('text.status_of_this_order')}}: </span><span class="w-50 text-right">{{$order->getStatus()->status_name}}</span>
                     </div>
@@ -47,7 +47,7 @@
             </div>
             <div class="col-lg-6 p-2">
                 <div class="bg-light order-details-font p-2">
-                    <h3>{{__('text.options')}}:</h3>
+                    <h3 class="text-center">{{__('text.options')}}:</h3>
                     <div class="order-show-row">
                         <span class="w-50">{{__('text.delivery_name')}}: </span><span class="w-50 text-right">{{$order->getDeliveryName()}}</span>
                     </div>
@@ -77,7 +77,7 @@
         <div class="row m-0">
             <div class="col-lg-6 p-2">
                 <div class="bg-light order-details-font p-2">
-                    <h3>{{__('text.client_information')}}:</h3>
+                    <h3 class="text-center">{{__('text.client_information')}}:</h3>
                     <div class="order-show-row">
                         <span class="w-50">{{__('text.first_name')}}: </span><span class="w-50 text-right">{{$order->first_name}}</span>
                     </div>
@@ -95,7 +95,7 @@
         </div>
         <div class="row m-0">
             <div class="col-lg-12 order-details-font">
-                <h3>{{__('text.products_in_order')}}:</h3>
+                <h3 class="text-center">{{__('text.products_in_order')}}:</h3>
                 <div class="overflow-auto w-100">
                     <table class="table">
                         <thead>
@@ -114,7 +114,7 @@
                                 <td>{{$product->product_name}}</td>
                                 <td>{{$product->price}}$</td>
                                 <td>{{$product->orderProduct($order->id)->products_quantity}}</td>
-                                <td>{{$product->orderProduct($order->id)->products_quantity * $product->price}}$</td>
+                                <td>{{round($product->orderProduct($order->id)->products_quantity * $product->price, 2)}}$</td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -125,15 +125,15 @@
         <div class="row m-0">
             <div class="col-lg-6 p-2">
                 <div class="bg-light order-details-font p-2">
-                    <h3>{{__('text.order_summary')}}:</h3>
+                    <h3 class="text-center">{{__('text.order_summary')}}:</h3>
                     <div class="order-show-row">
-                        <span class="w-50">{{__('text.price_without_delivery_discount')}}: </span><span class="w-50 text-right">{{$totalProductsPrice}}$</span>
+                        <span class="w-75">{{__('text.price_without_delivery_discount')}}: </span><span class="w-25 text-right">{{$totalProductsPrice}}$</span>
                     </div>
                     <div class="order-show-row">
-                        <span class="w-50">{{__('text.price_with_discount_without_delivery')}}: </span><span class="w-50 text-right">{{$productPriceWithDiscount}}$</span>
+                        <span class="w-75">{{__('text.price_with_discount_without_delivery')}}: </span><span class="w-25 text-right">{{$productPriceWithDiscount}}$</span>
                     </div>
                     <div class="order-show-row">
-                        <span class="w-50"><b>{{__('text.total_order_price')}}: </b></span><span class="w-50 text-right">{{$totalCost}}$</span>
+                        <span class="w-75"><b>{{__('text.total_order_price')}}: </b></span><span class="w-25 text-right">{{$totalCost}}$</span>
                     </div>
                 </div>
             </div>

@@ -23,10 +23,15 @@ class StoreLocaleRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'locale_name' => 'string|required|max:255',
-            'locale_code' => 'string|required|max:10',
+        $rules = [
+            'locale_name' => ['string','required','max:255', 'min:3'],
+            'locale_code' => ['string','required','max:10', 'min:2'],
+            'locale_logo' => ['image'],
         ];
+        if ($this->post('localeLogo') == 0) {//create PM
+            $rules['locale_logo'][1] = 'required';
+        }
+        return $rules;
     }
 
     /**

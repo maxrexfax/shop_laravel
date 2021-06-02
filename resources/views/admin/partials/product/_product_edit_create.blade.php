@@ -13,7 +13,7 @@
 
         <div id="divInFormToAddProduct" class="">
             <div class="col-md-12 col-sm-12">
-                <form method="POST" enctype="multipart/form-data" action="{{ route('product.store', ['id' => isset($product) ? $product->id : '']) }}">
+                <form method="POST" enctype="multipart/form-data" action="@if(!isset($product)){{ route('product.store')}} @else {{ route('product.update', ['id' => $product->id])}} @endif">
                     @csrf
                     <div class="form-group row">
                         <label for="id" class="col-md-4 col-form-label text-md-right">{{ __('actions.product_id') }}</label>

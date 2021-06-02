@@ -5,9 +5,18 @@ namespace App\Http\Controllers;
 use App\Currency;
 use App\Delivery;
 use App\Helpers\PriceHelper;
+use App\Http\Requests\EditStoreRequest;
+use App\Http\Requests\ListStoresRequest;
 use App\Http\Requests\StoreDeliveryStoreRequest;
 use App\Http\Requests\StoreStoreRequest;
 use App\Locale;
+use App\Repository\CurrencyRepositoryInterface;
+use App\Repository\DeliveryRepositoryInterface;
+use App\Repository\LocaleRepositoryInterface;
+use App\Repository\StoreCurrencyRepositoryInterface;
+use App\Repository\StoreDeliveryRepositoryInterface;
+use App\Repository\StoreLocaleRepositoryInterface;
+use App\Repository\StoreRepositoryInterface;
 use App\Services\StoreCurrencyStoreService;
 use App\Services\StoreDeliveryStoreService;
 use App\Services\StoreLocaleStoreService;
@@ -15,43 +24,63 @@ use App\Services\StoreStoreService;
 use App\Store;
 use App\StoreCurrency;
 use App\StoreLocale;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class StoreController extends Controller
 {
+    protected $storeRepository;
+    protected $localeRepository;
+    protected $deliveryRepository;
+    protected $currencyRepository;
+    protected $storeCurrencyRepository;
+    protected $storeLocaleRepository;
+    protected $storeDeliveryRepository;
+
+    public function __construct(StoreRepositoryInterface $storeRepository, LocaleRepositoryInterface $localeRepository,
+                                DeliveryRepositoryInterface $deliveryRepository, CurrencyRepositoryInterface $currencyRepository,
+                                StoreCurrencyRepositoryInterface $storeCurrencyRepository, StoreLocaleRepositoryInterface $storeLocaleRepository,
+                                StoreDeliveryRepositoryInterface $storeDeliveryRepository)
+    {
+        $this->storeRepository = $storeRepository;
+        $this->localeRepository = $localeRepository;
+        $this->deliveryRepository = $deliveryRepository;
+        $this->currencyRepository = $currencyRepository;
+        $this->storeCurrencyRepository = $storeCurrencyRepository;
+        $this->storeLocaleRepository = $storeLocaleRepository;
+        $this->storeDeliveryRepository = $storeDeliveryRepository;
+    }
+
     public function create($id = null)
     {
-        if (!empty($id)) {
-            $store = Store::find($id);
-            if ($store) {
-                return view ('admin.partials.store._store_edit_create', [
-                    'store' => $store,
-                ]);
-            }
-
-            return redirect('/admin/stores/list');
-        }
-
         return view ('admin.partials.store._store_edit_create');
     }
 
-    public function store($id = null, StoreStoreRequest $request)
+    public function edit(EditStoreRequest $request)
     {
-        $store = Store::find($id);
+        return view ('admin.partials.store._store_edit_create', [
+            'store' => $this->storeRepository->findById($request->get('id')),
+        ]);
+    }
 
-        if (!$store) {
-            $store = new Store();
-        }
-
-        (new StoreStoreService())->store($store ,$request);
+    public function store(StoreStoreRequest $request)
+    {
+        $this->storeRepository->store($request);
 
         return redirect('/admin/stores/list');
     }
 
-    public function phoneList($id = null)
+    public function update(StoreStoreRequest $request)
     {
-        $store = Store::find($id);
+        $this->storeRepository->store($request);
+
+        return redirect('/admin/stores/list');
+    }
+
+    public function phoneList(ListStoresRequest $request)
+    {
+        $store = $this->storeRepository->findById($request->get('storeId'));
 
         if ($store) {
             return view('admin.partials.phones._phones_list', [
@@ -63,87 +92,69 @@ class StoreController extends Controller
         return redirect('/admin/stores/list');
     }
 
-    public function languageList($id = null)
+    public function localesList(ListStoresRequest $request)
     {
-        $store = Store::find($id);
+        $store = $this->storeRepository->findById($request->get('storeId'));
 
         if ($store) {
             return view('admin.partials.locale._store_locale_list', [
                 'store' => $store,
-                'locales' => Locale::all(),
+                'locales' => $this->localeRepository->all(),
             ]);
         }
     }
 
-    public function storeLocales($id, Request $request)
+    public function storeLocales(Request $request)
     {
-        $store = Store::find($id);
-
-        if ($store) {
-            (new StoreLocaleStoreService())->store($store, $request);
-        }
-
+        $this->storeLocaleRepository->store($request);
         return redirect()->back();
     }
 
-    public function storeDelivery($id, StoreDeliveryStoreRequest $request)
-    {
-        $store = Store::find($id);
-
-        if ($store) {
-            (new StoreDeliveryStoreService())->store($store, $request);
-        }
-
-        return redirect()->back();
-    }
-
-    public function currencyList($id)
-    {
-        return view('admin.partials.currency._store_currency_list', [
-            'store' => Store::find($id),
-            'currencies' => Currency::all()
-        ]);
-    }
-
-    public function deliveryList($id)
+    public function deliveryList(ListStoresRequest $request)
     {
         return view('admin.partials.delivery._store_delivery_list', [
-            'store' => Store::find($id),
-            'deliveries' => Delivery::all()
+            'store' => $this->storeRepository->findById($request->get('storeId')),
+            'deliveries' => $this->deliveryRepository->all()
         ]);
     }
 
-    public function storeCurrency($id, Request $request)
+    public function storeDelivery(StoreDeliveryStoreRequest $request)
     {
-        $store = Store::find($id);
+        $this->storeDeliveryRepository->store($request);
 
-        if ($store) {
-            (new StoreCurrencyStoreService())->store($store, $request);
-        }
+        return redirect()->back();
+    }
+
+    public function currencyList(ListStoresRequest $request)
+    {
+        return view('admin.partials.currency._store_currency_list', [
+            'store' => $this->storeRepository->findById($request->get('storeId')),
+            'currencies' => $this->currencyRepository->all()
+        ]);
+    }
+
+    public function storeCurrency(Request $request)
+    {
+        $this->storeCurrencyRepository->storeCurrenciesForStore($request);
 
         return redirect()->back();
     }
 
     public function changeActive($id)
     {
-        $store = Store::find($id);
-
-        if ($store) {
-            $store->active = !$store->active;
-            $store->save();
-        }
+        $this->storeRepository->changeStoreState($id);
 
         return redirect()->back();
     }
 
     public function setDefaultCurrency($id)
     {
-        $store = Store::where('active', '=', Store::STORE_IS_ACTIVE)->first();
-        $storeCurrencies = StoreCurrency::where('store_id', '=', $store->id)->get();
+        $store = $this->storeRepository->getActiveStore();
+        $storeCurrencies = $this->storeCurrencyRepository->getStoreCurrenciesByStoreId($store->id);
 
         foreach ($storeCurrencies as $storeCurrency) {
             if ($storeCurrency->currency_id == $id) {
-                Session::put('defaultCurrency', Currency::find($id));
+                Session::put('defaultCurrency', $this->currencyRepository->findById($id));
             }
         }
 

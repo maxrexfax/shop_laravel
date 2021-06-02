@@ -4,9 +4,9 @@ namespace App\Services;
 
 class CurrencyStoreService
 {
-    public function store($currency, $request)
-    {
-        $currency->fill($request->post());
-        $currency->save();
-    }
+//    public function store($currency, $request)
+//    {
+//        $currency->fill($request->post());
+//        $currency->save();
+//    }
 }

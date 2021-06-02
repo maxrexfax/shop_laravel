@@ -32,8 +32,8 @@
 
                             <div class="col-md-6">
                                 <span class="form-control border-0">@if(!empty($phone)){{$phone->id}}@endif</span>
-                                <input id="id" type="hidden" name="id" value="@if(!empty($phone)){{$phone->id}}@endif">
-                                <input id="id" type="hidden" name="store_id" value="{{$store->id}}">
+                                <input id="phoneId" type="hidden" name="phoneId" value="@if(!empty($phone)){{$phone->id}}@else 0 @endif">
+                                <input id="storeId" type="hidden" name="storeId" value="{{$store->id}}">
                             </div>
                         </div>
 

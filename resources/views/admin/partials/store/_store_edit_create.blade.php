@@ -19,7 +19,8 @@
                     @endif
                 </div>
                 <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data" action="{{ route('store.store', ['id' => isset($store) ? $store->id : '']) }}">
+                    <form method="POST" enctype="multipart/form-data" action="@if(!isset($store)){{ route('store.store')}} @else {{ route('store.update', ['id' => $store->id])}} @endif">
+
                         @csrf
 
                         <div class="form-group row">

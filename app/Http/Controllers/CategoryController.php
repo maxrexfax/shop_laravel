@@ -5,67 +5,76 @@ namespace App\Http\Controllers;
 use App\Helpers\PaginationQuantityHelper;
 use App\Category;
 use App\Helpers\PriceHelper;
+use App\Http\Requests\EditCategoryRequest;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Repository\CategoryRepositoryInterface;
+use App\Repository\ProductRepositoryInterface;
 use App\Services\CategoryStoreService;
 use App\Services\GetProductsService;
 use App\Store;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
-    public function __construct()
+    protected $categoryRepository;
+    protected $productRepository;
+
+    public function __construct(CategoryRepositoryInterface $categoryRepository, ProductRepositoryInterface $productRepository)
     {
         if (!Session::has('defaultCurrency')) {
             Session::put('defaultCurrency', (new PriceHelper())->getCurrentCurrency());
         }
+        $this->categoryRepository = $categoryRepository;
+        $this->productRepository = $productRepository;
     }
 
-    public function create($id = null)
+
+    public function create()
     {
-        if (!empty($id)) {
-            $category = Category::find($id);
-            if($category) {
-                return view('admin.partials.category._category_edit_create', [
-                    'categories' => Category::all(),
-                    'category' => $category
-                ]);
-            }
-
-            return redirect('admin/category/list');
-        }
-
         return view('admin.partials.category._category_edit_create', [
-                'categories' => Category::all()
+                'categories' => $this->categoryRepository->all()
             ]);
     }
 
-    public function store($id = null, StoreCategoryRequest $request)
+    public function edit(EditCategoryRequest $request)
     {
-        $category = Category::find($id);
+        return view('admin.partials.category._category_edit_create', [
+            'categories' => $this->categoryRepository->all(),
+            'category' => $this->categoryRepository->findById($request->get('id'))
+        ]);
+    }
 
-        if (!$category) {
-            $category = new Category();
-        }
+    public function update(StoreCategoryRequest $request)
+    {
+        $this->categoryRepository->storeCategory($request);
 
-        (new CategoryStoreService())->storeCategory($request, $category);
+        return redirect('admin/category/list');
+    }
+
+    public function store(StoreCategoryRequest $request)
+    {
+        $this->categoryRepository->storeCategory($request);
 
         return redirect('admin/category/list');
     }
 
     public function show($id, Request $request)
     {
-        $category = Category::find($id);
+        $category = null;
+        if($id != null) {
+            $category = $this->categoryRepository->findById($id);
+        }
+
         $paginateQuantity = (new PaginationQuantityHelper())->getPaginationQuantity($request->get('paginateQuantity'));
-        $products = (new GetProductsService())
-                ->getUserListBySortData($id, $request
-                ->get('sortType'), $paginateQuantity);
+        $products = $this->productRepository->getUserListBySortData($id, $request->get('sortType'), $paginateQuantity);
 
         if ($category) {
             return view('categories.products', [
                 'products' => $products,
-                'categoriesAll' => Category::all(),
+                'categoriesAll' => $this->categoryRepository->all(),
                 'currentCategory' => $category,
                 'paginateQuantity' => $paginateQuantity,
                 'sortType' => $request->get('sortType'),
@@ -79,27 +88,21 @@ class CategoryController extends Controller
 
     public function list()
     {
-        $categoriesHierarchically = Category::whereNull('category_id')
-            ->with('childrenCategories')
-            ->get();
         return view('categories.index', [
-            'categories' => Category::all(),
-            'categoriesHierarchically' => $categoriesHierarchically,
+            'categories' => $this->categoryRepository->all(),
+            'categoriesHierarchically' => $this->categoryRepository->getCategoriesWithChildren(),
         ]);
     }
 
     public function categoriesRootList()
     {
-        $rootCategories = Category::whereNull('category_id')->get();
+        $rootCategories = $this->categoryRepository->getRootCategories();
         return response()->json($rootCategories);
     }
 
-    public function destroy($id)
+    public function destroy(EditCategoryRequest $request)
     {
-        $category = Category::find($id);
-        if ($category) {
-            $category->delete();
-        }
+        $this->categoryRepository->destroy($request->get('id'));
 
         return back();
     }

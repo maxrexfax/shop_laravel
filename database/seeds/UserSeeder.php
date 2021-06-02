@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
         ];
         User::create($user);
         for($i = 0; $i < 10; $i++) {
-            $user = [
+            User::create([
                 'login'                 => 'Login_'.Str::random(4),
                 'first_name'            => 'FN_'.Str::random(4),
                 'second_name'           => 'SN_'.Str::random(4),
@@ -38,8 +38,7 @@ class UserSeeder extends Seeder
                 'email_verified_at'     => Carbon::now(),
                 'remember_token'        => Str::random(10),
                 'created_at'            => now()
-            ];
-            User::create($user);
+            ]);
         }
     }
 }

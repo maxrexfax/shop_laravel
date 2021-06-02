@@ -1,5 +1,3 @@
-require('./bootstrap');
-
 const TIME_TO_RECHECK_CART = 3000;
 const TIME_TO_SHOW_MESSAGE = 2000;
 const TIME_TO_SLIDE_UP = 200;
@@ -377,9 +375,11 @@ $(document).ready(function() {
         let buttonClicked = this;
         let message = this.getAttribute('data-message');
         let text = $(this).text();
+        let urlToSendRequest = "/cart/add/" + this.getAttribute('data-id');
+        console.log("urlToSendRequest:" + urlToSendRequest);
         $('#cartInviteToBuy').removeClass('d-block').addClass('d-none');
         $('.item-to-hide-in-empty-cart').addClass('d-block').removeClass('d-none');
-        $.get( "/cart/add/" + this.getAttribute('data-id'))
+        $.get(urlToSendRequest)
             .done(function( data ) {
                 restoreText(buttonClicked, text, message);
         });

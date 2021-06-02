@@ -19,7 +19,7 @@
                     @endif
                 </div>
                 <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data" action="{{ route('locale.store', ['id' => isset($locale) ? $locale->id : '']) }}">
+                    <form method="POST" enctype="multipart/form-data" action="@if(!isset($locale)){{ route('locale.store')}} @else {{ route('locale.update')}} @endif">
                         @csrf
 
                         <div class="form-group row">
@@ -63,10 +63,13 @@
                                 <div class="pl-3" style="max-width: 300px; width: 100%;">
                                     @if($locale->locale_logo)
                                         <img width="100%" src="{{asset('/img/logo/' . $locale->locale_logo)}}" alt="{{$locale->locale_logo}}" title="Current logo for {{$locale->locale_name}}"/>
+                                        <input type="hidden" name="localeLogo" value="1">
                                     @else
                                         {{__('text.no current logo image!')}}
                                     @endif
                                 </div>
+                            @else
+                                <input type="hidden" name="localeLogo" value="0">
                             @endif
                         </div>
 
@@ -85,7 +88,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button id="btnCreateLocale" type="submit" class="btn btn-primary">
                                     {{ __('actions.save') }}
                                 </button>
                             </div>

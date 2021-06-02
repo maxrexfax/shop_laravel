@@ -22,7 +22,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/vars.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -87,7 +86,7 @@
                         <ul class="navbar-nav ml-auto">
                             @auth
                                 <li class="nav-item">
-                                    <a class="nav-link item-menu-non-root" href="{{ route('admin') }}">{{ __('actions.admin_control') }}</a>
+                                    <a class="nav-link item-menu-non-root" href="{{ route('admin') }}">{{ __('actions.dashboard') }}</a>
                                 </li>
                             @endauth
 
@@ -108,6 +107,9 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('user.edit', ['id' => Auth::user()->id]) }}">
+                                            {{ __('actions.edit_profile') }}
+                                        </a>
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
@@ -132,7 +134,7 @@
         <footer>
             <section class="place-holder"></section>
             <div class="text-center">
-                <p>Admin footer (TODO?)</p>
+                <p></p>
             </div>
         </footer>
     </div>

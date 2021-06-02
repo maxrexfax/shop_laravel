@@ -8,7 +8,7 @@
             </a>
         </div>
         <div class="col-12 p-0">
-            <table class="table table-striped w-100">
+            <table id="tableWithPromocodesData" class="table table-striped w-100">
                 <thead class="thead-dark">
                 <tr>
                     <th>{{ __('actions.promocode_id') }}</th>
@@ -24,7 +24,7 @@
                         <td>{{$promocode->promocode_name}}</td>
                         <td>{{$promocode->promocode_value}}</td>
                         <td>
-                            <a href="{{route('promocode.create', ['id' => isset($promocode) ? $promocode->id : ''])}}"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{{route('promocode.edit', ['id' => $promocode->id])}}"><i class="fas fa-pencil-alt"></i></a>
                             <a href="{{route('promocode.delete', ['id'=>$promocode->id])}}" title="{{__('actions.delete')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btn-delete-promocode">
                                 <span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>
                             </a>

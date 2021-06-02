@@ -8,7 +8,7 @@
             </a>
         </div>
         <div class="col-12 p-0 overflow-auto">
-            <table class="table table-striped w-100">
+            <table id="tableWithStoresData" class="table table-striped w-100">
                 <thead class="thead-dark">
                 <tr>
                     <th>{{ __('actions.store_id') }}</th>
@@ -38,16 +38,16 @@
                         <td>{{$store->store_keywords}}</td>
                         <td>
                             @if($store->active)
-                                <a href="{{route('store.changeactive', ['id' => $store->id])}}" class="btn btn-primary url-no-decoration" title="{{__('actions.turn_off')}}">{{__('actions.active')}}</a>
+                                <a href="{{route('store.changeactive', ['storeId' => $store->id])}}" class="btn btn-primary url-no-decoration" title="{{__('actions.turn_off')}}">{{__('actions.active')}}</a>
                             @else
-                                <a href="{{route('store.changeactive', ['id' => $store->id])}}" class="btn btn-secondary url-no-decoration" title="{{__('actions.turn_on')}}">{{__('actions.turned_off')}}</a>
+                                <a href="{{route('store.changeactive', ['storeId' => $store->id])}}" class="btn btn-secondary url-no-decoration" title="{{__('actions.turn_on')}}">{{__('actions.turned_off')}}</a>
                             @endif
                         </td>
-                        <td><a class="btn btn-secondary url-no-decoration" href="{{route('store.deliverylist', ['id' => $store->id])}}">{{ __('actions.deliveries') }}</a></td>
-                        <td><a class="btn btn-secondary url-no-decoration" href="{{route('store.currencylist', ['id' => $store->id])}}">{{ __('actions.currency') }}</a></td>
-                        <td><a class="btn btn-secondary url-no-decoration" href="{{route('store.langlist', ['id' => $store->id])}}">{{ __('actions.languages') }}</a></td>
-                        <td><a class="btn btn-secondary url-no-decoration" href="{{route('store.phonelist', ['id' => $store->id])}}">{{ __('actions.phones') }}</a></td>
-                        <td><a href="{{route('store.create')}}/{{$store->id}}"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td><a class="btn btn-secondary url-no-decoration" href="{{route('store.deliverylist', ['storeId' => $store->id])}}">{{ __('actions.deliveries') }}</a></td>
+                        <td><a class="btn btn-secondary url-no-decoration" href="{{route('store.currencylist', ['storeId' => $store->id])}}">{{ __('actions.currency') }}</a></td>
+                        <td><a class="btn btn-secondary url-no-decoration" href="{{route('store.localelist', ['storeId' => $store->id])}}">{{ __('actions.languages') }}</a></td>
+                        <td><a class="btn btn-secondary url-no-decoration" href="{{route('store.phonelist', ['storeId' => $store->id])}}">{{ __('actions.phones') }}</a></td>
+                        <td><a href="{{route('store.edit', ['id' => $store->id])}}"><i class="fas fa-pencil-alt"></i></a></td>
                     </tr>
                 @endforeach
                 </tbody>

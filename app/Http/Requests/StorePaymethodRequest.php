@@ -23,11 +23,15 @@ class StorePaymethodRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'logo' => 'image|required',
-            'payment_method_name' => 'string|required|max:500',
-            'payment_method_code' => 'string|required|max:25',
-            'other_data' => 'string|max:500|nullable',
+        $rules = [
+            'login' => ['logo'],
+            'payment_method_name' => ['string','required','max:500', 'min:3'],
+            'payment_method_code' => ['string','required','max:25', 'min:3'],
+            'other_data' => ['string','max:500','nullable'],
         ];
+        if ($this->post('logoExist') == 0) {//create PM
+            $rules['logo'][1] = 'required';
+        }
+        return $rules;
     }
 }

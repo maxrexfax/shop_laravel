@@ -100,4 +100,41 @@ class Order extends Model
         return !empty($this->orderProducts) ? $this->orderProducts : '';
     }
 
+    public function getOrderProductByProductId($productId) {
+        return OrderProduct::where('order_id', $this->id)->where('product_id', $productId)->first();
+    }
+
+    public function getOrderPaymentDetails()
+    {
+        $paymentArray = [];
+        if ($this->payment_method_code === PaymentMethod::PAYMENT_METHOD_CREDIT) {
+            $paymentArray['paymentDetails'] = (CreditCard::find($this->payment_method_id))->credit_card_number;
+            $paymentArray['paymentDescription'] = trans('text.credit_card_number');
+        } else if ($this->payment_method_code === PaymentMethod::PAYMENT_METHOD_PAYPAL) {
+            $paymentArray['paymentDetails'] = (PaypalPayment::find($this->payment_method_id)) ? (PaypalPayment::find($this->payment_method_id))->paypal_email : '';
+            $paymentArray['paymentDescription'] = trans('text.paypal_method_details');
+        } else if ($this->payment_method_code === PaymentMethod::PAYMENT_METHOD_CASH) {
+            $paymentArray['paymentDetails'] = '';
+            $paymentArray['paymentDescription'] = trans('text.cash_method_details');
+        }
+
+        return $paymentArray;
+    }
+
+    public function createProperty($name, $value){
+        $this->{$name} = $value;
+    }
+
+    public function getPriceOfAllProducts() {
+        $products = $this->products;
+        $totalPrice = 0;
+
+        if (isset($products)) {
+            foreach ($products as $product) {
+                $totalPrice += $product->price * $this->getOrderProductByProductId($product->id)->products_quantity;
+            }
+        }
+
+        return $totalPrice;
+    }
 }

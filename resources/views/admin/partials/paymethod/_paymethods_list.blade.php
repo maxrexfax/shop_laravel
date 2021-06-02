@@ -8,7 +8,7 @@
             </a>
         </div>
         <div class="col-12 p-0">
-            <table class="table table-striped w-100">
+            <table id="tableWithPaymethodsData" class="table table-striped w-100">
                 <thead class="thead-dark">
                 <tr>
                     <th>{{ __('text.paymethods_pm_name') }}</th>
@@ -32,7 +32,7 @@
                             @endif
                         </td>
                         <td>{{$paymentMethod->other_data}}</td>
-                        <td><a href="{{route('payment.method.create', ['id' => $paymentMethod->id])}}"><i class="fas fa-pencil-alt"></i></a></td>
+                        <td><a href="{{route('payment.method.edit', ['id' => $paymentMethod->id])}}"><i class="fas fa-pencil-alt"></i></a></td>
                         <td>
                             <a href="{{route('payment.destroy', ['id' => $paymentMethod->id])}}" title="{{__('text.delete')}}" data-confirm="{{__('actions.really_delete?')}}" class="btn btn-secondary float-right url-no-decoration btnToDeletePhone">
                                 <span><i class="fa fa-trash fa-lg" aria-hidden="true"></i></span>

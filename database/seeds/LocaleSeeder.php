@@ -23,7 +23,7 @@ class LocaleSeeder extends Seeder
         ]);
         App\Locale::create([
             'locale_name'              => 'Русский',
-            'locale_code'              => 'en',
+            'locale_code'              => 'ru',
             'locale_logo'       => 'locale_ru.png'
         ]);
     }

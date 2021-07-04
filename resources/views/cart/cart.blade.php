@@ -120,7 +120,7 @@
                         <br>
 
                         <br>
-                        <a href="{{route('cart.checkout')}}" class="btn btn-dark btn-block">{{__('messages.checkout')}}</a>
+                        <a id="btnGoCheckout" href="{{route('cart.checkout')}}" class="btn btn-dark btn-block">{{__('messages.checkout')}}</a>
                         <br>
                         <p>
                             @if($cart->promocodeValue)
